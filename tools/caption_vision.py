@@ -311,7 +311,14 @@ def eyes_in(bgr, box):
 def project_inputs(W_dir: Path, video=None, words=None, brand=None):
     W_dir = Path(W_dir)
     video = Path(video) if video else W_dir / "FINAL.mp4"
-    words = Path(words) if words else W_dir / "words_final.json"
+    if words:
+        words = Path(words)
+    else:
+        # v10 (10.10.26): כשה-MG הכניס פריים קפוא, הכתוביות ב-FINAL יושבות על ציר
+        # words_after_mg.json ולא על words_final.json. בלי זה V7 העצמאי (vision_check)
+        # מודד מול זמנים מוזזים ומדווח "garbled" על כתוביות תקינות (נמדד: 41/54 מול 0/54).
+        wf, wm = W_dir / "words_final.json", W_dir / "words_after_mg.json"
+        words = wm if (wm.exists() and (not wf.exists() or wm.stat().st_mtime >= wf.stat().st_mtime)) else wf
     man = {}
     try:
         man = json.loads((W_dir / "project_manifest.json").read_text(encoding="utf-8"))

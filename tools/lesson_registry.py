@@ -1149,10 +1149,10 @@ LESSONS: dict[str, dict] = {
     'pipeline',
     [{'kind': 'code', 'file': 'tools/local_finish_pipeline.py', 'pattern': 'REL_BROLL_USAGE_COMMIT'}, {'kind': 'test', 'file': 'tests/test_vision_gates_v930.py', 'pattern': 'test_usage_commit_can_be_neutralized'}]),
  'L80_hlg_is_tonemapped_not_graded': L(
-    "גלם HLG/HDR מומר ל-SDR ב-tonemap של macOS (tonemap.swift), לא ב-ffmpeg ולא בתיקון צבע ידני. 'צבעים דהויים' = לבדוק color_transfer קודם.",
+    "גלם HLG/HDR מומר ל-SDR בשרשרת מכוילת בלבד — במק tonemap.swift, בענן tools/hdr_gate.py (zscale+hable npl=160, כויל מול tonemap.swift, SSIM 0.95/0.98) — לא בתיקון צבע ידני. 'צבעים דהויים' = לבדוק color_transfer קודם.",
     'גוון חום ב-Descript, דהייה אחרי ffmpeg — כולם HLG לא-מטופל (7.26).',
     'render',
-    [{'kind': 'code', 'file': 'tools/relvid/render.py', 'pattern': 'tonemap.swift'}, {'kind': 'code', 'file': 'tools/relvid/registry.py', 'pattern': 'color_transfer'}]),
+    [{'kind': 'code', 'file': 'tools/relvid/render.py', 'pattern': 'tonemap.swift'}, {'kind': 'code', 'file': 'tools/relvid/registry.py', 'pattern': 'color_transfer'}, {'kind': 'code', 'file': 'tools/hdr_gate.py', 'pattern': 'CALIBRATION'}]),
  'L81_no_arabic_codepoints_in_hebrew': L(
     'אין תו ערבי בכתוביות/שמות קבצים עבריים — אותיות מתחלפות חזותית ועוברות כל בדיקת מילים.',
     'לקח 20.7.26.',
@@ -1570,6 +1570,13 @@ LESSONS: dict[str, dict] = {
      {'kind': 'test', 'file': 'tests/test_caption_gate.py', 'pattern': r'test_set_draft_rejects_echo_caption'},
      {'kind': 'gate', 'gate': 'caption_gate:no_novel_sentence', 'enforcement': 'blocking'},
      {'kind': 'doc', 'file': 'docs/CAPTION-ENGINE.md'}]),
+ 'L133_v7_reads_mg_axis': L(
+    'כשה-MG מכניס פריים קפוא, הכתוביות ב-FINAL יושבות על ציר words_after_mg.json. V7 העצמאי (vision_check) '
+    'חייב למדוד על הציר הזה, אחרת הוא מדווח "garbled" על כתוביות תקינות.',
+    'ריל הבדיקה בענן 10.10.26 (אביגיל): words_final ⇒ 41/54 garbled · words_after_mg ⇒ 0/54. בגימור עצמו נמדד נכון.',
+    'qa',
+    [{'kind': 'code', 'file': 'tools/caption_vision.py', 'pattern': 'words_after_mg.json'},
+     {'kind': 'test', 'file': 'tests/test_caption_vision_mg_axis.py', 'pattern': 'test_prefers_words_after_mg_when_newer'}]),
 }
 
 

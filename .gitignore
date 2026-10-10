@@ -32,3 +32,4 @@ node_modules/
 
 # ארכיון מסמכי הפרויקט (טקסט בלבד)
 !archive/**
+.upload/

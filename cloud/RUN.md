@@ -50,6 +50,7 @@ export שוב → ArtifactData batch set projects/<doc_id> מ-projects.json (if_
 Update אחד בפריט (`edit_update` אם קיים): `[AUTO-EDIT v2 DRAFT]` + לינק לעמוד + משך + פסק-דין ה-PREFLIGHT. לא מייל.
 
 ## 4. תזמון (state == ready_to_schedule בלבד)
+- פרויקט עם `"test": true` במניפסט (doc_id `p-e2etest`) **לעולם לא מתוזמן ולא נוגע במאנדיי** — זה ריל הבדיקה מהמעבר לענן.
 - הקובץ רק מ-`schedule_approval.artifact_path` + `artifacts.verify().ok` + sha256 מול `artifact_checksum`.
 - העלאה ל-`file_mm402fp7` ("סרטון מוכן"): `get_asset_upload_url` → PUT מהענן (curl) → `finalize_asset_upload` → `get_assets` → public_url.
 - הקאבר: אותו מסלול ל-public_url ⇒ `videoThumbnailUrl`.

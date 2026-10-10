@@ -123,8 +123,11 @@ def export(out: Path):
                 if not cover_url:
                     uploads.append({"project": r["name"], "doc_id": doc_id(W), "kind": "cover", "src": str(cpp), "sha": cs})
         pf = _j(W / "PREFLIGHT.json", {}) or {}
-        findings = pf.get("findings") or []
-        lines = [f.get("message") or f.get("msg") or f.get("id") for f in findings if isinstance(f, dict)][:6]
+        vd = pf.get("verdict") if isinstance(pf.get("verdict"), dict) else {}
+        ready = bool(vd.get("ready_for_harel", pf.get("ready_for_harel", False)))
+        sev = {"high": 0, "medium": 1, "low": 2}
+        findings = sorted([f for f in (pf.get("findings") or []) if isinstance(f, dict)], key=lambda f: sev.get(f.get("severity"), 3))
+        lines = [f"[{f.get('severity')}] {f.get('check')}: {str(f.get('detail') or '')[:140]}" for f in findings][:6]
         fixed = []
         try:
             cl = c.get(f"/api/changelog/{r['name']}").get_json() or {}
@@ -133,17 +136,17 @@ def export(out: Path):
         except Exception:
             pass
         state = STATE_MAP.get(r.get("state"), r.get("state") or "draft")
-        if state == "review" and not pf.get("ready_for_harel", pf.get("ready")):
+        if state == "review" and not ready:
             state = "fixing"   # אין תוצר להראל בלי מבקר-קדם תקין (חוזה 1)
         docs.append({"doc_id": doc_id(W), "data": {
             "title": m.get("title") or r["name"].replace("-", " "), "workdir": r["name"], "dept": r.get("dept"),
             "monday_item_id": m.get("monday_item_id"), "state": state, "raw_state": r.get("state"),
             "version": disp.get("version"), "artifact_id": aid, "duration": disp.get("duration") or r.get("kept"),
             "video_url": video_url,
-            "preflight": {"ready": bool(pf.get("ready_for_harel", pf.get("ready"))),
-                          "verdict": pf.get("verdict") or pf.get("summary"), "lines": [l for l in lines if l]},
+            "preflight": {"ready": ready, "verdict": "מבקר-קדם: " + str(vd.get("summary") or ("מוכן לך" if ready else "לא רץ")),
+                          "lines": lines},
             "fixed": fixed, "cover_url": cover_url,
-            "caption": sched.get("caption_text") or sched.get("caption_draft"),
+            "caption": sched.get("caption_text") or sched.get("caption_draft"), "test": bool(m.get("test")),
             "publish_date": r.get("planned_date"), "updated_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
         }})
     _w(out / "projects.json", docs)
@@ -166,6 +169,10 @@ def apply(inp: Path, out: Path):
     """inp/comments/*.json + inp/actions/*.json (פלט ArtifactData out_dir) → פעולות על הפרויקטים + db_writes.json."""
     c = _client(); idx = by_doc_id(); writes = []; log = []
     comments = _read_dir(inp / "comments"); actions = _read_dir(inp / "actions")
+    # גרסאות המסמכים (if_version) — מתוך פלט ArtifactData list ("<id> … version N"), שנשמר ע"י Claude ל-versions.json
+    vers = _j(inp / "versions.json", {}) or {}
+    for row in comments: row["version"] = row.get("version") or vers.get(f"comments/{row['id']}")
+    for row in actions: row["version"] = row.get("version") or vers.get(f"actions/{row['id']}")
     for cm in comments:
         W = idx.get(cm.get("project"))
         if not W:

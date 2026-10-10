@@ -12,7 +12,8 @@ STATE_FILES=(tools/music-rotation.json tools/learn-state.json tools/illustration
   tools/visual_hook_registry.json tools/motion/harel_verdicts.json tools/broll-tags-override.json tools/he-lexicon.json
   tools/asr-glossary.json tools/music-intro-dip.json "בירולים/catalog.json" "בירולים/usage.json")
 # תוצרי ביניים שלא שורדים בין סשנים (נבנים מחדש) — לא נדחפים
-PROJ_EXCL=(--exclude 'cue_*.png' --exclude 'FINAL_prev_*' --exclude 'clip_*.mp4' --exclude '_mg_snaps/**' --exclude '*.tmp' --exclude 'EXPORT+*.mp4' --exclude 'MIXED*.mp4')
+PROJ_EXCL=(--exclude 'cue_*.png' --exclude 'FINAL_prev_*' --exclude 'clip_*.mp4' --exclude '_mg_snaps/**' --exclude '*.tmp' --exclude 'EXPORT+*.mp4'
+  --exclude 'MIXED*.mp4' --exclude 'MG_LAYER.mov' --exclude '_insert_base.mp4' --exclude 'REVIEW_PROXY.mp4' --exclude 'INPUT.hlg.mp4' --exclude 'raw/**' --exclude '*.wav')
 verify(){ rclone check "$1" "$2" --one-way "${@:3}" --log-level ERROR; }
 case "${1:-}" in
   pull)

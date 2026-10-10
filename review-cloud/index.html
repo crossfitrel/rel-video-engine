@@ -130,10 +130,10 @@ textarea{min-height:76px;resize:vertical}
     </div>
 
     <div class="box" id="cc" hidden style="margin-top:12px">
-      <h3>קאבר וקפשן</h3>
+      <h3>קאבר, קפשן ותזמון</h3><div class="note" id="cc-date"></div>
       <div class="cover"><img id="cover" alt="קאבר"><div style="display:grid;gap:8px;min-width:0">
         <textarea id="caption" rows="8" aria-label="קפשן"></textarea>
-        <div class="row"><button class="btn go grow" id="cc-ok">✔ אשר קאבר וקפשן</button><button class="btn grow" id="cc-change">✏️ בקש שינוי</button></div>
+        <div class="row"><button class="btn go grow" id="cc-ok">✔ אשר קאבר, קפשן ותזמון</button><button class="btn grow" id="cc-change">✏️ בקש שינוי</button></div>
         <input type="text" id="cc-note" placeholder="מה לשנות בקאבר או בקפשן?" hidden>
       </div></div>
     </div>
@@ -214,7 +214,7 @@ function renderDetail(){
   // קאבר+קפשן
   const showCC = p.state==='cover_review' || (p.cover_url && ['ready_to_schedule','scheduled','published'].includes(p.state));
   $('cc').hidden=!showCC;
-  if(showCC){ $('cover').src=p.cover_url||''; const ta=$('caption'); if(document.activeElement!==ta && !ta.dataset.dirty) ta.value=p.caption||'';
+  if(showCC){ $('cc-date').textContent = p.publish_date ? ('יתוזמן ל-'+p.publish_date+' (מעמודת תאריך הפרסום בגאנט)') : 'אין תאריך פרסום בגאנט — הקלאוד לא יתזמן עד שייקבע'; $('cover').src=p.cover_url||''; const ta=$('caption'); if(document.activeElement!==ta && !ta.dataset.dirty) ta.value=p.caption||'';
     const locked = p.state!=='cover_review'; ta.readOnly=locked; $('cc-ok').disabled=locked||pend.some(a=>a.type==='approve_cover_caption'); $('cc-change').disabled=locked; }
 }
 
@@ -246,7 +246,7 @@ $('send').onclick=async()=>{
 $('approve').onclick=()=>{ $('approve-confirm').hidden=false; };
 $('approve-no').onclick=()=>{ $('approve-confirm').hidden=true; };
 $('approve-yes').onclick=async()=>{ $('approve-confirm').hidden=true; try{ await addAction('approve_publish'); toast('אושר לגימור'); }catch(e){ toast('האישור לא נשמר: '+(e.message||e.code)); } };
-$('cc-ok').onclick=async()=>{ try{ await addAction('approve_cover_caption',{caption:$('caption').value}); $('caption').dataset.dirty=''; toast('קאבר וקפשן אושרו'); }catch(e){ toast('לא נשמר: '+(e.message||e.code)); } };
+$('cc-ok').onclick=async()=>{ try{ await addAction('approve_cover_caption',{caption:$('caption').value}); $('caption').dataset.dirty=''; toast('אושר — יתוזמן בריצה הבאה'); }catch(e){ toast('לא נשמר: '+(e.message||e.code)); } };
 $('cc-change').onclick=async()=>{ const n=$('cc-note'); if(n.hidden){ n.hidden=false; n.focus(); return; }
   const note=n.value.trim(); if(!note) return toast('כתוב מה לשנות');
   try{ await addAction('request_cover_change',{note, caption:$('caption').value}); n.value=''; n.hidden=true; toast('הבקשה נשלחה'); }catch(e){ toast('לא נשמר: '+(e.message||e.code)); } };

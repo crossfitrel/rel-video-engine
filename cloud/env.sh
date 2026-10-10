@@ -8,6 +8,8 @@ export REL_ASR_BACKEND="${REL_ASR_BACKEND:-ct2}"                                
 export REL_DRIVE_REMOTE="${REL_DRIVE_REMOTE:-hayonhq}"                                 # rclone remote (Drive של hayonhq)
 export REL_DRIVE_ROOT="${REL_DRIVE_ROOT:-REL Video Cloud}"
 export REL_RUNTIME=cloud
+# venv אחד לכל הכלים: גם `python3` שהקוד קורא לו ישירות (preflight, intake_guard) רץ מה-venv — אחרת cv2/PIL חסרים בשקט
+export PATH="$HOME/.rel-whisper/bin:$PATH"
 export HF_HOME="${HF_HOME:-$HOME/.cache/huggingface}"
 # טוקן Drive מגיע רק ממשתני סביבה של סביבת הענן (לא מקובץ בריפו):
 #   RCLONE_CONFIG_HAYONHQ_TYPE=drive  RCLONE_CONFIG_HAYONHQ_SCOPE=drive  RCLONE_CONFIG_HAYONHQ_TOKEN='{...}'
