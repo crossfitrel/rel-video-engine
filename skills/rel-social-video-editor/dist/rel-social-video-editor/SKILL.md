@@ -1,6 +1,6 @@
 ---
 name: rel-social-video-editor
-description: "מערכת עריכת סרטוני הסושיאל המקומית של קרוספיט אריאל: Monday → הכנה (Whisper+EDL) → review-app (5112) → גימור → אישור קאבר+קפשן → Metricool. TRIGGERS: ערוך סרטון, תרוץ על הסרטונים, הערות מהאפליקציה, גימור, מוכן לתזמון, תזמן ב-Metricool, EDITPLAN, סרטון אפליקציה. NEGATIVE: תסריט → rel-script-writer · קפשן → rel-cta-psychology · פודקאסט מלא → rel-podcast-descript-editor."
+description: "מערכת עריכת סרטוני הסושיאל של קרוספיט אריאל, בענן (v10): גלם מהטלפון ל-Monday → ריצת ענן מתוזמנת (Whisper+EDL+במאי+גימור+PREFLIGHT) → עמוד הרוויו בטלפון → אישור קאבר+קפשן+תזמון → Metricool. TRIGGERS: ערוך סרטון, תרוץ על הסרטונים, הערות מעמוד הרוויו, גימור, מוכן לתזמון, תזמן ב-Metricool, EDITPLAN, סרטון אפליקציה. NEGATIVE: תסריט → rel-script-writer · קפשן → rel-cta-psychology · פודקאסט מלא → rel-podcast-descript-editor."
 ---
 
 # rel-social-video-editor — ליבה
@@ -139,4 +139,4 @@ EMAIL_TO  = harel@crossfitrel.com — רק כשנדרשת פעולה מהראל 
 | `references/video-canon.md` | מחלוקת על חוק עריכה — הקאנון גובר | VIDEO-CANON (עותק מ-00_META) | 20K |
 
 ---
-*גרסת מערכת v10.0 — 2026-10-10 · נבנה 2026-10-10 23:25 · master sha a1ff1bdc8db1 · core sha b4d321bc8202*
+*גרסת מערכת v10.0 — 2026-10-10 · נבנה 2026-10-10 23:27 · master sha a1ff1bdc8db1 · core sha b4d321bc8202*
