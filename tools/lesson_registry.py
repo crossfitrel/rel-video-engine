@@ -1577,6 +1577,13 @@ LESSONS: dict[str, dict] = {
     'qa',
     [{'kind': 'code', 'file': 'tools/caption_vision.py', 'pattern': 'words_after_mg.json'},
      {'kind': 'test', 'file': 'tests/test_caption_vision_mg_axis.py', 'pattern': 'test_prefers_words_after_mg_when_newer'}]),
+ 'L134_knowledge_folder_no_media': L(
+    'הפרויקט ב-claude.ai והתיקייה המסונכרנת מחזיקים ידע בלבד. מדיה, תוצרי עבודה, לוגים, .bak וסקריפטים חד-פעמיים '
+    'הולכים ל-Drive של hayonhq (REL Video Cloud/) או לריפו, לעולם לא לתיקייה המסונכרנת.',
+    'v10 ענן 10.10.26: 853 קבצים (5.6GB) מילאו את הפרויקט ונגמר המקום; הועברו לארכיון עם מניפסט ו-md5.',
+    'ops',
+    [{'kind': 'code', 'file': 'tools/project_hygiene.py', 'pattern': 'MEDIA_EXT'},
+     {'kind': 'test', 'file': 'tests/test_project_hygiene.py', 'pattern': 'test_self_test_flags_media_and_junk'}]),
 }
 
 

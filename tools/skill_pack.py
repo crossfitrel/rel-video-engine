@@ -45,6 +45,11 @@ DIST = SKILL_DIR / "dist"
 REL_OS_SKILLS = PROJECT.parents[2] / "00 - REL-OS" / "03_SKILLS"
 VIDEO_CANON = REL_OS_SKILLS / "00_META" / "VIDEO-CANON.md"
 CANON_SNAPSHOT = REL_OS_SKILLS / "anthropic-skills" / SKILL_NAME / "CANON-snapshot.md"
+# v10 ענן: בלי REL-OS (סשן ענן) — עותקים בריפו, מתעדכנים מהמק בכל build שרואה את המקור
+if not VIDEO_CANON.exists():
+    VIDEO_CANON = SKILL_DIR / "canon" / "VIDEO-CANON.md"
+if not CANON_SNAPSHOT.exists():
+    CANON_SNAPSHOT = SKILL_DIR / "canon" / "CANON-snapshot.md"
 INSTALLED_GLOB = ("Library/Application Support/Claude/local-agent-mode-sessions/"
                   "skills-plugin/*/*/skills/" + SKILL_NAME + "/SKILL.md")
 

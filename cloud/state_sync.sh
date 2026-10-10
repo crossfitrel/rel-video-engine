@@ -20,6 +20,8 @@ case "${1:-}" in
     for d in "בירולים" "בירולים - מיכאל לוי 28.5" "brand-assets"; do
       "${RC[@]}" copy "$D/ספריות/$d" "$REL_HOME/$d" --exclude '_catalog_thumbs/**'; done
     "${RC[@]}" copy "$D/ספריות/tools-assets" "$REL_HOME"          # פונטים/sfx/מודלים של הכלים, באותם נתיבים
+    # פתיחים קבועים (fixed_intro.py קורא תוצרי-אנימציה/פתיחים-קבועים/catalog.json)
+    "${RC[@]}" copy "$D/מסירות/תוצרי-אנימציה/פתיחים-קבועים" "$REL_HOME/תוצרי-אנימציה/פתיחים-קבועים" 2>/dev/null || true
     for f in "${STATE_FILES[@]}"; do "${RC[@]}" copyto "$D/מצב/$f" "$REL_HOME/$f" 2>/dev/null || true; done
     "${RC[@]}" copy "$D/מצב/work-index" "$REL_WORK_ROOT/.index" 2>/dev/null || true
     echo "[state_sync] pull ✓" ;;

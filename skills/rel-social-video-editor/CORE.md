@@ -5,33 +5,35 @@
 
 ## איך לעבוד עם הסקיל הזה (חיסכון טוקנים)
 1. **קוראים רק את ה-reference של השלב שבו עובדים** (מפה בסוף הקובץ). לא קוראים את כל המאסטר, לא את CHANGELOG ולא את כל ה-handoffs.
-2. **פתיחת סשן = פקודה אחת** על המק (Desktop Commander):
-   `~/.rel-whisper/bin/python tools/claude_start.py` → מצב המערכת, תור "מה עכשיו", גרסה נוכחית, תביעות קבצים של צ'אטים מקבילים — בכ-30 שורות.
-3. **baseline/אימות = פקודה אחת:** `~/.rel-whisper/bin/python tools/baseline.py` (unittest + doctor + שני ה-audits, סיכום קצר ודיף מול הריצה הקודמת). לא מריצים את ארבעתם בנפרד ולא מדביקים פלט מלא.
+2. **פתיחת סשן (v10 ענן)** = `add_repo crossfitrel/rel-video-cloud` → clone → `bash cloud/bootstrap.sh` (~3 דק'; venv, ivrit-ai ct2, ffmpeg, puppeteer, ספריות+מצב מ-Drive של hayonhq) → `source cloud/env.sh` → `$REL_PY tools/claude_start.py`. ארכיטקטורה: `CLOUD.md` · מה ריצה מתוזמנת עושה: `cloud/RUN.md`.
+3. **baseline/אימות = פקודה אחת:** `$REL_PY tools/baseline.py` (unittest + doctor + שני ה-audits, סיכום קצר ודיף מול הריצה הקודמת). לא מריצים את ארבעתם בנפרד ולא מדביקים פלט מלא.
 4. **צ'אט מקביל:** לפני עריכת קובץ משותף — `tools/work_claim.py claim <קבצים> --by "<נושא הצ'אט>"`; בסוף — `release`. תביעה פעילה של צ'אט אחר = לתאם, לא לדרוס.
 5. העבודה הכבדה בסקריפטים דטרמיניסטיים; לא מצטטים תמלול מלא; בתיקון חוזר מתייחסים רק לחדש.
 
 ## התפיסה בשורה אחת
-Monday (בריף/סטטוס) → הכנה דטרמיניסטית מקומית (Whisper+EDL+ffmpeg) → שיפוט הבמאי (`--director`) → רוויו של הראל ב-**review-app** (פורט 5112) → גימור מקומי תחת נעילה (`run_finish.py` / `local_finish_pipeline.py`) → אישור קאבר+קפשן באפליקציה → Metricool. **Descript מחוץ לזרימה** (חריג יחיד `[DESCRIPT FALLBACK]` — אחרי שני כשלים מקומיים ובאישור הראל).
+גלם מהטלפון ל-Monday ("קבצים" `file_mkrpfxkz`, סטטוס "מוכן לעריכה") → ריצת ענן מתוזמנת כל שעה (`cloud/prep.py`: שער HDR + Whisper + EDL + ffmpeg) → שיפוט הבמאי (`--director`) → גימור מלא + PREFLIGHT → **עמוד הרוויו** (Artifact עם db, בטלפון; `cloud/review_bridge.py` מחבר אותו למנוע ה-review-app) → גימור תחת נעילה (`local_finish_pipeline.py`) → אישור קאבר+קפשן+תזמון בעמוד → Metricool. **אפס תלות במק בריל** (המק נשאר לפודקאסט ולמסלול גיבוי עד סגירת האימותים). **Descript מחוץ לזרימה** (חריג יחיד `[DESCRIPT FALLBACK]` — אחרי שני כשלים מקומיים ובאישור הראל).
 **עקרון העל:** תמליל = מקור אמת · תסריט רופף (`⟦SCRIPT v{n}⟧` הנעוץ) = מצפן · הקאנון = חוקי העריכה · הקבצים על הדיסק = מקור האמת (SQLite = אינדקס; `project_id` במניפסט = הזהות).
 
 ## קבועים שצריך כמעט בכל סשן
 ```
-PROJECT   = ~/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System
-WORK_ROOT = ~/rel-video-work   (לקרוא work_root() מ-tools/relvid/paths.py — לא לקבע נתיב)
-PYTHON    = ~/.rel-whisper/bin/python   (ל-python3 המערכתי אין flask/raqm — פלט בדיקות שגוי)
-REVIEW    = http://127.0.0.1:5112 · launchd com.rel.review-app · אחרי עדכון קוד: launchctl kickstart -k gui/$(id -u)/com.rel.review-app (לעולם לא nohup)
+REPO      = github.com/crossfitrel/rel-video-cloud (פרטי) · REL_HOME = שורש הריפו · נתיבים רק מ-cloud/env.sh (לא לקבע /Users/...)
+WORK_ROOT = $REL_WORK_ROOT = ~/rel-video-work   (לקרוא work_root() מ-tools/relvid/paths.py — לא לקבע נתיב)
+PYTHON    = $REL_PY = ~/.rel-whisper/bin/python (venv של bootstrap; ל-python3 המערכתי אין cv2/flask)
+REVIEW    = עמוד הרוויו https://claude.ai/artifact/B799jvngoLRUMYzoz1XqZn (db: projects · comments · actions · system/health; doc id = p-<monday_item_id>)
+DRIVE     = Drive של hayonhq@gmail.com → "REL Video Cloud/" (ספריות · מצב · מסירות · ארכיון · מניפסט) דרך rclone remote hayonhq (טוקן רק מ-env). לעולם לא ה-Drive של crossfitrel
+TRIGGER   = משימה מתוזמנת "עריכת סושיאל בענן" trig_018rae8HZ3XwT7tsdZEdAwSA (כל שעה, ענן בלבד) · מנעול: "לאחר צילום, בעריכה" + [CLOUD-LOCK]
+MAC       = מסלול גיבוי בלבד עד שהאימותים בטלפון נסגרים: review-app 5112 (launchd com.rel.review-app) + Desktop Commander
 MONDAY    = בורד סושיאל 18395578529 · סטטוס color_mkrp4sgm · "מוכן לעריכה"(11) → "לאחר צילום, בעריכה" → "מוכן לבדיקה"(12) → "מוכן לתזמון!"(8) → "תוזמן!"(6) · תאריך date_mkrpvw3n (UTC!) · קובץ file_mm402fp7
 METRICOOL = מועדון 6323702 (IG+FB+TikTok+YT) · Throwdown 6436350 (IG+FB) · "הראל חיון" 6519658 (SmartLink t.mtrbio.com/HarelHayon)
-ASR       = ivrit-ai turbo + VAD + language=he · רץ ב-MLX על ה-GPU (~/.rel-mlx, פי ~3), נסיגה ל-ct2 בכשל · REL_ASR_BACKEND=ct2 לכפות (ASR-BENCH.md §MLX)
-BRAND     = מועדון #871d1f · הראל חיון #0077B6 · 1080×1920@30 · אסור לגעת בצבע (HDR/HLG → tonemap.swift)
+ASR       = ivrit-ai turbo (ct2) + VAD + language=he · בענן REL_ASR_BACKEND=ct2 (MLX רק במק)
+BRAND     = מועדון #871d1f · הראל חיון #0077B6 · 1080×1920@30 · אסור לגעת בצבע (HDR כבוי באייפון מ-10.10.26; גלם HLG ישן → tools/hdr_gate.py המכויל, SDR עובר כמו שהוא)
 EMAIL_TO  = harel@crossfitrel.com — רק כשנדרשת פעולה מהראל (כשל שדורש אותו, לפי rel-email-design); אין מייל אימות/סטטוס שגרתי (הראל 30.8/3.9/13.9.26)
 ```
 קבועים מלאים (עמודות, נתיבי כלים, API): `references/constants.md`.
 
 ## שערי אישור — לא עוקפים
-1. **רוויו באפליקציה** → "אשר והמשך לגימור" = `[APPROVE-PUBLISH]` → גימור תחת נעילה → `learn_from_edits.py --propose`.
-2. **אישור קאבר+קפשן באפליקציה** → נועל `artifact_id`/`artifact_checksum` → `state=ready_to_schedule`.
+1. **רוויו בעמוד הרוויו** (במצב מעבר גם review-app) → "אשר והתחל גימור" = `[APPROVE-PUBLISH]` → גימור תחת נעילה → `learn_from_edits.py --propose`.
+2. **אישור קאבר+קפשן+תזמון לתאריך שבבורד — כפתור אחד בעמוד** → נועל `artifact_id`/`artifact_checksum` → `state=ready_to_schedule`.
 3. **תזמון** רק מ-`schedule_approval.artifact_path` אחרי `artifacts.verify().ok` + sha256; **אימות אחרי כל תזמון = קריאה חוזרת ב-Metricool (`getScheduledPosts`), ורק אז "תוזמן!" במאנדיי + עדכון האפליקציה + דיווח בצ'אט; מייל רק בכשל שדורש את הראל.** חוסר התאמה = `[STALE-FINAL]`, לא מתזמנים.
    עדכון האפליקציה = `state_override:"scheduled"` ("📅 תוזמן — ממתין לפרסום"), **לא** `published` — published רק ידני / Metricool מראה `PUBLISHED` (v9.33, L97). שניהם מחוץ לתור התזמון.
 
@@ -67,7 +69,7 @@ EMAIL_TO  = harel@crossfitrel.com — רק כשנדרשת פעולה מהראל 
 6. **B-roll**: קטלוג בלבד · mute · לא על Hook/CTA (8ש אחרונות) · המרה = מצע רציף 70% · ערך/חיבור = עוגנים עם **ציטוט** ≥0.75 · אפס בירולים = תשובה טובה · הפרדת מחלקות קשיחה.
 7. **מוזיקה**: מצע בכל סרטון, ‎-46 LUFS + דאקינג (דיבור ‎-54; ברירת המחדל של `local_finish_pipeline.py` מאז v9.22), אורך מלא, Pixabay/Mixkit בלבד (v9.36 — רישיון מסחרי, בלי AI/Content ID/קאברים/שירה), אי-חזרה 90 יום + לא אותה משפחת סאונד כמו 3 הבחירות האחרונות.
 8. **1080×1920** · crf19/medium ב-v2, crf23 להעלאות ב-v1 · אסור ultrafast · **לעולם לא לדחוס FINAL.**
-9. **אסור לגעת בצבע** (HDR/HLG → `tonemap.swift`).
+9. **אסור לגעת בצבע** (HLG → `tools/hdr_gate.py` המכויל npl=160 hable, מסומן ב-`HDR_GATE.json`; לעולם לא חוסם בשקט).
 10. **אסור לגעת במדיה של פוסט מתוזמן.**
 11. **ראיות לפני "בוצע"** — FINAL בלי `qa_gates` PASS לא יוצא.
 12. **קובץ סופי יחיד** → `{מחלקה}/{חודש}/{סרטון}/`; ביניים רק ב-`_work`.
@@ -99,8 +101,9 @@ EMAIL_TO  = harel@crossfitrel.com — רק כשנדרשת פעולה מהראל 
 ## כללי עבודה שנוטים להישכח
 - **פריים 0 = עוגן מוחשי** (סצנה/פעולה/חפץ/אדם/מספר) — לא כרטיס, לא פתיח, לא מדבר-למצלמה מופשט. `HOOK_PLAN.json` + Read על `HOOK_SHEET.jpg` לפני כל הצגה להראל (P22). מגבר אחד לכל היותר ב-0-2ש.
 - אחרי כל תזמון: Metricool **+** Monday **+** אפליקציה (גם קרוסלות). תאריך רק מעמודת הבורד. אופק ~חודש.
-- גימור ארוך רץ ב-Desktop Commander על המק, לא ב-bash של הסנדבוקס (מגבלת זמן).
-- קליטת גלם מקומית; קבצים גדולים ל-Monday — מהמק.
+- גימור רץ בסשן הענן (2 ליבות: ~13 דק' עם MG). בסוף כל ריצה: `cloud/state_sync.sh push` + `archive-final` ל-Drive של hayonhq.
+- הגלם נכנס מהטלפון ל-Monday; התוצר הסופי עולה ל-`file_mm402fp7` ו-Metricool מושך מ-public_url.
+- **הפרויקט ב-claude.ai = ידע בלבד.** מדיה/תוצרים/לוגים/.bak — ל-Drive או לריפו, לעולם לא לתיקייה המסונכרנת (L134, `tools/project_hygiene.py scan`).
 - "לעולם לא 'חדר כושר'" — מועדון קרוספיט. לב: הראל 🩵 · מועדון 🖤❤️.
 - תיקנת אותו דבר פעמיים = השכבה הלא-נכונה. מדוד לפני התיקון ואחריו. תיקון שנמדד ולא עבד לא נשאר בקוד.
 - כל שער חדש מקבל בדיקת הזרקת-כשל ורשומה ב-`gate_registry` (protects/cost_of_blocking/fallback); כל לקח חדש מקבל אוכף. `tools/golden.py run` לפני כל שינוי policy. E2E רק על עותקים.
