@@ -6,7 +6,7 @@
 > **22.9.26 (v2.2) — הטמעת חוקי feedback מהזיכרון.** §4 נסגר: ‎-46 LUFS עם דאקינג (דיבור ‎-54, כיול 10.9.26), Pixabay בלבד. נוספו: אורך לפי `length_policy` (§1), concat filter ו-HLG (§2), turbo+VAD ו-raqm (§3), דוקטרינת בירול v9.5 (§7-8), תאריך מהבורד וסגירה משולשת (§5). הוסרו מיילי אימות/אישור שגרתיים (העדפות הראל 3.9/13.9.26). §6 יושר ל-`rel-thumbnail-creator` v4.1 (Studentit, `SUB_RATIO` 0.85, תמיד 2 שורות, יחס קאבר = יחס הסרטון, שער `cover_make.py`) — אין עוד חריג פונט בסקיל. §7: בירול בכל סוגי התוכן, מעוגן לתמליל. **אחרי העלאה — לסנכרן את שלושת העותקים ב-`references/video-canon.md` ולוודא diff ריק.**
 
 ## 1. חוק-על v6: מקומי מקצה-לקצה — אפס Descript (19.7.26)
-- **סושיאל: Descript מחוץ לזרימה הראשית.** עריכה = Whisper+EDL+ffmpeg מקומית; רוויו ותיקון של הראל = **review-app מקומית** (פורט 5112, `Social Video Editing System/review-app/`); גימור = `local_finish_pipeline.py` (recut→tighten אקוסטי→whisper→reconcile→gate→מוזיקה→כתוביות→loudness→qa_gates). אפס העלאות.
+- **סושיאל: Descript מחוץ לזרימה הראשית.** עריכה = Whisper+EDL+ffmpeg מקומית; רוויו ותיקון של הראל = **עמוד הרוויו בטלפון** (Artifact עם db, v10 ענן 10.10.26 — הריפו `crossfitrel/rel-video-cloud`; review-app 5112 במק = מסלול גיבוי בלבד עד סגירת האימותים); גימור = `local_finish_pipeline.py` (recut→tighten אקוסטי→whisper→reconcile→gate→מוזיקה→כתוביות→loudness→qa_gates). אפס העלאות.
 - שערי האישור נשמרים: `[APPROVE-PUBLISH]` (בתוך האפליקציה, APPROVAL.json) + אישור קאבר+קפשן באפליקציה (נועל `artifact_id`; checksum מול ה-FINAL החי לפני כל תזמון Metricool). **אין מיילי עדכון/אימות שגרתיים** — מייל רק כשנדרשת פעולה מהראל (3.9/13.9.26); האימות בדיווח ובבורד.
 - **לולאת למידה חובה:** כל תיקון של הראל → `corrections.jsonl` → `learn_from_edits.py --propose` (shadow) → Golden Set → `--approve` רק עם regression PASS ואישור הראל.
 - **אורך לפי סוג תוכן (19.9.26):** `tools/length_policy.py` — המרה 20-50ש · ערך/סיפור 40-90ש · פודקאסט 45-90ש · קשיח 12-180ש. **אין תקרת 60ש** ואין האצה כדי לעמוד במספר; האצה רק כשהדיבור עצמו איטי.
@@ -20,7 +20,7 @@
 # חיתוך לפי EDL (בלי re-encode): ffmpeg -i raw.mp4 -ss S -to E -c copy seg.mp4
 # איחוד: concat FILTER, לא demuxer (demuxer + -c copy קטע וידאו בשקט, 23.7.26):
 #   ffmpeg -i a.mp4 -i b.mp4 -filter_complex "[0:v:0][0:a:0][1:v:0][1:a:0]concat=n=2:v=1:a=1[v][a]" -map "[v]" -map "[a]" rough.mp4
-# HLG/HDR בקלט (ffprobe color_transfer=arib-std-b67): tonemap.swift (macOS AVFoundation) לפני כל דחיסה — לא zscale
+# HLG/HDR בקלט (ffprobe color_transfer=arib-std-b67): בענן `tools/hdr_gate.py` (zscale npl=160 + hable, מכויל מול tonemap.swift: SSIM 0.98, מסומן ב-HDR_GATE.json); במק tonemap.swift. SDR עובר כמו שהוא. HDR כבוי באייפון מ-10.10.26
 # ffmpeg בתוך לולאת while read: -nostdin
 # דחיסת גלם לפני העלאה/הכנה (חובה, גם לגלם 1080p כבד; 4K בוטל — הראל 21.6). הקובץ הסופי לעולם לא נדחס/מקודד מחדש:
 ffmpeg -y -i in.mp4 -c:v libx264 -preset veryfast -crf 23 -pix_fmt yuv420p -c:a aac -b:a 128k -movflags +faststart out_1080.mp4
@@ -31,7 +31,7 @@ ffmpeg -y -i in.mp4 -c:v libx264 -preset veryfast -crf 23 -pix_fmt yuv420p -c:a 
 
 ## 3. כתוביות — לעולם לא בעברית בתוך Descript
 - **אסור captions/subtitles/pop-text של Descript בעברית — בלי יוצא דופן** (הרנדרר לא תומך RTL; טקסט יוצא הפוך). בכל prompt ל-agent לכתוב מפורש: "אל תוסיף captions כלל".
-- הצינור הקנוני (מקומי, על המק): `align_words.py … auto he` (ivrit-ai turbo + VAD; **לא** `/transcribe` של captions-app — small בלי VAD) → `align_reconcile.py` (זמן אמיתי + `edited.txt` המתוקן) → `captions_qa.py` (PASS ≥90%) → gate שקט (אחרי אישור הראל = אזהרה בלבד) → `captions_overlay.py` (PIL). `captions_build.py` (libass) = fallback בסנדבוקס בלבד.
+- הצינור הקנוני (בענן; במק זהה): `align_words.py … auto he` (ivrit-ai turbo + VAD; **לא** `/transcribe` של captions-app — small בלי VAD) → `align_reconcile.py` (זמן אמיתי + `edited.txt` המתוקן) → `captions_qa.py` (PASS ≥90%) → gate שקט (אחרי אישור הראל = אזהרה בלבד) → `captions_overlay.py` (PIL). `captions_build.py` (libass) = fallback בסנדבוקס בלבד.
 - **RTL ב-PIL:** `features.check("raqm")` ⇒ טקסט לוגי + `direction="rtl"`, בלי `get_display`/python-bidi מעליו (היפוך כפול).
 - סטייל: מילה אחת בכל פעם (2 רק למילה ≤2 אותיות/<0.2ש), בלי נקודות ופסיקים (`?` `!` נשארים), Assistant ExtraBold לבן. **מתאר לפי המותג שמפיק את התוכן:** מועדון ‎#871d1f · "הראל חיון" ‎#0077B6 · פודקאסט "מדברים כושר" = מועדון גם כשעולה בפרופיל האישי.
 

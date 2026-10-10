@@ -1,10 +1,10 @@
 {
  "version": "v10.0 — 2026-10-10",
- "built_at": "2026-10-10T23:27:34",
+ "built_at": "2026-10-10T23:29:42",
  "master_sha256": "a1ff1bdc8db1723b3171958a60166ef2325a98baf2ffc44a655e439297d7d2fa",
  "core_sha256": "b4d321bc820267616297f68c642ad339072b3e333b0381f06b4d1e5f409f6fa4",
  "config_sha256": "6553eebf840e94be6b51976fb19b3c8bc4bd852aa4098396ed1d309fa1a5810c",
- "skill_md_sha256": "18809063f97921b5230e5ad3ea7ad130d44736e2525969ffb64de654cf0c87ca",
+ "skill_md_sha256": "dd2b1735a368968fd3224c19093ea721932e8fba0b9359dff8120ff4d1fad8ec",
  "master_chars": 123920,
  "master_lines": 1361,
  "core_chars": 14740,
@@ -29,7 +29,7 @@
   "hook-build.md": 3142,
   "motion-graphics.md": 3599,
   "version-history.md": 19939,
-  "video-canon.md": 20715
+  "video-canon.md": 20986
  },
  "unmapped": []
 }

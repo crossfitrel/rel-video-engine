@@ -139,4 +139,4 @@ EMAIL_TO  = harel@crossfitrel.com — רק כשנדרשת פעולה מהראל 
 | `references/video-canon.md` | מחלוקת על חוק עריכה — הקאנון גובר | VIDEO-CANON (עותק מ-00_META) | 20K |
 
 ---
-*גרסת מערכת v10.0 — 2026-10-10 · נבנה 2026-10-10 23:27 · master sha a1ff1bdc8db1 · core sha b4d321bc8202*
+*גרסת מערכת v10.0 — 2026-10-10 · נבנה 2026-10-10 23:29 · master sha a1ff1bdc8db1 · core sha b4d321bc8202*
