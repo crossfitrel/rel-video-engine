@@ -1,0 +1,117 @@
+{
+  "_doc": "מקור אמת יחיד לניתוב תוצרי וידאו סושיאל לתיקיות. נקרא ע\"י resolve_output_path.py וע\"י SKILL.md. index/id = ערכי עמודת 'סטטוס מחלקה' (color_mkzks1yg) בבורד 18395578529.",
+  "content_root": "/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי",
+  "work_root": "/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/_work",
+  "final_suffix": " - סופי",
+  "structure": "{content_root}/{base_folder}/{month_folder}/{video_folder}/{name - סופי.mp4}   (אירועים: בלי month_folder)",
+  "departments": [
+    {
+      "label": "קרוספיט אריאל",
+      "id": 1,
+      "index": 0,
+      "folder": "קרוספיט אריאל",
+      "month_based": true,
+      "aliases": [
+        "ariel",
+        "אריאל"
+      ]
+    },
+    {
+      "label": "שיקום בתנועה",
+      "id": 0,
+      "index": 1,
+      "folder": "שיקום בתנועה",
+      "month_based": true,
+      "aliases": [
+        "rehab",
+        "שיקום",
+        "R.E.L Therapy",
+        "טיפול"
+      ]
+    },
+    {
+      "label": "REL Performance",
+      "id": 2,
+      "index": 2,
+      "folder": "REL Performance",
+      "month_based": true,
+      "aliases": [
+        "performance",
+        "פרפורמנס",
+        "rel performance"
+      ]
+    },
+    {
+      "label": "קבוצות נפרדות",
+      "id": 3,
+      "index": 3,
+      "folder": "קרוספיט אריאל",
+      "month_based": true,
+      "aliases": [
+        "נשים",
+        "women",
+        "קבוצת נשים"
+      ]
+    },
+    {
+      "label": "ילדים",
+      "id": 4,
+      "index": 4,
+      "folder": "קרוספיט אריאל",
+      "month_based": true,
+      "aliases": [
+        "kids",
+        "ילדים וקיץ"
+      ]
+    },
+    {
+      "label": "REL Throwdown",
+      "id": 6,
+      "index": 5,
+      "folder": "REL Throwdown {year}",
+      "month_based": false,
+      "aliases": [
+        "throwdown",
+        "תחרות",
+        "רל throwdown"
+      ],
+      "raw_folder": "גלם/{date}/{source_folder}"
+    },
+    {
+      "label": "Community Games",
+      "id": 7,
+      "index": 6,
+      "folder": "Community Games {year}",
+      "month_based": false,
+      "aliases": [
+        "community games",
+        "קומיוניטי גיימס",
+        "משחקים קהילתיים"
+      ]
+    },
+    {
+      "label": "הראל חיון",
+      "id": 8,
+      "index": 7,
+      "folder": "הראל חיון - תכנים",
+      "month_based": true,
+      "aliases": [
+        "הראל אישי",
+        "אישי",
+        "personal",
+        "oshia",
+        "אושיה",
+        "harel",
+        "המותג האישי"
+      ]
+    }
+  ],
+  "routing_notes": [
+    "התאמת מחלקה: לפי label (טקסט) קודם, אחר כך id/index, אחר כך aliases.",
+    "'קבוצות נפרדות' ו'ילדים' מתויקות תחת תיקיית 'קרוספיט אריאל' — תואם לתצוגת הבורד 'קרוספיט אריאל' (view 242179658, מסנן [1,3,4]).",
+    "אירועים (REL Throwdown / Community Games) ללא תיקיית חודש — התיקייה היא נושא/מקצה ישירות תחת תיקיית האירוע.",
+    "החודש נקבע מתאריך הפרסום (date_mkrpvw3n) או מקבוצת הפריט בבורד — לא מ'היום'.",
+    "אם הראל כבר יצר תיקיית סרטון מראש — לאתר אותה (scan_dir) ולתייק לתוכה במקום ליצור חדשה.",
+    "'הראל חיון' (id 8) = המותג האישי — מתויק תחת 'הראל חיון - תכנים', לא תחת 'קרוספיט אריאל'. נוסף 27.8.26 אחרי ש-match_intake נכשל ב-dept_unresolved על סרטון אישי. brand=personal בגימור (כתוביות #0077B6), לא brand=rel."
+  ]
+}

@@ -1,0 +1,87 @@
+{
+ "schema_version": 1,
+ "project_id": "prj_vhscan45061",
+ "input_digest": "sha256:5e11a447ac7950fb49746773ebca408ad21ff5cf626c943fe3762d21704eaf56",
+ "policy_digest": "sha256:04a9d9a591d5ed423be77d5f8aade8533a5e6fabc2eaaef21ebf85df68eaeaa5",
+ "reservation_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+ "recipe": "SMART_PUNCH_IN",
+ "recipe_version": 1,
+ "candidate_id": "cand_848db410743d",
+ "timeline": {
+  "axis": "body_final",
+  "fps_num": 30,
+  "fps_den": 1,
+  "frame_count": 1098,
+  "intro_frames": 0
+ },
+ "audio_mode": "preserve",
+ "evidence": {
+  "word_ids": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "quote": "עם הכתפיים שלכם, נוגעת באוזניים שלכם",
+  "grade": "supported",
+  "reviewed_subjects": []
+ },
+ "assets": [],
+ "cues": [
+  {
+   "id": "cue_1",
+   "kind": "crop",
+   "start_frame": 24,
+   "end_frame": 88,
+   "interpolation": "smoothstep",
+   "keyframes": [
+    {
+     "frame": 24,
+     "rect": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "frame": 39,
+     "rect": [
+      0.028302,
+      0.028302,
+      0.943396,
+      0.943396
+     ]
+    },
+    {
+     "frame": 72,
+     "rect": [
+      0.028302,
+      0.028302,
+      0.943396,
+      0.943396
+     ]
+    },
+    {
+     "frame": 87,
+     "rect": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ]
+    }
+   ]
+  }
+ ],
+ "declared_transitions": [],
+ "selection": {
+  "actor": "harel",
+  "reason_codes": [
+   "operator_selected"
+  ]
+ },
+ "plan_digest": "sha256:7abbc518ce5c7574372183fc36161638668b4e08ce55efd595fef501cb868051"
+}

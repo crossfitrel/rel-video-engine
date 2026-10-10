@@ -1,0 +1,578 @@
+{
+ "tolerances": {
+  "dur": 0.15,
+  "frame_delta": 5,
+  "ssim_anchor": 0.85,
+  "lufs": 1.2,
+  "tp": -0.8
+ },
+ "n": 7,
+ "n_applicable": 5,
+ "passed": 5,
+ "results": [
+  {
+   "project": "אוריה-המנהלת-המקצועית",
+   "v1": "/Users/hayon/rel-video-work/אוריה-המנהלת-המקצועית/FINAL.mp4",
+   "v2": "/Users/hayon/rel-video-work/אוריה-המנהלת-המקצועית/FINAL_engine2.mp4",
+   "skip": "השוואה לא תקפה — קומפוזיטינג/סידור ידני על קבצי ביניים (EXPORT_TIGHT2.mp4). v2 מרנדר מ-INPUT ולכן אינו רואה את זה. חוב מתועד: לבטא את השינוי בתוכנית, או לחבר src פר-סגמנט.",
+   "not_applicable": true
+  },
+  {
+   "project": "בדיקת-v2-render",
+   "v1": "/Users/hayon/rel-video-work/בדיקת-v2-render/FINAL.mp4",
+   "v2": "/Users/hayon/rel-video-work/בדיקת-v2-render/FINAL_engine2.mp4",
+   "probe": {
+    "v1": {
+     "w": 1080,
+     "h": 1920,
+     "fps": 30.0,
+     "vcodec": "h264",
+     "pix_fmt": "yuv420p",
+     "primaries": "bt2020",
+     "frames": 935,
+     "dur": 31.178,
+     "mb": 18.33
+    },
+    "v2": {
+     "w": 1080,
+     "h": 1920,
+     "fps": 30.0,
+     "vcodec": "h264",
+     "pix_fmt": "yuv420p",
+     "primaries": "bt2020",
+     "frames": 935,
+     "dur": 31.18,
+     "mb": 9.29
+    }
+   },
+   "dur_delta": 0.002,
+   "format_match": true,
+   "align": {
+    "ssim": 0.85171,
+    "psnr": 16.69
+   },
+   "vs_ref": {
+    "v1": {
+     "ssim": 0.86194,
+     "psnr": 16.88
+    },
+    "v2": {
+     "ssim": 0.98513,
+     "psnr": 38.98
+    },
+    "ref_dur": 31.167,
+    "ref_frames": 935
+   },
+   "loudness": {
+    "v1": {
+     "I": -14.42,
+     "TP": -0.92
+    },
+    "v2": {
+     "I": -14.43,
+     "TP": -0.9
+    }
+   },
+   "render_v2": {
+    "n_segments": 5,
+    "n_cached": 0,
+    "n_rendered": 5,
+    "encode_secs": 22.0,
+    "wall_secs": 6.7,
+    "jobs": 4,
+    "video_generations": 1,
+    "meta": "נמדד מ-EXPORT_TIGHT (34.16/31.17)"
+   },
+   "checks": [
+    {
+     "check": "משך זהה",
+     "pass": true,
+     "detail": "Δ=0.002ש (סף 0.15)"
+    },
+    {
+     "check": "פורמט זהה",
+     "pass": true,
+     "detail": "v1 1080x1920@30.0 h264 · v2 1080x1920@30.0 h264"
+    },
+    {
+     "check": "יישור ציר (ספירת פריימים)",
+     "pass": true,
+     "detail": "v1 935 · v2 935 פריימים (Δ=0, סף 5)"
+    },
+    {
+     "check": "שניהם מיושרים לעוגן",
+     "pass": true,
+     "detail": "מול ייחוס crf12: v1 SSIM=0.86194 · v2 SSIM=0.98513 (סף 0.85)"
+    },
+    {
+     "check": "v2 קרוב יותר למקור (פחות דורות)",
+     "pass": true,
+     "detail": "v2 0.98513 מול v1 0.86194 → v2 מנצח (+12.32 נק' SSIM)"
+    },
+    {
+     "check": "loudness v2",
+     "pass": true,
+     "detail": "I=-14.43 TP=-0.9 (יעד -14 ±1.2, TP≤-0.8)"
+    },
+    {
+     "check": "גודל ≤60MB",
+     "pass": true,
+     "detail": "9.29MB"
+    },
+    {
+     "check": "תיוג צבע",
+     "pass": true,
+     "detail": "v1 primaries=bt2020 · v2 primaries=bt2020"
+    }
+   ],
+   "pass": true
+  },
+  {
+   "project": "מה-זה-להיות-בעל-מועדון",
+   "v1": "/Users/hayon/rel-video-work/מה-זה-להיות-בעל-מועדון/FINAL.mp4",
+   "v2": "/Users/hayon/rel-video-work/מה-זה-להיות-בעל-מועדון/FINAL_engine2.mp4",
+   "probe": {
+    "v1": {
+     "w": 1080,
+     "h": 1920,
+     "fps": 30.0,
+     "vcodec": "h264",
+     "pix_fmt": "yuv420p",
+     "primaries": "bt709",
+     "frames": 1848,
+     "dur": 61.614,
+     "mb": 16.83
+    },
+    "v2": {
+     "w": 1080,
+     "h": 1920,
+     "fps": 30.0,
+     "vcodec": "h264",
+     "pix_fmt": "yuv420p",
+     "primaries": "bt709",
+     "frames": 1844,
+     "dur": 61.471,
+     "mb": 16.53
+    }
+   },
+   "dur_delta": 0.143,
+   "format_match": true,
+   "align": {
+    "ssim": 0.94231,
+    "psnr": 28.27
+   },
+   "vs_ref": {
+    "v1": {
+     "ssim": 0.94404,
+     "psnr": 28.9
+    },
+    "v2": {
+     "ssim": 0.98701,
+     "psnr": 41.34
+    },
+    "ref_dur": 61.466,
+    "ref_frames": 1844
+   },
+   "loudness": {
+    "v1": {
+     "I": -14.49,
+     "TP": -0.98
+    },
+    "v2": {
+     "I": -14.56,
+     "TP": -1.57
+    }
+   },
+   "render_v2": {
+    "n_segments": 14,
+    "n_cached": 0,
+    "n_rendered": 14,
+    "encode_secs": 28.1,
+    "wall_secs": 7.7,
+    "jobs": 4,
+    "video_generations": 1,
+    "meta": "1.0 (נמדד: יחס 0.9974)"
+   },
+   "checks": [
+    {
+     "check": "משך זהה",
+     "pass": true,
+     "detail": "Δ=0.143ש (סף 0.15)"
+    },
+    {
+     "check": "פורמט זהה",
+     "pass": true,
+     "detail": "v1 1080x1920@30.0 h264 · v2 1080x1920@30.0 h264"
+    },
+    {
+     "check": "יישור ציר (ספירת פריימים)",
+     "pass": true,
+     "detail": "v1 1848 · v2 1844 פריימים (Δ=4, סף 5)"
+    },
+    {
+     "check": "שניהם מיושרים לעוגן",
+     "pass": true,
+     "detail": "מול ייחוס crf12: v1 SSIM=0.94404 · v2 SSIM=0.98701 (סף 0.85)"
+    },
+    {
+     "check": "v2 קרוב יותר למקור (פחות דורות)",
+     "pass": true,
+     "detail": "v2 0.98701 מול v1 0.94404 → v2 מנצח (+4.3 נק' SSIM)"
+    },
+    {
+     "check": "loudness v2",
+     "pass": true,
+     "detail": "I=-14.56 TP=-1.57 (יעד -14 ±1.2, TP≤-0.8)"
+    },
+    {
+     "check": "גודל ≤60MB",
+     "pass": true,
+     "detail": "16.53MB"
+    },
+    {
+     "check": "תיוג צבע",
+     "pass": true,
+     "detail": "v1 primaries=bt709 · v2 primaries=bt709"
+    }
+   ],
+   "pass": true
+  },
+  {
+   "project": "מי-אמר-שמאוחר-מידיי",
+   "v1": "/Users/hayon/rel-video-work/מי-אמר-שמאוחר-מידיי/FINAL.mp4",
+   "v2": "/Users/hayon/rel-video-work/מי-אמר-שמאוחר-מידיי/FINAL_engine2.mp4",
+   "probe": {
+    "v1": {
+     "w": 1080,
+     "h": 1920,
+     "fps": 30.0,
+     "vcodec": "h264",
+     "pix_fmt": "yuv420p",
+     "primaries": "bt2020",
+     "frames": 935,
+     "dur": 31.178,
+     "mb": 18.33
+    },
+    "v2": {
+     "w": 1080,
+     "h": 1920,
+     "fps": 30.0,
+     "vcodec": "h264",
+     "pix_fmt": "yuv420p",
+     "primaries": "bt2020",
+     "frames": 935,
+     "dur": 31.18,
+     "mb": 9.34
+    }
+   },
+   "dur_delta": 0.002,
+   "format_match": true,
+   "align": {
+    "ssim": 0.85491,
+    "psnr": 16.78
+   },
+   "vs_ref": {
+    "v1": {
+     "ssim": 0.86194,
+     "psnr": 16.88
+    },
+    "v2": {
+     "ssim": 0.98766,
+     "psnr": 41.3
+    },
+    "ref_dur": 31.167,
+    "ref_frames": 935
+   },
+   "loudness": {
+    "v1": {
+     "I": -14.42,
+     "TP": -0.92
+    },
+    "v2": {
+     "I": -14.43,
+     "TP": -0.9
+    }
+   },
+   "render_v2": {
+    "n_segments": 5,
+    "n_cached": 0,
+    "n_rendered": 5,
+    "encode_secs": 30.2,
+    "wall_secs": 8.5,
+    "jobs": 4,
+    "video_generations": 1,
+    "meta": "נמדד מ-EXPORT_TIGHT (34.16/31.17)"
+   },
+   "checks": [
+    {
+     "check": "משך זהה",
+     "pass": true,
+     "detail": "Δ=0.002ש (סף 0.15)"
+    },
+    {
+     "check": "פורמט זהה",
+     "pass": true,
+     "detail": "v1 1080x1920@30.0 h264 · v2 1080x1920@30.0 h264"
+    },
+    {
+     "check": "יישור ציר (ספירת פריימים)",
+     "pass": true,
+     "detail": "v1 935 · v2 935 פריימים (Δ=0, סף 5)"
+    },
+    {
+     "check": "שניהם מיושרים לעוגן",
+     "pass": true,
+     "detail": "מול ייחוס crf12: v1 SSIM=0.86194 · v2 SSIM=0.98766 (סף 0.85)"
+    },
+    {
+     "check": "v2 קרוב יותר למקור (פחות דורות)",
+     "pass": true,
+     "detail": "v2 0.98766 מול v1 0.86194 → v2 מנצח (+12.57 נק' SSIM)"
+    },
+    {
+     "check": "loudness v2",
+     "pass": true,
+     "detail": "I=-14.43 TP=-0.9 (יעד -14 ±1.2, TP≤-0.8)"
+    },
+    {
+     "check": "גודל ≤60MB",
+     "pass": true,
+     "detail": "9.34MB"
+    },
+    {
+     "check": "תיוג צבע",
+     "pass": true,
+     "detail": "v1 primaries=bt2020 · v2 primaries=bt2020"
+    }
+   ],
+   "pass": true
+  },
+  {
+   "project": "ניפוץ-מיתוסים-לטיפול-מגיעים-רק-כשכואב",
+   "v1": "/Users/hayon/rel-video-work/ניפוץ-מיתוסים-לטיפול-מגיעים-רק-כשכואב/FINAL.mp4",
+   "v2": "/Users/hayon/rel-video-work/ניפוץ-מיתוסים-לטיפול-מגיעים-רק-כשכואב/FINAL_engine2.mp4",
+   "skip": "השוואה לא תקפה — קומפוזיטינג/סידור ידני על קבצי ביניים (EXPORT_with_effect.mp4, EXPORT_reordered.mp4, EXPORT_before_fx_backup.mp4, EXPORT_TIGHT2.mp4). v2 מרנדר מ-INPUT ולכן אינו רואה את זה. חוב מתועד: לבטא את השינוי בתוכנית, או לחבר src פר-סגמנט.",
+   "not_applicable": true
+  },
+  {
+   "project": "עיסוי-רפואי",
+   "v1": "/Users/hayon/rel-video-work/עיסוי-רפואי/FINAL.mp4",
+   "v2": "/Users/hayon/rel-video-work/עיסוי-רפואי/FINAL_engine2.mp4",
+   "probe": {
+    "v1": {
+     "w": 1080,
+     "h": 1920,
+     "fps": 30.0,
+     "vcodec": "h264",
+     "pix_fmt": "yuv420p",
+     "primaries": "bt2020",
+     "frames": 965,
+     "dur": 32.172,
+     "mb": 17.91
+    },
+    "v2": {
+     "w": 1080,
+     "h": 1920,
+     "fps": 30.0,
+     "vcodec": "h264",
+     "pix_fmt": "yuv420p",
+     "primaries": "bt2020",
+     "frames": 967,
+     "dur": 32.235,
+     "mb": 8.52
+    }
+   },
+   "dur_delta": 0.063,
+   "format_match": true,
+   "align": {
+    "ssim": 0.89826,
+    "psnr": 24.11
+   },
+   "vs_ref": {
+    "v1": {
+     "ssim": 0.90086,
+     "psnr": 24.35
+    },
+    "v2": {
+     "ssim": 0.98811,
+     "psnr": 40.67
+    },
+    "ref_dur": 32.231,
+    "ref_frames": 967
+   },
+   "loudness": {
+    "v1": {
+     "I": -14.51,
+     "TP": -1.49
+    },
+    "v2": {
+     "I": -14.48,
+     "TP": -1.52
+    }
+   },
+   "render_v2": {
+    "n_segments": 12,
+    "n_cached": 0,
+    "n_rendered": 12,
+    "encode_secs": 24.6,
+    "wall_secs": 7.0,
+    "jobs": 4,
+    "video_generations": 1,
+    "meta": "נמדד מ-EXPORT_TIGHT (33.15/32.24)"
+   },
+   "checks": [
+    {
+     "check": "משך זהה",
+     "pass": true,
+     "detail": "Δ=0.063ש (סף 0.15)"
+    },
+    {
+     "check": "פורמט זהה",
+     "pass": true,
+     "detail": "v1 1080x1920@30.0 h264 · v2 1080x1920@30.0 h264"
+    },
+    {
+     "check": "יישור ציר (ספירת פריימים)",
+     "pass": true,
+     "detail": "v1 965 · v2 967 פריימים (Δ=2, סף 5)"
+    },
+    {
+     "check": "שניהם מיושרים לעוגן",
+     "pass": true,
+     "detail": "מול ייחוס crf12: v1 SSIM=0.90086 · v2 SSIM=0.98811 (סף 0.85)"
+    },
+    {
+     "check": "v2 קרוב יותר למקור (פחות דורות)",
+     "pass": true,
+     "detail": "v2 0.98811 מול v1 0.90086 → v2 מנצח (+8.73 נק' SSIM)"
+    },
+    {
+     "check": "loudness v2",
+     "pass": true,
+     "detail": "I=-14.48 TP=-1.52 (יעד -14 ±1.2, TP≤-0.8)"
+    },
+    {
+     "check": "גודל ≤60MB",
+     "pass": true,
+     "detail": "8.52MB"
+    },
+    {
+     "check": "תיוג צבע",
+     "pass": true,
+     "detail": "v1 primaries=bt2020 · v2 primaries=bt2020"
+    }
+   ],
+   "pass": true
+  },
+  {
+   "project": "צעדים-קטנים-כל-יום",
+   "v1": "/Users/hayon/rel-video-work/צעדים-קטנים-כל-יום/FINAL.mp4",
+   "v2": "/Users/hayon/rel-video-work/צעדים-קטנים-כל-יום/FINAL_engine2.mp4",
+   "probe": {
+    "v1": {
+     "w": 1080,
+     "h": 1920,
+     "fps": 30.0,
+     "vcodec": "h264",
+     "pix_fmt": "yuv420p",
+     "primaries": "bt709",
+     "frames": 1790,
+     "dur": 59.672,
+     "mb": 24.23
+    },
+    "v2": {
+     "w": 1080,
+     "h": 1920,
+     "fps": 30.0,
+     "vcodec": "h264",
+     "pix_fmt": "yuv420p",
+     "primaries": "bt709",
+     "frames": 1792,
+     "dur": 59.736,
+     "mb": 25.19
+    }
+   },
+   "dur_delta": 0.064,
+   "format_match": true,
+   "align": {
+    "ssim": 0.93195,
+    "psnr": 26.89
+   },
+   "vs_ref": {
+    "v1": {
+     "ssim": 0.92056,
+     "psnr": 26.75
+    },
+    "v2": {
+     "ssim": 0.98453,
+     "psnr": 41.02
+    },
+    "ref_dur": 59.733,
+    "ref_frames": 1792
+   },
+   "loudness": {
+    "v1": {
+     "I": -14.6,
+     "TP": -1.47
+    },
+    "v2": {
+     "I": -14.69,
+     "TP": -1.49
+    }
+   },
+   "render_v2": {
+    "n_segments": 12,
+    "n_cached": 0,
+    "n_rendered": 12,
+    "encode_secs": 64.4,
+    "wall_secs": 17.6,
+    "jobs": 4,
+    "video_generations": 1,
+    "meta": "נמדד מ-EXPORT_TIGHT (71.41/59.73)"
+   },
+   "checks": [
+    {
+     "check": "משך זהה",
+     "pass": true,
+     "detail": "Δ=0.064ש (סף 0.15)"
+    },
+    {
+     "check": "פורמט זהה",
+     "pass": true,
+     "detail": "v1 1080x1920@30.0 h264 · v2 1080x1920@30.0 h264"
+    },
+    {
+     "check": "יישור ציר (ספירת פריימים)",
+     "pass": true,
+     "detail": "v1 1790 · v2 1792 פריימים (Δ=2, סף 5)"
+    },
+    {
+     "check": "שניהם מיושרים לעוגן",
+     "pass": true,
+     "detail": "מול ייחוס crf12: v1 SSIM=0.92056 · v2 SSIM=0.98453 (סף 0.85)"
+    },
+    {
+     "check": "v2 קרוב יותר למקור (פחות דורות)",
+     "pass": true,
+     "detail": "v2 0.98453 מול v1 0.92056 → v2 מנצח (+6.4 נק' SSIM)"
+    },
+    {
+     "check": "loudness v2",
+     "pass": true,
+     "detail": "I=-14.69 TP=-1.49 (יעד -14 ±1.2, TP≤-0.8)"
+    },
+    {
+     "check": "גודל ≤60MB",
+     "pass": true,
+     "detail": "25.19MB"
+    },
+    {
+     "check": "תיוג צבע",
+     "pass": true,
+     "detail": "v1 primaries=bt709 · v2 primaries=bt709"
+    }
+   ],
+   "pass": true
+  }
+ ]
+}

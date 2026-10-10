@@ -1,0 +1,203 @@
+{
+ "built": [
+  {
+   "idx": 1,
+   "name": "אוריה-המנהלת-המקצועית",
+   "dir": "01_אוריה-המנהלת-המקצועית",
+   "scale": 1.06,
+   "center": "center",
+   "window_sec": [
+    1.4,
+    3.93
+   ],
+   "anchor": "המקצועית",
+   "plan_digest": "sha256:0ea89a02c073e9acb6e7e7dfdcfed030ff86632671eb9f4745530299e4588f96",
+   "publishable": false,
+   "kind": "calibration",
+   "rejected_for": [
+    "unsafe_crop"
+   ],
+   "relaxation": "head_only",
+   "relaxation_he": "רק הראש מוגן — ידיים/גוף מותר שייחתכו בשוליים",
+   "overflow": {
+    "scale": 1.04,
+    "center": "center",
+    "head_over": 0.0,
+    "motion_over": 0.0129
+   }
+  },
+  {
+   "idx": 2,
+   "name": "טעויות-נפוצות-strict-pull-ups",
+   "dir": "02_טעויות-נפוצות-strict-pull-ups",
+   "scale": 1.06,
+   "center": "center",
+   "window_sec": [
+    0.8,
+    2.93
+   ],
+   "anchor": "באוזניים",
+   "plan_digest": "sha256:7abbc518ce5c7574372183fc36161638668b4e08ce55efd595fef501cb868051",
+   "publishable": false,
+   "kind": "calibration",
+   "rejected_for": [
+    "unsafe_crop"
+   ],
+   "relaxation": "head_only",
+   "relaxation_he": "רק הראש מוגן — ידיים/גוף מותר שייחתכו בשוליים",
+   "overflow": {
+    "scale": 1.04,
+    "center": "center",
+    "head_over": 0.0,
+    "motion_over": 0.0026
+   }
+  },
+  {
+   "idx": 3,
+   "name": "מה-זה-להיות-בעל-מועדון",
+   "dir": "03_מה-זה-להיות-בעל-מועדון",
+   "scale": 1.06,
+   "center": "center",
+   "window_sec": [
+    1.93,
+    4.47
+   ],
+   "anchor": "מתאמן",
+   "plan_digest": "sha256:dc0df4ef0c6b1c0832c63ec9fbe7feac187092c86f01792b168f77682b640fa0",
+   "publishable": false,
+   "kind": "calibration",
+   "rejected_for": [
+    "unsafe_crop"
+   ],
+   "relaxation": "head_only",
+   "relaxation_he": "רק הראש מוגן — ידיים/גוף מותר שייחתכו בשוליים",
+   "overflow": {
+    "scale": 1.04,
+    "center": "center",
+    "head_over": 0.0,
+    "motion_over": 0.0136
+   }
+  },
+  {
+   "idx": 4,
+   "name": "ניפוץ-מיתוסים-לטיפול-מגיעים-רק-כשכואב",
+   "dir": "04_ניפוץ-מיתוסים-לטיפול-מגיעים-רק-כשכואב",
+   "scale": 1.06,
+   "center": "center",
+   "window_sec": [
+    4.1,
+    6.2
+   ],
+   "anchor": "יתקלקל",
+   "plan_digest": "sha256:48c73df8fc591635bb05998613bf07b5a1e879c682f119f6d9caf9f0004ade8b",
+   "publishable": false,
+   "kind": "calibration",
+   "rejected_for": [
+    "unsafe_crop"
+   ],
+   "relaxation": "head_only",
+   "relaxation_he": "רק הראש מוגן — ידיים/גוף מותר שייחתכו בשוליים",
+   "overflow": {
+    "scale": 1.04,
+    "center": "center",
+    "head_over": 0.0,
+    "motion_over": 0.0067
+   }
+  },
+  {
+   "idx": 5,
+   "name": "עיסוי-רפואי",
+   "dir": "05_עיסוי-רפואי",
+   "scale": 1.06,
+   "center": "center",
+   "window_sec": [
+    4.2,
+    6.73
+   ],
+   "anchor": "ההתאוששות",
+   "plan_digest": "sha256:9f02140716a25e9e91ee0079971c42fc90ed9ac8ccf37a05b6fb71d51e73dfd8",
+   "publishable": false,
+   "kind": "calibration",
+   "rejected_for": [
+    "unsafe_crop"
+   ],
+   "relaxation": "head_only",
+   "relaxation_he": "רק הראש מוגן — ידיים/גוף מותר שייחתכו בשוליים",
+   "overflow": {
+    "scale": 1.04,
+    "center": "center",
+    "head_over": 0.0,
+    "motion_over": 0.0136
+   }
+  },
+  {
+   "idx": 6,
+   "name": "צעדים-קטנים-כל-יום",
+   "dir": "06_צעדים-קטנים-כל-יום",
+   "scale": 1.06,
+   "center": "center",
+   "window_sec": [
+    2.57,
+    5.1
+   ],
+   "anchor": "מצעדים",
+   "plan_digest": "sha256:16ed3e0401cea976ede4ea0c03290ce12c7ca3213d18e62785213ce99199fe1a",
+   "publishable": false,
+   "kind": "calibration",
+   "rejected_for": [
+    "unsafe_crop"
+   ],
+   "relaxation": "head_only",
+   "relaxation_he": "רק הראש מוגן — ידיים/גוף מותר שייחתכו בשוליים",
+   "overflow": {
+    "scale": 1.04,
+    "center": "center",
+    "head_over": 0.0,
+    "motion_over": 0.0067
+   }
+  },
+  {
+   "idx": 7,
+   "name": "טיפ-אחד-דאבל-אנדרס",
+   "dir": "07_טיפ-אחד-דאבל-אנדרס",
+   "scale": 1.06,
+   "center": "center",
+   "window_sec": [
+    1.53,
+    4.07
+   ],
+   "anchor": "אנדרס.",
+   "plan_digest": "sha256:95de0582fc7a53b223bd487fa31419c8ca2c07eea8de2d23bbbd7bd50dea3b73",
+   "publishable": false,
+   "kind": "calibration",
+   "rejected_for": [
+    "unsafe_crop"
+   ],
+   "relaxation": "head_only_margin0",
+   "relaxation_he": "רק הראש מוגן ובלי שוליים",
+   "overflow": {
+    "scale": 1.04,
+    "center": "center",
+    "head_over": 0.0,
+    "motion_over": 0.0129
+   }
+  },
+  {
+   "idx": 90,
+   "name": "סקאלת-הבריאות-×1.04",
+   "dir": "90_סקאלת-הבריאות-×1.04",
+   "scale": 1.04,
+   "center": "center",
+   "window_sec": [
+    0.8,
+    2.63
+   ],
+   "anchor": "הלוח,",
+   "plan_digest": "sha256:85916c691a50bdaa4ac5e4cc6d0cb9ea66bd2694b7666658b5cc1526e16c7e4c",
+   "publishable": false,
+   "kind": "variant",
+   "project": "סקאלת-הבריאות"
+  }
+ ],
+ "probe_n": 8
+}

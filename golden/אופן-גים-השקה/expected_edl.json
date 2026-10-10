@@ -1,0 +1,124 @@
+{
+ "source_words": "/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/golden/אופן-גים-השקה/words.json",
+ "video": "",
+ "total_dur": 91.54,
+ "kept_dur": 81.23,
+ "removed_dur": 10.31,
+ "keep_segments": [
+  {
+   "start": 0.0,
+   "end": 13.82
+  },
+  {
+   "start": 17.66,
+   "end": 29.34
+  },
+  {
+   "start": 30.1,
+   "end": 34.24
+  },
+  {
+   "start": 35.1,
+   "end": 39.72
+  },
+  {
+   "start": 40.16,
+   "end": 50.02
+  },
+  {
+   "start": 51.32,
+   "end": 56.72
+  },
+  {
+   "start": 57.24,
+   "end": 62.7
+  },
+  {
+   "start": 63.78,
+   "end": 79.54
+  },
+  {
+   "start": 80.36,
+   "end": 85.17
+  },
+  {
+   "start": 85.86,
+   "end": 91.54
+  }
+ ],
+ "auto_cuts": [
+  {
+   "start": 13.82,
+   "end": 17.66,
+   "reason": "שקט 4.06ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 29.34,
+   "end": 30.1,
+   "reason": "שקט 0.98ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 34.24,
+   "end": 35.1,
+   "reason": "שקט 1.08ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 39.72,
+   "end": 40.16,
+   "reason": "שקט 0.66ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 50.02,
+   "end": 51.32,
+   "reason": "שקט 1.52ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 56.72,
+   "end": 57.24,
+   "reason": "שקט 0.74ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 62.7,
+   "end": 63.78,
+   "reason": "שקט 1.30ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 79.54,
+   "end": 80.36,
+   "reason": "שקט 1.04ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 85.17,
+   "end": 85.86,
+   "reason": "שקט 1.04ש → 0.35ש",
+   "confidence": "high"
+  }
+ ],
+ "manual_review_cuts": [
+  {
+   "start": 0.0,
+   "end": 4.1,
+   "reason": "פתיחה ארוכה בלי דיבור — פתיח ויזואלי? (Hook) — הכרעה באפליקציה",
+   "confidence": "medium",
+   "rough_start": 0.0,
+   "rough_end": 4.1
+  },
+  {
+   "start": 47.4,
+   "end": 47.6,
+   "reason": "שקט 0.42ש → 0.22ש",
+   "confidence": "medium",
+   "rough_start": 41.5,
+   "rough_end": 41.7
+  }
+ ],
+ "policy": "/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tools/edl-policy.json"
+}

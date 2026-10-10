@@ -1,0 +1,101 @@
+{
+ "schema_version": 1,
+ "project_id": "prj_vhscan916009",
+ "input_digest": "sha256:9dae70944f376917c34cbb9912695a136cb92c1100609617d8f3db17d19095b8",
+ "policy_digest": "sha256:04a9d9a591d5ed423be77d5f8aade8533a5e6fabc2eaaef21ebf85df68eaeaa5",
+ "reservation_digest": "sha256:126fbd1015a1886d90c4d360c125e9a0b8bd2888e04adfc5156d68e8da27ec9f",
+ "recipe": "SMART_PUNCH_IN",
+ "recipe_version": 1,
+ "candidate_id": "cand_da505e55a335",
+ "timeline": {
+  "axis": "body_final",
+  "fps_num": 30,
+  "fps_den": 1,
+  "frame_count": 1790,
+  "intro_frames": 0
+ },
+ "audio_mode": "preserve",
+ "evidence": {
+  "word_ids": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19
+  ],
+  "quote": "זה הפעם לא צעד אחד גדול, זה תמיד מורכב מצעדים מאוד מאוד קטנים בשביל להגיע לתוצאה מסוימת, כל מי שאמר",
+  "grade": "supported",
+  "reviewed_subjects": []
+ },
+ "assets": [],
+ "cues": [
+  {
+   "id": "cue_1",
+   "kind": "crop",
+   "start_frame": 77,
+   "end_frame": 153,
+   "interpolation": "smoothstep",
+   "keyframes": [
+    {
+     "frame": 77,
+     "rect": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "frame": 92,
+     "rect": [
+      0.028302,
+      0.028302,
+      0.943396,
+      0.943396
+     ]
+    },
+    {
+     "frame": 137,
+     "rect": [
+      0.028302,
+      0.028302,
+      0.943396,
+      0.943396
+     ]
+    },
+    {
+     "frame": 152,
+     "rect": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ]
+    }
+   ]
+  }
+ ],
+ "declared_transitions": [],
+ "selection": {
+  "actor": "harel",
+  "reason_codes": [
+   "operator_selected"
+  ]
+ },
+ "plan_digest": "sha256:16ed3e0401cea976ede4ea0c03290ce12c7ca3213d18e62785213ce99199fe1a"
+}

@@ -1,0 +1,140 @@
+{
+ "_doc": "קטלוג Cost-first. price_usd = estimate אמיתי מ-/estimate (25.9.26, בהנחת השקה 45% שמסתיימת 1.10.26 — אחרי זה בערך x1.8). retry_prior = הערכת סיכוי לניסיון חוזר לפי סוג שוט. לפני שימוש: לרענן עם `enhance.py prices`.",
+ "checked_at": "2026-09-25",
+ "usd_ils": 3.1,
+ "video_tiers": [
+  {
+   "id": "kling-video/v3.0/std/image-to-video",
+   "tier": 1,
+   "last_frame": "last_image_url",
+   "first_field": "image_url",
+   "durations": [
+    3,
+    15
+   ],
+   "price_usd": {
+    "3s": 0.139,
+    "5s": 0.231
+   },
+   "fixed": {
+    "sound": "off"
+   },
+   "use": "ברירת מחדל: הזול ביותר עם פריים אחרון (חובה למעבר חלק לצילום אמיתי)"
+  },
+  {
+   "id": "kling-video/o3/first-last-frame",
+   "tier": 1,
+   "last_frame": "last_frame_url",
+   "first_field": "first_frame_url",
+   "durations": [
+    3,
+    15
+   ],
+   "price_usd": {
+    "3s": 0.139
+   },
+   "fixed": {
+    "mode": "std",
+    "aspect_ratio": "9:16"
+   },
+   "use": "חלופה שקולה במחיר — כשצריך aspect_ratio מפורש"
+  },
+  {
+   "id": "kling-video/v3.0/pro/image-to-video",
+   "tier": 2,
+   "last_frame": "last_image_url",
+   "first_field": "image_url",
+   "durations": [
+    3,
+    15
+   ],
+   "price_usd": {
+    "3s": 0.185
+   },
+   "fixed": {
+    "sound": "off"
+   },
+   "use": "Escalation בלבד — אחרי 2 כשלונות איכות ב-std"
+  },
+  {
+   "id": "kling-video/v2.5-turbo/standard/image-to-video",
+   "tier": 0,
+   "last_frame": null,
+   "first_field": "image_url",
+   "durations": [
+    5,
+    10
+   ],
+   "price_usd": {
+    "5s": 0.116
+   },
+   "fixed": {},
+   "use": "הכי זול ל-I2V בלי פריים אחרון (אפקט שלא חוזר לצילום)"
+  },
+  {
+   "id": "minimax/hailuo-2.3/standard/image-to-video",
+   "tier": 0,
+   "last_frame": null,
+   "first_field": "image_url",
+   "durations": [
+    6,
+    10
+   ],
+   "price_usd": {
+    "6s": 0.07
+   },
+   "fixed": {},
+   "use": "זול מאוד (הנחה 75% עד 1.10), 768p, בלי פריים אחרון"
+  },
+  {
+   "id": "kling-video/o3/video-edit",
+   "tier": 1,
+   "last_frame": null,
+   "first_field": "video_urls",
+   "durations": [
+    3,
+    10
+   ],
+   "price_usd": {
+    "per_s_list": 0.126
+   },
+   "fixed": {
+    "mode": "std"
+   },
+   "use": "V2V — החלפת סביבה עם שמירת תנועת מצלמה ודובר (האפקט החזק של v2). /estimate מחזיר 500 ⇒ fallback_usd מחירון"
+  }
+ ],
+ "image_tiers": [
+  {
+   "id": "alibaba/qwen-image-3/edit",
+   "price_usd": {
+    "1k": 0.04,
+    "2k": 0.075
+   },
+   "use": "עריכת פריים אמיתי (clean plate, תאורה)"
+  },
+  {
+   "id": "alibaba/qwen-image-3/text-to-image",
+   "price_usd": {
+    "1k": 0.04,
+    "2k": 0.075
+   },
+   "use": "פריים חדש מאפס"
+  },
+  {
+   "id": "xai/grok-imagine-image-2.0",
+   "price_usd": {
+    "default": 0.07
+   },
+   "use": "Escalation לעריכה"
+  }
+ ],
+ "retry_priors": {
+  "flf_transition_large_morph": 0.8,
+  "flf_same_scene_light": 0.35,
+  "static_bg_light": 0.4,
+  "image_edit": 0.3,
+  "v2v_env_swap": 0.6
+ },
+ "upscale": "אין endpoint upscale בקטלוג — סקייל ל-1080x1920 ב-ffmpeg lanczos (חינם)"
+}

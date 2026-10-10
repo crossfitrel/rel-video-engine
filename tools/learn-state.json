@@ -1,0 +1,281 @@
+{
+ "version": 2,
+ "projects": {
+  "prj_82cf9c176524": {
+   "name": "סקאלת-הבריאות",
+   "offset": 97
+  },
+  "prj_81e3f81a21e3": {
+   "name": "טעויות-נפוצות-strict-pull-ups",
+   "offset": 303
+  },
+  "prj_f824f8293975": {
+   "name": "הלקח-הכי-חשוב-במכירות",
+   "offset": 25
+  },
+  "prj_e4208e603fa1": {
+   "name": "מי-אמר-שמאוחר-מידיי",
+   "offset": 65
+  },
+  "prj_c676626926c0": {
+   "name": "שינה-והתאוששות",
+   "offset": 32
+  },
+  "prj_f7f0235ec2f4": {
+   "name": "אופן-גים-חיזוק",
+   "offset": 47
+  },
+  "prj_7d68cd974fcf": {
+   "name": "מה-זה-להיות-בעל-מועדון",
+   "offset": 31
+  },
+  "prj_1b9658a771bf": {
+   "name": "יום-בחיים-של-הראל",
+   "offset": 62
+  },
+  "prj_47184007fd06": {
+   "name": "ההבנה-האנטומית-סוגי-אחיזות",
+   "offset": 419
+  },
+  "prj_e53334edcfed": {
+   "name": "ניפוץ-מיתוסים-לטיפול-מגיעים-רק-כשכואב",
+   "offset": 49
+  },
+  "prj_cca2a249bba5": {
+   "name": "מתח-ראשון-קרוסלה",
+   "offset": 3
+  },
+  "prj_58af868d6fec": {
+   "name": "אוריה-המנהלת-המקצועית",
+   "offset": 179
+  },
+  "prj_a61c18338d95": {
+   "name": "צעדים-קטנים-כל-יום",
+   "offset": 29
+  },
+  "prj_2bb927f2efec": {
+   "name": "טיפ-אחד-HSPU",
+   "offset": 20
+  },
+  "prj_a0add6be1409": {
+   "name": "אופן-גים-השקה",
+   "offset": 112
+  },
+  "prj_f7b294a7b612": {
+   "name": "עיסוי-רפואי",
+   "offset": 128
+  },
+  "prj_2e9c043d6831": {
+   "name": "מאסל-מן-רוטטור-קאף",
+   "offset": 45
+  },
+  "name:בדיקת-מערכת-אחת": {
+   "name": "בדיקת-מערכת-אחת",
+   "offset": 14
+  },
+  "prj_942bdcbb127f": {
+   "name": "V3-לולאה",
+   "offset": 10
+  },
+  "prj_f569bfe98d05": {
+   "name": "בריאות-לקום-מכיסא",
+   "offset": 68
+  },
+  "prj_56e084795f76": {
+   "name": "דקה-להורים-אימוני-כוח-לילדים",
+   "offset": 29
+  },
+  "prj_6e24bb75267f": {
+   "name": "טיפ-אחד-בטן-בר",
+   "offset": 84
+  },
+  "prj_19215e0fd4a1": {
+   "name": "מאסל-מן-סיבוב-כתף",
+   "offset": 8
+  },
+  "prj_28e5d0976dc0": {
+   "name": "ממומן-ת1-סטודנטים",
+   "offset": 4
+  },
+  "prj_5fc00ce24781": {
+   "name": "ממומן-ת1-תושבים",
+   "offset": 11
+  },
+  "prj_2a343d4de526": {
+   "name": "ממומן-ת2-סטודנטים",
+   "offset": 104
+  },
+  "prj_0f7b58bb5067": {
+   "name": "ממומן-ת2-תושבים",
+   "offset": 89
+  },
+  "prj_6b92bfc90995": {
+   "name": "ממומן-ת3-סטודנטים",
+   "offset": 11
+  },
+  "prj_61ac8062ea91": {
+   "name": "ממומן-ת3-תושבים",
+   "offset": 10
+  },
+  "prj_8a07f056ce3d": {
+   "name": "ממומן-ת4-סטודנטים",
+   "offset": 10
+  },
+  "prj_04ef47d69bda": {
+   "name": "ממומן-ת4-תושבים",
+   "offset": 64
+  },
+  "prj_7442d1160ded": {
+   "name": "על-הלוח-כוח-וגיל",
+   "offset": 26
+  },
+  "prj_d5fac0c6005a": {
+   "name": "רמז מקצה 3 - סולם",
+   "offset": 2
+  },
+  "prj_13b1188b8d96": {
+   "name": "רמז מקצה ריצה",
+   "offset": 2
+  }
+ },
+ "counts": {
+  "_legacy_v1": {
+   "RC_SILENCE_RESTORE": 2,
+   "RC_MANUAL_ADD": 13,
+   "RC_TRANSCRIPT": 1
+  },
+  "unknown/rel": {
+   "RC_VIDEO_PATCH": 1,
+   "RC_ACTIVATE": 4,
+   "RC_MANUAL_ADD": 8,
+   "RC_BOUNDARY_ADJUST": 38,
+   "RC_SILENCE_RESTORE": 1,
+   "RC_OTHER_RESTORE": 1,
+   "RC_TRANSCRIPT": 1
+  },
+  "value/rel": {
+   "RC_TRANSCRIPT": 8,
+   "RC_BOUNDARY_ADJUST": 16,
+   "RC_MANUAL_ADD": 5,
+   "RC_ACTIVATE": 1,
+   "RC_OTHER_RESTORE": 6
+  },
+  "value/personal": {
+   "RC_MANUAL_ADD": 1,
+   "RC_ACTIVATE": 1,
+   "RC_BOUNDARY_ADJUST": 1,
+   "RC_TRANSCRIPT": 1
+  },
+  "conversion/rel": {
+   "RC_BOUNDARY_ADJUST": 2,
+   "RC_SILENCE_RESTORE": 1,
+   "RC_ACTIVATE": 1,
+   "RC_TRANSCRIPT": 1
+  }
+ },
+ "migrated_from_v1": "2026-07-23 14:36:23",
+ "last_event_ts": {
+  "prj_a0add6be1409": {
+   "RC_BOUNDARY_ADJUST": 1785065664.0,
+   "RC_MANUAL_ADD": 1785065603.0
+  },
+  "prj_f7f0235ec2f4": {},
+  "prj_58af868d6fec": {
+   "RC_BOUNDARY_ADJUST": 1784826928.0,
+   "RC_MANUAL_ADD": 1784826802.0,
+   "RC_OTHER_RESTORE": 1784826863.0,
+   "RC_ACTIVATE": 1784826935.0,
+   "RC_TRANSCRIPT": 1784885780.0
+  },
+  "prj_47184007fd06": {
+   "RC_BOUNDARY_ADJUST": 1784819185.0,
+   "RC_MANUAL_ADD": 1784819088.0,
+   "RC_ACTIVATE": 1784819070.0,
+   "RC_SILENCE_RESTORE": 1784819078.0
+  },
+  "prj_f824f8293975": {},
+  "prj_2bb927f2efec": {},
+  "prj_81e3f81a21e3": {
+   "RC_BOUNDARY_ADJUST": 1784816615.0,
+   "RC_MANUAL_ADD": 1784816522.0,
+   "RC_ACTIVATE": 1784816296.0
+  },
+  "prj_1b9658a771bf": {
+   "RC_TRANSCRIPT": 1784884748.0,
+   "RC_BOUNDARY_ADJUST": 1784971343.0
+  },
+  "prj_2e9c043d6831": {
+   "RC_TRANSCRIPT": 1784991044.0
+  },
+  "prj_7d68cd974fcf": {},
+  "prj_e4208e603fa1": {
+   "RC_BOUNDARY_ADJUST": 1784815437.0,
+   "RC_SILENCE_RESTORE": 1784815363.0,
+   "RC_ACTIVATE": 1784815365.0
+  },
+  "prj_cca2a249bba5": {},
+  "prj_e53334edcfed": {
+   "RC_BOUNDARY_ADJUST": 1784818722.0,
+   "RC_MANUAL_ADD": 1784818632.0,
+   "RC_TRANSCRIPT": 1784886204.0
+  },
+  "prj_82cf9c176524": {
+   "RC_BOUNDARY_ADJUST": 1784813779.0
+  },
+  "prj_f7b294a7b612": {
+   "RC_BOUNDARY_ADJUST": 1784884468.0,
+   "RC_MANUAL_ADD": 1784813192.0,
+   "RC_OTHER_RESTORE": 1784884459.0
+  },
+  "prj_a61c18338d95": {
+   "RC_ACTIVATE": 1784874942.0,
+   "RC_BOUNDARY_ADJUST": 1784874968.0,
+   "RC_TRANSCRIPT": 1784991189.0
+  },
+  "prj_c676626926c0": {},
+  "prj_942bdcbb127f": {},
+  "prj_f569bfe98d05": {
+   "RC_BOUNDARY_ADJUST": 1787037398.0,
+   "RC_MANUAL_ADD": 1786982300.0,
+   "RC_OTHER_RESTORE": 1786982387.0
+  },
+  "prj_56e084795f76": {
+   "RC_BOUNDARY_ADJUST": 1787042197.0
+  },
+  "prj_6e24bb75267f": {
+   "RC_BOUNDARY_ADJUST": 1787037484.0,
+   "RC_OTHER_RESTORE": 1787037570.0
+  },
+  "prj_19215e0fd4a1": {},
+  "prj_28e5d0976dc0": {
+   "RC_TRANSCRIPT": 1786980033.0
+  },
+  "prj_5fc00ce24781": {
+   "RC_TRANSCRIPT": 1786980205.0
+  },
+  "prj_2a343d4de526": {
+   "RC_BOUNDARY_ADJUST": 1787041709.0
+  },
+  "prj_0f7b58bb5067": {
+   "RC_BOUNDARY_ADJUST": 1787038487.0
+  },
+  "prj_6b92bfc90995": {
+   "RC_TRANSCRIPT": 1786980735.0,
+   "RC_OTHER_RESTORE": 1786980707.0
+  },
+  "prj_61ac8062ea91": {},
+  "prj_8a07f056ce3d": {
+   "RC_TRANSCRIPT": 1786980958.0
+  },
+  "prj_04ef47d69bda": {
+   "RC_MANUAL_ADD": 1786981447.0,
+   "RC_BOUNDARY_ADJUST": 1786981469.0
+  },
+  "prj_7442d1160ded": {
+   "RC_BOUNDARY_ADJUST": 1787037852.0,
+   "RC_OTHER_RESTORE": 1787037857.0
+  },
+  "prj_d5fac0c6005a": {},
+  "prj_13b1188b8d96": {}
+ }
+}

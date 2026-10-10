@@ -1,0 +1,90 @@
+{
+ "schema_version": 1,
+ "project_id": "prj_vhscan520206",
+ "input_digest": "sha256:9487839602a93bdfa2594956e013e1f2b922326fa70aee1009413bb296e12bc6",
+ "policy_digest": "sha256:04a9d9a591d5ed423be77d5f8aade8533a5e6fabc2eaaef21ebf85df68eaeaa5",
+ "reservation_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+ "recipe": "SMART_PUNCH_IN",
+ "recipe_version": 1,
+ "candidate_id": "cand_9dbb9ee77d12",
+ "timeline": {
+  "axis": "body_final",
+  "fps_num": 30,
+  "fps_den": 1,
+  "frame_count": 1153,
+  "intro_frames": 0
+ },
+ "audio_mode": "preserve",
+ "evidence": {
+  "word_ids": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "quote": "היי אני אוריה אני המנהלת המקצועית של קרוספיט אריאל",
+  "grade": "supported",
+  "reviewed_subjects": []
+ },
+ "assets": [],
+ "cues": [
+  {
+   "id": "cue_1",
+   "kind": "crop",
+   "start_frame": 42,
+   "end_frame": 118,
+   "interpolation": "smoothstep",
+   "keyframes": [
+    {
+     "frame": 42,
+     "rect": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "frame": 57,
+     "rect": [
+      0.028302,
+      0.028302,
+      0.943396,
+      0.943396
+     ]
+    },
+    {
+     "frame": 102,
+     "rect": [
+      0.028302,
+      0.028302,
+      0.943396,
+      0.943396
+     ]
+    },
+    {
+     "frame": 117,
+     "rect": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ]
+    }
+   ]
+  }
+ ],
+ "declared_transitions": [],
+ "selection": {
+  "actor": "harel",
+  "reason_codes": [
+   "operator_selected"
+  ]
+ },
+ "plan_digest": "sha256:0ea89a02c073e9acb6e7e7dfdcfed030ff86632671eb9f4745530299e4588f96"
+}

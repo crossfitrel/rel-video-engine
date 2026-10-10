@@ -1,0 +1,160 @@
+{
+ "source_words": "/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/golden/מאסל-מן-רוטטור-קאף/words.json",
+ "video": "",
+ "total_dur": 84.27,
+ "kept_dur": 48.24,
+ "removed_dur": 36.03,
+ "keep_segments": [
+  {
+   "start": 0.0,
+   "end": 8.62
+  },
+  {
+   "start": 10.02,
+   "end": 10.92
+  },
+  {
+   "start": 11.16,
+   "end": 18.78
+  },
+  {
+   "start": 21.62,
+   "end": 26.52
+  },
+  {
+   "start": 27.98,
+   "end": 31.3
+  },
+  {
+   "start": 37.69,
+   "end": 37.86
+  },
+  {
+   "start": 52.27,
+   "end": 52.44
+  },
+  {
+   "start": 57.42,
+   "end": 61.7
+  },
+  {
+   "start": 61.96,
+   "end": 67.62
+  },
+  {
+   "start": 70.6,
+   "end": 71.54
+  },
+  {
+   "start": 71.78,
+   "end": 79.91
+  },
+  {
+   "start": 80.74,
+   "end": 84.27
+  }
+ ],
+ "auto_cuts": [
+  {
+   "start": 8.62,
+   "end": 10.02,
+   "reason": "שקט 1.62ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 10.92,
+   "end": 11.16,
+   "reason": "שקט 0.46ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 18.78,
+   "end": 21.62,
+   "reason": "שקט 3.06ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 26.52,
+   "end": 27.98,
+   "reason": "שקט 1.68ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 31.3,
+   "end": 37.69,
+   "reason": "שקט 5.30ש → 0.22ש + טייק פסול/כפילות: «מה זה, מה עושה שם?»",
+   "confidence": "high"
+  },
+  {
+   "start": 37.86,
+   "end": 52.27,
+   "reason": "שקט 13.42ש → 0.22ש + טייק פסול/כפילות: «מה זה, מה אתה עושה?»",
+   "confidence": "high"
+  },
+  {
+   "start": 52.44,
+   "end": 57.42,
+   "reason": "שקט 5.20ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 61.7,
+   "end": 61.96,
+   "reason": "שקט 0.48ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 67.62,
+   "end": 70.6,
+   "reason": "שקט 3.20ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 71.54,
+   "end": 71.78,
+   "reason": "שקט 0.46ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 79.91,
+   "end": 80.74,
+   "reason": "שקט 1.18ש → 0.35ש",
+   "confidence": "high"
+  }
+ ],
+ "manual_review_cuts": [
+  {
+   "start": 25.42,
+   "end": 25.56,
+   "reason": "שקט 0.36ש → 0.22ש",
+   "confidence": "medium",
+   "rough_start": 20.94,
+   "rough_end": 21.08
+  },
+  {
+   "start": 29.96,
+   "end": 30.1,
+   "reason": "שקט 0.36ש → 0.22ש",
+   "confidence": "medium",
+   "rough_start": 24.02,
+   "rough_end": 24.16
+  },
+  {
+   "start": 64.4,
+   "end": 64.54,
+   "reason": "שקט 0.36ש → 0.22ש",
+   "confidence": "medium",
+   "rough_start": 32.42,
+   "rough_end": 32.56
+  },
+  {
+   "start": 75.04,
+   "end": 75.18,
+   "reason": "שקט 0.36ש → 0.22ש",
+   "confidence": "medium",
+   "rough_start": 39.84,
+   "rough_end": 39.98
+  }
+ ],
+ "policy": "/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tools/edl-policy.json"
+}

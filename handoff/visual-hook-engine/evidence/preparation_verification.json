@@ -1,0 +1,8 @@
+{
+  "files_checked": 234,
+  "changed_files": [],
+  "production_changes_by_preparation": false,
+  "dependencies_installed": false,
+  "full_tests_run": false,
+  "notes": "SHA256 comparison covers paths in source_snapshot.json; documentation and evidence only were written by this preparation."
+}

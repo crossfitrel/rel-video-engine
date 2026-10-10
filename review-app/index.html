@@ -1,0 +1,3238 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#871d1f">
+<script>/* rel-darkmode: start */(function(){try{var m=localStorage.getItem('relReviewTheme')||'system';document.documentElement.setAttribute('data-theme',m);}catch(e){}})();/* rel-darkmode: end */</script>
+<title>רוויו R.E.L</title>
+<style id="rel-precision-tokens">
+/* ===== R.E.L Precision — tokens + primitives (prepended layer) ===== */
+@font-face{font-family:"Ploni";src:url("https://rel-media.netlify.app/fonts/PloniRegular.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Ploni";src:url("https://rel-media.netlify.app/fonts/PloniMedium.woff2") format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Ploni";src:url("https://rel-media.netlify.app/fonts/PloniBold.woff2") format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Ploni";src:url("https://rel-media.netlify.app/fonts/PloniUBold.woff2") format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Ploni";src:url("https://rel-media.netlify.app/fonts/PloniBlack.woff2") format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"AssistantXB";src:url("https://rel-media.netlify.app/fonts/Assistant-ExtraBold.woff2") format("woff2");font-weight:400 900;font-display:swap}
+
+:root{
+  --rel-brand-50:#f8eeee; --rel-brand-100:#efd9da;
+  --rel-brand-500:#9b2f32; --rel-brand-600:#871d1f; --rel-brand-700:#6f1719;
+  --rel-bg:#f6f4f2; --rel-bg-elevated:#fbfaf9;
+  --rel-surface:#ffffff; --rel-surface-solid:#ffffff;
+  --rel-surface-muted:#efedeb; --rel-surface-sunken:#eceae7;
+  --rel-line:rgba(34,25,25,.10); --rel-line-strong:rgba(34,25,25,.18);
+  --rel-text:#211d1d; --rel-text-secondary:#5f5757; --rel-text-tertiary:#6f6866;
+  --rel-tint-ink:color-mix(in srgb,var(--rel-brand-600) 93%,#000);
+  --rel-success:#1f6340; --rel-success-soft:#e8f2ec;
+  --rel-warning:#7d5410; --rel-warning-soft:#f7efe1;
+  --rel-danger:#b4232c;  --rel-danger-soft:#f9ebec;
+  --rel-info:#356ea8;    --rel-info-soft:#e9f0f7;
+  --rel-r-sm:10px; --rel-r-md:14px; --rel-r-lg:20px; --rel-r-xl:26px; --rel-r-pill:999px;
+  --rel-space-1:4px; --rel-space-2:8px; --rel-space-3:12px; --rel-space-4:16px;
+  --rel-space-5:20px; --rel-space-6:24px; --rel-space-8:32px; --rel-space-10:40px; --rel-space-12:48px;
+  --rel-shadow-1:0 1px 2px rgba(25,18,18,.05), 0 8px 24px rgba(25,18,18,.05);
+  --rel-shadow-2:0 2px 8px rgba(25,18,18,.08), 0 18px 48px rgba(25,18,18,.10);
+  --rel-shadow-pop:0 4px 14px rgba(25,18,18,.10), 0 28px 64px rgba(25,18,18,.16);
+  --rel-glass:rgba(255,255,255,.72); --rel-glass-border:rgba(255,255,255,.66);
+  --rel-scrim:rgba(28,20,20,.42);
+  --motion-instant:90ms; --motion-fast:140ms; --motion-base:220ms;
+  --motion-slow:360ms; --motion-exit:160ms;
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --ease-in-out:cubic-bezier(.65,0,.35,1);
+  --ease-sheet:cubic-bezier(.32,.72,0,1);
+  --rel-font-display:"AssistantXB","Assistant","Ploni",system-ui,-apple-system,sans-serif;
+  --rel-font-body:"Ploni","Assistant",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+html[data-theme="dark"],html[data-rel-dark="1"]{
+  --rel-bg:#141110; --rel-bg-elevated:#1c1817; --rel-surface:#211d1b;
+  --rel-surface-solid:#211d1b; --rel-surface-muted:#2a2523; --rel-surface-sunken:#100d0c;
+  --rel-line:rgba(255,246,244,.10); --rel-line-strong:rgba(255,246,244,.20);
+  --rel-text:#f3ece9; --rel-text-secondary:#c3b8b4; --rel-text-tertiary:#9d918d;
+  --rel-tint-ink:color-mix(in srgb,var(--rel-brand-600) 62%,#ffd9d9);
+  --rel-brand-500:#c9494c; --rel-brand-600:#b73a3d; --rel-brand-700:#8f2529;
+  --rel-brand-50:#2a1a1a; --rel-brand-100:#3a2122;
+  --rel-success:#54b07a; --rel-success-soft:#1b2b22;
+  --rel-warning:#d09a3f; --rel-warning-soft:#2c241a;
+  --rel-danger:#e0565f;  --rel-danger-soft:#2e1b1d;
+  --rel-info:#6ba3dc;    --rel-info-soft:#182430;
+  --rel-shadow-1:0 1px 2px rgba(0,0,0,.34), 0 8px 24px rgba(0,0,0,.34);
+  --rel-shadow-2:0 2px 8px rgba(0,0,0,.42), 0 18px 48px rgba(0,0,0,.46);
+  --rel-shadow-pop:0 4px 14px rgba(0,0,0,.46), 0 28px 64px rgba(0,0,0,.56);
+  --rel-glass:rgba(33,29,27,.74); --rel-glass-border:rgba(255,246,244,.10);
+  --rel-scrim:rgba(0,0,0,.58);
+}
+
+@media(prefers-color-scheme:dark){
+  html[data-rel-dark="auto"]{
+    --rel-bg:#141110; --rel-bg-elevated:#1c1817; --rel-surface:#211d1b;
+    --rel-surface-solid:#211d1b; --rel-surface-muted:#2a2523; --rel-surface-sunken:#100d0c;
+    --rel-line:rgba(255,246,244,.10); --rel-line-strong:rgba(255,246,244,.20);
+    --rel-text:#f3ece9; --rel-text-secondary:#c3b8b4; --rel-text-tertiary:#9d918d;
+  --rel-tint-ink:color-mix(in srgb,var(--rel-brand-600) 62%,#ffd9d9);
+    --rel-brand-500:#c9494c; --rel-brand-600:#b73a3d; --rel-brand-700:#8f2529;
+    --rel-brand-50:#2a1a1a; --rel-brand-100:#3a2122;
+    --rel-success:#54b07a; --rel-success-soft:#1b2b22;
+    --rel-warning:#d09a3f; --rel-warning-soft:#2c241a;
+    --rel-danger:#e0565f;  --rel-danger-soft:#2e1b1d;
+    --rel-info:#6ba3dc;    --rel-info-soft:#182430;
+    --rel-shadow-1:0 1px 2px rgba(0,0,0,.34), 0 8px 24px rgba(0,0,0,.34);
+    --rel-shadow-2:0 2px 8px rgba(0,0,0,.42), 0 18px 48px rgba(0,0,0,.46);
+    --rel-shadow-pop:0 4px 14px rgba(0,0,0,.46), 0 28px 64px rgba(0,0,0,.56);
+    --rel-glass:rgba(33,29,27,.74); --rel-glass-border:rgba(255,246,244,.10);
+    --rel-scrim:rgba(0,0,0,.58);
+    color-scheme:dark;
+  }
+}
+
+/* icon system */
+.rel-i{width:1.15em;height:1.15em;flex:none;display:inline-block;vertical-align:-.16em;
+  fill:none;stroke:currentColor;stroke-width:1.85;stroke-linecap:round;stroke-linejoin:round}
+.rel-i.solid{fill:currentColor;stroke:none}
+.rel-sprite{position:absolute;width:0;height:0;overflow:hidden}
+.rel-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.control-material{background:var(--rel-glass);border:1px solid var(--rel-glass-border);
+  -webkit-backdrop-filter:blur(22px) saturate(1.25);backdrop-filter:blur(22px) saturate(1.25)}
+
+/* accessibility variants — real behaviour changes */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .spatial-transition{transform:none!important;transition:opacity 100ms linear!important}
+}
+@media(prefers-reduced-transparency:reduce){
+  .control-material{background:var(--rel-surface-solid)!important;
+    -webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+}
+@media(prefers-contrast:more){
+  :root{--rel-line:rgba(34,25,25,.34);--rel-line-strong:rgba(34,25,25,.5);--rel-text-secondary:#4c4444}
+}
+
+</style>
+<style>
+/* ===== v9.16 — רסקין "פופ אנרגטי" (rel-ui-expert v2) + מצב פשוט (rel-ux-expert) ===== */
+:root{
+  /* Brand pop */
+  --red:#c62828; --red-deep:#871d1f;
+  --yellow:#ffd54f; --yellow-sh:#e0a800;
+  /* Neutrals חמים */
+  --bg:#fff8f0; --card:#ffffff; --card2:#f7efe4; --line:#eadfce; --sh:#f0e2d2;
+  --txt:#2d1b1b; --txt2:#7d6a6a; --txt3:#a5978f;
+  /* Semantic */
+  --green:#1f9d55; --green-sh:#14713c; --green-tint:#e7f5ec;
+  --warn:#b97d10; --warn-tint:#fdf3d9;
+  --blue:#1e6fa8; --blue-tint:#e3f0fa;
+  --err:#b42323; --err-tint:#fdecec;
+  --purple:#6b3fc9; --purple-tint:#f3ecfb;
+  --mut:var(--txt2); --ok:var(--green); --cut:#a52427;
+  --radius-card:22px; --radius-btn:14px; --radius-pill:999px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);
+  font-family:var(--rel-font-body);font-size:16px}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 18px 60px}
+header{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.logo{width:46px;height:46px;border-radius:13px;background:var(--red);color:#fff;display:grid;
+  place-items:center;font-weight:800;font-size:16px;box-shadow:0 3px 0 var(--red-deep);
+  font-family:var(--rel-font-display)}
+h1{font-size:24px;font-weight:400;margin:0;font-family:var(--rel-font-display)}
+.sub{color:var(--txt2);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-card);
+  padding:18px;box-shadow:0 4px 0 var(--sh)}
+.btn{border:0;border-radius:var(--radius-btn);padding:11px 18px;font-size:16px;font-weight:600;
+  cursor:pointer;font-family:inherit;background:var(--card);color:var(--txt);
+  border:2px solid var(--line);box-shadow:0 3px 0 var(--sh);min-height:44px}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--sh)}
+.btn.primary{background:var(--red);color:#fff;border-color:var(--red);box-shadow:0 3px 0 var(--red-deep)}
+.btn.primary:hover{background:#b32020}
+.btn.primary:active{box-shadow:0 1px 0 var(--red-deep)}
+.btn.ok{background:var(--green);color:#fff;border-color:var(--green);box-shadow:0 3px 0 var(--green-sh)}
+.btn.ok:active{box-shadow:0 1px 0 var(--green-sh)}
+.btn.big{min-height:52px;font-size:17px;font-weight:700;padding:12px 22px}
+.btn.small{padding:6px 12px;font-size:14px;min-height:36px;border-radius:11px}
+.btn:disabled{opacity:.45;cursor:default;transform:none}
+.btn.toggled{outline:3px solid var(--yellow);outline-offset:-1px}
+.projrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 8px;
+  border-bottom:1px solid var(--line);cursor:pointer;border-radius:12px}
+.projrow:hover{background:var(--card2)}
+.projrow .rowmain{min-width:0;flex:1}
+.projrow .rowname{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:16.5px}
+.projrow .rownote{color:var(--txt2);font-size:13.5px;margin-top:3px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;max-width:640px}
+.projrow .rowbadges{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;flex-shrink:0;align-items:center}
+.badge{font-size:13px;border-radius:var(--radius-pill);padding:3px 11px;background:var(--card2);
+  color:var(--txt2);white-space:nowrap;font-weight:600;border:1px solid var(--line)}
+.badge.g{background:var(--green-tint);color:var(--green-sh);border-color:#cdebd8}
+.badge.warn{background:var(--warn-tint);color:var(--warn);border-color:#f3e2b3}
+.badge.blue{background:var(--blue-tint);color:var(--blue);border-color:#c9e0f2}
+.badge.err{background:var(--err-tint);color:var(--err);border-color:#f5c9c9}
+.section-h{display:flex;align-items:center;gap:10px;margin:22px 0 4px;padding:0 6px}
+.section-h:first-child{margin-top:0}
+.section-h b{font-size:16px;font-family:var(--rel-font-display);font-weight:400}
+.section-h .cnt{background:var(--card2);color:var(--txt2);border-radius:var(--radius-pill);padding:1px 10px;font-size:13px}
+.section-h .hint{color:var(--txt3);font-size:13px}
+details.section-final{margin:22px 0 4px}
+details.section-final summary.section-h{list-style:none;cursor:pointer;user-select:none;
+  border-radius:10px;padding:6px 6px}
+details.section-final summary.section-h:hover{background:var(--card2)}
+details.section-final summary.section-h::-webkit-details-marker{display:none}
+details.section-final summary.section-h::marker{content:""}
+details.section-final summary.section-h::before{content:"▸";color:var(--txt3);font-size:12px;margin-inline-end:2px}
+details.section-final[open] summary.section-h::before{content:"▾"}
+.summary{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.sumchip{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:9px 16px;
+  font-size:14px;cursor:pointer;box-shadow:0 2px 0 var(--sh);text-align:center}
+.sumchip:active{transform:translateY(1px)}
+.sumchip.on{outline:3px solid var(--yellow);outline-offset:-2px}
+.sumchip b{font-size:22px;display:block;font-family:var(--rel-font-display);font-weight:400}
+.searchrow{margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap}
+.searchrow input{flex:1;min-width:200px;background:var(--card);color:var(--txt);border:2px solid var(--line);
+  border-radius:var(--radius-btn);padding:11px 14px;font-family:inherit;font-size:16px}
+.searchrow select{background:var(--card);color:var(--txt);border:2px solid var(--line);
+  border-radius:var(--radius-btn);padding:10px;font-family:inherit;font-size:15px}
+.empty-section{color:var(--txt2);font-size:14px;padding:8px 6px 4px}
+.grid{display:grid;grid-template-columns:minmax(340px,4fr) minmax(300px,3fr);gap:16px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+video{width:100%;max-height:56vh;background:#000;border-radius:14px}
+#timeline{width:100%;height:100px;background:var(--card2);border:1px solid var(--line);
+  border-radius:12px;cursor:crosshair;display:block;margin-top:10px}
+.legend{display:flex;gap:14px;color:var(--txt2);font-size:13px;margin-top:6px;flex-wrap:wrap}
+.dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-inline-end:4px;vertical-align:-1px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;align-items:center}
+#transcript{max-height:42vh;overflow:auto;line-height:2.05;font-size:17px;padding:4px 2px}
+.sent{padding:5px 8px;border-radius:9px;margin-bottom:4px}
+.sent:hover{background:var(--card2)}
+.sent.sel{background:var(--err-tint);outline:1px solid var(--red)}
+.w{cursor:pointer;border-radius:4px;padding:0 1px}
+.w:hover{background:var(--yellow);color:#2d1b1b}
+.w.cut{color:var(--err);text-decoration:line-through;opacity:.7}
+.w.play{background:var(--red);color:#fff}
+.panel{border-top:1px solid var(--line);margin-top:10px;padding-top:10px;font-size:15px}
+.mut{color:var(--txt2)} .flex{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+textarea{width:100%;min-height:180px;background:var(--card);color:var(--txt);
+  border:2px solid var(--line);border-radius:var(--radius-btn);padding:12px;font-size:16px;
+  line-height:1.7;font-family:inherit}
+textarea:focus,input:focus,select:focus{outline:none;border-color:var(--red)}
+.modal{position:fixed;inset:0;background:rgba(45,27,27,.45);display:none;place-items:center;z-index:9}
+.modal.on{display:grid}
+.modal .card{width:min(480px,92vw)}
+select,input[type=text],input[type=number]{background:var(--card);color:var(--txt);border:2px solid var(--line);
+  border-radius:11px;padding:9px;font-family:inherit;font-size:16px;width:100%}
+input[type=number]{direction:ltr}
+.steps{font-size:15px;line-height:1.9}
+.toast{position:fixed;bottom:18px;inset-inline-start:18px;background:var(--txt);color:var(--bg);
+  padding:12px 18px;border-radius:14px;font-size:15px;opacity:0;transition:.25s;z-index:10;
+  box-shadow:0 4px 0 rgba(0,0,0,.25)}
+.toast.on{opacity:1}
+.tabs{display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap}
+.tab{border:0;border-radius:11px;padding:8px 14px;font-size:14px;font-weight:700;cursor:pointer;
+  font-family:inherit;background:transparent;color:var(--txt2)}
+.tab.on{background:var(--txt);color:var(--bg)}
+.comment{padding:10px;border-bottom:1px solid var(--line);font-size:14.5px}
+.comment .chead{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:3px}
+.comment .tclick{color:var(--blue);cursor:pointer;font-weight:700}
+.comment.stale{opacity:.65}
+.revrow{padding:9px 6px;border-bottom:1px solid var(--line);font-size:14px;display:flex;
+  justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.qarow{padding:8px 6px;border-bottom:1px solid var(--line);font-size:14px}
+.whytog{color:var(--blue);cursor:pointer;font-size:13px;font-weight:700;margin-right:4px;user-select:none}
+.whybox{margin:5px 0 2px;padding:8px 10px;border-right:3px solid var(--blue);background:var(--blue-tint);
+        border-radius:6px;font-size:13.5px;line-height:1.55}
+.framepair{display:flex;gap:6px;margin-top:8px}
+.framepair img{width:49%;border-radius:8px;border:1px solid var(--line)}
+kbd{background:var(--card2);border-radius:5px;padding:1px 6px;font-size:12.5px;border:1px solid var(--line)}
+
+/* ===== מצב פשוט / מתקדם — מנהלים קשב, לא מוחקים יכולת ===== */
+body.simple .adv{display:none!important}
+body:not(.simple) .simple-only{display:none!important}
+#modeBtn{margin-inline-start:auto}
+
+/* "מה עכשיו" — הכרטיס הראשי; צהוב = הזרקור היחיד במסך */
+.nowcard{background:var(--card);border:2px solid var(--yellow);border-radius:var(--radius-card);
+  padding:16px 18px;box-shadow:0 4px 0 var(--yellow-sh);margin-bottom:14px}
+.nowcard h2{margin:0 0 6px;font-size:19px;font-family:var(--rel-font-display);font-weight:400}
+.nextrow{display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.nextrow:last-child{border-bottom:0}
+.nextrow .who{font-size:13px;border-radius:var(--radius-pill);padding:2px 10px;font-weight:700;white-space:nowrap}
+.nextrow .who.harel{background:var(--yellow);color:#5c4500}
+.nextrow .who.claude{background:var(--blue-tint);color:var(--blue)}
+
+/* שורת הערה מהירה מתחת לנגן */
+#quickBar{display:flex;gap:8px;margin-top:10px;align-items:stretch}
+#quickBar input{flex:1;font-size:16px;padding:12px 14px;border-radius:var(--radius-btn)}
+.notecard{padding:10px 12px;border:1px solid var(--line);border-radius:14px;margin-bottom:8px;
+  background:var(--card);box-shadow:0 2px 0 var(--sh);font-size:15px}
+.notecard .nhead{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:2px}
+
+/* ===== מצב לילה (v9.17) — אותו דפוס ואותה פלטה כמו rel.fit/tasks ===== */
+html[data-theme="dark"]{
+  --bg:#171210; --card:#241d1a; --card2:#2c231f; --line:#3a2f2a;
+  --sh:#0f0b0a; --txt:#f2e9e4; --txt2:#c9b8b0; --txt3:#8f7d75;
+  --green:#3cb371; --green-sh:#1c6a41; --green-tint:#18301f;
+  --warn:#e0b34a; --warn-tint:#332a10;
+  --blue:#5aa9e6; --blue-tint:#132638;
+  --err:#e0645f; --err-tint:#341412;
+  --purple:#b795ec; --purple-tint:#251a38;
+}
+@media(prefers-color-scheme:dark){
+  html[data-theme="system"]{
+    --bg:#171210; --card:#241d1a; --card2:#2c231f; --line:#3a2f2a;
+    --sh:#0f0b0a; --txt:#f2e9e4; --txt2:#c9b8b0; --txt3:#8f7d75;
+    --green:#3cb371; --green-sh:#1c6a41; --green-tint:#18301f;
+    --warn:#e0b34a; --warn-tint:#332a10;
+    --blue:#5aa9e6; --blue-tint:#132638;
+    --err:#e0645f; --err-tint:#341412;
+    --purple:#b795ec; --purple-tint:#251a38;
+  }
+}
+html[data-theme="dark"] .badge.g{border-color:#2b5a3e}
+html[data-theme="dark"] .badge.warn{border-color:#5c4a1a}
+html[data-theme="dark"] .badge.blue{border-color:#254a68}
+html[data-theme="dark"] .badge.err{border-color:#5f2521}
+@media(prefers-color-scheme:dark){
+  html[data-theme="system"] .badge.g{border-color:#2b5a3e}
+  html[data-theme="system"] .badge.warn{border-color:#5c4a1a}
+  html[data-theme="system"] .badge.blue{border-color:#254a68}
+  html[data-theme="system"] .badge.err{border-color:#5f2521}
+}
+
+/* v9.17: שורות "מה עכשיו" לחיצות — קליק בכל מקום בשורה נכנס לסרטון */
+.nextrow{cursor:pointer;border-radius:10px;padding-inline:6px}
+.nextrow:hover{background:var(--card2)}
+
+/* v9.17: שורת ההערה — צ'יפ הזמן שנתפס, ופס סמני ההערות מתחת לנגן */
+#qNoteT{font-size:13px;color:var(--txt2);white-space:nowrap;align-self:center;font-weight:700}
+#noteStrip{position:relative;height:16px;margin-top:6px;background:var(--card2);
+  border:1px solid var(--line);border-radius:8px;display:none;direction:ltr}
+#noteStrip .nsdot{position:absolute;top:2px;width:10px;height:10px;border-radius:50%;
+  cursor:pointer;transform:translateX(-50%);border:1px solid rgba(0,0,0,.25)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<style id="rel-precision-skin">
+/* ---- legacy variable remap: one edit repaints the whole app ---- */
+:root{
+  --red:var(--rel-brand-600); --red2:var(--rel-brand-500); --red-2:var(--rel-brand-500);
+  --red-deep:var(--rel-brand-700); --red-dark:var(--rel-brand-700); --red-d:var(--rel-brand-700);
+  --rel-red:var(--rel-brand-600); --rel-red-d:var(--rel-brand-700);
+  --brand:var(--rel-brand-600); --brand-soft:var(--rel-brand-50);
+  --brand-line:color-mix(in srgb,var(--rel-brand-600) 34%,transparent);
+  --bg:var(--rel-bg); --ground:var(--rel-bg); --paper:var(--rel-bg); --cream:var(--rel-bg);
+  --card:var(--rel-surface); --surface:var(--rel-surface); --panel:var(--rel-surface);
+  --card2:var(--rel-surface-muted); --surface2:var(--rel-surface-muted);
+  --panel-2:var(--rel-surface-muted); --chip:var(--rel-surface-muted); --soft:var(--rel-surface-muted);
+  --line:var(--rel-line); --line2:var(--rel-line-strong);
+  --sh:transparent; --yellow-sh:transparent;
+  --txt:var(--rel-text); --ink:var(--rel-text); --ink2:var(--rel-text-secondary);
+  --txt2:var(--rel-text-secondary); --muted:var(--rel-text-secondary); --mut:var(--rel-text-secondary);
+  --muted-2:var(--rel-text-tertiary); --txt3:var(--rel-text-tertiary); --faint:var(--rel-text-tertiary);
+  --gr:var(--rel-text-tertiary); --grey:var(--rel-text-tertiary);
+  --ok:var(--rel-success); --green:var(--rel-success); --g:var(--rel-success);
+  --green-deep:var(--rel-success); --green-d:var(--rel-success); --green-l:var(--rel-success-soft);
+  --ok-bg:var(--rel-success-soft); --green-bg:var(--rel-success-soft); --green-soft:var(--rel-success-soft);
+  --warn:var(--rel-warning); --amber:var(--rel-warning); --o:var(--rel-warning);
+  --gold:var(--rel-warning); --gold2:var(--rel-warning); --yellow:var(--rel-warning);
+  --warn-bg:var(--rel-warning-soft); --amber-l:var(--rel-warning-soft);
+  --danger:var(--rel-danger); --red-l:var(--rel-danger-soft);
+  --blue:var(--rel-info); --b:var(--rel-info); --blue-bg:var(--rel-info-soft);
+}
+
+/* ---- kill the block-shadow language, restore quiet depth ---- */
+body{font-family:var(--rel-font-body);background:var(--rel-bg);color:var(--rel-text);
+  font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.h1,.h2,.h3{font-family:var(--rel-font-display);font-weight:800;letter-spacing:-.012em}
+
+button,.btn,select,input,textarea{font-family:inherit}
+button,.btn,[role=button]{transition:background-color var(--motion-fast) var(--ease-out),
+  border-color var(--motion-fast) var(--ease-out),color var(--motion-fast) var(--ease-out),
+  transform var(--motion-instant) var(--ease-out)}
+[data-pressed="1"]{transform:scale(.978)}
+input,textarea,select{font-size:16px}
+
+:focus-visible{outline:3px solid color-mix(in srgb,var(--rel-brand-600) 74%,white);
+  outline-offset:3px;border-radius:10px}
+
+/* numbers stay aligned */
+.num,[data-num],table td,table th{font-variant-numeric:tabular-nums}
+
+/* ---- generic Precision polish: applies the language to common patterns ---- */
+body{overflow-x:hidden}
+
+/* surfaces */
+.card,.box,.hcard,.gcard,.pcard,.panel,.tier,.role,.it,.grp,.person,.ev,.step,.tab,
+.progress-card,.hrow,.srcrow,.wo,.day,.upbox,.lcard{
+  border-radius:var(--rel-r-lg);
+}
+.card,.box,.hcard,.gcard,.panel,.progress-card{
+  background:var(--rel-surface);border:1px solid var(--rel-line);box-shadow:var(--rel-shadow-1)}
+
+/* controls: real targets, quiet depth, one tint */
+button,.btn,.bigbtn,.rbtn,.a,.tab,.pill,.chip,.lnk,input[type=submit],input[type=button]{
+  border-radius:var(--rel-r-md)}
+button,.btn,.bigbtn,.rbtn{min-height:44px}
+.btn,button.primary,.bigbtn{background:var(--rel-brand-600);color:#fff;border:1px solid var(--rel-brand-600)}
+.btn.ghost,.btn.o,button.ghost{background:var(--rel-surface);color:var(--rel-text);
+  border:1px solid var(--rel-line);box-shadow:var(--rel-shadow-1)}
+.btn .rel-i,button .rel-i,.tab .rel-i,.a .rel-i{width:18px;height:18px}
+button,.btn,.a,.tab,.lnk{display:inline-flex;align-items:center;justify-content:center;gap:7px}
+
+/* fields */
+input,textarea,select{border-radius:var(--rel-r-md);border:1px solid var(--rel-line);
+  background:var(--rel-surface);color:var(--rel-text);font-size:16px}
+input:not([type=checkbox]):not([type=radio]),select{min-height:46px;padding:0 13px}
+textarea{padding:12px 13px;line-height:1.5}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--rel-tint-ink);
+  box-shadow:0 0 0 3px var(--rel-brand-50)}
+
+/* text roles */
+.sub,.small,.hint,.lbl,.meta,.cardsub,.foot,.mut{color:var(--rel-text-secondary)}
+.val,.num,.big,.stat{font-variant-numeric:tabular-nums}
+
+/* status colours stay semantic, never brand */
+.ok,.g,.good,.income{color:var(--rel-success)}
+.warn,.o{color:var(--rel-warning)}
+.err,.bad,.neg,.expense{color:var(--rel-danger)}
+
+/* toast */
+.toast,#toast{background:var(--rel-text);color:var(--rel-bg);border-radius:var(--rel-r-md);
+  box-shadow:var(--rel-shadow-pop);font-weight:600}
+
+/* spinner */
+.spin,.spinner,.loader .spin{border-color:var(--rel-line);border-top-color:var(--rel-tint-ink)}
+
+
+/* ===== R.E.L Precision — review app ===== */
+body{max-width:none}
+.wrap{max-width:1180px;margin-inline:auto;padding:22px 18px 72px}
+h1,h2,h3,.h1{font-family:var(--rel-font-display);font-weight:800;letter-spacing:-.012em}
+.card,.panel,.box{border-radius:var(--rel-radius-card,18px);border:1px solid var(--rel-line);
+  background:var(--rel-surface);box-shadow:var(--rel-shadow-1)}
+button,.btn,select,input,textarea{border-radius:var(--rel-radius-control,12px)}
+button,.btn,[role=button],select{min-height:44px}
+.pill,.chip,.badge,.tag{border-radius:999px;min-height:28px;display:inline-flex;
+  align-items:center;gap:6px;padding:3px 10px}
+/* the controls layer reads as one material, not as many pop shadows */
+button,.btn,select,input,textarea{box-shadow:none!important;text-shadow:none!important}
+.stat,.stats>*,.kpi{background:var(--rel-surface);border:1px solid var(--rel-line);
+  border-radius:16px;box-shadow:none}
+a{color:var(--rel-tint-ink)}
+/* filled brand controls always carry their own contrast */
+#themeBtn,#modeBtn,.btn.primary,.btn.brand,button.on,.btn.on{color:var(--rel-brand-contrast,#fff)}
+.badge,.sumchip,.tab{border:1px solid var(--rel-line)}
+.projrow{border-radius:14px}
+.projrow:hover{background:var(--rel-surface-muted)}
+body .hint,body .mut,body .rownote,body .sub{color:var(--rel-text-secondary)}
+html[data-theme="dark"] .badge.g,html[data-rel-dark="1"] .badge.g{color:var(--rel-success)}
+html[data-theme="dark"] .badge.warn,html[data-rel-dark="1"] .badge.warn{color:var(--rel-warning)}
+html[data-theme="dark"] .badge.blue,html[data-rel-dark="1"] .badge.blue{color:var(--rel-info)}
+html[data-theme="dark"] .badge.err,html[data-rel-dark="1"] .badge.err{color:var(--rel-danger)}
+@media(prefers-color-scheme:dark){
+  html[data-theme="system"] .badge.g{color:var(--rel-success)}
+  html[data-theme="system"] .badge.warn{color:var(--rel-warning)}
+  html[data-theme="system"] .badge.blue{color:var(--rel-info)}
+  html[data-theme="system"] .badge.err{color:var(--rel-danger)}
+}
+::selection{background:color-mix(in srgb,var(--rel-brand-600) 26%,transparent)}
+:focus-visible{outline:3px solid color-mix(in srgb,var(--rel-brand-600) 74%,white);outline-offset:3px}
+@media (max-width:900px){
+  .wrap{padding:16px 14px 64px}
+  .row,.toolbar,.filters{flex-wrap:wrap}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{
+  animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo">R.E.L</div>
+  <div><h1 id="title">רוויו עריכה</h1><div class="sub" id="subtitle">בחר סרטון לבדיקה — הכל מקומי, בלי העלאות</div></div>
+  <button class="btn small" id="themeBtn" title="מצב תצוגה — אוטומטי/יום/לילה" style="min-width:48px"></button>
+  <button class="btn small" id="modeBtn" title="מצב פשוט = צפייה, הערות ואישור בלבד. מצב מתקדם = כל כלי העריכה">🧰 מצב מתקדם</button>
+  <div id="topbtns"></div>
+</header>
+
+<div id="listWrap">
+  <!-- v9.16: "מה עכשיו" הוא המסך — שורה לכל צעד שממתין להראל, עם כפתור אחד -->
+  <div id="nextPanel" class="nowcard">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <h2 style="margin:0">🚦 מה עכשיו</h2>
+      <span class="mut" style="font-size:13.5px">הצעדים הפתוחים, לפי מי שהם אצלו</span>
+      <!-- v9.34 (24.9.26, בקשת הראל): סינון מחלקה למעלה, ליד "מה עכשיו" —
+           קודם היה רק ב-deptSel למטה, אחרי הרשימה הארוכה, וזה דרש גלילה
+           כל פעם. שני ה-select-ים (כאן ולמטה) חולקים אותו localStorage
+           ומסונכרנים דו-כיווני — ראו setDeptFilter/refreshDeptOptions. -->
+      <select id="deptQuick" class="btn small" style="max-width:160px"></select>
+      <span style="margin-inline-start:auto" class="flex">
+        <button id="copyBriefBtn" class="btn small" title="מעתיק הודעה מוכנה להדבקה בקלאוד עם כל מה שממתין לו">📋 העתק בריף לקלאוד</button>
+        <span id="briefStatus" class="mut" style="font-size:13px"></span>
+      </span>
+    </div>
+    <div id="nextList" style="margin-top:8px"><span class="mut">טוען…</span></div>
+  </div>
+  <div class="summary" id="summary"></div>
+  <div class="searchrow">
+    <input type="text" id="searchBox" placeholder="🔎 חיפוש בשם, בהערות ובתמליל…">
+    <select id="viewSel">
+      <option value="all">כל התצוגות</option>
+      <option value="my_review">📝 ממתין לרוויו שלי</option>
+      <option value="claude_queue">🤖 ממתין לקלאוד</option>
+      <option value="fixed_waiting">✅ תוקן — ממתין לבדיקה</option>
+      <option value="failed">✖ נכשל בגימור</option>
+      <option value="in_review">🔄 בסקירה</option>
+      <option value="final">✔ מוכנים (FINAL קיים, עוד לא פורסם)</option>
+      <option value="awaiting_schedule_approval">🖼 ממתין לאישור קאבר+קפשן</option>
+      <option value="ready_to_schedule">📅 מוכן לתזמון!</option>
+      <option value="scheduled">📅 תוזמן — ממתין לפרסום</option>
+      <option value="published">🚀 הושלם — פורסם בפועל</option>
+    </select>
+    <select id="deptSel">
+      <option value="">כל המחלקות</option>
+    </select>
+  </div>
+  <div id="list" class="card"><div class="mut">טוען…</div></div>
+</div>
+
+<div id="editor" style="display:none">
+  <!-- v9.16: פעולה ראשית אחת למסך — הכרטיס הזה אומר מה הצעד הבא ונותן כפתור אחד -->
+  <div id="nowBar" class="nowcard" style="display:none">
+    <div class="flex" style="justify-content:space-between">
+      <div style="min-width:220px;flex:1"><h2 id="nowTitle">מה עכשיו</h2><div id="nowMsg" style="font-size:15.5px;line-height:1.6"></div></div>
+      <div class="flex" style="flex-direction:column;align-items:flex-end;gap:8px">
+        <button class="btn primary big" id="nowBtn" style="display:none"></button>
+        <button class="btn small" id="nowNextBtn" style="display:none" title="הסרטון הבא שממתין לרוויו שלך"></button>
+      </div>
+    </div>
+  </div>
+  <div class="grid">
+    <div>
+      <div class="card">
+        <!-- v7.7: מצב סנכרון בין הציר שמוצג כאן לבין ה-FINAL שעל הדיסק -->
+        <div id="syncBox" style="display:none;margin:0 0 8px;padding:8px 10px;border-radius:8px;
+             font-size:13px;line-height:1.5;border:1px solid var(--line)"></div>
+        <!-- v9.4: איזו גרסת וידאו מוצגת כרגע — תמיד מפורש, אף פעם לא "FINAL.mp4" סתם -->
+        <div id="verBanner" style="display:none;margin:0 0 8px;padding:8px 10px;border-radius:8px;
+             font-size:13.5px;line-height:1.6;border:1px solid var(--line)"></div>
+        <!-- v9.15: מה נבדק ברגע זה בסבב הבדיקה — התוכן של ההערה מול העיניים -->
+        <div id="clNow" style="display:none;margin:0 0 8px;padding:8px 10px;border-radius:8px;
+             font-size:13.5px;line-height:1.5;background:var(--blue-tint);border:1px solid var(--blue)"></div>
+        <div class="toolbar" id="srcBar" style="margin:0 0 8px">
+          <span class="mut" style="font-size:13px">מה מציג הנגן:</span>
+          <button class="btn small" data-src="final">✔ גרסה מוגמרת</button>
+          <button class="btn small" data-src="input">✏️ מקור לעריכה</button>
+          <button class="btn small adv" data-src="preview">🔄 PREVIEW</button>
+          <select id="verPick" style="width:auto;display:none;font-size:13px"></select>
+          <span class="mut" id="srcHint" style="font-size:12.5px;margin-inline-start:auto"></span>
+        </div>
+        <video id="vid" controls playsinline></video>
+        <!-- v9.16: שורת הערה מהירה — תמיד מתחת לנגן, נצמדת לזמן הנוכחי ולגרסה הנוכחית -->
+        <div id="quickBar">
+          <span id="qNoteT"></span>
+          <input type="text" id="qNote" placeholder="✏️ ראית משהו לתקן? התחל לכתוב (או N) — הנגן נעצר והזמן נתפס">
+          <button class="btn" id="qNoteBtn">📝 שמור הערה</button>
+        </div>
+        <div id="noteStrip" title="ההערות על ציר הסרטון — קליק קופץ לנקודה"></div>
+        <div class="mut" style="font-size:13px;margin-top:4px">ההערה נקשרת לרגע הנוכחי בסרטון ולגרסה שמנוגנת. אחרי שסיימת לצפות — "שלח הכל לקלאוד" בצד.</div>
+        <div class="adv">
+        <canvas id="timeline"></canvas>
+        <div class="legend">
+          <span><i class="dot" style="background:#3aa763"></i>נשאר</span>
+          <span><i class="dot" style="background:#a52427"></i>חיתוך פעיל</span>
+          <span><i class="dot" style="background:#c98a2b"></i>הצעה</span>
+          <span><i class="dot" style="background:#7a4fd0"></i>חיתוך שלך</span>
+          <span><i class="dot" style="background:#2c86d1"></i>Hook</span>
+          <span><i class="dot" style="background:#e0a800"></i>הערות</span>
+          <span id="dur" style="margin-inline-start:auto;font-weight:700"></span>
+        </div>
+        <div class="toolbar">
+          <button class="btn" id="skipBtn">▶ ניגון מדלג: פעיל</button>
+          <button class="btn" id="addBtn">✂ הוסף חיתוך</button>
+          <button class="btn small" id="undoBtn" title="Cmd+Z">↩ בטל</button>
+          <button class="btn small" id="redoBtn" title="Cmd+Shift+Z">↪ חזור</button>
+          <button class="btn" id="previewBtn">🔄 בנה PREVIEW אמיתי</button>
+          <button class="btn primary" id="approveBtn">✔ אשר והמשך לגימור</button>
+        </div>
+        <div class="toolbar" id="speedBar" style="margin-top:-4px">
+          <span class="mut" style="font-size:13px">⏩ קצב נגינה:</span>
+          <button class="btn small" data-spd="0.95">0.95x</button>
+          <button class="btn small" data-spd="1">1x</button>
+          <button class="btn small" data-spd="1.05">1.05x</button>
+          <button class="btn small" data-spd="1.1">1.1x</button>
+          <button class="btn small" data-spd="1.15">1.15x</button>
+          <button class="btn small" data-spd="1.2">1.2x</button>
+          <button class="btn small" data-spd="1.3">1.3x</button>
+          <input type="number" id="speedCustom" step="0.01" min="0.5" max="2" style="width:78px" placeholder="מותאם">
+          <button class="btn small" id="speedCustomBtn">קבע</button>
+          <span id="speedStatus" style="font-size:13px;font-weight:700;margin-inline-start:auto"></span>
+        </div>
+        <div class="mut" style="font-size:12px">קיצורים: <kbd>K</kbd> נגן/עצור · <kbd>J</kbd>/<kbd>L</kbd> ‑5/+5ש · <kbd>M</kbd> הערה בזמן הנוכחי · <kbd>I</kbd>/<kbd>O</kbd> טווח · <kbd>,</kbd>/<kbd>.</kbd> בעיה קודמת/הבאה · קצב הנגינה חל מיד בנגן; נשמר אוטומטית ומועבר לגימור האמיתי (setpts/atempo)</div>
+        <div class="flex" style="margin-top:8px;font-size:13px">
+          מצב:
+          <select id="stateSel" style="width:auto">
+            <option value="">אוטומטי (לפי הקבצים)</option>
+            <option value="not_started">🆕 לא נסקר</option>
+            <option value="in_review">🔄 בסקירה</option>
+            <option value="approved">⏳ אושר</option>
+            <option value="failed">✖ נכשל</option>
+            <option value="final">✔ מוכן (FINAL קיים)</option>
+            <option value="awaiting_schedule_approval">🖼 ממתין לאישור קאבר+קפשן</option>
+            <option value="ready_to_schedule">📅 מוכן לתזמון!</option>
+            <option value="scheduled">📅 תוזמן — ממתין לפרסום</option>
+            <option value="published">🚀 הושלם — פורסם בפועל</option>
+          </select>
+          מחלקה: <input type="text" id="deptInput" list="deptList" style="width:150px" placeholder="—">
+          <datalist id="deptList"></datalist>
+          <button class="btn small" id="metaSave">עדכן</button>
+          <button class="btn small ok" id="publishToggleBtn" style="display:none"></button>
+          <span class="mut" id="metaState" style="font-size:12px"></span>
+        </div>
+        <div class="panel" id="cutPanel" style="display:none"></div>
+        </div><!-- /.adv -->
+      </div>
+
+      <!-- v9.16: התקדמות הגימור — נראית תמיד, לא קבורה בלשונית "ריצות" -->
+      <div class="card" id="statusCard" style="display:none;margin-top:14px">
+        <b style="font-family:var(--rel-font-display);font-weight:400;font-size:17px">⏳ גימור מקומי</b>
+        <div class="steps" id="statusSteps"></div>
+        <div id="finalBox" style="display:none;margin-top:10px">
+          <div class="flex">
+            <button class="btn" id="watchFinalBtn">▶ צפה ב-FINAL בנגן</button>
+            <a class="btn" id="finalDl">⬇ הורד</a>
+          </div>
+          <div class="flex adv" style="margin-top:8px">
+            <span class="mut" style="font-size:13px">⚡ תיקון מהיר בלי קלאוד:</span>
+            <button class="btn small" onclick="gotoTab('music')">🎵 מוזיקה</button>
+            <button class="btn small" onclick="gotoTab('broll')">🎞 בירולים</button>
+            <button class="btn small" id="finalFixCaptions">💬 תקן כתוביות</button>
+          </div>
+          <div class="panel adv">
+            <b style="font-size:15px">📝 הערות תוך כדי צפייה בגרסה הסופית</b>
+            <div class="mut" style="font-size:13px;margin:4px 0">נצמד אוטומטית לזמן הנוכחי בנגן</div>
+            <textarea id="finalCmText" placeholder="מה לתקן בגרסה הזו…" style="min-height:60px"></textarea>
+            <div class="flex" style="margin-top:6px;justify-content:flex-end">
+              <button class="btn small" id="finalCmAdd">שמור הערה</button>
+              <button class="btn primary small" id="finalCmQueue">📤 שלח לקלאוד</button>
+            </div>
+            <div id="finalCmList" style="margin-top:8px;max-height:26vh;overflow:auto"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- v9.16: האישור הסופי — כרטיס עצמאי מתחת לנגן, בשני המצבים (היה קבור בלשונית ריצות) -->
+      <div class="card" id="scheduleApprovalPanel" style="display:none;margin-top:14px">
+        <b style="font-family:var(--rel-font-display);font-weight:400;font-size:17px">✅ אישור סופי לגרסה — לפני תזמון/מסירה</b>
+        <div class="mut" style="font-size:13px;margin:4px 0">כאן נועלים את הגרסה כ"מאושרת סופית" — בלי קידוד מחדש. אם ה-FINAL ישתנה אחרי האישור, האישור מתבטל אוטומטית כדי שלעולם לא ייצא קובץ ישן.<br><span style="opacity:.8">קפשן וקאבר הם רשות — לממומן שנמסר ידנית אפשר לאשר בלי קפשן.</span></div>
+        <div id="schApBadge" style="margin-bottom:8px"></div>
+        <div id="schApNext" style="margin-bottom:8px;font-size:14px"></div>
+        <div class="flex" style="align-items:flex-start;gap:14px">
+          <img id="schApCover" style="width:160px;border-radius:10px;border:1px solid var(--line);background:#000">
+          <div style="flex:1;min-width:220px">
+            <textarea id="schApCaption" placeholder="קפשן הפוסט — רשות. לממומן שנמסר ידנית אפשר להשאיר ריק…" style="min-height:150px"></textarea>
+          </div>
+        </div>
+        <div class="flex" style="margin-top:10px">
+          <button class="btn primary big" id="schApApprove">✅ מאושר סופית</button>
+          <button class="btn" id="schApRequest">✏️ בקש שינוי</button>
+        </div>
+        <div id="schApRequestBox" style="display:none;margin-top:8px">
+          <textarea id="schApNote" placeholder="מה לשנות בקאבר/בקפשן…" style="min-height:60px"></textarea>
+          <div class="flex" style="margin-top:6px">
+            <select id="schApCat" style="width:auto">
+              <option value="cover">🖼 קאבר</option>
+              <option value="captions">💬 קפשן</option>
+            </select>
+            <button class="btn small primary" id="schApSendRequest">📤 שלח לקלאוד</button>
+            <button class="btn small" id="schApCancelRequest">ביטול</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <!-- v9.16: מצב פשוט — ההערות שלי, בלי לשוניות -->
+      <div class="card simple-only" id="simplePanel">
+        <div class="flex" style="justify-content:space-between">
+          <b style="font-family:var(--rel-font-display);font-weight:400;font-size:18px">📝 ההערות שלי</b>
+          <button class="btn primary" id="snSendAll" style="display:none"></button>
+        </div>
+        <div class="mut" style="font-size:13.5px;margin:4px 0 8px">צפה בסרטון, זרוק הערות למטה מהנגן — וכשסיימת, שלח הכל לקלאוד במכה אחת. קלאוד מסדר, אתה רק בודק.</div>
+        <div id="snList" style="max-height:56vh;overflow:auto"></div>
+      </div>
+      <div class="card adv">
+        <div class="tabs">
+          <button class="tab on" data-tab="edit">תמליל</button>
+          <button class="tab" data-tab="comments">הערות <span id="cCount"></span></button>
+          <button class="tab" data-tab="artifacts">🎬 גרסאות ותוצרים <span id="aCount"></span></button>
+          <button class="tab" data-tab="changelog">🔍 מה תוקן <span id="clCount"></span></button>
+          <button class="tab" data-tab="versions">גרסאות עריכה</button>
+          <button class="tab" data-tab="music">🎵 מוזיקה</button>
+          <button class="tab" data-tab="broll">🎞 בירולים</button>
+          <button class="tab" data-tab="qa">QA</button>
+          <button class="tab" data-tab="runs">ריצות</button>
+        </div>
+
+        <div id="tab-edit">
+          <div class="flex" style="justify-content:space-between">
+            <b>תמליל</b>
+            <span class="flex" style="gap:6px">
+              <button class="btn small" id="reburnBtn" style="display:none" title="גימור מהיר: צריבת הכתוביות מחדש לפי הטקסט המתוקן — בלי לגעת בעריכה">⚡ צרוב כתוביות מחדש</button>
+              <button class="btn small" id="editTxtBtn">✏️ תיקון טקסט</button>
+            </span>
+          </div>
+          <div id="transcript"></div>
+          <div id="txtEdit" style="display:none">
+            <textarea id="txtArea"></textarea>
+            <div class="flex" style="margin-top:8px">
+              <button class="btn primary small" id="txtSave">שמור טקסט</button>
+              <button class="btn small" id="txtCancel">ביטול</button>
+            </div>
+            <div class="mut" style="font-size:12.5px;margin-top:6px">הטקסט המתוקן מוזג עם התזמון האמיתי (Whisper) — זה מה שנצרב בכתוביות.</div>
+          </div>
+          <div class="panel" id="hookPanel" style="display:none"></div>
+          <details class="panel"><summary>INTENT CARD</summary><pre id="intent" style="white-space:pre-wrap;font-family:inherit;font-size:13.5px"></pre></details>
+        </div>
+
+        <div id="tab-comments" style="display:none">
+          <div class="flex" style="gap:6px">
+            <select id="cmCat" style="width:auto">
+              <option value="edit">✂ עריכה</option><option value="transcript">📝 תמליל</option>
+              <option value="hook">🎯 Hook</option><option value="pacing">⏱ קצב</option>
+              <option value="audio">🔊 אודיו</option><option value="captions">💬 כתוביות</option>
+              <option value="broll">🎞 בירול</option><option value="cover">🖼 קאבר</option>
+              <option value="qa">🧪 QA</option><option value="general">💭 כללי</option>
+            </select>
+            <select id="cmPrio" style="width:auto">
+              <option value="normal">רגיל</option><option value="high">גבוה</option>
+              <option value="blocking">חוסם</option><option value="low">נמוך</option>
+            </select>
+            <label class="mut" style="font-size:12.5px"><input type="checkbox" id="cmAtTime" checked> בזמן הנוכחי</label>
+          </div>
+          <textarea id="cmText" placeholder="הערה חדשה… (M מהמקלדת פותח לשונית זו עם הזמן הנוכחי)" style="min-height:70px;margin-top:8px"></textarea>
+          <div class="flex" style="margin-top:6px;justify-content:flex-end">
+            <button class="btn small" id="cmAdd">שמור הערה</button>
+            <button class="btn primary small" id="cmQueue">📤 שלח לקלאוד</button>
+          </div>
+          <div class="flex" style="margin-top:8px;justify-content:space-between">
+            <b style="font-size:14px">כל ההערות</b>
+            <label class="mut" style="font-size:12.5px"><input type="checkbox" id="cmOpenOnly" checked> פתוחות בלבד</label>
+          </div>
+          <div id="cmList" style="max-height:40vh;overflow:auto"></div>
+          <details class="panel"><summary>היסטוריית סבבים (v6)</summary><div id="roundHistory" style="margin-top:8px;font-size:13.5px"></div></details>
+        </div>
+
+        <!-- v9.4: מרכז הגרסאות — כל תוצר וידאו שנוצר אי פעם, נגיש לצמיתות -->
+        <div id="tab-artifacts" style="display:none">
+          <div class="flex" style="justify-content:space-between">
+            <b>🎬 גרסאות ותוצרים (וידאו)</b>
+            <span class="flex">
+              <button class="btn small" id="artVerifyBtn" title="בודק שכל קובץ קיים ו-checksum תואם">🔍 אמת שלמות</button>
+              <span class="mut" style="font-size:12.5px">כל ריצה מוצלחת = גרסה קבועה שלא נדרסת</span>
+            </span>
+          </div>
+          <div id="artDisplay" class="panel" style="margin-top:6px"></div>
+          <div id="artList" style="max-height:52vh;overflow:auto;margin-top:6px"></div>
+          <div id="artCompare" class="panel" style="display:none"></div>
+          <div id="artFaults" style="margin-top:8px"></div>
+        </div>
+
+        <!-- v9.15: מה תוקן בגרסה הזו — בדיקת הנקודות שהשתנו במקום צפייה מלאה -->
+        <div id="tab-changelog" style="display:none">
+          <div class="flex" style="justify-content:space-between">
+            <b>🔍 מה תוקן בגרסה הזו</b>
+            <select id="clVerPick" style="width:auto;font-size:12.5px"></select>
+          </div>
+          <div class="mut" style="font-size:12.5px;margin:4px 0 8px">
+            כל הערה שתוקנה, עם הטיימקוד שלה <b>בציר של הגרסה הזו</b> (ממופה מהגרסה שעליה נכתבה).
+            "סבב בדיקה" מנגן רק את הנקודות שהשתנו — לא את הסרטון המלא.</div>
+          <div id="clSummary" class="panel" style="margin-top:0"></div>
+          <div class="flex" style="margin:8px 0">
+            <button class="btn primary" id="clRunFocusBtn" style="display:none">🤖 בדוק רק מה שלא אומת</button>
+            <button class="btn primary" id="clRunBtn">▶ סבב בדיקה מלא</button>
+            <button class="btn" id="clStopBtn" style="display:none">⏹ עצור</button>
+            <button class="btn small" id="clRefreshBtn">🔄 רענן</button>
+            <a class="btn small" id="clReelBtn" style="display:none" target="_blank">🎬 סרטון בדיקה</a>
+          </div>
+          <div id="clList" style="max-height:52vh;overflow:auto"></div>
+          <div id="clPending" style="margin-top:8px"></div>
+        </div>
+
+        <div id="tab-versions" style="display:none">
+          <div class="flex" style="justify-content:space-between">
+            <b>גרסאות עריכה (Revisions)</b>
+            <span class="mut" style="font-size:12.5px">החלטות עריכה — לא וידאו. לגרסאות הווידאו: לשונית "גרסאות ותוצרים".</span>
+          </div>
+          <div id="revList" style="max-height:44vh;overflow:auto;margin-top:6px"></div>
+          <div id="revCompare" class="panel" style="display:none"></div>
+        </div>
+
+        <div id="tab-music" style="display:none">
+          <div class="flex" style="justify-content:space-between"><b>🎵 מוזיקה — שליטה ידנית</b><span class="mut" id="musCur" style="font-size:12.5px"></span></div>
+          <div class="mut" style="font-size:12.5px;margin:4px 0 8px">ההגדרות נשמרות לסרטון הזה וגוברות על הבחירה האוטומטית. "שמור והחל" מריץ <b>גימור מהיר</b> — מחליף מוזיקה וצורב מחדש בלי לגעת בעריכה (דקות ספורות, בלי קלאוד).</div>
+          <div class="panel">
+            <div class="flex" style="justify-content:space-between"><b style="font-size:14px">🎚 עוצמת המוזיקה</b><span id="musVolLabel" style="font-weight:700"></span></div>
+            <input type="range" id="musVol" min="-52" max="-28" step="1" value="-38" style="width:100%;direction:ltr">
+            <div class="flex" style="justify-content:space-between;font-size:11.5px;direction:ltr"><span class="mut">שקטה מאוד</span><span class="mut">ברירת מחדל ‎-38</span><span class="mut">חזקה</span></div>
+            <label class="mut" style="font-size:13px"><input type="checkbox" id="musDuck" checked> הנמכה אוטומטית בזמן דיבור (מומלץ)</label>
+          </div>
+          <div class="panel">
+            <b style="font-size:14px">🎼 בחירת מנגינה</b>
+            <input type="text" id="musSearch" placeholder="🔎 חיפוש לפי שם / ז'אנר / אנרגיה…" style="margin-top:6px">
+            <audio id="musPlayer" controls style="width:100%;display:none;margin-top:6px"></audio>
+            <div id="musList" style="max-height:32vh;overflow:auto;margin-top:6px"></div>
+          </div>
+          <div class="flex" style="margin-top:10px">
+            <button class="btn" id="musSave">💾 שמור העדפות</button>
+            <button class="btn primary" id="musApply">⚡ שמור והחל עכשיו (גימור מהיר)</button>
+          </div>
+        </div>
+
+        <div id="tab-broll" style="display:none">
+          <b>🎞 בירולים — שכבת וידאו ידנית</b>
+          <div class="mut" style="font-size:12.5px;margin:4px 0 8px">בחר קליפ מהספרייה וקבע איפה ייכנס. <b>הזמנים לפי הסרטון הסופי</b> (אחרי חיתוכים) — הכי מדויק: נגן את ה-FINAL בלשונית "ריצות", עצור בנקודה, וחזור לכאן. מצב ידני גובר על הבחירה האוטומטית. תזכורת קאנון: לא על הפתיח, לא על ה-CTA (8ש אחרונות), תמיד מושתק.</div>
+          <div class="flex" style="font-size:13px">מצב:
+            <select id="brMode" style="width:auto">
+              <option value="auto">אוטומטי (לפי קלאוד — רק בתוכן המרה)</option>
+              <option value="manual">ידני — התוכנית שלי למטה</option>
+              <option value="off">בלי בירולים בכלל</option>
+            </select>
+          </div>
+          <div class="panel" id="brAppliedWrap" style="display:none">
+            <div class="flex" style="justify-content:space-between">
+              <b style="font-size:14px">🎬 מה שנצרב ב-FINAL האחרון</b>
+              <button class="btn small" id="brImportApplied">✏️ ייבא לעריכה</button>
+            </div>
+            <div id="brApplied" style="font-size:12.5px;margin-top:4px"></div>
+          </div>
+          <div class="panel">
+            <b style="font-size:14px">📋 התוכנית שלי</b>
+            <div id="brPlan" style="margin-top:6px"></div>
+            <div class="flex" style="margin-top:8px;font-size:13px">
+              התחלה (ש): <input type="number" id="brAt" step="0.1" min="0" style="width:84px">
+              משך (ש): <input type="number" id="brLen" step="0.5" min="1" value="3" style="width:70px">
+              <button class="btn small" id="brUseNow">⏱ מהזמן הנוכחי בנגן</button>
+              <button class="btn small ok" id="brAdd" disabled>➕ הוסף את הקליפ הנבחר</button>
+            </div>
+          </div>
+          <div class="panel">
+            <b style="font-size:14px">🎬 ספריית הבירולים</b>
+            <input type="text" id="brSearch" placeholder="🔎 חיפוש לפי תיאור / תגית / קטגוריה…" style="margin-top:6px">
+            <video id="brPreview" controls muted playsinline style="display:none;max-height:32vh;margin-top:6px"></video>
+            <div id="brList" style="max-height:30vh;overflow:auto;margin-top:6px"></div>
+          </div>
+          <div class="flex" style="margin-top:10px">
+            <button class="btn" id="brSave">💾 שמור העדפות</button>
+            <button class="btn primary" id="brApply">⚡ שמור והחל עכשיו (גימור מהיר)</button>
+          </div>
+        </div>
+
+        <div id="tab-qa" style="display:none">
+          <div id="qaBody" class="mut">אין דוח QA עדיין — נוצר בגימור.</div>
+        </div>
+
+        <div id="tab-runs" style="display:none">
+          <div id="runsBody"></div>
+          <div class="mut" style="font-size:13px;margin-top:6px">התקדמות הגימור והאישור הסופי מוצגים בכרטיסים מתחת לנגן.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal" id="approveModal">
+  <div class="card">
+    <h1 style="font-size:19px;margin:0 0 12px">אישור והמשך לגימור מקומי</h1>
+    <div style="display:grid;gap:10px">
+      <label>סוג תוכן<select id="apType"><option value="value">ערך / קהילה (מוזיקה רגועה, בלי בירול)</option><option value="conversion">המרה / מכירה</option></select></label>
+      <label>מותג<select id="apBrand"><option value="rel">קרוספיט אריאל (מתאר אדום)</option><option value="personal">הראל חיון — אישי (מתאר כחול #0077B6)</option></select></label>
+      <label>כותרת קאבר (לא חובה)<input type="text" id="apTitle" placeholder="למשל: 8 שעות שינה"></label>
+      <label>הערה<input type="text" id="apNote"></label>
+      <label>נימוק אורך (רק אם ארוך מהיעד — מה ישאיר את הצופה עד הסוף?)<input type="text" id="apLenReason" placeholder="למשל: סיפור עם מתח עד הסוף / הדגמה שלא מתקצרת"></label>
+      <div class="mut" id="apSpeedInfo" style="font-size:13px"></div>
+      <!-- v9.23: פתיחה חזותית — שורה מקופלת אחת. האישור קושר רק את מה שנצפה. -->
+      <div id="vhLine" style="font-size:13.5px;display:flex;gap:8px;align-items:center;flex-wrap:wrap" aria-live="polite"></div>
+      <video id="vhVideo" controls playsinline style="display:none;width:100%;max-height:48vh;border-radius:10px;background:#000"></video>
+    </div>
+    <div class="flex" style="margin-top:14px">
+      <button class="btn primary" id="apGo">✔ אשר — התחל גימור אוטומטי</button>
+      <button class="btn" id="apCancel">ביטול</button>
+    </div>
+  </div>
+</div>
+<div class="modal" id="trashModal">
+  <div class="card" style="width:min(560px,92vw)">
+    <div class="flex" style="justify-content:space-between">
+      <h1 style="font-size:19px;margin:0">🗑 פח מיחזור</h1>
+      <button class="btn small" id="trashModalClose">סגור</button>
+    </div>
+    <div class="mut" style="font-size:12.5px;margin:6px 0 10px">סרטונים שנמחקו מהרשימה — אפשר לשחזר, או למחוק לצמיתות (בלתי הפיך).</div>
+    <div id="trashModalBody" style="max-height:56vh;overflow:auto"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s);
+let P=null, name=null, cuts=[], hookMove=null, total=0, words=[], sents=[];
+let selCut=-1, addMode=false, addStart=null, skipMode=true, saveTimer=null, selSent=-1;
+let usingPreview=false, markIn=null, issuePoints=[];
+let simpleMode=(localStorage.getItem("relReviewMode")||"simple")==="simple";
+let speed=1.0;
+/* v9.25 (הראל 19.9.26 "לא כל סרטון חייב להיות מוגבל עד 60 שניות"): יעד האורך לפי סוג
+   התוכן — נקרא מ-P.length_policy (tools/length_policy.py). אין יותר תקרת 60ש. */
+const LEN_FALLBACK={hard_min:12,hard_max:180,bands:{value:{target:[45,90],reason_above:90,label:"ערך / הסבר מקצועי"},conversion:{target:[20,45],reason_above:90,label:"המרה / הוק — קהל קר"}}};
+function lenBand(){
+  const pol=(P&&P.length_policy)||LEN_FALLBACK;
+  const sel=document.getElementById("apType");
+  const ct=(sel&&sel.value)||(P&&P.content_type)||"value";
+  const b=pol.bands[ct]||pol.bands.value;
+  return {ct, lo:b.target[0], hi:b.target[1], reason:b.reason_above, label:b.label, hmin:pol.hard_min, hmax:pol.hard_max};
+}
+function lenVerdict(adj){
+  const b=lenBand();
+  if(adj>b.hmax||adj<b.hmin) return `⛔ ${adj.toFixed(1)}ש מחוץ לגבול הקשיח ${b.hmin}-${b.hmax}ש`;
+  if(adj>b.reason) return `⚠️ ${adj.toFixed(1)}ש — מעל ${b.reason}ש ל${b.label}: צריך נימוק אורך (מה ישאיר את הצופה עד הסוף?)`;
+  if(adj<b.lo||adj>b.hi) return `ℹ️ ${adj.toFixed(1)}ש — מחוץ ליעד ${b.lo}-${b.hi}ש ל${b.label} (לא חוסם)`;
+  return `✅ ${adj.toFixed(1)}ש — בתוך יעד ${b.lo}-${b.hi}ש ל${b.label}`;
+}
+const SPEED_PRESETS=[0.95,1,1.05,1.1,1.15,1.2,1.3];
+
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");
+  setTimeout(()=>t.classList.remove("on"),2600);}
+const fmt=t=>`${Math.floor(t/60)}:${(t%60).toFixed(1).padStart(4,"0")}`;
+
+/* v8.6: שגיאות מובנות. השרת מחזיר עכשיו code (BUSY_FINISHING/STALE_EDL/NOT_FOUND/
+   BAD_REQUEST) ולא 500 HTML, ולכן ה-Error נושא את הקוד ואת הגוף — כדי שהקורא
+   יוכל להגיב (טעינה מחדש) במקום להציג "שגיאה: 500". */
+async function api(url,opts){const r=await fetch(url,opts);
+  if(!r.ok){let e={};try{e=await r.json()}catch(_){};
+    const err=new Error(e.error||("שגיאת שרת "+r.status));
+    err.code=e.code||null; err.status=r.status; err.body=e; throw err;}
+  return r.json();}
+const esc=s=>(s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const post=(u,b)=>api(u,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b||{})});
+
+/* ---------- רשימת פרויקטים ---------- */
+let ALL_PROJ=[], sumFilter=null;
+/* v7.5 (הראל 24.7: "מלא סטטוסים ומידע — לנקות"): באדג' סטטוס *אחד* ברור לשורה.
+   כל שאר הפירוט (הערות/QA/סבבים/תיקונים) חי בתוך מסך הסרטון, לא ברשימה. */
+function primaryBadge(p){
+  if(p.state==="failed")return ['✖ נכשל בגימור','err'];
+  if(p.state==="running"||(p.approved&&!p.has_final))return ['⏳ בגימור…','blue'];
+  if(p.state==="published")return ['🚀 פורסם','g'];
+  if(p.state==="scheduled")return ['📅 תוזמן','g'];
+  if(p.state==="ready_to_schedule")return ['✅ מאושר סופית','g'];
+  if(p.state==="awaiting_schedule_approval")return ['🟡 ממתין לאישור סופי','warn'];
+  /* v9.15: "מוכן" היה עמום — הגימור הסתיים אבל אף אחד לא אמר שזה סופי. */
+  if(p.state==="final")return ['🟡 ממתין לאישור סופי','warn'];
+  if(p.state==="in_review"){
+    if(p.has_final)return ['↩ יש הערות חדשות על ה-FINAL','warn'];
+    if(waitingOnHarel(p))return ['🧑‍💻 ממתין לך','warn'];
+    if(withClaude(p))return ['🤖 אצל קלאוד','blue'];
+    return ['🔄 בסקירה',''];
+  }
+  return ['🆕 חדש',''];
+}
+/* v9.27 (20.9.26, בקשת הראל): תאריך הפרסום המתוכנן — כדי לראות דחיפות אמיתית
+   בלי לפתוח כל פרויקט. מקור: planned_dates.json (בורד הסושיאל/EDITPLAN). */
+function fmtPlanDate(iso){
+  const [y,m,d]=iso.split("-").map(Number);
+  return y===2026?`${d}.${m}`:`${d}.${m}.${String(y).slice(2)}`;
+}
+function daysLeft(iso){
+  const today=new Date(); today.setHours(0,0,0,0);
+  return Math.round((new Date(iso+"T00:00:00")-today)/86400000);
+}
+function planBadgeHtml(p){
+  if(!p.planned_date) return "";
+  const dl=daysLeft(p.planned_date);
+  const col=dl<=7?"var(--err)":dl<=21?"var(--warn)":"var(--blue)";
+  const txt=dl<0?`באיחור ${-dl} ימים`:dl===0?"עולה היום":`עוד ${dl} ימים`;
+  return `<div class="rownote" style="color:${col}">📅 ${fmtPlanDate(p.planned_date)} · ${txt}</div>`;
+}
+function rowHtml(p){
+  const [st,cls]=primaryBadge(p);
+  return `
+    <div class="projrow" onclick="openProj('${encodeURIComponent(p.name)}')">
+      <div class="rowmain">
+        <div class="rowname"><b>${p.name}</b></div>
+        <div class="rownote">${p.dept?esc(p.dept)+" · ":""}${p.kept??"?"}ש${p.brand==="personal"?" · אישי":""}</div>
+        ${planBadgeHtml(p)}
+        ${p.state==="failed"&&p.blocker?`<div class="rownote" style="color:var(--err)">⛔ ${esc(p.blocker)}</div>`:""}
+        ${p.sync_state==="drift"?`<div class="rownote" style="color:var(--warn)">⚠️ הציר באפליקציה אינו הציר שנחתך — ייושר בפתיחה</div>`:""}
+        ${p.sync_state==="edl_ahead"?`<div class="rownote" style="color:var(--blue)">🔁 הציר נערך אחרי ה-FINAL — צריך גימור מחדש</div>`:""}
+      </div>
+      <div class="rowbadges"><span class="badge ${cls}">${st}</span></div>
+      <button class="btn small" title="מחק סרטון" style="flex-shrink:0;opacity:.55"
+        onclick="event.stopPropagation();deleteProject('${encodeURIComponent(p.name)}')">🗑</button>
+    </div>`;
+}
+function renderSummary(l){
+  const c={not_started:0,in_review:0,approved:0,final:0,failed:0,running:0,published:0,
+    awaiting_schedule_approval:0,ready_to_schedule:0,scheduled:0};
+  l.forEach(p=>c[p.state]=(c[p.state]||0)+1);
+  /* v7.5: פחות צ'יפים — רק מה שמניע פעולה. נכשלו/בגימור מופיעים רק כשקיימים. */
+  const chips=[["","סה״כ",l.length],["not_started","חדשים",c.not_started],
+    ["in_review","בסקירה",c.in_review],["final","מוכנים",c.final],
+    ["ready_to_schedule","לתזמון",c.ready_to_schedule],["scheduled","תוזמנו",c.scheduled],
+    ["published","פורסמו",c.published]];
+  if(c.failed)chips.splice(1,0,["failed","נכשלו",c.failed]);
+  if(c.approved+c.running)chips.push(["running","בגימור",c.approved+c.running]);
+  if(c.awaiting_schedule_approval)chips.push(["awaiting_schedule_approval","קאבר+קפשן",c.awaiting_schedule_approval]);
+  $("#summary").innerHTML=chips.map(([k,t,n])=>
+    `<div class="sumchip ${sumFilter===k?"on":""}" data-f="${k}"><b>${n}</b>${t}</div>`).join("");
+  document.querySelectorAll(".sumchip").forEach(ch=>ch.onclick=()=>{
+    sumFilter=sumFilter===ch.dataset.f?null:ch.dataset.f;renderList();});
+}
+/* v7.1: "מצב סקירה" מפוצל — מה עדיין אצלך (הערה לא נשלחה / תיקון ממתין לבדיקה)
+   מול מה שכבר עבר אליך והועבר הלאה (בתור/בעבודה אצל קלאוד) */
+function waitingOnHarel(p){return (p.truly_open||0)>0||(p.resolved_waiting||0)>0;}
+function withClaude(p){return (p.queued_for_claude||0)>0||(p.in_progress||0)>0;}
+function matchView(p,v){
+  if(v==="my_review") return p.state==="not_started"||waitingOnHarel(p);
+  if(v==="claude_queue") return withClaude(p);
+  if(v==="fixed_waiting") return p.resolved_waiting>0;
+  if(v==="failed") return p.state==="failed";
+  if(v==="in_review") return p.state==="in_review";
+  if(v==="final") return p.state==="final";
+  if(v==="awaiting_schedule_approval") return p.state==="awaiting_schedule_approval";
+  if(v==="ready_to_schedule") return p.state==="ready_to_schedule";
+  if(v==="scheduled") return p.state==="scheduled";
+  if(v==="published") return p.state==="published";
+  return true;
+}
+/* v9.34 (24.9.26, בקשת הראל): מסנן המחלקה היה מתאפס בכל location.reload()
+   (יציאה מפרויקט = "⇤ כל הסרטונים" עושה reload מלא), ולא היה נגיש בלי
+   לגלול עד תחתית "מה עכשיו". תיקון: הערך נשמר ב-localStorage וחוזר אחרי
+   reload; ושני selects (#deptQuick למעלה, #deptSel למטה) מסונכרנים ביניהם
+   ומסננים גם את "מה עכשיו" עצמו, לא רק את הרשימה למטה. */
+const DEPT_LS_KEY="relReviewDeptFilter";
+function getDeptFilter(){try{return localStorage.getItem(DEPT_LS_KEY)||"";}catch(e){return "";}}
+function setDeptFilter(v){
+  try{localStorage.setItem(DEPT_LS_KEY,v);}catch(e){}
+  [$("#deptSel"),$("#deptQuick")].forEach(s=>{if(s&&s.value!==v&&[...s.options].some(o=>o.value===v))s.value=v;});
+  renderList(); renderNextPanel();  // v9.34 — סינון בלבד, בלי לפנות שוב ל-API
+}
+function refreshDeptOptions(){
+  const stored=getDeptFilter();
+  const depts=[...new Set([...ALL_PROJ.map(p=>p.dept),...NEXT_ROWS.map(r=>r.dept)].filter(Boolean))].sort();
+  const optHtml='<option value="">כל המחלקות</option>'+
+    depts.map(d=>`<option value="${esc(d)}">${esc(d)}</option>`).join("")+
+    '<option value="__none__">בלי מחלקה</option>';
+  [$("#deptSel"),$("#deptQuick")].forEach(sel=>{
+    if(!sel)return;
+    const cur=sel.value||stored;
+    sel.innerHTML=optHtml;
+    sel.value=cur&&[...sel.options].some(o=>o.value===cur)?cur:"";
+  });
+}
+function renderList(){
+  const q=($("#searchBox").value||"").trim();
+  const v=$("#viewSel").value, b=$("#deptSel").value;
+  let l=ALL_PROJ.filter(p=>!q||p.name.includes(q)||(p.notes_preview||"").includes(q));
+  l=l.filter(p=>matchView(p,v));
+  if(b==="__none__")l=l.filter(p=>!p.dept);
+  else if(b)l=l.filter(p=>p.dept===b);
+  if(sumFilter)l=l.filter(p=>sumFilter===""||p.state===sumFilter||(sumFilter==="running"&&(p.state==="approved"||p.state==="running")));
+  renderSummary(ALL_PROJ);
+  const groups=[
+    {key:"failed",title:"✖ נכשלו בגימור",hint:"דורש תיקון — ה-blocker מוצג"},
+    {key:"not_started",title:"🆕 לא נסקרו עדיין",hint:"תתחיל מכאן"},
+    /* v7.1: "בסקירה" מפוצל לשני חלקים ברורים — כדי לדעת בבירור מה עדיין
+       אצלך (טרם נשלח/ממתין לבדיקתך אחרי תיקון) מול מה שכבר עברת עליו
+       והעברת הלאה (בתור/בעבודה אצל קלאוד) */
+    {key:"in_review_yours",title:"🧑‍💻 ממתין לרוויו שלך",
+     hint:"הערה שכתבת ועוד לא שלחת, או תיקון של קלאוד שממתין לבדיקה שלך",
+     match:p=>p.state==="in_review"&&waitingOnHarel(p)},
+    {key:"in_review_claude",title:"🤖 כבר עברת והערת — אצל קלאוד",
+     hint:"נשלח לקלאוד/בעבודה — אין כרגע מה לעשות מהצד שלך",
+     match:p=>p.state==="in_review"&&!waitingOnHarel(p)&&withClaude(p)},
+    {key:"running",title:"⏳ בגימור אוטומטי",hint:"רץ ברקע"},
+    {key:"approved",title:"⏳ אושרו",hint:"ממתין לגימור"},
+    {key:"final",title:"✔ מוכנים",hint:"FINAL.mp4 קיים — עדיין לא תוזמן"},
+    {key:"awaiting_schedule_approval",title:"🖼 ממתין לאישור קאבר+קפשן",
+     hint:"קלאוד הכין קאבר+טיוטת קפשן — ממתין לאישורך/תיקון לפני תזמון"},
+    {key:"ready_to_schedule",title:"📅 מוכן לתזמון!",
+     hint:"קאבר+קפשן אושרו — קלאוד יתזמן ב-Metricool כשתגיד לו"},
+    {key:"scheduled",title:"📅 תוזמן — ממתין לפרסום",hint:"תוזמן ב-Metricool ואומת בקריאה חוזרת — Metricool יפרסם אוטומטית בתאריך שנקבע. יצא מתור התזמון."},
+    {key:"published",title:"🚀 הושלם — פורסם בפועל",hint:"הפוסט חי ברשתות (סימון ידני, או Metricool מראה PUBLISHED)"},
+  ];
+  let html="";
+  groups.forEach(g=>{
+    const match=g.match||(p=>p.state===g.key);
+    /* v9.27 (20.9.26, בקשת הראל): "הרבה תכנים לעבור עליהם — שאדע כל פעם מה דחוף".
+       קודם מי שיש לו תאריך פרסום מתוכנן (הקרוב ביותר קודם), ורק אחר-כך
+       (בלי תאריך) הישן-מעודכן-לאחרונה כברירת המחדל הקודמת. */
+    const items=l.filter(match).sort((a,b)=>{
+      if(a.planned_date&&b.planned_date) return a.planned_date<b.planned_date?-1:a.planned_date>b.planned_date?1:0;
+      if(a.planned_date&&!b.planned_date) return -1;
+      if(!a.planned_date&&b.planned_date) return 1;
+      return b.updated_at-a.updated_at;
+    });
+    if(!items.length) return;
+    if(g.key==="published"){
+      const open=localStorage.getItem("relReviewPublishedOpen")==="1";
+      html+=`<details class="section-final" id="publishedDetails" ${open?"open":""}>
+        <summary class="section-h"><b>${g.title}</b><span class="cnt">${items.length}</span><span class="hint">${g.hint}</span></summary>
+        ${items.map(rowHtml).join("")}
+      </details>`;
+    } else {
+      html+=`<div class="section-h"><b>${g.title}</b><span class="cnt">${items.length}</span><span class="hint">${g.hint}</span></div>`;
+      html+=items.map(rowHtml).join("");
+    }
+  });
+  $("#list").innerHTML = html || '<div class="mut">אין סרטונים תואמים</div>';
+  const pd=$("#publishedDetails");
+  if(pd) pd.addEventListener("toggle",()=>localStorage.setItem("relReviewPublishedOpen",pd.open?"1":"0"));
+}
+let NEXT_ROWS=[];
+async function loadList(){
+  ALL_PROJ=await api("/api/projects");
+  refreshDeptOptions();
+  renderList();
+  loadNextPanel();
+}
+/* v9.13 — "מה עכשיו": שורה אחת לכל פרויקט, של מי המהלך, ובריף לקלאוד בקליק */
+async function loadNextPanel(){
+  try{
+    NEXT_ROWS=await api("/api/next");
+    refreshDeptOptions();  // v9.34 — גם מחלקות שמופיעות רק בקרוסלות (לא בפרויקטי וידאו)
+    renderNextPanel();
+  }catch(e){$("#nextList").textContent="שגיאה בטעינת הצעדים: "+e;}
+}
+/* v9.34 — רק סינון+ציור מה-NEXT_ROWS שכבר בזיכרון, בלי לפנות שוב ל-API
+   (קרוא בכל שינוי של מסנן המחלקה, כדי שזה יהיה מיידי). */
+function renderNextPanel(){
+  try{
+    const b=getDeptFilter();
+    const rows=NEXT_ROWS.filter(r=>b==="__none__"?!r.dept:!b||r.dept===b);  // v9.34
+    if(!rows.length){$("#nextList").innerHTML=NEXT_ROWS.length?'<span class="mut">אין צעדים פתוחים במחלקה הזו</span>':'<span class="mut">אין צעדים פתוחים — הכל מתוזמן או פורסם ✅</span>';return;}
+    rows.sort((a,b)=>(a.owner==="harel"?0:1)-(b.owner==="harel"?0:1));
+    $("#nextList").innerHTML=rows.map(r=>{
+      const who=r.owner==="harel"?'<span class="who harel">אצלך</span>':'<span class="who claude">אצל קלאוד</span>';
+      const pf=r.preflight&&r.preflight.startsWith("צפוי")?` <span style="color:var(--warn)">🎭 ${esc(r.preflight)}</span>`:"";
+      /* v9.27 (20.9.26, בקשת הראל): תאריך הפרסום המתוכנן ממש בשורה של "מה עכשיו" —
+         "שאראה אותו מול העיניים" — לא רק בכרטיס הסרטון בהמשך. אותם ספי צבע כמו rowHtml. */
+      let planBadge="";
+      if(r.planned_date){
+        const dl=daysLeft(r.planned_date);
+        const col=dl<=7?"err":dl<=21?"warn":"blue";
+        const txt=dl<0?`באיחור ${-dl} ימים`:dl===0?"עולה היום":`עוד ${dl} ימים`;
+        planBadge=`<span class="badge ${col}" style="flex-shrink:0">📅 ${fmtPlanDate(r.planned_date)} · ${txt}</span>`;
+      }
+      /* v9.17 (הראל): כל השורה לחיצה — נכנסים לסרטון גם כשהצעד אצל קלאוד */
+      /* v9.28 (21.9.26, בקשת הראל): שורת קרוסלה — אין פרויקט וידאו לפתוח,
+         קליק פותח את הכרטיס במאנדיי בלשונית חדשה במקום openProj. */
+      const isCarousel=r.type==="carousel";
+      const rowLabel=isCarousel?"🖼️ קרוסלה":"";
+      const btnTxt=isCarousel?"מאנדיי ←":"פתח ←";
+      const btn=r.owner==="harel"?`<button class="btn small primary">${btnTxt}</button>`:`<span class="mut" style="font-size:12.5px">${btnTxt}</span>`;
+      const onClick=isCarousel?`openCarouselRow('${encodeURIComponent(r.monday_url||"")}')`:`openProj('${encodeURIComponent(r.project)}')`;
+      return `<div class="nextrow" onclick="${onClick}">${who}${planBadge}${rowLabel?`<span class="mut" style="font-size:12.5px">${rowLabel}</span>`:""}<b>${esc(r.project)}</b><span style="flex:1;min-width:180px">${esc(r.action)} <span class="mut" style="font-size:13px">${esc(r.detail||"")}</span>${pf}</span>${btn}</div>`;
+    }).join("");
+  }catch(e){$("#nextList").textContent="שגיאה בטעינת הצעדים: "+e;}
+}
+$("#copyBriefBtn").addEventListener("click",async()=>{
+  try{
+    const d=await api("/api/claude-brief");
+    await navigator.clipboard.writeText(d.brief);
+    $("#briefStatus").textContent=d.n?`הועתק — ${d.n} משימות. הדבק בצ'אט של קלאוד.`:"אין משימות בצד של קלאוד.";
+  }catch(e){$("#briefStatus").textContent="העתקה נכשלה: "+e;}
+});
+$("#searchBox").addEventListener("input",renderList);
+$("#viewSel").addEventListener("change",renderList);
+$("#deptSel").addEventListener("change",e=>setDeptFilter(e.target.value));   // v9.34
+$("#deptQuick").addEventListener("change",e=>setDeptFilter(e.target.value)); // v9.34
+
+/* ---------- v7.5: נגן אחד לכל הגרסאות (בקשת הראל 24.7) ----------
+   מקור אחד: FINAL (אם קיים, ברירת מחדל — להשוואה מיידית) / מקור-לעריכה / PREVIEW.
+   כל ריצת גימור מרעננת את אותו נגן. אינטראקציות עריכה (ציר/מילים) חוזרות
+   אוטומטית למקור — ציר הזמן של ה-FINAL שונה מציר ה-INPUT. */
+let curSrc="input", pendingSeek=null;
+/* v9.19 - פתיח קבוע מלא (מאסל מן) מודבק בתחילת ה-FINAL, ולכן ציר ה-FINAL מוזז
+   ב-intro_offset_sec מול ציר העריכה שכל שאר האפליקציה מדברת בו. במקום לתקן ~35
+   מקומות שקוראים/כותבים currentTime - מתרגמים בנקודה אחת: דורסים את המאפיין על
+   אלמנט הווידאו עצמו. כל שאר הקוד ממשיך לחשוב בציר העריכה, כפי שהיה.
+   בזמן שהפתיח מנגן הציר מציג 00:00 (clamp) - הפתיח קבוע ואינו נסקר. */
+let INTRO_OFF=0;
+(function installIntroAxis(){
+  const v=document.getElementById("vid"); if(!v)return;
+  const d=Object.getOwnPropertyDescriptor(HTMLMediaElement.prototype,"currentTime");
+  if(!d||!d.get||!d.set)return;
+  Object.defineProperty(v,"currentTime",{configurable:true,
+    get(){const t=d.get.call(v);
+          return (curSrc==="final"&&INTRO_OFF)?Math.max(0,t-INTRO_OFF):t;},
+    set(x){d.set.call(v,(curSrc==="final"&&INTRO_OFF)?
+                        Math.max(0,(+x||0)+INTRO_OFF):x);}});
+})();
+/* v9.4 — הנגן מכוון ל**גרסה מסוימת** (artifact_id) ולא לנתיב FINAL.mp4 שמתחלף.
+   curArt=null ⇒ אין artifacts (פרויקט ישן לפני מיגרציה) ⇒ נפילה לאחור ל-FINAL.mp4. */
+let ART={artifacts:[],pointers:{},display:null}, curArt=null;
+function hasFinalVideo(){ return (ART.artifacts||[]).length>0 || P.has_final; }
+function artById(id){ return (ART.artifacts||[]).find(a=>a.artifact_id===id)||null; }
+function setSource(k,seek,artifactId){
+  if(k==="final"&&!hasFinalVideo())k="input";
+  if(k==="preview"&&!P.has_preview)k="input";
+  curSrc=k; usingPreview=(k!=="input");
+  pendingSeek=(seek!=null)?seek:null;
+  const enc=encodeURIComponent(name);
+  if(k==="final"){
+    if(artifactId)curArt=artifactId;
+    if(!artById(curArt))curArt=(ART.display&&ART.display.artifact_id)||null;
+    vid.src = curArt ? `/artifact-media/${enc}/${curArt}`
+                     : `/media/${enc}/FINAL.mp4?t=${Date.now()}`;
+  }else{
+    vid.src=`/media/${enc}/${k==="input"?"INPUT.mp4":"PREVIEW.mp4"}`+(k==="input"?"":"?t="+Date.now());
+  }
+  vid.defaultPlaybackRate = vid.playbackRate = k==="input"?speed:1; /* גרסה מוגמרת/PREVIEW כוללים את הקצב בקובץ; default שורד טעינת src */
+  document.querySelectorAll("#srcBar [data-src]").forEach(b=>{
+    const kk=b.dataset.src;
+    b.classList.toggle("toggled",kk===k);
+    b.disabled=(kk==="final"&&!hasFinalVideo())||(kk==="preview"&&!P.has_preview);
+  });
+  const a=artById(curArt);
+  /* בורר הגרסאות חייב להצביע על מה שמנוגן בפועל — אחרת המסך "מבטיח" גרסה
+     אחת ומשמיע אחרת, וזו בדיוק אי-הוודאות שהשדרוג הזה בא לחסל. */
+  if(a&&$("#verPick").value!==a.artifact_id)$("#verPick").value=a.artifact_id;
+  $("#srcHint").textContent = k==="final"
+      ? (a?`גרסה ${a.version} · ${a.created_at}`:"FINAL.mp4 (לא נשמר כגרסה — הרץ מיגרציה)")
+    : k==="preview"?"הקאט האמיתי, לפני גימור" : "ציר העריכה — חיתוכים ותמליל";
+  renderVerBanner();
+  drawTimeline();
+  if(typeof renderNoteStrip==="function")renderNoteStrip();
+}
+$("#verPick").onchange=e=>setSource("final",null,e.target.value);
+$("#vid").addEventListener("loadedmetadata",()=>{
+  if(pendingSeek!=null){$("#vid").currentTime=pendingSeek;pendingSeek=null;}
+});
+document.querySelectorAll("#srcBar [data-src]").forEach(b=>b.onclick=()=>setSource(b.dataset.src));
+function toInputAxis(t){ /* אינטראקציית עריכה בזמן שצופים ב-FINAL — חוזרים למקור */
+  if(curSrc!=="input"){setSource("input",t);toast("✏️ עברתי למקור — עריכה על ציר ה-INPUT");return true;}
+  return false;
+}
+
+window.openCarouselRow=enc=>{
+  const url=decodeURIComponent(enc||"");
+  if(url) window.open(url,"_blank");
+  else toast("אין לינק מאנדיי לשורה הזו");
+};
+window.openProj=async enc=>{
+  name=decodeURIComponent(enc);
+  await reloadProject();
+  $("#listWrap").style.display="none"; $("#editor").style.display="";
+  $("#title").textContent=name; $("#subtitle").textContent=simpleMode?"צפה → רשום הערות מתחת לנגן → שלח לקלאוד או אשר":"קליק על הציר=בחירת חיתוך · קליק על מילה=קפיצה · M=הערה";
+  $("#topbtns").innerHTML='<button class="btn" onclick="location.reload()">⇤ כל הסרטונים</button>'+
+    `<button class="btn" style="background:var(--err-tint);color:var(--err)" onclick="deleteProject('${enc}')">🗑 מחק סרטון</button>`;
+  await loadArtifacts();
+  /* ברירת מחדל: הגרסה **המאושרת**. אין מאושרת ⇒ המועמד האחרון, מסומן במפורש. */
+  curArt=(ART.display&&ART.display.artifact_id)||null;
+  setSource(hasFinalVideo()?"final":"input");
+  if(P.finish_status&&P.finish_status.state) pollStatus(true);
+};
+async function reloadProject(){
+  P=await api("/api/project/"+encodeURIComponent(name));
+  INTRO_OFF=+(P.intro_offset_sec||0);
+  total=P.total; cuts=P.review.cuts.map((c,i)=>({...c,id:i}));
+  hookMove=P.review.hook_move||null; words=P.words;
+  setSpeed(P.review.speed||1,false);
+  buildSents(); buildIssues();
+  $("#intent").textContent=P.intent;
+  $("#stateSel").value=P.state_override||"";
+  $("#deptInput").value=P.dept||"";
+  $("#deptList").innerHTML=[...new Set(ALL_PROJ.map(p=>p.dept).filter(Boolean))]
+    .map(d=>`<option value="${esc(d)}">`).join("");
+  $("#metaState").textContent=P.state_override?`(עקיפה ידנית: ${P.state_override})`:`(מצב אוטומטי: ${P.state||""})`;
+  $("#reburnBtn").style.display=P.has_tight?"":"none";
+  if($("#tab-music").style.display!=="none")renderMusicTab();
+  if($("#tab-broll").style.display!=="none")renderBrollTab();
+  await loadArtifacts();          // v9.4 — גרסאות הווידאו תמיד עדכניות
+  await loadChangelog();          // v9.15 — מה תוקן בגרסה שמוצגת
+  updatePublishBtn();
+  renderAll(); renderComments(); renderRevisions(); renderQA(); renderRuns(); renderRounds(); renderFinalComments();
+  renderSimple(); renderNowBar(); renderNoteStrip();
+  api("/api/next").then(r=>{NEXTQ=r;renderNowNext();}).catch(()=>{});
+  renderScheduleApproval();
+  renderSync();
+}
+
+/* ---------- v7.7: סנכרון ציר ↔ FINAL (הראל 25.7) ----------
+   עורכים גם בצ'אט וגם באפליקציה — הבאנר הזה אומר במשפט אחד אם מה שמוצג כאן
+   הוא הציר שממנו נבנה ה-FINAL, ואם לא — מה לעשות. */
+function renderSync(){
+  const box=$("#syncBox"), s=P.sync;
+  if(!s){box.style.display="none";return;}
+  const style={
+    drift:      ["var(--warn-tint)","var(--warn)"],
+    edl_ahead:  ["var(--blue-tint)","var(--blue)"],
+    final_ahead:["var(--err-tint)","var(--err)"],
+    final_mismatch:["var(--err-tint)","var(--err)"],
+    in_sync:    ["var(--green-tint)","var(--green)"],
+    no_final:   ["var(--card2)","var(--txt2)"],
+    no_provenance:["var(--card2)","var(--txt2)"]
+  }[s.state]||["var(--card2)","var(--txt2)"];
+  const icon={drift:"⚠️",edl_ahead:"🔁",final_ahead:"⛔",final_mismatch:"⛔",in_sync:"🔗",
+              no_final:"•",no_provenance:"•"}[s.state]||"•";
+  let extra="";
+  if(s.state==="in_sync"&&P.auto_synced)
+    extra=` <span class="mut">(סונכרן עכשיו אוטומטית מהעריכה בצ'אט)</span>`;
+  if(s.final_expected_dur!=null&&(s.state==="in_sync"||s.state==="no_provenance"))
+    extra+=` <span class="mut">· ציר: ${(s.kept_dur||0).toFixed(1)}ש → FINAL בפועל ~${s.final_expected_dur.toFixed(1)}ש</span>`;
+  const btn=(s.state==="drift")
+    ? `<button class="btn small" style="margin-inline-start:8px" onclick="doSync()">🔗 סנכרן ציר</button>`
+    : ((s.state==="edl_ahead"||s.state==="final_mismatch")
+       ? `<button class="btn small" style="margin-inline-start:8px" onclick="gotoApprove()">▶ גימור מחדש</button>` : "");
+  box.style.background=style[0]; box.style.borderColor=style[1]; box.style.color=style[1];
+  box.innerHTML=`${icon} ${esc(s.message||"")}${extra}${btn}`;
+  box.style.display="";
+}
+window.doSync=async()=>{
+  try{
+    const r=await post("/api/sync/"+encodeURIComponent(name));
+    toast(r.changed?"🔗 הציר סונכרן למה שנחתך בפועל":"הציר כבר מסונכרן"+(r.reason?" — "+r.reason:""));
+    await reloadProject();
+  }catch(e){toast("שגיאה בסנכרון: "+e.message);}
+};
+window.gotoApprove=()=>{$("#approveBtn").scrollIntoView({behavior:"smooth",block:"center"});
+  toast("הציר חדש מה-FINAL — אשר והמשך לגימור כדי לבנות FINAL מעודכן");};
+$("#metaSave").onclick=async()=>{
+  try{
+    const r=await post("/api/meta/"+encodeURIComponent(name),
+      {state_override:$("#stateSel").value||null, dept:$("#deptInput").value.trim()||null});
+    toast("עודכן · מצב: "+r.state+(r.dept?" · "+r.dept:""));await reloadProject();
+  }catch(e){toast("שגיאה: "+e.message);}
+};
+
+/* ---------- v7.1: סימון ידני "תוזמן ב-Metricool" (אף פעם לא אוטומטי).
+   v7.9 (הראל 25.7): שונה מ"הושלם — פורסם בפועל" — תזמון ב-Metricool ≠ פרסום בפועל
+   (autoPublish מפרסם בתאריך עתידי; ראו feedback_published_vs_scheduled_state_bug). ---------- */
+/* v9.33 (23.9.26): מצב scheduled אמיתי — הכפתור מתקדם בשלבים:
+   (ללא) → 📅 תוזמן (אחרי תזמון מאומת) → 🚀 פורסם בפועל (כשהפוסט חי) → ↩ ביטול. */
+function updatePublishBtn(){
+  const btn=$("#publishToggleBtn");
+  const so=P.state_override;
+  const closed=so==="scheduled"||so==="published";
+  btn.style.display=(P.has_final||closed)?"":"none";
+  btn.textContent=so==="published"?"↩ בטל סימון פורסם":
+    so==="scheduled"?"🚀 סמן כפורסם בפועל":"📅 סמן כתוזמן ב-Metricool";
+  btn.classList.toggle("ok",!closed);
+  btn.classList.toggle("primary",closed);
+}
+$("#publishToggleBtn").onclick=async()=>{
+  const so=P.state_override;
+  const next=so==="published"?null:so==="scheduled"?"published":"scheduled";
+  try{
+    const r=await post("/api/meta/"+encodeURIComponent(name),{state_override:next});
+    toast(next==="scheduled"?"📅 סומן כתוזמן — ממתין לפרסום":
+      next==="published"?"🚀 סומן כפורסם בפועל":"↩ הסימון בוטל");await reloadProject();
+  }catch(e){toast("שגיאה: "+e.message);}
+};
+
+/* ---------- לשוניות ---------- */
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x===t));
+  ["edit","comments","artifacts","changelog","versions","music","broll","qa","runs"].forEach(k=>
+    $("#tab-"+k).style.display = t.dataset.tab===k?"":"none");
+  if(t.dataset.tab==="music")renderMusicTab();
+  if(t.dataset.tab==="broll")renderBrollTab();
+  if(t.dataset.tab==="artifacts")loadArtifacts();
+  if(t.dataset.tab==="changelog")loadChangelog();
+});
+function gotoTab(k){setMode(false);document.querySelector(`.tab[data-tab=${k}]`).click();}
+
+/* ---------- הערות מובנות ---------- */
+const CATICON={edit:"✂",transcript:"📝",hook:"🎯",pacing:"⏱",audio:"🔊",captions:"💬",broll:"🎞",cover:"🖼",qa:"🧪",general:"💭"};
+const STATTXT={open:["פתוחה","warn"],queued_for_claude:["🤖 בתור לקלאוד","blue"],
+  in_progress:["🤖 קלאוד עובד…","blue"],resolved:["✅ תוקן — ממתין לבדיקה שלך","g"],rejected:["נדחתה",""]};
+function renderComments(){
+  const list=P.comments||[];
+  const openN=list.filter(c=>["open","queued_for_claude","in_progress"].includes(c.status)).length;
+  $("#cCount").textContent=openN?`(${openN})`:"";
+  const onlyOpen=$("#cmOpenOnly").checked;
+  const rows=list.slice().reverse().filter(c=>!onlyOpen||c.status!=="rejected"&&c.status!=="resolved"||(!onlyOpen));
+  const shown=onlyOpen? list.filter(c=>c.status!=="resolved"&&c.status!=="rejected") : list;
+  $("#cmList").innerHTML=shown.slice().reverse().map(c=>{
+    const [st,cls]=STATTXT[c.status]||[c.status,""];
+    /* v9.4 — ההערה נושאת את הגרסה שעליה נכתבה; קליק פותח *אותה* ולא את הנוכחית */
+    const ar=c.artifact_ref||null;
+    const t=c.time_start!=null?`<span class="tclick" data-t="${c.time_start}" ${c.on_final?'data-final="1"':''} ${ar&&ar.artifact_id?`data-art="${ar.artifact_id}"`:""}>${fmt(c.time_start)}${c.time_end?"–"+fmt(c.time_end):""}</span> · `:"";
+    const arBadge = !c.on_final ? ""
+      : (ar&&ar.resolved ? `<span class="badge blue">🎬 גרסה ${ar.version??"?"}${ar.source==="inferred_by_time"?" (משוער)":""}</span>`
+        : `<span class="badge err" title="${esc((ar&&ar.detail)||"")}">🎬 גרסה לא זמינה</span>`);
+    return `<div class="comment ${c.stale?'stale':''}">
+      <div class="chead">${CATICON[c.category]||""} ${t}<span class="badge ${cls}">${st}</span>
+        ${arBadge}
+        ${c.priority==="blocking"?'<span class="badge err">חוסם</span>':c.priority==="high"?'<span class="badge warn">גבוה</span>':""}
+        ${c.stale?'<span class="badge warn">גרסה ישנה</span>':""}
+        <span class="mut" style="font-size:11.5px;margin-inline-start:auto">${c.created_at||""}</span></div>
+      <div>${esc(c.text)}</div>
+      ${c.resolution?`<div class="mut">↳ ${esc(c.resolution)}</div>`:""}
+      <div class="flex" style="margin-top:4px">
+        ${c.status==="open"?`<button class="btn small" data-q="${c.comment_id}">📤 לקלאוד</button>`:""}
+        ${c.status==="resolved"?`<button class="btn small ok" data-ok="${c.comment_id}">אושר ✓</button>
+          <button class="btn small" data-reopen="${c.comment_id}">פתח מחדש</button>`:""}
+        ${["open","queued_for_claude"].includes(c.status)?`<button class="btn small" data-rej="${c.comment_id}">✖ בטל</button>`:""}
+      </div></div>`;
+  }).join("")||'<div class="mut" style="padding:8px">אין הערות</div>';
+  $("#cmList").querySelectorAll(".tclick").forEach(el=>el.onclick=()=>{
+    /* הערה שנרשמה תוך כדי צפייה בגרסה מוגמרת — הזמן בציר הגימור, לא ב-INPUT.
+       v9.4: פותחים את **הגרסה שעליה נכתבה ההערה** (data-art), גם אם מאז רצו
+       עוד ריצות והוחלף ה-FINAL הפעיל. */
+    if(el.dataset.art){
+      const a=artById(el.dataset.art);
+      if(!a){toast("⛔ הגרסה שעליה נכתבה ההערה אינה זמינה");return;}
+      setSource("final",parseFloat(el.dataset.t),el.dataset.art);
+      if(a.artifact_id!==((ART.display||{}).artifact_id))toast(`↩ הוצגה גרסה ${a.version} — זו שעליה נכתבה ההערה`);
+    }
+    else if(el.dataset.final)setSource("final",parseFloat(el.dataset.t));
+    else if(curSrc!=="input")setSource("input",parseFloat(el.dataset.t));
+    else $("#vid").currentTime=parseFloat(el.dataset.t);
+  });
+  const upd=(cid,body)=>post(`/api/comment/${encodeURIComponent(name)}/${cid}`,body).then(reloadProject);
+  $("#cmList").querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>upd(b.dataset.q,{status:"queued_for_claude"}));
+  $("#cmList").querySelectorAll("[data-ok]").forEach(b=>b.onclick=()=>upd(b.dataset.ok,{status:"rejected",resolution:"אושר ע\"י הראל (סגור)"}).then(()=>toast("ההערה נסגרה")));
+  $("#cmList").querySelectorAll("[data-reopen]").forEach(b=>b.onclick=()=>upd(b.dataset.reopen,{status:"queued_for_claude"}));
+  $("#cmList").querySelectorAll("[data-rej]").forEach(b=>b.onclick=()=>upd(b.dataset.rej,{status:"rejected"}));
+}
+async function addComment(queue){
+  const txt=$("#cmText").value.trim();
+  if(!txt){toast("כתוב הערה קודם");return;}
+  const body={text:txt,category:$("#cmCat").value,priority:$("#cmPrio").value,queue};
+  if($("#cmAtTime").checked){body.time_start=+($("#vid").currentTime.toFixed(2));}
+  if(markIn!=null&&body.time_start!=null&&markIn<body.time_start){body.time_end=body.time_start;body.time_start=+markIn.toFixed(2);markIn=null;}
+  await post("/api/comments/"+encodeURIComponent(name),body);
+  $("#cmText").value="";toast(queue?"נשלח לקלאוד 🤖":"הערה נשמרה");
+  await reloadProject();
+}
+$("#cmAdd").onclick=()=>addComment(false);
+$("#cmQueue").onclick=()=>addComment(true);
+$("#cmOpenOnly").onchange=renderComments;
+
+/* ---------- הערות תוך כדי צפייה בגרסה הסופית (FINAL) ---------- */
+/* בקשת הראל 23.7: לא לצאת מהסרטון כדי לרשום הערה — כתיבה וצפייה במקביל.
+   v7.5: הזמן נלקח מהנגן הראשי כשהוא במצב FINAL (ציר הגימור, שונה מציר ה-INPUT). */
+async function addFinalComment(queue){
+  const txt=$("#finalCmText").value.trim();
+  if(!txt){toast("כתוב הערה קודם");return;}
+  const t=curSrc==="final"?vid.currentTime:0;
+  /* v9.4 — ההערה נקשרת לגרסה שמנוגנת *עכשיו*, לא ל-"FINAL" הכללי */
+  const body={text:txt,category:"general",priority:"normal",queue,on_final:true,
+              artifact_id:(curSrc==="final"?curArt:null),
+              time_start:+(t||0).toFixed(2)};
+  await post("/api/comments/"+encodeURIComponent(name),body);
+  $("#finalCmText").value="";toast(queue?"נשלח לקלאוד 🤖":"הערה נשמרה");
+  await reloadProject();
+}
+$("#finalCmAdd").onclick=()=>addFinalComment(false);
+$("#finalCmQueue").onclick=()=>addFinalComment(true);
+function renderFinalComments(){
+  const list=(P&&P.comments||[]).filter(c=>c.on_final);
+  $("#finalCmList").innerHTML=list.slice().reverse().map(c=>{
+    const [st,cls]=STATTXT[c.status]||[c.status,""];
+    const t=c.time_start!=null?`<span class="tclick" data-t="${c.time_start}">${fmt(c.time_start)}</span> · `:"";
+    return `<div class="comment">
+      <div class="chead">${t}<span class="badge ${cls}">${st}</span>
+        <span class="mut" style="font-size:11.5px;margin-inline-start:auto">${c.created_at||""}</span></div>
+      <div>${esc(c.text)}</div>
+      ${c.resolution?`<div class="mut">↳ ${esc(c.resolution)}</div>`:""}
+    </div>`;
+  }).join("")||'<div class="mut" style="padding:4px 2px">אין הערות עדיין על הגרסה הסופית</div>';
+  $("#finalCmList").querySelectorAll(".tclick").forEach(el=>el.onclick=()=>
+    setSource("final",parseFloat(el.dataset.t)));
+}
+
+/* ---------- v7.2: אישור קאבר+קפשן — שער בין FINAL לתזמון ---------- */
+/* בקשת הראל 23.7: מיד אחרי אישור העריכה (FINAL עם כתוביות+מוזיקה) — קאבר
+   וקפשן מוצגים כאן לאישור/תיקון נפרד. רק אחרי "אשר" זה "מוכן לתזמון" —
+   וה-checksum שנעל ברגע האישור הוא מה שקלאוד חייב להתאים אליו בדיוק לפני
+   שהוא קורא ל-Metricool (שורש: למנוע תזמון בטעות של גרסה ישנה/שגויה). */
+const SCHAP_BADGE={
+  none:'<span class="badge warn">🟡 הגרסה מוכנה — ממתינה לאישור סופי שלך</span>',
+  pending:'<span class="badge warn">📝 ממתין לאישורך</span>',
+  changes_requested:'<span class="badge blue">🤖 שינוי נשלח לקלאוד — ממתין לתיקון</span>',
+  approved:'<span class="badge g">✅ מאושר סופית — נעול ומוכן לתזמון/מסירה</span>',
+};
+/* שורת "מה עכשיו" — הראל 17.8: "כרגע לא ברור כל כך מה צריך לעשות". */
+const SCHAP_NEXT={
+  none:'➡️ <b>מה עכשיו:</b> צפה בגרסה. אם היא טובה — לחץ "מאושר סופית". אם לא — רשום הערה ושלח לקלאוד.',
+  pending:'➡️ <b>מה עכשיו:</b> עבור על הקאבר והקפשן, ואז "מאושר סופית".',
+  changes_requested:'➡️ <b>מה עכשיו:</b> קלאוד עובד על התיקון. הסרטון יחזור לכאן לאישור.',
+  approved:'✔️ <b>אין מה לעשות.</b> הגרסה נעולה. כל גימור נוסף יבטל את האישור ויחזיר אותה לכאן.',
+};
+function renderScheduleApproval(){
+  const panel=$("#scheduleApprovalPanel");
+  if(!panel)return;
+  if(!P||!P.has_final){panel.style.display="none";return;}
+  panel.style.display="";
+  const sa=P.schedule_approval||{};
+  $("#schApBadge").innerHTML=SCHAP_BADGE[sa.status||"none"]||SCHAP_BADGE.none;
+  const nx=$("#schApNext");
+  if(nx){
+    /* v9.15 — מלכודת: אושר כשעוד לא היה קפשן, ואז הגיעה טיוטה. המצב נשאר
+       ready_to_schedule אבל caption_approved ריק — כלומר תזמון היה יוצא בלי קפשן. */
+    const capPending = sa.status==="approved" && !sa.caption_approved && !!sa.caption_draft;
+    nx.innerHTML = capPending
+      ? '⚠️ <b>הגרסה מאושרת, אבל הקפשן עוד לא נעול.</b> הגיעה טיוטת קפשן חדשה אחרי האישור — עבור עליה ולחץ "מאושר סופית" שוב כדי לנעול גם אותה.'
+      : (SCHAP_NEXT[sa.status||"none"]||SCHAP_NEXT.none);
+    nx.style.color = capPending ? "var(--warn)" : "";
+  }
+  const cover=sa.cover_path||"thumbnail.png";
+  $("#schApCover").src=`/media/${encodeURIComponent(name)}/${cover}?t=${Date.now()}`;
+  $("#schApCover").onerror=()=>{$("#schApCover").style.display="none";};
+  $("#schApCover").onload=()=>{$("#schApCover").style.display="";};
+  if(document.activeElement!==$("#schApCaption"))
+    /* v9.15: אושר לפני שהיה קפשן (ממומן) ואז הגיעה טיוטה — בלי הנפילה-אחורה
+       התיבה הייתה מוצגת ריקה והטיוטה נעלמת מהעין. */
+    $("#schApCaption").value = sa.status==="approved"
+      ? (sa.caption_approved||sa.caption_draft||"")
+      : (sa.caption_draft||sa.caption_approved||"");
+  $("#schApApprove").textContent = sa.status==="approved" ? "✅ מאושר סופית — אשר שוב אחרי שינוי" : "✅ מאושר סופית";
+}
+$("#schApApprove").onclick=async()=>{
+  const txt=$("#schApCaption").value.trim();
+  /* v9.15 (הראל 17.8): הקפשן היה תנאי לאישור — ולכן סרטון ממומן, שאין לו קפשן
+     בכלל, לא היה ניתן לאישור והפרויקט נתקע במצב "final" בלי כפתור רלוונטי.
+     מכאן: הקפשן רשות, והאישור נועל את הגרסה בכל מקרה. */
+  if(!txt && !confirm("אין קפשן לסרטון הזה.\n\nלאשר סופית את הגרסה בלבד?\n(מתאים לממומן — הקובץ נמסר ידנית ולא מתוזמן ברשתות)"))return;
+  try{
+    await post("/api/schedule-review/"+encodeURIComponent(name),{action:"approve",caption_text:txt});
+    toast("✅ הגרסה אושרה סופית ונעולה");
+    confettiBurst();
+    await reloadProject();
+  }catch(e){toast("שגיאה: "+e.message);}
+};
+$("#schApRequest").onclick=()=>{$("#schApRequestBox").style.display="";$("#schApNote").focus();};
+$("#schApCancelRequest").onclick=()=>{$("#schApRequestBox").style.display="none";};
+$("#schApSendRequest").onclick=async()=>{
+  const note=$("#schApNote").value.trim();
+  if(!note){toast("כתוב מה לשנות");return;}
+  try{
+    await post("/api/schedule-review/"+encodeURIComponent(name),
+      {action:"request_changes",note,category:$("#schApCat").value});
+    $("#schApNote").value="";$("#schApRequestBox").style.display="none";
+    toast("נשלח לקלאוד 🤖 — הסרטון חוזר לבסקירה עד שהתיקון יעלה מחדש לאישור");
+    await reloadProject();
+  }catch(e){toast("שגיאה: "+e.message);}
+};
+
+/* ---------- v9.4: גרסאות ותוצרים (וידאו) ----------
+   שורש: "גרסה" הייתה שם קובץ שכל ריצה דרסה — 71 ריצות מוצלחות הותירו 51 קבצים.
+   כאן כל תוצר הוא רשומה קבועה: נגן, הורדה, סטטוס, מקור, QA, שלמות. */
+const ART_ST={approved:["✅ מאושרת","var(--green-tint)","var(--green)"],
+              published:["📤 פורסמה","var(--blue-tint)","var(--blue)"],
+              candidate:["🟡 מועמדת","var(--warn-tint)","#e0a800"],
+              was_approved:["מאושרת בעבר","var(--card2)","var(--txt3)"],
+              was_published:["פורסמה בעבר","var(--card2)","var(--txt3)"]};
+function mb(n){return !n?"—":(n>=1e6?(n/1e6).toFixed(1)+"MB":Math.round(n/1e3)+"KB");}
+async function loadArtifacts(deep){
+  try{ ART=await api(`/api/artifacts/${encodeURIComponent(name)}${deep?"?verify=1":""}`); }
+  catch(e){ ART={artifacts:[],pointers:{},display:null,unmatched:[]}; }
+  $("#aCount").textContent=(ART.artifacts||[]).length?`(${ART.artifacts.length})`:"";
+  const sel=$("#verPick");
+  sel.style.display=(ART.artifacts||[]).length>1?"":"none";
+  sel.innerHTML=(ART.artifacts||[]).slice().reverse().map(a=>
+    `<option value="${a.artifact_id}">גרסה ${a.version} · ${(ART_ST[a.status]||["",""])[0]}</option>`).join("");
+  if(curArt&&artById(curArt))sel.value=curArt;
+  else if(ART.display&&ART.display.artifact_id)sel.value=ART.display.artifact_id;
+  renderVerBanner(); renderArtifacts();
+}
+/* הבאנר הקבוע: מה מוצג *עכשיו*, ואם יש חדש יותר — אומרים את זה במפורש. */
+function renderVerBanner(){
+  const box=$("#verBanner"), d=ART.display;
+  if(!d||!d.artifact_id||curSrc!=="final"){box.style.display="none";return;}
+  const a=artById(curArt)||artById(d.artifact_id);
+  if(!a){box.style.display="none";return;}
+  const isShown=a.artifact_id===d.artifact_id;
+  const st=ART_ST[a.status]||["",""];
+  const bad=a.integrity&&a.integrity.ok===false;
+  let bg="var(--green-tint)",fg="var(--green)";
+  if(a.status==="candidate"){bg="var(--warn-tint)";fg="#e0a800";}
+  if(!isShown){bg="var(--purple-tint)";fg="var(--purple)";}
+  if(bad){bg="var(--err-tint)";fg="var(--err)";}
+  let msg=`<b>מציג עכשיו: גרסה ${a.version} — ${st[0].replace(/^\S+\s/,"")}</b>`;
+  if(bad)msg+=`<br>⛔ ${esc(a.integrity.detail||"הגרסה פגומה")}`;
+  if(!isShown)msg+=`<br>⚠️ זו אינה הגרסה שאמורה להיות מוצגת (${d.is_approved?"המאושרת":"האחרונה"} היא גרסה ${d.version}) — <span class="tgo" data-go="${d.artifact_id}" style="cursor:pointer;text-decoration:underline">חזור אליה</span>`;
+  if(a.status==="candidate")msg+=`<br>זו גרסה <b>שטרם אושרה</b>.`;
+  if(isShown&&d.newer_count)
+    msg+=`<br>🆕 קיימת גרסה ${d.newer_version} חדשה יותר — ממתינה לבדיקה שלך · <span class="tgo" data-go="${d.newer_artifact_id}" style="cursor:pointer;text-decoration:underline">הצג אותה</span>`;
+  /* v9.15: הדבר הראשון שהראל צריך לדעת על גרסה חדשה הוא **מה השתנה בה** —
+     ואיפה, כדי לבדוק את זה בלי לצפות מחדש בכל הסרטון. */
+  const cv=clVer(a.artifact_id);
+  if(cv&&cv.counts.total){
+    const left=clOpen(cv), pl=(cv.review_plan||{});
+    msg+=`<br>🔍 <b>${cv.counts.notes} הערות תוקנו בגרסה הזו</b>`
+       + (cv.counts.total>cv.counts.notes?` (+${cv.counts.total-cv.counts.notes} שינויים נוספים)`:"")
+       + ` · ${left?`נותרו ${left} לבדיקה`:"הכל נבדק ✅"}`
+       + (pl.spots&&pl.spots.length?` · סבב של ~${pl.covered_secs}ש` : "")
+       + ` — <span class="clgo" style="cursor:pointer;text-decoration:underline">פתח "מה תוקן"</span>`;
+  }
+  box.style.display="";box.style.background=bg;box.style.borderColor=fg;box.style.color=fg;
+  box.innerHTML=msg+` <span class="mut" style="font-size:11.5px">· ${a.created_at} · ${a.duration??"?"}ש · ${a.artifact_id}</span>`;
+  box.querySelectorAll(".tgo").forEach(el=>el.onclick=()=>setSource("final",null,el.dataset.go));
+  box.querySelectorAll(".clgo").forEach(el=>el.onclick=()=>{
+    clSel=a.artifact_id; gotoTab("changelog");});
+}
+function renderArtifacts(){
+  const d=ART.display, A=(ART.artifacts||[]);
+  $("#artDisplay").innerHTML = !d||!d.artifact_id
+    ? `<b>אין עדיין גרסאות וידאו שמורות</b><div class="mut" style="font-size:12.5px">גרסה נוצרת בכל ריצת גימור מוצלחת. לפרויקטים ישנים: <code>python3 tools/migrate_artifacts.py --apply</code></div>`
+    : `<b>ברירת המחדל להצגה: גרסה ${d.version}</b> ${d.is_approved?'<span class="badge g">מאושרת</span>':'<span class="badge" style="background:var(--warn-tint);color:#e0a800">לא מאושרת</span>'}
+       ${d.newer_count?`<br><span style="color:var(--purple)">🆕 ${d.newer_count} גרסאות חדשות יותר ממתינות לבדיקה (האחרונה: ${d.newer_version})</span>`:""}
+       <div class="mut" style="font-size:12.5px;margin-top:4px">סה"כ ${d.total} גרסאות · מאושרת: ${d.pointers.approved_final?("גרסה "+(artById(d.pointers.approved_final)||{}).version):"—"} · פורסמה: ${d.pointers.published_final?("גרסה "+(artById(d.pointers.published_final)||{}).version):"—"}</div>`;
+  $("#artList").innerHTML=A.slice().reverse().map(a=>{
+    const st=ART_ST[a.status]||["",""];
+    const bad=a.integrity&&a.integrity.ok===false;
+    const qa=a.qa&&a.qa.pass===true?"✅ PASS":(a.qa&&a.qa.pass===false?"❌ FAIL":"—");
+    return `<div class="revrow" style="${a.artifact_id===curArt?'outline:1px solid var(--blue);':''}${bad?'background:var(--err-tint);':''}">
+      <div style="min-width:0">
+        <b>גרסה ${a.version}</b> <span class="badge" style="background:${st[1]};color:${st[2]}">${st[0]}</span>
+        ${bad?`<span class="badge" style="background:var(--err-tint);color:var(--err)">⛔ ${esc(a.integrity.state)}</span>`:""}
+        ${a.migrated?`<span class="badge" style="background:var(--card2);color:var(--txt3)">מיגרציה${a.matched===false?" · לא הותאם לריצה":""}</span>`:""}
+        <br><span class="mut" style="font-size:12px">${a.created_at} · ${a.duration??"?"}ש · ${mb(a.size_bytes)} · QA ${qa}</span>
+        <br><span class="mut" style="font-size:11.5px">${a.artifact_id} · ריצה ${a.run_id||"—"} · עריכה ${a.revision_id||"—"}${a.music?" · 🎵 "+esc(a.music):""}${a.broll_items?" · 🎞 "+a.broll_items:""}</span>
+        <br><span class="mut" style="font-size:11px;direction:ltr;display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis">${esc(a.checksum||"")}</span>
+        ${a.summary?`<br><span class="mut" style="font-size:12px">${esc(a.summary)}</span>`:""}
+      </div>
+      <div class="flex" style="flex-wrap:wrap;gap:4px">
+        <button class="btn small" data-play="${a.artifact_id}" ${bad?"disabled":""}>▶ צפה</button>
+        <a class="btn small" href="/artifact-media/${encodeURIComponent(name)}/${a.artifact_id}?download=1" download>⬇</a>
+        ${a.status!=="approved"?`<button class="btn small ok" data-appr="${a.artifact_id}" ${bad?"disabled":""}>✔ אשר</button>`:""}
+        <button class="btn small" data-act="${a.artifact_id}" ${bad?"disabled":""} title="הופך את הגרסה הזו ל-FINAL.mp4 הפעיל (הגרסה הנוכחית נשמרת)">⭐ הפוך לפעילה</button>
+        <button class="btn small" data-acmp="${a.artifact_id}">⇄ השווה</button>
+      </div></div>`;
+  }).join("")||'<div class="mut">אין גרסאות וידאו — כל ריצת גימור מוצלחת תיצור אחת</div>';
+
+  $("#artList").querySelectorAll("[data-play]").forEach(b=>b.onclick=()=>{
+    setSource("final",null,b.dataset.play);gotoTab("edit");
+    window.scrollTo({top:0,behavior:"smooth"});});
+  $("#artList").querySelectorAll("[data-appr]").forEach(b=>b.onclick=async()=>{
+    const r=await post(`/api/artifacts/${encodeURIComponent(name)}/${b.dataset.appr}/approve`);
+    if(r.error){toast(r.error);return;}
+    toast("✅ הגרסה אושרה");await loadArtifacts();await reloadProject();});
+  $("#artList").querySelectorAll("[data-act]").forEach(b=>b.onclick=async()=>{
+    const r=await post(`/api/artifacts/${encodeURIComponent(name)}/${b.dataset.act}/activate`);
+    if(r.error){toast(r.error);return;}
+    toast("⭐ הגרסה היא עכשיו ה-FINAL הפעיל (הקודמת נשמרה)");await loadArtifacts();await reloadProject();});
+  let acmp=[];
+  $("#artList").querySelectorAll("[data-acmp]").forEach(b=>b.onclick=async()=>{
+    acmp.push(b.dataset.acmp);
+    if(acmp.length<2){toast("בחר גרסה שנייה להשוואה");return;}
+    const [x,y]=acmp.slice(-2);acmp=[];
+    const r=await api(`/api/artifacts/${encodeURIComponent(name)}/compare?a=${x}&b=${y}`);
+    if(!r.ok){toast("שגיאת השוואה");return;}
+    const f=r.diff;
+    $("#artCompare").style.display="";
+    $("#artCompare").innerHTML=`<b>השוואת גרסאות ${f.version[0]} ⇄ ${f.version[1]}</b><br>
+      משך: ${f.duration[0]??"?"}ש → ${f.duration[1]??"?"}ש ${f.duration_delta!=null?`(${f.duration_delta>0?"+":""}${f.duration_delta}ש)`:""}<br>
+      גודל: ${mb(f.size_bytes[0])} → ${mb(f.size_bytes[1])}<br>
+      גרסת עריכה: ${f.same_revision?"זהה":`${f.revision_id[0]||"—"} → ${f.revision_id[1]||"—"}`} · ציר: ${f.edl_hash_same?"זהה":"שונה"}<br>
+      מוזיקה: ${esc(String(f.music[0]??"—"))} → ${esc(String(f.music[1]??"—"))} · בירולים: ${f.broll_items[0]??0} → ${f.broll_items[1]??0}<br>
+      QA: ${f.qa_pass[0]} → ${f.qa_pass[1]}${f.identical_content?"<br><b>התוכן זהה בייט-לבייט</b>":""}`;
+  });
+  const um=(ART.unmatched||[]);
+  $("#artFaults").innerHTML = um.length
+    ? `<div class="panel" style="border-color:var(--err)"><b style="color:var(--err)">⛔ ${um.length} ריצות מוצלחות שהווידאו שלהן אבד לפני שהמערכת הזו נכנסה לתוקף</b>
+       <div class="mut" style="font-size:12px">נרשמות כתקלה ולא כגרסה תקינה — אין קובץ לשחזר.</div>`
+      + um.map(u=>`<div class="qarow"><span class="mut" style="font-size:12px">${esc(u.run_id)} · ${esc(u.finished_at||"?")}</span></div>`).join("")+"</div>"
+    : "";
+}
+$("#artVerifyBtn").onclick=async()=>{toast("בודק שלמות…");await loadArtifacts(true);toast("✔ נבדק");};
+
+/* ---------- v9.15: "מה תוקן בגרסה הזו" (בקשת הראל 17.8.26) ----------
+   שורש: comments.json ידע *מה* ביקשת, artifacts/ ידע *מה נוצר* — ואף אחד לא
+   ידע איזה תיקון נכנס לאיזו גרסה. לכן כל סבב תיקונים דרש צפייה מלאה מחדש.
+   כאן: רשימת התיקונים של הגרסה, כל אחד עם הטיימקוד שלו **בציר של הגרסה
+   הזו** (ממופה מהגרסה שעליה נכתבה ההערה), וסבב שמנגן רק את הנקודות. */
+let CL={versions:[],pending_render:[],unassigned:[]}, clSel=null, clRun=null;
+const CLST={pending:["⬜ לא נבדק",""],ok:["✅ נבדק ותקין","g"],not_fixed:["✖ עדיין לא תוקן","err"]};
+
+function clVer(id){return (CL.versions||[]).find(v=>v.artifact_id===(id||clSel))||null;}
+/* "נותר לבדוק" = הערות + שינויים שאפשר באמת לראות בנגן. שורות מידע כמו
+   "אורך הסרטון 56→61ש" לא דורשות בדיקה ולכן לא מנפחות את המונה. */
+function clOpen(v){
+  if(!v)return 0;
+  return (v.items||[]).filter(it=>(it.kind==="comment"||it.t!=null)
+    &&((it.check||{}).state||"pending")==="pending").length;
+}
+
+async function loadChangelog(){
+  if(!name)return;
+  try{ CL=await api(`/api/changelog/${encodeURIComponent(name)}`); }
+  catch(e){ CL={versions:[],pending_render:[],unassigned:[]}; }
+  if(!clVer(clSel))
+    clSel=(ART.display&&ART.display.artifact_id)
+        ||((CL.versions.slice(-1)[0]||{}).artifact_id)||null;
+  const v=clVer(clSel), n=clOpen(v);
+  $("#clCount").textContent=n?`(${n})`:"";
+  renderChangelog(); renderVerBanner();
+}
+
+function renderChangelog(){
+  const V=CL.versions||[];
+  $("#clVerPick").innerHTML=V.slice().reverse().map(v=>
+    `<option value="${v.artifact_id}">גרסה ${v.version}${v.prev_version?` מול ${v.prev_version}`:" (ראשונה)"} · ${v.counts.total} שינויים</option>`).join("");
+  if(clSel)$("#clVerPick").value=clSel;
+  const v=clVer(clSel);
+  if(!v){
+    $("#clSummary").innerHTML='<span class="mut">אין עדיין גרסאות וידאו — יומן השינויים נבנה מהגרסה הראשונה שתיווצר</span>';
+    $("#clList").innerHTML=""; $("#clPending").innerHTML=""; return;
+  }
+  const plan=v.review_plan||{spots:[],covered_secs:0};
+  const focus=v.review_plan_focus||{spots:[],covered_secs:0};
+  const savings=(v.duration&&plan.covered_secs)
+    ? ` — <b>~${plan.covered_secs}ש</b> במקום ${Math.round(v.duration)}ש של סרטון מלא` : "";
+  /* v9.18 — שורת קלאוד: כמה מהתיקונים כבר אומתו בראיות, וכמה באמת נשאר להראל */
+  const cv=v.counts.claude_verified||0, cf=v.counts.claude_flagged||0;
+  const clLine=(cv||cf)
+    ? `<br>🤖 קלאוד אימת בראיות <b>${cv}/${v.counts.notes}</b> תיקונים`
+      +(cf?` · <span class="badge err">סימן ${cf} כלא-תוקנו (חזרו לתור)</span>`:"")
+      +(focus.spots.length
+        ?` · נשאר לך לבדוק <b>~${focus.covered_secs}ש</b> בלבד`
+        :` · <b>אין מה לבדוק ידנית — הכל אומת</b> (דגימה חופשית)`)
+    : "";
+  $("#clSummary").innerHTML=
+    `<b>גרסה ${v.version}</b> ${v.prev_version?`מול גרסה ${v.prev_version}`:"(הגרסה הראשונה)"} · `
+    +`${v.counts.notes} הערות שתוקנו · ${v.counts.total} שינויים בסך הכל`
+    +`<br>✅ נבדקו ${v.counts.checked} · ✖ סומנו כלא תוקנו ${v.counts.not_fixed} · ⬜ נותרו ${clOpen(v)}`
+    +clLine
+    +`<br><span class="mut">${plan.spots.length} נקודות לבדיקה${savings}</span>`
+    +(v.timeline_known?"":`<br><span class="badge warn">⚠️ אין snapshot של הציר לגרסה הזו — טיימקודים לא מופו</span>`);
+  $("#clRunBtn").disabled=!plan.spots.length;
+  const fb=$("#clRunFocusBtn");
+  if(fb){
+    const useFocus=focus.spots.length&&focus.spots.length<plan.spots.length;
+    fb.style.display=useFocus?"":"none";
+    if(useFocus)fb.textContent=`🤖 בדוק רק מה שלא אומת (${focus.spots.length} · ~${focus.covered_secs}ש)`;
+  }
+  const fv=CL.fix_verify||{};
+  const rb=$("#clReelBtn");
+  if(rb){
+    const hasReel=fv.reel&&fv.artifact_id===v.artifact_id;
+    rb.style.display=hasReel?"":"none";
+    if(hasReel)rb.href=`/fixverify-media/${encodeURIComponent(name)}/${fv.artifact_id}/${fv.reel}`;
+  }
+
+  $("#clList").innerHTML=(v.items||[]).map(it=>{
+    const [st,cls]=CLST[(it.check||{}).state]||CLST.pending;
+    const tc=it.t!=null
+      ? `<span class="tclick" data-t="${it.t}" style="color:var(--blue);cursor:pointer;font-weight:700">${fmt(it.t)}</span>`
+      : (it.t_status==="unknown"
+         ? `<span class="mut" style="font-size:12px">בלי טיימקוד</span>` : "");
+    const cl=it.claude||{state:"pending"};
+    const fvIt=((CL.fix_verify||{}).items||{})[it.item_id]||null;
+    const fvArt=(CL.fix_verify||{}).artifact_id===v.artifact_id;
+    const flags=[
+      it.t_status==="cut_out"?'<span class="badge warn" title="הנקודה שעליה נכתבה ההערה נחתכה בגרסה הזו — הטיימקוד הוא הגבול הקרוב">✂ נחתך</span>':"",
+      it.confidence==="משוער"?'<span class="badge warn" title="השיוך לגרסה הוסק בדיעבד משני אותות שלא הסכימו">שיוך משוער</span>':"",
+      it.origin_version?`<span class="badge blue">נכתב על גרסה ${it.origin_version}</span>`:"",
+      it.priority==="blocking"?'<span class="badge err">חוסם</span>':"",
+      /* v9.18 — פסיקת קלאוד: אומת בראיות / לא נכנס / דורש עין */
+      cl.state==="verified"?`<span class="badge g" title="${esc(cl.evidence||"אומת בקריאת גיליון-המגע")}">🤖 אומת בקלאוד</span>`:"",
+      cl.state==="not_fixed"?`<span class="badge err" title="${esc(cl.note||cl.evidence||"")}">🤖 קלאוד: לא תוקן — חזר לתור</span>`:"",
+      cl.state==="needs_eye"?'<span class="badge warn" title="אין דרך לאמת במכונה — נשאר לעין שלך">🤖 דורש עין</span>':"",
+      (fvArt&&fvIt&&fvIt.sheet)?`<a class="badge blue" target="_blank" title="${esc(fvIt.detail||"")}" href="/fixverify-media/${encodeURIComponent(name)}/${(CL.fix_verify||{}).artifact_id}/${fvIt.sheet}">🖼 ראיות</a>`:"",
+    ].filter(Boolean).join(" ");
+    return `<div class="comment" data-item="${it.item_id}">
+      <div class="chead">${it.icon||""} ${tc} <span class="badge ${cls}">${st}</span> ${flags}
+        <span class="mut" style="font-size:11.5px;margin-inline-start:auto">${it.resolved_at||""}</span></div>
+      <div>${esc(it.title||"")}</div>
+      ${it.resolution?`<div class="mut">↳ ${esc(it.resolution)}</div>`:""}
+      ${(it.check&&it.check.note)?`<div class="mut">📝 ${esc(it.check.note)}</div>`:""}
+      <div class="flex" style="margin-top:4px">
+        ${it.t!=null?`<button class="btn small" data-play="${it.item_id}">▶ בדוק את הנקודה</button>`:""}
+        <button class="btn small ok" data-ok="${it.item_id}">✅ תוקן</button>
+        <button class="btn small" data-bad="${it.item_id}">✖ עדיין לא</button>
+      </div>
+      <div class="clnote" style="display:none;margin-top:6px">
+        <textarea placeholder="מה עדיין לא בסדר? (נשלח לקלאוד עם ההערה)" style="min-height:52px"></textarea>
+        <div class="flex" style="margin-top:4px">
+          <button class="btn small primary" data-send="${it.item_id}">📤 החזר לקלאוד</button>
+          <button class="btn small" data-cancel="${it.item_id}">ביטול</button>
+        </div>
+      </div>
+    </div>`;
+  }).join("")||'<div class="mut" style="padding:8px">אין שינויים רשומים בגרסה הזו</div>';
+
+  $("#clList").querySelectorAll(".tclick").forEach(el=>el.onclick=()=>
+    clSeekPlay(parseFloat(el.dataset.t)-2.5, v.artifact_id));
+  $("#clList").querySelectorAll("[data-play]").forEach(b=>b.onclick=()=>clPlayItem(b.dataset.play));
+  $("#clList").querySelectorAll("[data-ok]").forEach(b=>b.onclick=()=>clCheck(b.dataset.ok,"ok"));
+  $("#clList").querySelectorAll("[data-bad]").forEach(b=>b.onclick=()=>{
+    const box=b.closest(".comment").querySelector(".clnote");
+    box.style.display=""; box.querySelector("textarea").focus();});
+  $("#clList").querySelectorAll("[data-cancel]").forEach(b=>b.onclick=()=>{
+    b.closest(".clnote").style.display="none";});
+  $("#clList").querySelectorAll("[data-send]").forEach(b=>b.onclick=()=>{
+    const box=b.closest(".clnote");
+    clCheck(b.dataset.send,"not_fixed",box.querySelector("textarea").value.trim());});
+
+  const pend=CL.pending_render||[], un=CL.unassigned||[];
+  $("#clPending").innerHTML=
+    (pend.length?`<div class="panel" style="border-color:#e0a800"><b>🕗 ${pend.length} תיקונים שטרם נכנסו לשום גרסה</b>
+       <div class="mut" style="font-size:12px">נסגרו אחרי הגרסה האחרונה — צריך גימור מחדש כדי לראות אותם</div>`
+      +pend.map(p=>`<div class="qarow" style="display:flex;justify-content:space-between;gap:10px"><span>${esc((p.text||"").slice(0,90))}</span><span class="mut" style="font-size:11.5px;white-space:nowrap">${p.resolved_at||""}</span></div>`).join("")+"</div>":"")
+    +(un.length?`<details class="panel"><summary>❔ ${un.length} תיקונים שלא ניתן היה לשייך לגרסה (גרסאות שנוצרו לפני v9.15)</summary>`
+      +un.map(p=>`<div class="qarow" style="display:flex;justify-content:space-between;gap:10px"><span>${esc((p.text||"").slice(0,90))}</span><span class="mut" style="font-size:11.5px;white-space:nowrap">${p.resolved_at||""}</span></div>`).join("")+"</details>":"");
+}
+$("#clVerPick").onchange=e=>{clSel=e.target.value;clStopRun();renderChangelog();};
+$("#clRefreshBtn").onclick=()=>loadChangelog();
+
+/* ניגון נקודתי — תמיד על **הגרסה שהפריט שייך אליה**, לא על מה שבמקרה בנגן */
+function clSeekPlay(t,aid){
+  const tt=Math.max(0,t||0);
+  if(curSrc!=="final"||curArt!==aid){
+    setSource("final",tt,aid);
+    vid.addEventListener("loadeddata",()=>vid.play().catch(()=>{}),{once:true});
+  }else{ vid.currentTime=tt; vid.play().catch(()=>{}); }
+}
+function clPlayItem(itemId){
+  const v=clVer(); if(!v)return;
+  const it=(v.items||[]).find(x=>x.item_id===itemId); if(!it||it.t==null)return;
+  clStopRun();
+  const start=Math.max(0,it.t-2.5), end=(it.t_end??it.t)+2.5;
+  clRun={spots:[{start,end,item_ids:[itemId]}],i:0,aid:v.artifact_id,single:true};
+  clShowNow(); clSeekPlay(start,v.artifact_id);
+  vid.addEventListener("timeupdate",clTick);
+  $("#clStopBtn").style.display="";
+}
+function clTick(){
+  if(!clRun)return;
+  /* הראל החליף מקור/גרסה באמצע הסבב — הסבב מפסיק במקום להמשיך "לתקן" את
+     הזמן על וידאו אחר (זו בדיוק הקפיצה המסתורית שהייתה נראית כבאג בנגן). */
+  if(curSrc!=="final"||curArt!==clRun.aid)
+    return clStopRun("⏹ הסבב נעצר — הוחלפה הגרסה בנגן");
+  const sp=clRun.spots[clRun.i];
+  if(!sp)return clStopRun();
+  if(vid.currentTime>=sp.end-0.03){
+    clRun.i++;
+    const nx=clRun.spots[clRun.i];
+    if(!nx){clStopRun(clRun.single?null:"✔ סבב הבדיקה הסתיים — סמן מה תקין ומה לא");return;}
+    vid.currentTime=nx.start; clShowNow();
+  }
+}
+function clShowNow(){
+  const v=clVer(); if(!v||!clRun)return;
+  const sp=clRun.spots[clRun.i]||{};
+  const its=(v.items||[]).filter(x=>(sp.item_ids||[]).includes(x.item_id));
+  $("#clNow").style.display="";
+  $("#clNow").innerHTML=`🔍 <b>בודק ${clRun.i+1}/${clRun.spots.length}</b> · ${fmt(sp.start||0)}–${fmt(sp.end||0)}<br>`
+    +its.map(x=>`${x.icon||""} ${esc((x.title||"").slice(0,120))}`).join("<br>");
+  $("#clList").querySelectorAll(".comment").forEach(el=>
+    el.style.outline=(sp.item_ids||[]).includes(el.dataset.item)?"1px solid var(--blue)":"");
+}
+function clStopRun(msg){
+  if(clRun){vid.removeEventListener("timeupdate",clTick);vid.pause();}
+  clRun=null; $("#clNow").style.display="none"; $("#clStopBtn").style.display="none";
+  $("#clList").querySelectorAll(".comment").forEach(el=>el.style.outline="");
+  if(msg)toast(msg);
+}
+$("#clStopBtn").onclick=()=>clStopRun("⏹ הסבב נעצר");
+function clStartRun(plan,label){
+  const v=clVer(); if(!v)return;
+  if(!plan||!plan.spots.length){toast("אין נקודות ניתנות לניגון בגרסה הזו");return;}
+  clStopRun();
+  clRun={spots:plan.spots,i:0,aid:v.artifact_id};
+  clShowNow(); clSeekPlay(plan.spots[0].start,v.artifact_id);
+  vid.addEventListener("timeupdate",clTick);
+  $("#clStopBtn").style.display="";
+  toast(`${label} ${plan.spots.length} נקודות · ~${plan.covered_secs}ש במקום ${Math.round(v.duration||0)}ש`);
+}
+$("#clRunBtn").onclick=()=>clStartRun((clVer()||{}).review_plan,"▶");
+/* v9.18 — ברירת המחדל של הראל: רק מה שקלאוד לא אימת */
+$("#clRunFocusBtn").onclick=()=>clStartRun((clVer()||{}).review_plan_focus,"🤖");
+
+/* סימון = פעולה אחת על שני מקומות: מצב הבדיקה **וסטטוס ההערה**.
+   ✖ מחזיר את ההערה לתור של קלאוד עם הנימוק — כדי שלא ייווצר מצב שהראל
+   סימן "לא תוקן" והתור עדיין חושב שהכל נסגר. */
+async function clCheck(itemId,state,note){
+  const v=clVer(); if(!v)return;
+  try{
+    await post(`/api/changelog/${encodeURIComponent(name)}/${v.artifact_id}/check`,
+               {item_id:itemId,state,note:note||null});
+    toast(state==="ok"?"✅ סומן כתקין":"✖ הוחזר לקלאוד לתיקון");
+    await loadChangelog();
+    if(itemId.startsWith("cmt_")){P=await api("/api/project/"+encodeURIComponent(name));
+      renderComments();renderFinalComments();}
+  }catch(e){toast("שגיאה: "+e.message);}
+}
+
+/* ---------- גרסאות עריכה (Revisions) ---------- */
+let cmpSel=[];
+function renderRevisions(){
+  const R=(P.revisions&&P.revisions.revisions)||[];
+  const head=P.revisions&&P.revisions.head;
+  $("#revList").innerHTML=R.slice().reverse().map(r=>`
+    <div class="revrow">
+      <div><b>${r.revision_id===head?"⭐ ":""}${esc(r.summary||"—")}</b>
+        ${r.approved?'<span class="badge g">מאושר</span>':""}
+        <br><span class="mut" style="font-size:12px">${r.ts} · ${r.actor} · ${r.kept_dur??"?"}ש</span></div>
+      <div class="flex">
+        <button class="btn small" data-cmp="${r.revision_id}">השווה</button>
+        ${r.revision_id!==head?`<button class="btn small" data-res="${r.revision_id}">שחזר</button>`:""}
+      </div>
+    </div>`).join("")||'<div class="mut">אין גרסאות עדיין — כל שמירה תיצור אחת</div>';
+  $("#revList").querySelectorAll("[data-res]").forEach(b=>b.onclick=async()=>{
+    await post("/api/restore/"+encodeURIComponent(name),{revision_id:b.dataset.res});
+    toast("שוחזר — נוצרה גרסה חדשה");await reloadProject();});
+  $("#revList").querySelectorAll("[data-cmp]").forEach(b=>b.onclick=async()=>{
+    cmpSel.push(b.dataset.cmp);
+    if(cmpSel.length<2){toast("בחר גרסה שנייה להשוואה");return;}
+    const [a,bb]=cmpSel.slice(-2);cmpSel=[];
+    const r=await api(`/api/compare/${encodeURIComponent(name)}?a=${a}&b=${bb}`);
+    if(!r.ok){toast("שגיאת השוואה");return;}
+    const s=r.summary;
+    $("#revCompare").style.display="";
+    $("#revCompare").innerHTML=`<b>השוואה</b><br>
+      משך: ${s.kept_dur_from}ש → ${s.kept_dur_to}ש (${s.kept_dur_delta>0?"+":""}${s.kept_dur_delta}ש)<br>
+      חיתוכים: +${s.cuts_added} נוספו · ‑${s.cuts_removed} הוסרו · ${s.cuts_changed} שונו<br>
+      מילות תמליל שהשתנו: ${s.transcript_words_changed}`;
+  });
+}
+$("#undoBtn").onclick=async()=>{const r=await post("/api/undo/"+encodeURIComponent(name));
+  if(r.ok){toast("↩ בוטל: חזרה ל"+(r.summary||"גרסה קודמת"));await reloadProject();}else toast(r.error);};
+$("#redoBtn").onclick=async()=>{const r=await post("/api/redo/"+encodeURIComponent(name));
+  if(r.ok){toast("↪ הוחזר");await reloadProject();}else toast(r.error);};
+
+/* ---------- QA ---------- */
+function jumpBtn(t){return t!=null?`<span class="tclick" data-t="${t}" style="color:var(--blue);cursor:pointer;font-weight:700">${fmt(t)}</span>`:"";}
+/* v9.9 — "שער שאומר רק 'לא' הוא שער שלא סיים את העבודה" (הראל, 31.7).
+   כל שער שנכשל נושא ב-`why` את מה שהוא מגן עליו, מה מחיר החסימה, ומה
+   קורה במקום. הנימוק מגיע מ-tools/gate_registry.py ונכתב לתוך הדוח עצמו,
+   ולכן האפליקציה רק מציגה — היא לא מחזיקה עותק שני של האמת. */
+function whyBox(w){
+  if(!w) return "";
+  if(w.registry==="unknown")
+    return `<div class="whybox mut">⚠️ השער הזה אינו ברשומה (gate_registry) — אין לו נימוק מתועד.</div>`;
+  const kind={blocking:"🔒 חוסם",advisory:"⚠️ מדווח",reporting:"📊 מדידה"}[w.enforcement]||"";
+  const src=w.threshold_source==="unmeasured"?' <span style="color:var(--warn)">‹סף לא-מדוד›</span>':"";
+  return `<div class="whybox">
+    <div><b>מגן על:</b> ${esc(w.protects||"")}</div>
+    <div><b>מחיר החסימה:</b> ${esc(w.cost_of_blocking||"")}</div>
+    <div><b>במקום חסימה:</b> ${esc(w.fallback||"")}</div>
+    <div class="mut" style="margin-top:3px">${kind}${w.threshold?" · סף "+esc(w.threshold):""}${src}</div>
+  </div>`;
+}
+function gateRow(icon,title,detail,why,open){
+  const id="w"+(gateRow._n=(gateRow._n||0)+1);
+  const has=!!why;
+  return `<div class="qarow">${icon} <b>${esc(title)}</b> <span class="mut">${esc(String(detail??""))}</span>`
+    + (has?` <span class="whytog" data-w="${id}">${open?"למה? ▾":"למה? ▸"}</span>`:"")
+    + (has?`<div id="${id}" style="display:${open?"block":"none"}">${whyBox(why)}</div>`:"")
+    + `</div>`;
+}
+function renderQA(){
+  const q=P.qa_report, gf=P.gate_fail, cq=P.cut_qa, cn=P.canon;
+  let html="";
+  if(q){
+    html+=`<div style="font-size:15px;font-weight:800;margin-bottom:6px">${q.pass?"✅ QA PASS":"❌ QA FAIL"}</div>`;
+    (q.gates||[]).forEach(g=>{
+      const bad=g.pass===false;
+      const st=bad?"❌":(g.warn?"⚠️":"✅");
+      // נפתח מעצמו רק כשהשער נכשל — אחרת המסך מוצף בנימוקים של שערים שעברו.
+      html+=gateRow(st,g.gate||g.name||"",g.detail??g.info??"",g.why,bad);
+    });
+  }
+  if(gf){
+    const spans=[...(gf.edge_silence_spans||[]),...(gf.dead_air_spans||[]),...(gf.audio_silence_spans||[])];
+    if(spans.length){
+      html+=`<div style="margin-top:10px"><b>⛔ פערי שקט חוסמים (gate)</b></div>`;
+      spans.forEach(s=>{html+=`<div class="qarow">🔇 ${jumpBtn(s.from)} — ${s.gap_sec}ש ${esc(s.where||s.after_word||"")}
+        <span class="mut">· פעולה: הרחב/הוסף חיתוך שקט בציר, או פאוזה מכוונת → הרפה סף</span></div>`;});
+    }
+  }
+  if(cq&&cq.boundaries){
+    const bad=cq.boundaries.filter(b=>b.flags&&b.flags.length);
+    html+=`<div style="margin-top:10px"><b>🎬 QA גבולות חיתוך</b> <span class="mut">${bad.length} חשודים מתוך ${cq.boundaries.length}</span></div>`;
+    bad.forEach(b=>{html+=`<div class="qarow">⚠️ ${jumpBtn(b.time)} — ${b.flags.join(", ")}</div>`;});
+  }
+  if(cn){
+    html+=`<div style="margin-top:10px"><b>📏 Canon Linter — ${cn.result||""}</b></div>`;
+    (cn.checks||[]).filter(c=>c.level!=="PASS").forEach(c=>{
+      const ic=c.level==="HARD_FAIL"?"❌":c.level==="WARNING"?"⚠️":"ℹ️";
+      html+=gateRow(ic,c.rule,c.detail||"",c.why,c.level==="HARD_FAIL");});
+  }
+  /* v9.9 — דקדוק חזותי של המצע. `coverage_pct` שואל "יש בירול?",
+     `broll_seam_qa` שואל "התפר חושף את הדובר?" — כאן: "הרצף נקרא טוב?".
+     מדווח ולא חוסם, כי הליקוי בדרך כלל אינו של הסרטון אלא של הבריכה. */
+  const sq=P.broll_sequence, sd=P.shot_debt;
+  if(sq){
+    const iss=sq.issues||[];
+    html+=`<div style="margin-top:12px"><b>🎞 רצף מצע</b> <span class="mut">${sq.n_bed||0} קליפים · ${iss.length} הערות</span></div>`;
+    if(!iss.length) html+=`<div class="qarow">✅ הרצף נקרא טוב</div>`;
+    iss.forEach(i=>{html+=gateRow("⚠️",i.check,i.detail||"",i.why,false);});
+    const seq=(sq.sequence||[]).map(s=>s.shot||"?").join(" › ");
+    if(seq) html+=`<div class="qarow mut" style="font-size:12px">גדלי שוט לפי הסדר: ${esc(seq)}</div>`;
+  }
+  if(sd&&(sd.board_items||[]).length){
+    html+=`<div style="margin-top:12px"><b>📸 חוב צילום</b> <span class="mut">מה חסר כדי שזה ייראה אחרת — לא מה פסול בסרטון</span></div>`;
+    (sd.board_items||[]).forEach(it=>{
+      const sev=it.severity==="high"?"🔴":"🟠";
+      html+=`<div class="qarow">${sev} <b>${esc(it.name)}</b>
+        <div class="whybox" style="white-space:pre-wrap">${esc(it.what||"")}</div></div>`;});
+    html+=`<div class="qarow mut" style="font-size:12px">הפריטים האלה נכנסים לבורד הסושיאל כפריטי צילום —
+      <a href="https://crossfitrel.monday.com/boards/18395578529" target="_blank" style="color:var(--blue)">קבוצת "רעיונות"</a></div>`;
+  }
+  $("#qaBody").innerHTML=html||'<div class="mut">אין דוח QA עדיין — נוצר בגימור.</div>';
+  $("#qaBody").querySelectorAll(".tclick").forEach(el=>el.onclick=()=>{$("#vid").currentTime=parseFloat(el.dataset.t);});
+  $("#qaBody").querySelectorAll(".whytog").forEach(el=>el.onclick=()=>{
+    const b=document.getElementById(el.dataset.w); if(!b)return;
+    const open=b.style.display==="none";
+    b.style.display=open?"block":"none";
+    el.textContent=open?"למה? ▾":"למה? ▸";
+  });
+}
+
+/* ---------- ריצות ---------- */
+function renderRuns(){
+  const r=P.last_run;
+  let html="";
+  if(P.running)html+=`<div class="qarow">⏳ <b>ריצה פעילה עכשיו</b> <button class="btn small" id="cancelRun">עצור</button></div>`;
+  if(r)html+=`<div class="qarow"><b>${r.run_id}</b> · ${r.status} ${r.stage?("· "+r.stage):""}
+    <br><span class="mut">${r.started_at||""} → ${r.finished_at||"—"} · revision ${r.revision_id||"?"} ${r.resume?("· "+esc(r.resume)):""}</span>
+    ${r.detail?`<br><span class="mut">${esc(r.detail)}</span>`:""}</div>`;
+  $("#runsBody").innerHTML=html||'<div class="mut">אין ריצות גימור עדיין</div>';
+  const cb=$("#cancelRun");if(cb)cb.onclick=async()=>{await post("/api/cancel/"+encodeURIComponent(name));toast("הריצה בוטלה");await reloadProject();};
+}
+
+/* ---------- סבבים legacy ---------- */
+function renderRounds(){
+  const hist=$("#roundHistory");
+  const rounds=P.rounds||[];
+  hist.innerHTML=rounds.slice().reverse().map((r,ri)=>{
+    const i=rounds.length-1-ri;
+    const lines=[];
+    if(r.note) lines.push(`📝 <b>העדכון שלך:</b> ${esc(r.note)}${r.note_at?` <span class="mut">(${r.note_at})</span>`:""}`);
+    if(r.corrected_at) lines.push(`✅ <b>תוקן:</b> ${r.summary?esc(r.summary):"—"} <span class="mut">(${r.corrected_at})</span>`);
+    else lines.push(`⏳ <span class="mut">ממתין לתיקון…</span>`);
+    return `<div style="padding:7px 0;border-bottom:1px solid var(--line)"><b>סבב ${i+1}</b><br>${lines.join("<br>")}</div>`;
+  }).join("")||'<div class="mut">אין</div>';
+}
+
+/* ---------- משפטים ---------- */
+function buildSents(){
+  sents=[];let cur=[];
+  words.forEach((w,i)=>{cur.push({...w,i});
+    const nxt=words[i+1], gap=nxt? nxt.start-w.end : 99;
+    if(gap>=0.55){sents.push(cur);cur=[];}});
+  if(cur.length)sents.push(cur);
+}
+function buildIssues(){
+  issuePoints=[];
+  /* on_final נכתבו בציר הגימור הסופי (FINAL.mp4) — לא שייכות לציר ה-INPUT כאן */
+  (P.comments||[]).forEach(c=>{if(!c.on_final&&c.time_start!=null&&c.status!=="resolved"&&c.status!=="rejected")issuePoints.push(c.time_start);});
+  const gf=P.gate_fail;
+  if(gf)[...(gf.edge_silence_spans||[]),...(gf.dead_air_spans||[]),...(gf.audio_silence_spans||[])].forEach(s=>{if(s.from!=null)issuePoints.push(s.from);});
+  issuePoints.sort((a,b)=>a-b);
+}
+
+/* ---------- רנדור ---------- */
+function activeCuts(){return cuts.filter(c=>c.active).sort((a,b)=>a.start-b.start);}
+function keptDur(){let cut=0;activeCuts().forEach(c=>cut+=c.end-c.start);return total-cut;}
+function inCut(t){return activeCuts().find(c=>t>=c.start&&t<c.end-0.03);}
+
+function renderAll(){drawTimeline();renderTranscript();renderCutPanel();renderHookPanel();renderDur();}
+function renderDur(){
+  const kept=keptDur(), adj=kept/speed;
+  let t=`נשאר: ${kept.toFixed(1)}ש`;
+  if(Math.abs(speed-1)>0.001)t+=` · בקצב ${speed}x: ${adj.toFixed(1)}ש בפועל`;
+  t+=` / ${total.toFixed(1)}ש`;
+  $("#dur").textContent=t;
+  $("#speedStatus").innerHTML = lenVerdict(adj);
+}
+
+/* ---------- קצב נגינה — משפיע מיידית על הנגן, נשמר ומועבר לגימור ---------- */
+function setSpeed(v,save){
+  v=Math.max(0.5,Math.min(2,parseFloat(v)||1));
+  speed=Math.round(v*1000)/1000;
+  /* v9.22 (L59, הראל 11.9.26 "המוזיקה בקצב גבוה"): הקצב חל רק על INPUT. FINAL/PREVIEW
+     כבר מכילים את ההאצה בקובץ — בלי התנאי הזה reloadProject ניגן את FINAL שוב ב-speed
+     (1.175×1.175) והמוזיקה נשמעה מואצת למרות שבקובץ היא בקצב המקורי. */
+  const v0=$("#vid"); if(v0){ const r=(curSrc==="input")?speed:1; v0.defaultPlaybackRate=r; v0.playbackRate=r; }
+  document.querySelectorAll("#speedBar [data-spd]").forEach(b=>
+    b.classList.toggle("toggled",Math.abs(parseFloat(b.dataset.spd)-speed)<0.001));
+  $("#speedCustom").value = SPEED_PRESETS.some(s=>Math.abs(s-speed)<0.001) ? "" : speed;
+  renderDur();
+  if(save!==false){logAct({type:"set_speed",speed});scheduleSave();}
+}
+document.querySelectorAll("#speedBar [data-spd]").forEach(b=>b.onclick=()=>setSpeed(b.dataset.spd));
+$("#speedCustomBtn").onclick=()=>{
+  const v=parseFloat($("#speedCustom").value);
+  if(!v){toast("הזן קצב תקין (0.5–2)");return;}
+  setSpeed(v);
+};
+
+/* v9.17: צבעי הקנבס נקראים מהטוקנים (canvas לא מבין var()) — מתעדכנים בהחלפת ערכת נושא */
+let TL=null;
+function tlPal(){
+  const cs=getComputedStyle(document.documentElement), v=k=>(cs.getPropertyValue(k)||"").trim();
+  TL={keep:"#3aa763",cutA:"#a52427",cutS:"#c98a2b",harel:"#7a4fd0",hook:"#2c86d1",
+      issue:"#e0a800",play:v("--txt")||"#2d1b1b",tick:v("--txt3")||"var(--txt3)"};
+}
+function drawTimeline(){
+  if(!TL)tlPal();
+  const c=$("#timeline"),W=c.clientWidth||900;c.width=W*2;c.height=200;
+  const x=t=>t/total*c.width, g=c.getContext("2d");
+  g.clearRect(0,0,c.width,c.height);
+  g.fillStyle=TL.keep;g.fillRect(0,52,c.width,70);
+  cuts.forEach(ct=>{
+    g.fillStyle=ct.source==="harel"?TL.harel:(ct.active?TL.cutA:TL.cutS);
+    const h=ct.active?70:36;
+    g.fillRect(x(ct.start),52,Math.max(3,x(ct.end)-x(ct.start)),h);
+    if(ct.id===selCut){g.strokeStyle=TL.play;g.lineWidth=3;
+      g.strokeRect(x(ct.start),50,Math.max(3,x(ct.end)-x(ct.start)),74);}
+  });
+  if(hookMove){g.fillStyle=TL.hook;g.fillRect(x(hookMove.start),28,Math.max(3,x(hookMove.end)-x(hookMove.start)),18);}
+  // lane הערות
+  issuePoints.forEach(t=>{g.fillStyle=TL.issue;g.beginPath();
+    g.moveTo(x(t),18);g.lineTo(x(t)-7,4);g.lineTo(x(t)+7,4);g.fill();});
+  if(markIn!=null){g.fillStyle=TL.issue;g.fillRect(x(markIn)-2,28,4,100);}
+  if(curSrc==="input"){ /* playhead רק על ציר ה-INPUT — ב-FINAL הצירים שונים */
+    const t=$("#vid").currentTime||0;
+    g.fillStyle=TL.play;g.fillRect(x(t)-2,22,4,152);
+  }
+  g.fillStyle=TL.tick;g.font="22px Rubik";
+  for(let s=0;s<total;s+=10)g.fillText(fmt(s),x(s)+4,190);
+}
+
+function renderTranscript(){
+  const el=$("#transcript");
+  el.innerHTML=sents.map((sw,si)=>`<div class="sent ${si===selSent?'sel':''}" data-si="${si}">`+
+    sw.map(w=>`<span class="w ${inCut((w.start+w.end)/2)?'cut':''}" data-t="${w.start}" data-i="${w.i}">${w.word}</span>`).join(" ")
+    +`</div>`).join("");
+  el.querySelectorAll(".w").forEach(s=>s.addEventListener("click",e=>{
+    e.stopPropagation();
+    const t=parseFloat(s.dataset.t)+0.01;
+    if(toInputAxis(t))return;
+    $("#vid").currentTime=t;}));
+  el.querySelectorAll(".sent").forEach(s=>s.addEventListener("click",()=>{
+    selSent=selSent===+s.dataset.si?-1:+s.dataset.si;renderTranscript();renderHookPanel();}));
+}
+
+function renderCutPanel(){
+  const p=$("#cutPanel"), ct=cuts.find(c=>c.id===selCut);
+  if(!ct){p.style.display="none";return;}
+  p.style.display="";
+  const enc=encodeURIComponent(name);
+  p.innerHTML=`<div class="flex" style="justify-content:space-between">
+    <div><b>${ct.active?"חיתוך פעיל":"הצעה (לא פעילה)"}</b>
+      <span class="mut">· ${fmt(ct.start)}–${fmt(ct.end)} (${(ct.end-ct.start).toFixed(2)}ש)</span><br>
+      <span class="mut">${ct.reason||""} · ${ct.source||"auto"}</span></div>
+    <button class="btn small ${ct.active?'':'ok'}" id="cutToggle">${ct.active?"בטל חיתוך ↩":"הפעל חיתוך ✂"}</button></div>
+    <div class="flex" style="margin-top:8px">
+      גבול התחלה: <button class="btn small" data-adj="s-">‑0.1</button><button class="btn small" data-adj="s+">+0.1</button>
+      גבול סוף: <button class="btn small" data-adj="e-">‑0.1</button><button class="btn small" data-adj="e+">+0.1</button>
+      <button class="btn small" id="cutPlay">▶ נגן סביב</button>
+      ${ct.source==="harel"?'<button class="btn small" id="cutDel">🗑 מחק</button>':''}
+    </div>
+    <div class="framepair" id="framePair">
+      <img src="/api/frame/${enc}?t=${Math.max(0,ct.start-0.08).toFixed(2)}" title="פריים לפני החיתוך">
+      <img src="/api/frame/${enc}?t=${(ct.end+0.08).toFixed(2)}" title="פריים אחרי החיתוך">
+    </div>
+    <div class="mut" style="font-size:12px;margin-top:3px">שני צדי החיתוך — ודא שאין קפיצת מסגור/תאורה</div>`;
+  $("#cutToggle").onclick=()=>{ct.active=!ct.active;
+    logAct({type:ct.active?"activate_cut":"restore_cut",cut:pick(ct)});renderAll();scheduleSave();};
+  p.querySelectorAll("[data-adj]").forEach(b=>b.onclick=()=>{
+    const d=b.dataset.adj, old={...ct};
+    if(d==="s-")ct.start=Math.max(0,ct.start-0.1); if(d==="s+")ct.start=Math.min(ct.end-0.06,ct.start+0.1);
+    if(d==="e-")ct.end=Math.max(ct.start+0.06,ct.end-0.1); if(d==="e+")ct.end=Math.min(total,ct.end+0.1);
+    logAct({type:"adjust_cut",from:pick(old),to:pick(ct)});renderAll();scheduleSave();});
+  $("#cutPlay").onclick=()=>{const v=$("#vid");v.currentTime=Math.max(0,ct.start-1.2);v.play();};
+  const del=$("#cutDel");if(del)del.onclick=()=>{cuts=cuts.filter(c=>c.id!==selCut);
+    logAct({type:"delete_cut",cut:pick(ct)});selCut=-1;renderAll();scheduleSave();};
+}
+
+function renderHookPanel(){
+  const p=$("#hookPanel");
+  let html="";
+  if(hookMove) html+=`<div class="flex" style="justify-content:space-between"><span>🎯 Hook הוזז לפתיחה: <b>${fmt(hookMove.start)}–${fmt(hookMove.end)}</b></span>
+    <button class="btn small" id="hookClear">בטל</button></div>`;
+  if(selSent>=0){const sw=sents[selSent];
+    html+=`<div class="flex" style="margin-top:6px"><span class="mut">משפט נבחר (${fmt(sw[0].start)})</span>
+      <button class="btn small primary" id="hookSet">🎯 קבע כפתיחה (Hook)</button>
+      <button class="btn small" id="sentCut">✂ חתוך משפט זה</button></div>`;}
+  p.style.display=html?"":"none";p.innerHTML=html;
+  const hc=$("#hookClear");if(hc)hc.onclick=()=>{logAct({type:"hook_clear",was:hookMove});hookMove=null;renderAll();scheduleSave();};
+  const hs=$("#hookSet");if(hs)hs.onclick=()=>{const sw=sents[selSent];
+    hookMove={start:+(sw[0].start-0.05).toFixed(2),end:+(sw[sw.length-1].end+0.05).toFixed(2)};
+    logAct({type:"hook_move",to:hookMove});toast("Hook יוזז לפתיחה — ייכנס לתוקף ב-PREVIEW/גימור");renderAll();scheduleSave();};
+  const sc=$("#sentCut");if(sc)sc.onclick=()=>{const sw=sents[selSent];
+    const ct={id:Date.now(),start:+(sw[0].start-0.05).toFixed(2),end:+(sw[sw.length-1].end+0.05).toFixed(2),
+      reason:"חיתוך ידני (משפט): "+sw.map(w=>w.word).join(" ").slice(0,50),confidence:"harel",source:"harel",active:true};
+    cuts.push(ct);logAct({type:"add_cut",cut:pick(ct)});selCut=ct.id;renderAll();scheduleSave();};
+}
+
+const pick=c=>({start:+c.start.toFixed(2),end:+c.end.toFixed(2),reason:c.reason,source:c.source,confidence:c.confidence});
+
+/* ---------- פעולות ושמירה ---------- */
+let actions=[];
+function logAct(a){actions.push(a);}
+function scheduleSave(){clearTimeout(saveTimer);saveTimer=setTimeout(doSave,500);}
+async function doSave(){
+  try{
+    /* v8.6 (P0-9): base_token = חתימת הציר כפי שנטען במסך הזה. אם מישהו אחר
+       (טאב שני / תיקון של קלאוד / sync) שינה את הציר בינתיים — השרת מחזיר 409
+       ואנחנו טוענים מחדש במקום לדרוס בשקט. */
+    const body={cuts:cuts.map(({id,...c})=>c),hook_move:hookMove,actions,speed,
+                base_token:(P&&P.edl_token)||null};
+    const r=await api("/api/save/"+encodeURIComponent(name),{method:"POST",
+      headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+    actions=[];
+    if(P)P.edl_token=r.edl_token||P.edl_token;
+    const spdTxt = Math.abs(speed-1)>0.001 ? ` · בקצב ${speed}x: ${r.kept_at_speed}ש` : "";
+    const snapTxt = r.snapped ? ` · 🧲 ${r.snapped} גבולות הוצמדו למילים` : "";
+    toast(`נשמר · ${r.kept}ש${spdTxt}${snapTxt}`);
+    if(r.snapped)await reloadProject(); /* להציג את הגבולות המדויקים אחרי ההצמדה */
+  }catch(e){
+    if(e.code==="STALE_EDL"){
+      toast("⚠️ הציר השתנה מאז שנטען — טוען מחדש כדי לא לדרוס");
+      await reloadProject();
+    }else if(e.code==="BUSY_FINISHING"){
+      toast("🔒 הפרויקט בגימור — אין לערוך את הציר עד שהריצה תסתיים");
+    }else{
+      toast("שגיאת שמירה: "+e.message);
+    }
+  }
+}
+
+/* ---------- timeline אינטראקציה ---------- */
+$("#timeline").addEventListener("click",ev=>{
+  const c=$("#timeline"),r=c.getBoundingClientRect();
+  const t=(ev.clientX-r.left)/r.width*total;
+  if(toInputAxis(t))return; /* הציר הוא ציר ה-INPUT — עריכה רק שם */
+  if(addMode){
+    if(addStart===null){addStart=t;toast("קליק שני = סוף החיתוך");return;}
+    const s=Math.min(addStart,t),e=Math.max(addStart,t);
+    if(e-s>=0.08){const ct={id:Date.now(),start:+s.toFixed(2),end:+e.toFixed(2),
+      reason:"חיתוך ידני מהציר",confidence:"harel",source:"harel",active:true};
+      cuts.push(ct);logAct({type:"add_cut",cut:pick(ct)});selCut=ct.id;scheduleSave();}
+    addMode=false;addStart=null;$("#addBtn").classList.remove("toggled");renderAll();return;
+  }
+  const hit=cuts.filter(ct=>t>=ct.start-total*0.004&&t<=ct.end+total*0.004)
+               .sort((a,b)=>(a.end-a.start)-(b.end-b.start))[0];
+  if(hit){selCut=hit.id;renderAll();}
+  else {$("#vid").currentTime=t;selCut=-1;renderAll();}
+});
+$("#addBtn").onclick=()=>{addMode=!addMode;addStart=null;
+  $("#addBtn").classList.toggle("toggled",addMode);
+  if(addMode)toast("קליק ראשון על הציר = תחילת חיתוך");};
+$("#skipBtn").onclick=()=>{skipMode=!skipMode;
+  $("#skipBtn").textContent=skipMode?"▶ ניגון מדלג: פעיל":"▶ ניגון מדלג: כבוי";};
+
+const vid=$("#vid");
+function snapPastCut(){
+  if(!(skipMode&&!usingPreview))return;
+  const c=inCut(vid.currentTime);
+  if(c)vid.currentTime=Math.min(c.end+0.02, Math.max(0, total-0.05));
+}
+vid.addEventListener("play",snapPastCut);
+vid.addEventListener("seeked",snapPastCut);
+vid.addEventListener("timeupdate",()=>{
+  if(skipMode&&!usingPreview&&!vid.paused){
+    const c=inCut(vid.currentTime);
+    if(c)vid.currentTime=Math.min(c.end+0.02, Math.max(0, total-0.05));
+  }
+  drawTimeline();
+  const t=vid.currentTime;
+  document.querySelectorAll(".w.play").forEach(w=>w.classList.remove("play"));
+  const el=[...document.querySelectorAll(".w")].find(w=>{
+    const s=parseFloat(w.dataset.t);return t>=s&&t<s+1.2;});
+  if(el)el.classList.add("play");
+});
+
+/* ---------- קיצורי מקלדת ---------- */
+document.addEventListener("keydown",e=>{
+  if($("#editor").style.display==="none")return;
+  const tag=(document.activeElement||{}).tagName;
+  if(tag==="TEXTAREA"||tag==="INPUT"||tag==="SELECT")return;
+  const k=e.key.toLowerCase();
+  if(k==="k"){e.preventDefault();vid.paused?vid.play():vid.pause();}
+  else if(k==="j"){e.preventDefault();vid.currentTime=Math.max(0,vid.currentTime-5);}
+  else if(k==="l"){e.preventDefault();vid.currentTime=Math.min(total,vid.currentTime+5);}
+  else if(k==="m"){e.preventDefault();gotoTab("comments");$("#cmAtTime").checked=true;$("#cmText").focus();
+    toast("הערה בזמן "+fmt(vid.currentTime));}
+  else if(k==="n"){e.preventDefault();$("#qNote").focus();}
+  else if(k==="i"){e.preventDefault();markIn=vid.currentTime;drawTimeline();toast("IN: "+fmt(markIn));}
+  else if(k==="o"){e.preventDefault();
+    if(markIn==null){toast("קודם I לסימון התחלה");return;}
+    const s=Math.min(markIn,vid.currentTime),en=Math.max(markIn,vid.currentTime);
+    if(en-s<0.08){toast("טווח קצר מדי");return;}
+    const ct={id:Date.now(),start:+s.toFixed(2),end:+en.toFixed(2),
+      reason:"חיתוך ידני (I/O)",confidence:"harel",source:"harel",active:true};
+    cuts.push(ct);logAct({type:"add_cut",cut:pick(ct)});selCut=ct.id;markIn=null;renderAll();scheduleSave();}
+  else if(k===","){e.preventDefault();const t=vid.currentTime;
+    const prev=[...issuePoints].reverse().find(p=>p<t-0.3);
+    if(prev!=null){vid.currentTime=prev;toast("בעיה קודמת "+fmt(prev));}}
+  else if(k==="."){e.preventDefault();const t=vid.currentTime;
+    const nxt=issuePoints.find(p=>p>t+0.3);
+    if(nxt!=null){vid.currentTime=nxt;toast("בעיה הבאה "+fmt(nxt));}}
+  else if((e.metaKey||e.ctrlKey)&&k==="z"){e.preventDefault();
+    e.shiftKey?$("#redoBtn").click():$("#undoBtn").click();}
+});
+
+/* ---------- PREVIEW אמיתי ---------- */
+$("#previewBtn").onclick=async()=>{
+  $("#previewBtn").disabled=true;$("#previewBtn").textContent="⏳ חותך…";
+  try{await doSave();
+    await api("/api/recut/"+encodeURIComponent(name),{method:"POST"});
+    P.has_preview=true;setSource("preview");toast("PREVIEW נבנה — זה הקאט האמיתי");
+  }catch(e){toast("שגיאה: "+e.message);}
+  $("#previewBtn").textContent="🔄 בנה PREVIEW אמיתי";
+  $("#previewBtn").disabled=false;
+};
+$("#watchFinalBtn").onclick=()=>setSource("final");
+
+/* ---------- v7.4: גימור מהיר (refinish) — תיקוני מוזיקה/בירולים/כתוביות בלי קלאוד ---------- */
+async function startRefinish(scope){
+  if(!P.has_tight){toast("גימור מהיר אפשרי רק אחרי ריצת גימור מלאה אחת");return;}
+  try{
+    const r=await post("/api/refinish/"+encodeURIComponent(name),{scope});
+    if(r.already_running)toast("⏳ ריצה כבר פעילה ("+r.run_id+") — לא הופעל שוב");
+    else toast("⚡ גימור מהיר רץ — העריכה לא משתנה, רק שכבות הגימור");
+    pollStatus();
+    setTimeout(()=>$("#statusCard").scrollIntoView({behavior:"smooth",block:"center"}),300);
+  }catch(e){toast("שגיאה: "+e.message);}
+}
+
+/* ---------- v7.4: מוזיקה — עוצמה + החלפת מנגינה ---------- */
+let MUS=null, musSel=null;
+const musClean=f=>f.replace(/-[0-9a-f]{8,}(?=\.mp3$)/,"").replace(/\.mp3$/,"").replace(/[-_]+/g," ").trim();
+const GENRE_HE={funk:"פאנק",edm:"EDM",phonk:"פונק כבד",trap:"טראפ",rock_sport:"רוק ספורט",
+  afrobeat:"אפרוביט",corporate:"קורפורייט",lofi_calm:"לו-פיי רגוע",piano_calm:"פסנתר רגוע",
+  pop:"פופ",hiphop:"היפ-הופ",electronic:"אלקטרוני",latin:"לטיני",drill:"דריל"};
+function musVolText(v){
+  v=+v;
+  if(v<=-50)return v+" · כמעט דוממת";
+  if(v<=-45)return v+" · שקטה מאוד";
+  if(v<=-41)return v+" · שקטה";
+  if(v<=-36)return v+" · מאוזנת"+(v===-38?" (ברירת מחדל)":"");
+  if(v<=-32)return v+" · נוכחת";
+  return v+" · חזקה (למכירה)";
+}
+function updateMusVolLabel(){$("#musVolLabel").textContent=musVolText($("#musVol").value);}
+$("#musVol").addEventListener("input",updateMusVolLabel);
+async function renderMusicTab(){
+  const prefs=(P.finish_prefs||{}).music||{};
+  $("#musVol").value=prefs.music_lufs!=null?prefs.music_lufs:-38;
+  $("#musDuck").checked=prefs.duck!==false;
+  musSel=prefs.track||null;
+  updateMusVolLabel();
+  if(!MUS){try{MUS=await api("/api/music");}catch(e){toast("שגיאה בטעינת ספריית המוזיקה");MUS=[];}}
+  renderMusList();
+}
+function musCurText(){
+  const prefs=(P.finish_prefs||{}).music||{};
+  if(musSel)return "נבחר ידנית: "+musClean(musSel);
+  return prefs.track_auto?("המנגינה הנוכחית נשמרת: "+musClean(prefs.track_auto)):"בחירה אוטומטית בגימור הבא";
+}
+function renderMusList(){
+  $("#musCur").textContent=musCurText();
+  const q=($("#musSearch").value||"").trim().toLowerCase();
+  const rows=(MUS||[]).filter(t=>{
+    if(!q)return true;
+    const hay=(t.file+" "+musClean(t.file)+" "+(t.genre||"")+" "+(GENRE_HE[t.genre]||"")+" "+(t.energy||"")).toLowerCase();
+    return hay.includes(q);
+  });
+  const curAuto=((P.finish_prefs||{}).music||{}).track_auto;
+  const autoRow=`<div class="revrow" style="cursor:pointer" data-pick="">
+    <div><b>${musSel===null?"⭐ ":""}🎵 להשאיר את המנגינה הנוכחית</b><br><span class="mut" style="font-size:12px">${curAuto?("שינוי ווליום לא מחליף מנגינה — נשארת "+esc(musClean(curAuto))):"אין עדיין גימור — תיבחר אוטומטית"}</span></div>
+    <div class="flex">
+      <button class="btn small" data-reroll="1" title="בקשה מפורשת למנגינה אחרת מהרוטציה">🎲 הגרל חדשה</button>
+      ${musSel===null?'<span class="badge g">נבחר</span>':'<button class="btn small" data-pick2="">בחר</button>'}</div>
+  </div>`;
+  $("#musList").innerHTML=autoRow+rows.map(t=>{
+    const sel=musSel===t.file;
+    const isCur=curAuto===t.file;
+    const g=t.genre?`<span class="badge">${GENRE_HE[t.genre]||t.genre}</span>`:"";
+    const e=t.energy==="mellow_special"?'<span class="badge blue">רגוע</span>':"";
+    const lu=t.last_used?`<span class="mut" style="font-size:11px">· נוגן ${t.last_used.slice(0,10)}</span>`:"";
+    const du=t.duration?`<span class="mut" style="font-size:11px">${Math.round(t.duration)}ש</span>`:"";
+    return `<div class="revrow">
+      <div><b>${sel?"⭐ ":""}${esc(musClean(t.file))}</b> ${isCur?'<span class="badge blue">🎵 נוכחי</span>':""} ${g}${e} ${du} ${lu}</div>
+      <div class="flex">
+        <button class="btn small" data-play="${esc(t.file)}">▶</button>
+        ${sel?'<span class="badge g">נבחר</span>':`<button class="btn small" data-pick2="${esc(t.file)}">בחר</button>`}
+      </div>
+    </div>`;
+  }).join("");
+  $("#musList").querySelectorAll("[data-play]").forEach(b=>b.onclick=()=>{
+    const pl=$("#musPlayer");pl.style.display="";pl.src="/music/"+encodeURIComponent(b.dataset.play);pl.play();
+  });
+  const pickHandler=v=>{musSel=v||null;renderMusList();};
+  $("#musList").querySelectorAll("[data-pick2]").forEach(b=>b.onclick=e=>{e.stopPropagation();pickHandler(b.dataset.pick2);});
+  const rr=$("#musList").querySelector("[data-reroll]");
+  if(rr)rr.onclick=async e=>{e.stopPropagation();
+    if(!confirm("להגריל מנגינה חדשה מהרוטציה בגימור הבא?"))return;
+    try{
+      await post("/api/finish-prefs/"+encodeURIComponent(name),{music:{track:null,track_auto:null}});
+      musSel=null;
+      P.finish_prefs=P.finish_prefs||{};P.finish_prefs.music=P.finish_prefs.music||{};
+      delete P.finish_prefs.music.track;delete P.finish_prefs.music.track_auto;
+      toast("🎲 בגימור הבא תוגרל מנגינה חדשה");renderMusList();
+    }catch(err){toast("שגיאה: "+err.message);}
+  };
+}
+$("#musSearch").addEventListener("input",renderMusList);
+async function saveMusicPrefs(){
+  const body={music:{track:musSel||null,music_lufs:+$("#musVol").value,duck:$("#musDuck").checked}};
+  await post("/api/finish-prefs/"+encodeURIComponent(name),body);
+  P.finish_prefs=P.finish_prefs||{};
+  P.finish_prefs.music=Object.assign({},P.finish_prefs.music||{},body.music);
+  if(!musSel)delete P.finish_prefs.music.track;
+  toast("🎵 העדפות המוזיקה נשמרו לסרטון הזה");
+}
+$("#musSave").onclick=()=>saveMusicPrefs().catch(e=>toast("שגיאה: "+e.message));
+$("#musApply").onclick=async()=>{
+  try{await saveMusicPrefs();await startRefinish("music");}catch(e){toast("שגיאה: "+e.message);}
+};
+
+/* ---------- v7.4: בירולים — שכבת וידאו ידנית ---------- */
+let BR=null, brItems=[], brSelClip=null;
+async function renderBrollTab(){
+  const prefs=(P.finish_prefs||{}).broll||{};
+  $("#brMode").value=prefs.mode||"auto";
+  brItems=(prefs.items||[]).map(x=>({...x}));
+  if(!BR){try{BR=await api("/api/broll");}catch(e){toast("שגיאה בטעינת ספריית הבירולים");BR=[];}}
+  $("#brAt").value=((curSrc==="final"&&vid.currentTime)?vid.currentTime:0).toFixed(1);
+  renderBrApplied();renderBrPlan();renderBrList();
+}
+/* v7.6: מה שנצרב בפועל ב-FINAL האחרון (items_applied מהמניפסט) + ייבוא לעריכה */
+function renderBrApplied(){
+  const applied=(((P.finish_prefs||{}).broll)||{}).items_applied;
+  const wrap=$("#brAppliedWrap");
+  if(!applied||!applied.length){wrap.style.display="none";return;}
+  wrap.style.display="";
+  $("#brApplied").innerHTML=applied.map(it=>
+    `<div class="mut">🎞 ${esc(it.file||it.id||"")} · <span class="tclick" data-t="${it.insert_at}" style="cursor:pointer">${(+it.insert_at).toFixed(1)}ש</span> → ${(+it.insert_end).toFixed(1)}ש</div>`).join("");
+  $("#brApplied").querySelectorAll(".tclick").forEach(el=>el.onclick=()=>setSource("final",parseFloat(el.dataset.t)));
+  $("#brImportApplied").onclick=()=>{
+    brItems=applied.map(x=>({...x}));
+    $("#brMode").value="manual";
+    renderBrPlan();
+    toast("✏️ התוכנית שנצרבה יובאה — ערוך, שמור והחל");
+  };
+}
+function renderBrPlan(){
+  $("#brPlan").innerHTML=brItems.map((it,i)=>`
+    <div class="revrow">
+      <div><b>${esc(it.file||it.id)}</b><br>
+        <span class="mut" style="font-size:12px">${(+it.insert_at).toFixed(1)}ש → ${(+it.insert_end).toFixed(1)}ש (${(it.insert_end-it.insert_at).toFixed(1)}ש)</span></div>
+      <div class="flex">
+        <button class="btn small" data-nud="${i}|-0.5">‑0.5ש</button>
+        <button class="btn small" data-nud="${i}|0.5">+0.5ש</button>
+        <button class="btn small" data-del="${i}">🗑</button>
+      </div>
+    </div>`).join("")||'<div class="mut" style="font-size:13px;padding:4px 0">אין קליפים בתוכנית — בחר קליפ מהספרייה למטה והוסף</div>';
+  $("#brPlan").querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{brItems.splice(+b.dataset.del,1);renderBrPlan();});
+  $("#brPlan").querySelectorAll("[data-nud]").forEach(b=>b.onclick=()=>{
+    const [i,d]=b.dataset.nud.split("|");const it=brItems[+i];const dd=+d;
+    it.insert_at=Math.max(0,+(it.insert_at+dd).toFixed(2));it.insert_end=+(it.insert_end+dd).toFixed(2);
+    renderBrPlan();});
+}
+function renderBrList(){
+  const q=($("#brSearch").value||"").trim();
+  const rows=(BR||[]).filter(it=>{
+    if(!q)return true;
+    const hay=[it.file,it.desc,it.category,(it.tags||[]).join(" "),(it.audience||[]).join(" ")].join(" ");
+    return hay.includes(q);
+  });
+  $("#brList").innerHTML=rows.map(it=>{
+    const sel=brSelClip&&brSelClip.id===it.id;
+    const tags=(it.tags||[]).slice(0,4).map(t=>`<span class="badge">${esc(t)}</span>`).join(" ");
+    const aud=(it.audience||[]).map(t=>`<span class="badge blue">${esc(t)}</span>`).join(" ");
+    return `<div class="revrow" style="${sel?'outline:2px solid var(--red2);border-radius:8px;':''}">
+      <div><b>${esc(it.file)}</b> <span class="mut" style="font-size:11.5px">${esc(it.category||"")} · ${(it.dur||0).toFixed(0)}ש</span><br>${tags} ${aud}</div>
+      <div class="flex">
+        <button class="btn small" data-prev="${it.id}">▶</button>
+        <button class="btn small ${sel?'ok':''}" data-sel="${it.id}">${sel?"✓ נבחר":"בחר"}</button>
+      </div>
+    </div>`;
+  }).join("")||'<div class="mut">אין קליפים תואמים</div>';
+  $("#brList").querySelectorAll("[data-prev]").forEach(b=>b.onclick=()=>{
+    const pv=$("#brPreview");pv.style.display="";pv.src="/broll-media/"+b.dataset.prev;pv.play();});
+  $("#brList").querySelectorAll("[data-sel]").forEach(b=>b.onclick=()=>{
+    brSelClip=(BR||[]).find(x=>x.id===b.dataset.sel)||null;
+    $("#brAdd").disabled=!brSelClip;renderBrList();});
+  $("#brAdd").disabled=!brSelClip;
+}
+$("#brSearch").addEventListener("input",renderBrList);
+$("#brUseNow").onclick=()=>{
+  const t=vid.currentTime||0;
+  $("#brAt").value=t.toFixed(1);
+  toast("זמן התחלה: "+t.toFixed(1)+"ש"+(curSrc==="final"?" (מה-FINAL — מדויק)":" (מנגן ה-"+curSrc+" — עדיף לעבור ל-FINAL)"));
+};
+$("#brAdd").onclick=()=>{
+  if(!brSelClip){toast("בחר קליפ קודם");return;}
+  const at=parseFloat($("#brAt").value)||0, len=Math.max(1,parseFloat($("#brLen").value)||3);
+  const item={id:brSelClip.id,file:brSelClip.file,path:brSelClip.path,
+    insert_at:+at.toFixed(2),insert_end:+(at+len).toFixed(2),
+    src_offset:+Math.max(0,((brSelClip.dur||len)-len)/2).toFixed(2)};
+  brItems.push(item);brItems.sort((a,b)=>a.insert_at-b.insert_at);
+  $("#brMode").value="manual";
+  if(at<3)toast("⚠️ שים לב: הקליפ יושב על הפתיח (Hook) — הקאנון ממליץ אחרי המשפט הראשון");
+  renderBrPlan();
+};
+async function saveBrollPrefs(){
+  const body={broll:{mode:$("#brMode").value,items:brItems}};
+  await post("/api/finish-prefs/"+encodeURIComponent(name),body);
+  P.finish_prefs=P.finish_prefs||{};
+  P.finish_prefs.broll={mode:$("#brMode").value,items:brItems.map(x=>({...x}))};
+  toast("🎞 העדפות הבירולים נשמרו לסרטון הזה");
+}
+$("#brSave").onclick=()=>saveBrollPrefs().catch(e=>toast("שגיאה: "+e.message));
+$("#brApply").onclick=async()=>{
+  if($("#brMode").value==="manual"&&!brItems.length){toast("מצב ידני בלי קליפים — הוסף קליפ או שנה מצב");return;}
+  try{await saveBrollPrefs();await startRefinish("broll");}catch(e){toast("שגיאה: "+e.message);}
+};
+
+/* ---------- תיקון טקסט ---------- */
+$("#editTxtBtn").onclick=()=>{$("#txtArea").value=P.transcript;$("#txtEdit").style.display="";$("#transcript").style.display="none";};
+$("#txtCancel").onclick=()=>{$("#txtEdit").style.display="none";$("#transcript").style.display="";};
+$("#txtSave").onclick=async()=>{
+  try{await post("/api/transcript/"+encodeURIComponent(name),{text:$("#txtArea").value});
+    P.transcript=$("#txtArea").value;
+    toast(P.has_tight?"הטקסט נשמר — עכשיו '⚡ צרוב כתוביות מחדש' כדי להחיל על ה-FINAL":"הטקסט נשמר — ישמש לכתוביות בגימור");
+    $("#txtEdit").style.display="none";$("#transcript").style.display="";
+  }catch(e){toast("שגיאה: "+e.message);}
+};
+/* v7.4: צריבת כתוביות מחדש = גימור מהיר (קולט edited.txt דרך reconcile) */
+$("#reburnBtn").onclick=()=>startRefinish("captions");
+$("#finalFixCaptions").onclick=()=>{gotoTab("edit");$("#editTxtBtn").click();
+  toast("תקן את הטקסט, שמור, ואז '⚡ צרוב כתוביות מחדש'");};
+
+/* ---------- אישור וגימור ---------- */
+$("#apType").addEventListener("change",()=>{renderDur();const a2=keptDur()/speed;$("#apSpeedInfo").textContent=(Math.abs(speed-1)>0.001?`⏩ קצב שנבחר: ${speed}x — `:"קצב רגיל (1x) — ")+lenVerdict(a2);});
+$("#approveBtn").onclick=()=>{
+  const adj=keptDur()/speed;
+  $("#apSpeedInfo").textContent = Math.abs(speed-1)>0.001
+    ? `⏩ קצב שנבחר: ${speed}x — ${lenVerdict(adj)}`
+    : `קצב רגיל (1x) — ${lenVerdict(adj)}`;
+  if(P&&P.length_reason&&!$("#apLenReason").value)$("#apLenReason").value=P.length_reason;
+  if(P&&P.content_type&&$("#apType").querySelector(`option[value="${P.content_type}"]`))$("#apType").value=P.content_type;
+  $("#approveModal").classList.add("on");
+  vhCompared=false; loadVisualHook();
+};
+$("#apCancel").onclick=()=>{$("#approveModal").classList.remove("on");const v=$("#vhVideo");v.pause();v.style.display="none";};
+
+/* ---------- v9.23: פתיחה חזותית — שורה מקופלת אחת, השוואה, "ללא שינוי" ----------
+   אין מסך אישור נוסף ואין אחוזי ביטחון. "אשר" שולח את ה-digest של מה שמוצג כאן —
+   ורק אם יש תצוגה טרייה. בלי תצוגה ⇒ הגימור לא נוגע בפתיחה. */
+let VH=null, vhCompared=false, vhPollT=null;
+async function loadVisualHook(){
+  try{VH=await api("/api/visual-hook/"+encodeURIComponent(name));}catch(e){VH=null;}
+  renderVisualHook();
+}
+function renderVisualHook(){
+  const el=$("#vhLine"); if(!el)return;
+  clearTimeout(vhPollT);
+  if(!VH){el.innerHTML="";return;}
+  const running=VH.status&&VH.status.state==="running";
+  let h=`<span>🎬 <b>${esc(VH.label_he)}</b></span>`;
+  if(VH.treatment_available){
+    h+=`<button class="btn small" type="button" id="vhCmp">השוואה</button>`+
+       `<button class="btn small" type="button" id="vhOff">ללא שינוי</button>`;
+  }else if(running){
+    h+=`<span class="mut">מכין תצוגה…</span>`;
+    vhPollT=setTimeout(loadVisualHook,4000);
+  }else if(!VH.enabled){
+    h+=`<button class="btn small" type="button" id="vhOn">לאפשר הצעה</button>`;
+  }else{
+    h+=`<button class="btn small" type="button" id="vhPrep">הכן תצוגה</button>`;
+    if(VH.status&&VH.status.state==="failed")h+=`<span class="mut">ההכנה נכשלה — הפתיחה תישאר כמו שהיא</span>`;
+  }
+  el.innerHTML=h;
+  const u="/api/visual-hook/"+encodeURIComponent(name);
+  const act=async(body)=>{try{const r=await post(u,Object.assign({pref_version:VH.pref_version},body));VH.pref_version=r.pref_version;}
+    catch(e){toast(e.code==="STALE_PREFS"?"ההגדרה שונתה במסך אחר — נטען מחדש":"שגיאה: "+e.message);}
+    await loadVisualHook();};
+  if($("#vhCmp"))$("#vhCmp").onclick=()=>{const v=$("#vhVideo");v.src=VH.preview.side_by_side;v.style.display="";
+    v.play().catch(()=>{});vhCompared=true;post(u,{action:"compare_viewed",pref_version:VH.pref_version})
+      .then(r=>{VH.pref_version=r.pref_version;}).catch(()=>{});};
+  if($("#vhOff"))$("#vhOff").onclick=()=>{$("#vhVideo").pause();$("#vhVideo").style.display="none";act({action:"disable"});};
+  if($("#vhOn"))$("#vhOn").onclick=()=>act({action:"enable"});
+  if($("#vhPrep"))$("#vhPrep").onclick=async()=>{
+    try{await doSave();await post(u+"/preview",{});toast("מכין תצוגת פתיחה על הגוף הנוכחי…");}
+    catch(e){toast("שגיאה: "+e.message);}
+    await loadVisualHook();};
+}
+$("#apGo").onclick=async()=>{
+  if(VH&&VH.status&&VH.status.state==="running"){toast("⏳ תצוגת הפתיחה עדיין בהכנה — רגע אחד");return;}
+  $("#approveModal").classList.remove("on");
+  $("#vhVideo").pause();
+  try{await doSave();
+    const r=await post("/api/approve/"+encodeURIComponent(name),
+      {content_type:$("#apType").value,brand:$("#apBrand").value,
+       title:$("#apTitle").value,note:$("#apNote").value,speed,
+       length_reason:$("#apLenReason").value,
+       visual_hook_plan_digest:(VH&&VH.treatment_available)?VH.plan_digest:null,
+       visual_hook_comparison_seen:vhCompared});
+    if(r.already_running)toast("⏳ גימור כבר רץ ("+r.run_id+") — לא הופעל שוב");
+    else toast("✔ האישור נרשם — הגימור רץ עכשיו");
+    pollStatus();
+    setTimeout(()=>$("#statusCard").scrollIntoView({behavior:"smooth",block:"center"}),300);
+  }catch(e){toast("שגיאה: "+e.message);}
+};
+
+let pollT=null;
+async function pollStatus(once){
+  $("#statusCard").style.display="";
+  try{
+    const s=await api("/api/status/"+encodeURIComponent(name));
+    /* v7.8 — זמן פר-שלב + הערכת זמן נותר: כדי שלא תמתין מול ספינר עיוור */
+    const steps=(s.steps_done||[]).map(x=>
+      `✅ ${x.step}${x.secs!=null?` <span class="mut">[${x.secs}ש]</span>`:""} <span class="mut">${x.detail||""}</span>`).join("<br>");
+    const done=(s.steps_done||[]).reduce((a,x)=>a+(x.secs||0),0);
+    let eta="";
+    if(s.state==="running"&&s.eta_secs){
+      const left=Math.max(0,Math.round(s.eta_secs-done));
+      eta=` <span class="mut">(עוד ~${left}ש מתוך ~${s.eta_secs}ש)</span>`;
+    }
+    const cur=s.step?`<br>⏳ ${s.step}…${eta}`:"";
+    /* תיקוני הכתיב שהוחלו אוטומטית מההערות שלך (notefix) */
+    let nfx="";
+    const nc=s.note_corrections;
+    if(nc&&((nc.fixes||[]).length||(nc.needs_manual||[]).length||(nc.ambiguous||[]).length)){
+      const f=(nc.fixes||[]).map(x=>`${x.from}→<b>${x.to}</b>`).join(" · ");
+      const man=(nc.needs_manual||[]).map(x=>x.word).join(", ");
+      const amb=(nc.ambiguous||[]).map(x=>`"${x.a}" / "${x.b}"`).join(" · ");
+      nfx=`<div class="mut" style="margin-top:6px;line-height:1.6">`
+        +(f?`📝 תוקן אוטומטית מההערות: ${f}<br>`:"")
+        +(man?`⚠️ לא זוהה חד-משמעית (תקן בתמליל): <b>${man}</b><br>`:"")
+        +(amb?`❔ "במקום" דו-משמעי — לא שונה: ${amb}`:"")+`</div>`;
+    }
+    $("#statusSteps").innerHTML=((steps+cur)||"<span class='mut'>אין ריצת גימור</span>")+nfx;
+    if(s.state==="done"){
+      $("#statusSteps").innerHTML=steps
+        +`<br><b style='color:var(--green)'>✔ FINAL.mp4 מוכן</b>`
+        +(s.total_secs?` <span class="mut">(${s.total_secs}ש סה"כ)</span>`:"")+nfx;
+      $("#finalBox").style.display="";
+      $("#finalDl").download=name+" - סופי.mp4";renderFinalComments();
+      P.has_final=true;
+      /* v9.4 — הריצה יצרה **גרסה חדשה**, לא "עדכנה את FINAL". טוענים את רשימת
+         הגרסאות, קופצים למועמד החדש, ואומרים בפירוש שהוא עדיין לא מאושר.
+         הגרסה המאושרת הקודמת לא זזה ונשארת נגישה בלשונית הגרסאות. */
+      await loadArtifacts();
+      const newest=(ART.artifacts||[]).slice(-1)[0];
+      $("#finalDl").href = newest ? `/artifact-media/${encodeURIComponent(name)}/${newest.artifact_id}?download=1`
+                                  : `/media/${encodeURIComponent(name)}/FINAL.mp4`;
+      /* v9.15 — הגרסה החדשה נושאת את רשימת התיקונים שנכנסו בה; טוענים אותה
+         מיד, כדי שהקפיצה תהיה ישר ל"מה תוקן" ולא לצפייה מלאה מחדש. */
+      clSel=newest?newest.artifact_id:null;
+      await loadChangelog();
+      if(!once){
+        setSource("final",null,newest?newest.artifact_id:null);
+        const cv=clVer(clSel);
+        toast(newest?`✔ נוצרה גרסה ${newest.version}`
+                    +(cv&&cv.counts.notes?` · ${cv.counts.notes} תיקונים לבדיקה 🔍`:" — ממתינה לבדיקה שלך")
+                   :"✔ FINAL עודכן בנגן");
+        if(cv&&cv.counts.total&&!simpleMode)gotoTab("changelog");
+        confettiBurst();
+      }
+      try{const pr=await api("/api/project/"+encodeURIComponent(name));P.schedule_approval=pr.schedule_approval;P.has_tight=pr.has_tight;P.finish_prefs=pr.finish_prefs;}catch(e){}
+      $("#reburnBtn").style.display=P.has_tight?"":"none";
+      renderScheduleApproval();
+      clearTimeout(pollT);return;
+    }
+    if(s.state==="failed"){$("#statusSteps").innerHTML=steps+`<br><b style='color:var(--err)'>✖ ${s.detail||"נכשל"}</b>`+nfx;clearTimeout(pollT);return;}
+  }catch(e){}
+  if(!once)pollT=setTimeout(()=>pollStatus(),2500);
+}
+
+/* ---------- מחיקת סרטון (soft-delete לפח) ---------- */
+window.deleteProject=async(enc)=>{
+  const nm=decodeURIComponent(enc);
+  const typed=prompt(`למחוק את "${nm}"?\nהעריכה תעבור לפח מיחזור — אפשר לשחזר משם בכל רגע.\nהקלד את שם הסרטון המדויק כדי לאשר:`);
+  if(typed===null)return;
+  if(typed.trim()!==nm){toast("השם לא תואם — לא נמחק");return;}
+  try{
+    const r=await post("/api/delete/"+enc,{confirm_name:typed.trim()});
+    toast("🗑 הועבר לפח מיחזור");
+    refreshTrashCount();
+    if(name===nm){location.reload();}else{loadList();}
+  }catch(e){toast("שגיאה: "+e.message);}
+};
+
+/* ---------- פח מיחזור ---------- */
+async function openTrash(){
+  const items=await api("/api/trash");
+  $("#trashModalBody").innerHTML = items.length ? items.map(t=>`
+    <div class="revrow">
+      <div><b>${esc(t.original_name)}</b><div class="mut" style="font-size:12px">נמחק ב-${t.trashed_at}</div></div>
+      <div class="flex">
+        <button class="btn small ok" onclick="restoreTrash('${encodeURIComponent(t.trash_name)}')">↩ שחזר</button>
+        <button class="btn small" style="background:var(--err-tint);color:var(--err)"
+          onclick="purgeTrash('${encodeURIComponent(t.trash_name)}','${esc(t.original_name)}')">מחק לצמיתות</button>
+      </div>
+    </div>`).join("") : '<div class="mut">הפח ריק</div>';
+  $("#trashModal").classList.add("on");
+}
+window.restoreTrash=async(encTrash)=>{
+  try{const r=await post("/api/trash/restore/"+encTrash,{});
+    toast("↩ שוחזר: "+r.restored_as);openTrash();loadList();refreshTrashCount();
+  }catch(e){toast("שגיאה: "+e.message);}
+};
+window.purgeTrash=async(encTrash,origName)=>{
+  const typed=prompt(`מחיקה לצמיתות של "${origName}" — לא ניתן לשחזר!\nהקלד את שם הסרטון המדויק כדי לאשר:`);
+  if(typed===null)return;
+  if(typed.trim()!==origName){toast("השם לא תואם — לא נמחק");return;}
+  try{await post("/api/trash/purge/"+encTrash,{confirm_name:typed.trim()});
+    toast("נמחק לצמיתות");openTrash();refreshTrashCount();
+  }catch(e){toast("שגיאה: "+e.message);}
+};
+async function refreshTrashCount(){
+  try{const items=await api("/api/trash");const el=$("#trashCount");if(el)el.textContent=items.length;}catch(e){}
+}
+$("#trashModalClose").onclick=()=>$("#trashModal").classList.remove("on");
+
+
+/* ---------- v9.16: הערה מהירה מתחת לנגן — נצמדת לזמן ולגרסה הנוכחיים ---------- */
+/* v9.17 — דפוס Frame.io: התחלת הקלדה עוצרת את הנגן ותופסת את הזמן; שליחה מחזירה ניגון */
+let qT=null, qWasPlaying=false;
+function qCapture(){
+  if(qT!=null)return;
+  if(!vid.paused){qWasPlaying=true;vid.pause();}
+  qT=+(vid.currentTime||0).toFixed(2);
+  $("#qNoteT").textContent="⏱ "+fmt(qT);
+}
+function qRelease(resume){
+  if(resume&&qWasPlaying)vid.play().catch(()=>{});
+  qWasPlaying=false;qT=null;$("#qNoteT").textContent="";
+}
+$("#qNote").addEventListener("focus",qCapture);
+$("#qNote").addEventListener("input",qCapture);
+$("#qNote").addEventListener("blur",()=>{ if(!$("#qNote").value.trim())qRelease(false); });
+async function addQuickNote(){
+  const inp=$("#qNote"), txt=inp.value.trim();
+  if(!txt){toast("כתוב הערה קודם");inp.focus();return;}
+  const t=(qT!=null)?qT:+(vid.currentTime||0).toFixed(2);
+  const body={text:txt,category:"general",priority:"normal",queue:false,time_start:t};
+  if(curSrc==="final"){body.on_final=true;body.artifact_id=curArt;}
+  await post("/api/comments/"+encodeURIComponent(name),body);
+  inp.value="";
+  const resume=qWasPlaying; qRelease(true);
+  toast("📝 נשמרה בזמן "+fmt(t)+(resume?" — ממשיך לנגן":"")+" · תישלח ב'שלח הכל לקלאוד'");
+  await reloadProject();
+}
+$("#qNoteBtn").onclick=()=>addQuickNote().catch(e=>toast("שגיאה: "+e.message));
+$("#qNote").addEventListener("keydown",e=>{
+  if(e.key==="Enter"){e.preventDefault();addQuickNote().catch(err=>toast("שגיאה: "+err.message));}});
+
+/* ---------- v9.16: פאנל ההערות של מצב פשוט ---------- */
+function renderSimple(){
+  if(!P)return;
+  const list=(P.comments||[]).filter(c=>c.status!=="rejected");
+  const open=list.filter(c=>c.status==="open");
+  const sa=$("#snSendAll");
+  sa.style.display=open.length?"":"none";
+  sa.textContent=`📤 שלח הכל לקלאוד (${open.length})`;
+  $("#snList").innerHTML=list.slice().reverse().slice(0,80).map(c=>{
+    const [st,cls]=STATTXT[c.status]||[c.status,""];
+    const ar=c.artifact_ref||null;
+    const t=c.time_start!=null?`<span class="tclick" data-t="${c.time_start}" ${c.on_final?'data-final="1"':''} ${ar&&ar.artifact_id?`data-art="${ar.artifact_id}"`:""}>${fmt(c.time_start)}</span>`:"";
+    return `<div class="notecard">
+      <div class="nhead">${CATICON[c.category]||"💭"} ${t} <span class="badge ${cls}">${st}</span>
+        <span class="mut" style="font-size:11.5px;margin-inline-start:auto">${c.created_at||""}</span></div>
+      <div>${esc(c.text)}</div>
+      ${c.resolution?`<div class="mut" style="font-size:13px">↳ ${esc(c.resolution)}</div>`:""}
+      <div class="flex" style="margin-top:5px">
+        ${c.status==="open"?`<button class="btn small" data-q="${c.comment_id}">📤 שלח</button>
+          <button class="btn small" data-rej="${c.comment_id}">🗑 בטל</button>`:""}
+        ${c.status==="resolved"?`<button class="btn small ok" data-ok="${c.comment_id}">✓ תוקן, סגור</button>
+          <button class="btn small" data-reopen="${c.comment_id}">↩ עדיין לא — החזר לקלאוד</button>`:""}
+      </div></div>`;
+  }).join("")||'<div class="mut" style="padding:8px">אין הערות עדיין — כתוב את הראשונה מתחת לנגן ⬅</div>';
+  const upd=(cid,body)=>post(`/api/comment/${encodeURIComponent(name)}/${cid}`,body).then(reloadProject);
+  $("#snList").querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>upd(b.dataset.q,{status:"queued_for_claude"}));
+  $("#snList").querySelectorAll("[data-rej]").forEach(b=>b.onclick=()=>upd(b.dataset.rej,{status:"rejected"}));
+  $("#snList").querySelectorAll("[data-ok]").forEach(b=>b.onclick=()=>upd(b.dataset.ok,{status:"rejected",resolution:"אושר ע\"י הראל (סגור)"}).then(()=>toast("ההערה נסגרה ✓")));
+  $("#snList").querySelectorAll("[data-reopen]").forEach(b=>b.onclick=()=>upd(b.dataset.reopen,{status:"queued_for_claude"}));
+  $("#snList").querySelectorAll(".tclick").forEach(el=>el.onclick=()=>{
+    if(el.dataset.art){const a=artById(el.dataset.art);
+      if(a)setSource("final",parseFloat(el.dataset.t),el.dataset.art);
+      else toast("⛔ הגרסה שעליה נכתבה ההערה אינה זמינה");}
+    else if(el.dataset.final)setSource("final",parseFloat(el.dataset.t));
+    else if(curSrc!=="input")setSource("input",parseFloat(el.dataset.t));
+    else $("#vid").currentTime=parseFloat(el.dataset.t);
+  });
+}
+$("#snSendAll").onclick=async()=>{
+  const open=(P.comments||[]).filter(c=>c.status==="open");
+  if(!open.length)return;
+  try{
+    for(const c of open)
+      await post(`/api/comment/${encodeURIComponent(name)}/${c.comment_id}`,{status:"queued_for_claude"});
+    toast(`📤 ${open.length} הערות נשלחו לקלאוד — הוא מסדר, אתה רק בודק`);
+    await reloadProject();
+  }catch(e){toast("שגיאה בשליחה: "+e.message);}
+};
+
+/* ---------- v9.16: "מה עכשיו" במסך הסרטון — פעולה ראשית אחת ---------- */
+function renderNowBar(){
+  if(!P)return;
+  const c=P.comments||[];
+  const nOpen=c.filter(x=>x.status==="open").length;
+  const nQ=c.filter(x=>["queued_for_claude","in_progress"].includes(x.status)).length;
+  const nWait=c.filter(x=>x.status==="resolved").length;
+  const sa=P.schedule_approval||{};
+  const st=P.state_override||P.state;
+  let msg="",btn=null;
+  if(P.running){msg="⏳ גימור רץ עכשיו — ההתקדמות בכרטיס מתחת לנגן. אין מה לעשות בינתיים.";}
+  else if(st==="failed"){msg="✖ הגימור נכשל"+((P.last_run&&P.last_run.detail)?": "+esc(P.last_run.detail):"")+".";
+    btn=["📤 שלח לקלאוד לתיקון",async()=>{
+      await post("/api/comments/"+encodeURIComponent(name),
+        {text:"הגימור נכשל — תבדוק ותתקן: "+((P.last_run||{}).detail||"ראה ריצה אחרונה"),
+         category:"qa",priority:"blocking",queue:true});
+      toast("נשלח לקלאוד 🤖");await reloadProject();}];}
+  else if(nOpen){msg=`✍️ יש לך ${nOpen} הערות שעוד לא נשלחו. סיימת לצפות?`;
+    btn=[`📤 שלח הכל לקלאוד (${nOpen})`,()=>$("#snSendAll").click()];}
+  else if(nWait){
+    /* v9.18 — קלאוד כבר אימת חלק מהתיקונים בראיות: להראל מוצג רק מה שנשאר */
+    const cvv=clVer(), cc=(cvv&&cvv.counts)||{};
+    const foc=(cvv&&cvv.review_plan_focus)||{spots:[]};
+    if(cc.claude_verified&&!foc.spots.length)
+      msg=`🤖 קלאוד תיקן <b>ואימת בראיות</b> את כל ${cc.claude_verified} התיקונים. אין חובת בדיקה — אפשר לדגום ואז לאשר.`;
+    else if(cc.claude_verified)
+      msg=`🔍 קלאוד תיקן ${nWait} הערות ואימת ${cc.claude_verified} מהן בראיות — נשאר לבדוק ~${foc.covered_secs||"?"}ש בלבד.`;
+    else msg=`🔍 קלאוד תיקן ${nWait} הערות — נשאר לבדוק רק את הנקודות שהשתנו, לא את כל הסרטון.`;
+    btn=["▶ בדוק מה תוקן",()=>{gotoTab("changelog");setTimeout(()=>{
+      const f=$("#clRunFocusBtn"), b=$("#clRunBtn");
+      if(f&&f.style.display!=="none")f.click(); else if(b&&!b.disabled)b.click();},700);}];}
+  else if(nQ){msg=`🤖 ${nQ} הערות אצל קלאוד. כשיסיים — הסרטון יחזור לכאן לבדיקה שלך.`;}
+  else if(st==="published"){msg="🚀 פורסם בפועל — סגור. אין מה לעשות.";}
+  else if(st==="scheduled"){msg="📅 תוזמן ב-Metricool — ממתין לפרסום בתאריך שנקבע. אין מה לעשות.";}
+  else if(st==="ready_to_schedule"){msg="✅ מאושר סופית ונעול — קלאוד מתזמן ב-Metricool.";}
+  else if(P.has_final&&sa.status!=="approved"){msg="🟡 הגרסה מוכנה. צפה בה — טובה? אשר סופית. לא? רשום הערה מתחת לנגן.";
+    btn=["✅ עבור לאישור הסופי",()=>$("#scheduleApprovalPanel").scrollIntoView({behavior:"smooth",block:"center"})];}
+  else if(!P.approved){msg="🆕 צפה בסרטון. הכל טוב? אשר — והגימור (חיתוך, כתוביות, מוזיקה) ירוץ לבד. יש תיקונים? רשום הערות מתחת לנגן.";
+    btn=["✔ אשר והתחל גימור",()=>$("#approveBtn").click()];}
+  else {msg="⏳ אושר — ממתין לגימור.";}
+  $("#nowMsg").innerHTML=msg;
+  const b=$("#nowBtn");
+  if(btn){b.style.display="";b.textContent=btn[0];b.onclick=btn[1];}
+  else b.style.display="none";
+  $("#nowBar").style.display="";
+}
+
+/* ---------- v9.16: מצב פשוט / מתקדם ---------- */
+function setMode(simple){
+  simpleMode=!!simple;
+  document.body.classList.toggle("simple",simpleMode);
+  localStorage.setItem("relReviewMode",simpleMode?"simple":"adv");
+  $("#modeBtn").textContent=simpleMode?"🧰 מצב מתקדם":"✨ מצב פשוט";
+  if($("#editor").style.display!=="none"&&P)renderAll();
+}
+$("#modeBtn").onclick=()=>setMode(!simpleMode);
+setMode(simpleMode);
+
+
+/* ---------- v9.17: פס סמני ההערות מתחת לנגן — כמו בועות ההערות ב-Frame.io ---------- */
+function renderNoteStrip(){
+  const s=$("#noteStrip"); if(!s)return;
+  if(!P||$("#editor").style.display==="none"){s.style.display="none";return;}
+  const dur=(vid.duration?vid.duration-((curSrc==="final")?INTRO_OFF:0):((curSrc==="input")?total:0));
+  const list=(P.comments||[]).filter(c=>c.status!=="rejected"&&c.time_start!=null
+    &&(curSrc==="final"?c.on_final:!c.on_final));
+  if(!dur||!list.length){s.style.display="none";return;}
+  const col=c=>c.status==="open"?"var(--yellow-sh)":c.status==="resolved"?"var(--green)":"var(--blue)";
+  s.innerHTML=list.map(c=>`<span class="nsdot" style="left:${Math.min(99,c.time_start/dur*100).toFixed(1)}%;background:${col(c)}" title="${fmt(c.time_start)} · ${esc((c.text||"").slice(0,80))}" data-t="${c.time_start}"></span>`).join("");
+  s.style.display="";
+  s.querySelectorAll(".nsdot").forEach(el=>el.onclick=()=>{vid.currentTime=parseFloat(el.dataset.t);});
+}
+vid.addEventListener("loadedmetadata",renderNoteStrip);
+
+/* ---------- v9.17: "הבא בתור" — מעבר ישיר לסרטון הבא שממתין לך ---------- */
+let NEXTQ=[];
+function renderNowNext(){
+  const b=$("#nowNextBtn"); if(!b)return;
+  const nxt=(NEXTQ||[]).find(r=>r.owner==="harel"&&r.project!==name);
+  if(!nxt){b.style.display="none";return;}
+  b.style.display="";
+  b.textContent="⏭ הבא בתור: "+nxt.project;
+  b.onclick=()=>openProj(encodeURIComponent(nxt.project));
+}
+
+/* ---------- v9.17: מצב לילה — אותו דפוס בדיוק כמו rel.fit/tasks ---------- */
+let themeMode=localStorage.getItem("relReviewTheme")||"system";
+function applyThemeMode(){
+  document.documentElement.setAttribute("data-theme",themeMode);
+  const b=$("#themeBtn");
+  if(b){b.textContent=themeMode==="dark"?"🌙":themeMode==="light"?"☀️":"🖥️";
+    b.title="מצב תצוגה: "+(themeMode==="dark"?"לילה":themeMode==="light"?"יום":"אוטומטי (לפי המק)")+" — קליק מחליף";}
+  tlPal();
+  if($("#editor").style.display!=="none"&&P){drawTimeline();renderNoteStrip();}
+}
+function cycleThemeMode(){
+  themeMode=themeMode==="system"?"light":themeMode==="light"?"dark":"system";
+  localStorage.setItem("relReviewTheme",themeMode);
+  applyThemeMode();
+  toast(themeMode==="dark"?"🌙 מצב לילה":themeMode==="light"?"☀️ מצב יום":"🖥️ אוטומטי — לפי הגדרת המק");
+}
+$("#themeBtn").onclick=cycleThemeMode;
+if(window.matchMedia)matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>applyThemeMode());
+applyThemeMode();
+
+/* ---------- v9.17: מיקרו-חגיגה (פופ אנרגטי) — מכבד prefers-reduced-motion ---------- */
+function confettiBurst(){
+  if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const colors=["#c62828","#ffd54f","#1f9d55","#2c86d1"];
+  for(let i=0;i<16;i++){
+    const p=document.createElement("span");
+    p.style.cssText="position:fixed;top:38%;left:50%;width:9px;height:9px;z-index:99;pointer-events:none;border-radius:"+(i%2?"50%":"2px")+";background:"+colors[i%4];
+    document.body.appendChild(p);
+    const a=p.animate([{transform:"translate(0,0) rotate(0)",opacity:1},
+      {transform:"translate("+((Math.random()-0.5)*360).toFixed(0)+"px,"+(120+Math.random()*260).toFixed(0)+"px) rotate("+(Math.random()*540).toFixed(0)+"deg)",opacity:0}],
+      {duration:1250,easing:"cubic-bezier(.15,.6,.4,1)"});
+    a.onfinish=()=>p.remove();
+  }
+}
+
+/* ---------- v9.17: רענון אוטומטי — המסך לא נתקע על מצב ישן ---------- */
+window.addEventListener("focus",()=>{
+  const tag=(document.activeElement||{}).tagName;
+  if(tag==="TEXTAREA"||tag==="INPUT"||tag==="SELECT")return;
+  if($("#editor").style.display==="none")loadList();
+  else if(P&&!P.running)reloadProject().catch(()=>{});
+});
+setInterval(()=>{ if($("#editor").style.display==="none"&&!document.hidden)loadList(); },90000);
+
+window.addEventListener("resize",drawTimeline);
+$("#topbtns").innerHTML='<button class="btn" id="trashBtn">🗑 פח מיחזור (<span id="trashCount">0</span>)</button>';
+$("#trashBtn").onclick=openTrash;
+refreshTrashCount();
+loadList();
+</script>
+<svg class="rel-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="ri-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></symbol>
+<symbol id="ri-display" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12.5" rx="2.4"/><path d="M9 20.5h6M12 16.5v4"/></symbol>
+<symbol id="ri-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.1"/><path d="M12 2.6v2.2M12 19.2v2.2M4.3 4.3l1.6 1.6M18.1 18.1l1.6 1.6M2.6 12h2.2M19.2 12h2.2M4.3 19.7l1.6-1.6M18.1 5.9l1.6-1.6"/></symbol>
+<symbol id="ri-moon" viewBox="0 0 24 24"><path d="M20 13.4A8.2 8.2 0 0 1 10.6 4a8.4 8.4 0 1 0 9.4 9.4Z"/></symbol>
+<symbol id="ri-command" viewBox="0 0 24 24"><path d="M9 6.5A2.5 2.5 0 1 0 6.5 9H9V6.5ZM15 6.5A2.5 2.5 0 1 1 17.5 9H15V6.5ZM9 17.5A2.5 2.5 0 1 1 6.5 15H9v2.5ZM15 17.5a2.5 2.5 0 1 0 2.5-2.5H15v2.5ZM9 9h6v6H9z"/></symbol>
+<symbol id="ri-repeat" viewBox="0 0 24 24"><path d="M4 9.5A4.5 4.5 0 0 1 8.5 5H19M19 5l-3-3M19 5l-3 3"/><path d="M20 14.5A4.5 4.5 0 0 1 15.5 19H5M5 19l3-3M5 19l3 3"/></symbol>
+<symbol id="ri-refresh" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4.5V10h-5.5"/></symbol>
+<symbol id="ri-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.4 15.4 20 20"/></symbol>
+<symbol id="ri-spotlight" viewBox="0 0 24 24"><circle cx="12" cy="13" r="4"/><path d="M12 4v2.4M18.4 6.6l-1.7 1.7M20 13h-2.4M4 13h2.4M7.3 6.6 9 8.3"/></symbol>
+<symbol id="ri-plus" viewBox="0 0 24 24"><path d="M12 5.5v13M5.5 12h13"/></symbol>
+<symbol id="ri-check" viewBox="0 0 24 24"><path d="m5 12.8 4.6 4.6L19 6.8"/></symbol>
+<symbol id="ri-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+<symbol id="ri-download" viewBox="0 0 24 24"><path d="M12 4v11M7.6 10.6 12 15l4.4-4.4M4.5 19.5h15"/></symbol>
+<symbol id="ri-clip" viewBox="0 0 24 24"><path d="M18.5 11.3 12 17.8a4.1 4.1 0 0 1-5.8-5.8l7-7a2.9 2.9 0 0 1 4.1 4.1l-7 7a1.7 1.7 0 0 1-2.4-2.4l6.3-6.3"/></symbol>
+<symbol id="ri-message" viewBox="0 0 24 24"><path d="M20 12.4c0 3.7-3.6 6.7-8 6.7a9.6 9.6 0 0 1-2.5-.3L4.6 20.4l1.2-3.4A6.4 6.4 0 0 1 4 12.4C4 8.7 7.6 5.7 12 5.7s8 3 8 6.7Z"/></symbol>
+<symbol id="ri-transfer" viewBox="0 0 24 24"><path d="M4 8.5h13M17 8.5l-3.2-3.2M17 8.5l-3.2 3.2M20 15.5H7M7 15.5l3.2-3.2M7 15.5l3.2 3.2"/></symbol>
+<symbol id="ri-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.6"/><path d="M3.5 9.6h17M8 3.4v3.2M16 3.4v3.2"/></symbol>
+<symbol id="ri-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7.6V12l3 1.8"/></symbol>
+<symbol id="ri-trash" viewBox="0 0 24 24"><path d="M4.8 6.6h14.4M9.4 6.6V4.9h5.2v1.7M6.6 6.6l.9 12.1a1.6 1.6 0 0 0 1.6 1.5h5.8a1.6 1.6 0 0 0 1.6-1.5l.9-12.1"/></symbol>
+<symbol id="ri-grip" viewBox="0 0 24 24"><circle cx="9.5" cy="6.5" r="1.35" class="dotfill"/><circle cx="14.5" cy="6.5" r="1.35"/><circle cx="9.5" cy="12" r="1.35"/><circle cx="14.5" cy="12" r="1.35"/><circle cx="9.5" cy="17.5" r="1.35"/><circle cx="14.5" cy="17.5" r="1.35"/></symbol>
+<symbol id="ri-edit" viewBox="0 0 24 24"><path d="M4.5 19.5h4l10-10a2.1 2.1 0 0 0-3-3l-10 10z"/><path d="M14 6.5 17.5 10"/></symbol>
+<symbol id="ri-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2.2"/><path d="M15.5 5.5H6.7A2.2 2.2 0 0 0 4.5 7.7v8.8"/></symbol>
+<symbol id="ri-link" viewBox="0 0 24 24"><path d="M10 13.8a3.6 3.6 0 0 0 5.4.4l2.4-2.4a3.6 3.6 0 0 0-5.1-5.1l-1.4 1.3"/><path d="M14 10.2a3.6 3.6 0 0 0-5.4-.4l-2.4 2.4a3.6 3.6 0 0 0 5.1 5.1l1.4-1.3"/></symbol>
+<symbol id="ri-external" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-7.5 7.5M17 14.5V18a2 2 0 0 1-2 2H6.5a2 2 0 0 1-2-2V9.5a2 2 0 0 1 2-2H10"/></symbol>
+<symbol id="ri-chevron-l" viewBox="0 0 24 24"><path d="M14.5 5.5 8 12l6.5 6.5"/></symbol>
+<symbol id="ri-chevron-r" viewBox="0 0 24 24"><path d="M9.5 5.5 16 12l-6.5 6.5"/></symbol>
+<symbol id="ri-chevron-d" viewBox="0 0 24 24"><path d="M5.5 9 12 15.5 18.5 9"/></symbol>
+<symbol id="ri-undo" viewBox="0 0 24 24"><path d="M4.5 9.5h9a5.5 5.5 0 0 1 0 11H10"/><path d="M8 5.5 4.5 9.5 8 13.5"/></symbol>
+<symbol id="ri-focus" viewBox="0 0 24 24"><path d="M4.5 8.6V6.4a2 2 0 0 1 2-2h2.1M15.4 4.4h2.1a2 2 0 0 1 2 2v2.2M19.5 15.4v2.2a2 2 0 0 1-2 2h-2.1M8.6 19.6H6.5a2 2 0 0 1-2-2v-2.2"/><circle cx="12" cy="12" r="2.6"/></symbol>
+<symbol id="ri-mic" viewBox="0 0 24 24"><rect x="9.2" y="3.4" width="5.6" height="10.6" rx="2.8"/><path d="M5.8 11.6a6.2 6.2 0 0 0 12.4 0M12 17.8v2.8"/></symbol>
+<symbol id="ri-paste" viewBox="0 0 24 24"><path d="M9 5.2H7.4a2 2 0 0 0-2 2v11.4a2 2 0 0 0 2 2h9.2a2 2 0 0 0 2-2V7.2a2 2 0 0 0-2-2H15"/><rect x="9" y="3.2" width="6" height="3.6" rx="1.4"/><path d="M8.8 12h6.4M8.8 15.5h4.4"/></symbol>
+<symbol id="ri-list" viewBox="0 0 24 24"><path d="M8.5 6.5h11M8.5 12h11M8.5 17.5h11M4.6 6.5h.01M4.6 12h.01M4.6 17.5h.01"/></symbol>
+<symbol id="ri-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.8"/><rect x="13" y="4" width="7" height="7" rx="1.8"/><rect x="4" y="13" width="7" height="7" rx="1.8"/><rect x="13" y="13" width="7" height="7" rx="1.8"/></symbol>
+<symbol id="ri-filter" viewBox="0 0 24 24"><path d="M4.5 6.2h15L14 12.6v5.1l-4 2.1v-7.2Z"/></symbol>
+<symbol id="ri-alert" viewBox="0 0 24 24"><path d="M12 4.6 20.5 19H3.5Z"/><path d="M12 10v3.6M12 16.6h.01"/></symbol>
+<symbol id="ri-offline" viewBox="0 0 24 24"><path d="M3 4l18 16"/><path d="M5.2 9.4a11.5 11.5 0 0 1 3.5-2.2M18.9 9.5a11.6 11.6 0 0 0-4.6-2.6M8 13a7 7 0 0 1 1.8-1.2M16 13a7 7 0 0 0-1.6-1.1M12 17.8h.01"/></symbol>
+<symbol id="ri-cloud" viewBox="0 0 24 24"><path d="M7.4 18.5A4 4 0 0 1 7 10.6a5.4 5.4 0 0 1 10.3-1.2 3.9 3.9 0 0 1-.6 9.1Z"/></symbol>
+<symbol id="ri-flag" viewBox="0 0 24 24"><path d="M6 20.5V4.2M6 5h9.5l-1.6 3.4 1.6 3.4H6"/></symbol>
+<symbol id="ri-folder" viewBox="0 0 24 24"><path d="M4 18.4V6.6a1.8 1.8 0 0 1 1.8-1.8h3.4l2 2.6h6.9a1.9 1.9 0 0 1 1.9 1.9v9.1a1.8 1.8 0 0 1-1.8 1.8H5.8A1.8 1.8 0 0 1 4 18.4Z"/></symbol>
+<symbol id="ri-tag" viewBox="0 0 24 24"><path d="M11.4 4.2H19a.9.9 0 0 1 .9.9v7.6a1.8 1.8 0 0 1-.5 1.2l-5.6 5.6a1.6 1.6 0 0 1-2.3 0l-6.8-6.8a1.6 1.6 0 0 1 0-2.3l5.6-5.6a1.8 1.8 0 0 1 1.1-.6Z"/><circle cx="15.6" cy="8.4" r="1.25"/></symbol>
+<symbol id="ri-chart" viewBox="0 0 24 24"><path d="M4.5 19.5h15M7.6 16.4V11M12 16.4V6.2M16.4 16.4v-6.7"/></symbol>
+<symbol id="ri-home" viewBox="0 0 24 24"><path d="M4 10.6 12 4l8 6.6V19a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19Z"/><path d="M9.6 20.5v-6.2h4.8v6.2"/></symbol>
+<symbol id="ri-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.9"/><path d="M19.2 14.2a1.5 1.5 0 0 0 .3 1.7l.1.1a1.8 1.8 0 1 1-2.6 2.6l-.1-.1a1.5 1.5 0 0 0-2.5 1v.3a1.8 1.8 0 1 1-3.6 0v-.2a1.5 1.5 0 0 0-2.6-1l-.1.1a1.8 1.8 0 1 1-2.6-2.6l.1-.1a1.5 1.5 0 0 0-1-2.5h-.3a1.8 1.8 0 1 1 0-3.6h.2a1.5 1.5 0 0 0 1-2.6l-.1-.1a1.8 1.8 0 1 1 2.6-2.6l.1.1a1.5 1.5 0 0 0 1.7.3h.1a1.5 1.5 0 0 0 .9-1.4v-.3a1.8 1.8 0 1 1 3.6 0v.2a1.5 1.5 0 0 0 2.5 1l.1-.1a1.8 1.8 0 1 1 2.6 2.6l-.1.1a1.5 1.5 0 0 0 1 2.5h.3a1.8 1.8 0 1 1 0 3.6h-.2a1.5 1.5 0 0 0-1.4.9Z"/></symbol>
+<symbol id="ri-play" viewBox="0 0 24 24"><path d="M8 5.4 18.2 12 8 18.6Z"/></symbol>
+<symbol id="ri-pause" viewBox="0 0 24 24"><path d="M9.2 5.2v13.6M14.8 5.2v13.6"/></symbol>
+<symbol id="ri-snooze" viewBox="0 0 24 24"><circle cx="12" cy="13" r="7.4"/><path d="M9.6 10.6h4.8L9.6 15.6h4.8M9 3.4 5.4 6M15 3.4 18.6 6"/></symbol>
+<symbol id="ri-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.6"/><circle cx="12" cy="12" r="3.6"/><circle cx="12" cy="12" r=".8" class="solid"/></symbol>
+<symbol id="ri-inbox" viewBox="0 0 24 24"><path d="M4 13.4 6.4 5.6A1.8 1.8 0 0 1 8.1 4.4h7.8a1.8 1.8 0 0 1 1.7 1.2L20 13.4v4.8a1.8 1.8 0 0 1-1.8 1.8H5.8A1.8 1.8 0 0 1 4 18.2Z"/><path d="M4 13.4h4.2l1.2 2.4h5.2l1.2-2.4H20"/></symbol>
+<symbol id="ri-sparkle" viewBox="0 0 24 24"><path d="M12 3.6 13.7 9l5.4 1.7-5.4 1.7L12 17.8l-1.7-5.4L4.9 10.7 10.3 9Z"/><path d="M18.6 16.4l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7Z"/></symbol>
+<symbol id="ri-arrow-l" viewBox="0 0 24 24"><path d="M19 12H5M5 12l5.5-5.5M5 12l5.5 5.5"/></symbol>
+<symbol id="ri-arrow-r" viewBox="0 0 24 24"><path d="M5 12h14M19 12l-5.5-5.5M19 12l-5.5 5.5"/></symbol>
+<symbol id="ri-at" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.4"/><path d="M15.4 8.6v4.6a2.6 2.6 0 0 0 5.2 0V12a8.6 8.6 0 1 0-3.4 6.9"/></symbol>
+<symbol id="ri-eye" viewBox="0 0 24 24"><path d="M2.8 12S6.6 5.8 12 5.8 21.2 12 21.2 12 17.4 18.2 12 18.2 2.8 12 2.8 12Z"/><circle cx="12" cy="12" r="2.9"/></symbol>
+<symbol id="ri-doc" viewBox="0 0 24 24"><path d="M6.5 3.6h7L18.5 8.6v11.8H6.5Z"/><path d="M13.4 3.6v5.1h5.1M9.4 13.2h5.2M9.4 16.6h5.2"/></symbol>
+</defs></svg>
+
+<script>/* ===== R.E.L Precision runtime (v1.0) — shared across R.E.L apps =====
+   Purpose-built, dependency-free. No window.RM, no external helpers.
+   Provides: press feedback, dialog semantics + focus trap, FLIP list motion,
+             connectivity state, reduced-motion guard.                       */
+(function () {
+  "use strict";
+  if (window.RELP) return;
+  var RM = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduced = function () { return RM.matches; };
+
+  /* ---------- 1. pointer-down feedback within 100ms ---------- */
+  var PRESSABLE = "button,[role=button],a.btn,.btn,.chip,.task,.iconbtn,.pitem,.fab,.fabmini,.toggle button,.upbtn,.lbbtn,.subck,.taskdone,.spotbtn,.more,[data-press]";
+  function pressOn(e) {
+    var el = e.target.closest && e.target.closest(PRESSABLE);
+    if (!el || el.disabled || el.getAttribute("aria-disabled") === "true") return;
+    el.classList.add("rel-press");
+    el.setAttribute("data-pressed", "1");
+    var clear = function () {
+      el.removeAttribute("data-pressed");
+      window.removeEventListener("pointerup", clear, true);
+      window.removeEventListener("pointercancel", clear, true);
+      window.removeEventListener("dragstart", clear, true);
+    };
+    window.addEventListener("pointerup", clear, true);
+    window.addEventListener("pointercancel", clear, true);
+    window.addEventListener("dragstart", clear, true);
+  }
+  document.addEventListener("pointerdown", pressOn, { passive: true });
+
+  /* ---------- 2. dialog semantics: focus trap, Escape, focus return ------- */
+  var stack = [];
+  function focusables(root) {
+    return Array.prototype.filter.call(
+      root.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]):not([type=hidden]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])'),
+      function (el) {
+        return el.offsetParent !== null || el === document.activeElement;
+      });
+  }
+  function trap(e) {
+    var top = stack[stack.length - 1];
+    if (!top || e.key !== "Tab") return;
+    var f = focusables(top.el);
+    if (!f.length) { e.preventDefault(); return; }
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Tab") return trap(e);
+    if (e.key === "Escape" && stack.length) {
+      var top = stack[stack.length - 1];
+      if (top.onClose) { e.stopPropagation(); top.onClose(); }
+    }
+  }, true);
+
+  function dialogOpen(el, opts) {
+    opts = opts || {};
+    if (!el) return;
+    if (stack.some(function (s) { return s.el === el; })) return;
+    el.setAttribute("role", opts.role || "dialog");
+    el.setAttribute("aria-modal", "true");
+    if (opts.labelledby) el.setAttribute("aria-labelledby", opts.labelledby);
+    else if (opts.label) el.setAttribute("aria-label", opts.label);
+    var entry = { el: el, onClose: opts.onClose, prev: document.activeElement };
+    stack.push(entry);
+    document.documentElement.setAttribute("data-modal-open", "1");
+    setTimeout(function () {
+      var f = focusables(el);
+      var target = opts.initial && el.querySelector(opts.initial);
+      /* focus the surface itself when it can hold focus, so no control looks armed */
+      var fallback = el.hasAttribute("tabindex") ? el : (f[0] || el);
+      (target || fallback).focus({ preventScroll: true });
+    }, reduced() ? 0 : 60);
+  }
+  function dialogClose(el) {
+    for (var i = stack.length - 1; i >= 0; i--) {
+      if (stack[i].el === el) {
+        var prev = stack[i].prev;
+        stack.splice(i, 1);
+        if (prev && prev.focus) { try { prev.focus({ preventScroll: true }); } catch (e) {} }
+        break;
+      }
+    }
+    if (!stack.length) document.documentElement.removeAttribute("data-modal-open");
+  }
+
+  /* ---------- 3. FLIP — object permanence on list re-render --------------- */
+  function flipRead(container, sel) {
+    var map = new Map();
+    if (!container) return map;
+    container.querySelectorAll(sel).forEach(function (n) {
+      var k = n.getAttribute("data-flip");
+      if (k) map.set(k, n.getBoundingClientRect());
+    });
+    return map;
+  }
+  function flipPlay(container, sel, before, opts) {
+    if (!container || reduced() || !before || !before.size) return;
+    opts = opts || {};
+    var dur = opts.duration || 260;
+    container.querySelectorAll(sel).forEach(function (n) {
+      var k = n.getAttribute("data-flip");
+      if (!k) return;
+      var b = before.get(k);
+      var a = n.getBoundingClientRect();
+      if (!b) {
+        n.animate([{ opacity: 0, transform: "translateY(6px) scale(.985)" }, { opacity: 1, transform: "none" }],
+          { duration: 200, easing: "cubic-bezier(.22,1,.36,1)" });
+        return;
+      }
+      var dx = b.left - a.left, dy = b.top - a.top;
+      if (Math.abs(dx) < 1 && Math.abs(dy) < 1) return;
+      n.getAnimations().forEach(function (an) { if (an.id === "relflip") an.cancel(); });
+      var an = n.animate(
+        [{ transform: "translate(" + dx + "px," + dy + "px)" }, { transform: "none" }],
+        { duration: dur, easing: "cubic-bezier(.22,1,.36,1)" });
+      an.id = "relflip";
+    });
+  }
+
+  /* ---------- 4. connectivity / sync state ------------------------------- */
+  function syncState(state, label) {
+    var host = document.getElementById("relSync");
+    if (!host) return;
+    host.setAttribute("data-state", state);
+    var t = host.querySelector("[data-sync-label]");
+    if (t) t.textContent = label || "";
+    host.setAttribute("aria-label", label || state);
+  }
+  function wireOnline(onBack) {
+    function paint() {
+      if (navigator.onLine) syncState("online", "מסונכרן");
+      else syncState("offline", "לא מקוון — פעולות ימתינו");
+    }
+    window.addEventListener("online", function () { paint(); if (onBack) onBack(); });
+    window.addEventListener("offline", paint);
+    paint();
+  }
+
+  /* ---------- 5. success on the object itself ---------------------------- */
+  function markDone(el) {
+    if (!el || reduced()) return;
+    el.animate([{ transform: "scale(1)" }, { transform: "scale(1.02)" }, { transform: "scale(1)" }],
+      { duration: 260, easing: "cubic-bezier(.22,1,.36,1)" });
+  }
+  function haptic(kind) {
+    if (!navigator.vibrate) return;
+    if (kind === "commit") navigator.vibrate(12);
+    else if (kind === "error") navigator.vibrate([16, 40, 16]);
+  }
+
+  /* ---------- 6. lift div/span click handlers to real controls ----------- */
+  /* The apps build rows with innerHTML + onclick. Rather than rewrite every
+     template, promote them once per render: role, tab stop, Enter/Space.      */
+  function liftClickables(root) {
+    (root || document).querySelectorAll(
+      'div[onclick],span[onclick],li[onclick],td[onclick]'
+    ).forEach(function (el) {
+      if (el.dataset.relLifted) return;
+      /* A control needs a name. Scrims and overlays have none and are a
+         click-away convenience — Escape is their keyboard path, so leave
+         them as plain click targets instead of naming them "button".      */
+      var name = (el.getAttribute("aria-label") || el.getAttribute("title") ||
+                  (el.textContent || "")).trim();
+      if (!name) { el.dataset.relLifted = "skip"; return; }
+      el.dataset.relLifted = "1";
+      if (!el.hasAttribute("role")) el.setAttribute("role", "button");
+      if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "0");
+      el.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          if (e.target !== el) return;
+          e.preventDefault();
+          el.click();
+        }
+      });
+    });
+  }
+  var liftPending = false;
+  function autoLift() {
+    if (liftPending) return;
+    liftPending = true;
+    requestAnimationFrame(function () { liftPending = false; liftClickables(document); });
+  }
+
+  /* ---- auto-ink: any element whose background is written by data (inline
+     style, or a CSS var the app sets per record) gets a text colour that
+     actually reads on it.  Runs after every render, never touches an element
+     whose contrast is already fine, and skips anything marked data-noink. ---- */
+  function relParse(c) {
+    var m = String(c || "").match(/^rgba?\(([^)]+)\)$/); if (!m) return null;
+    var p = m[1].split(/[ ,\/]+/).filter(Boolean).map(Number);
+    return { r: p[0], g: p[1], b: p[2], a: p.length > 3 ? p[3] : 1 };
+  }
+  function relLum(c) {
+    function f(v) { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }
+    return 0.2126 * f(c.r) + 0.7152 * f(c.g) + 0.0722 * f(c.b);
+  }
+  function relRatio(a, b) { var l1 = relLum(a), l2 = relLum(b); var h = Math.max(l1, l2), l = Math.min(l1, l2); return (h + 0.05) / (l + 0.05); }
+  function relOver(f, b) {
+    return { r: f.r * f.a + b.r * (1 - f.a), g: f.g * f.a + b.g * (1 - f.a), b: f.b * f.a + b.b * (1 - f.a), a: 1 };
+  }
+  function relBgOf(el) {
+    var stack = [], n = el;
+    while (n && n.nodeType === 1) {
+      var c = relParse(getComputedStyle(n).backgroundColor);
+      if (c && c.a > 0) { stack.push(c); if (c.a >= 0.999) break; }
+      n = n.parentElement;
+    }
+    var base = relParse(getComputedStyle(document.body).backgroundColor);
+    if (!base || base.a < 0.999) base = { r: 255, g: 255, b: 255, a: 1 };
+    var out = base;
+    for (var i = stack.length - 1; i >= 0; i--) out = relOver(stack[i], out);
+    return out;
+  }
+  var INK = { r: 23, g: 17, b: 15, a: 1 }, PAPER = { r: 255, g: 255, b: 255, a: 1 };
+  function autoInk(root) {
+    var nodes = (root || document).querySelectorAll('[style*="background"],[style*="--dept"],[style*="--av"],[style*="--d:"],[data-autoink],button,.btn,[role=button],.badge,.chip,.pill,.tag,.sumchip,.tab,.count,.dcount,.dept-chip,.avatar,.type-tag,.seg,.navbtn,.dtab');
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      if (el.hasAttribute("data-noink")) continue;
+      var own = "";
+      for (var k = 0; k < el.childNodes.length; k++) if (el.childNodes[k].nodeType === 3) own += el.childNodes[k].nodeValue;
+      if (!own.trim()) continue;
+      var cs = getComputedStyle(el);
+      var self = relParse(cs.backgroundColor);
+      if (!self || self.a < 0.35) continue;           /* nothing painted here */
+      var bg = relBgOf(el);
+      var fg = relParse(cs.color); if (!fg) continue;
+      if (fg.a < 1) fg = relOver(fg, bg);
+      var size = parseFloat(cs.fontSize), w = parseInt(cs.fontWeight) || 400;
+      var need = (size >= 24 || (size >= 18.66 && w >= 700)) ? 3 : 4.5;
+      if (relRatio(fg, bg) >= need) { if (el.dataset.relInk) { el.style.removeProperty("color"); delete el.dataset.relInk; } continue; }
+      var pick = relRatio(INK, bg) >= relRatio(PAPER, bg) ? "#17110f" : "#ffffff";
+      el.style.setProperty("color", pick, "important");
+      el.dataset.relInk = "1";
+    }
+  }
+  var inkTimer = 0;
+  function autoInkSoon() {
+    if (inkTimer) clearTimeout(inkTimer);
+    inkTimer = setTimeout(function () { inkTimer = 0; try { autoInk(document); } catch (e) {} }, 60);
+  }
+
+  function watchClickables() {
+    autoLift(); autoInkSoon();
+    /* childList only — we write attributes, so this cannot re-trigger itself */
+    new MutationObserver(function () { autoLift(); autoInkSoon(); })
+      .observe(document.body, { childList: true, subtree: true });
+    window.addEventListener("load", autoInkSoon);
+    setTimeout(autoInkSoon, 400); setTimeout(autoInkSoon, 1500);
+    if (window.matchMedia) {
+      try { window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", autoInkSoon); } catch (e) {}
+    }
+  }
+  if (document.readyState === "loading")
+    document.addEventListener("DOMContentLoaded", watchClickables);
+  else watchClickables();
+
+  window.RELP = {
+    liftClickables: liftClickables,
+    autoInk: autoInk,
+    reduced: reduced,
+    dialogOpen: dialogOpen,
+    dialogClose: dialogClose,
+    flipRead: flipRead,
+    flipPlay: flipPlay,
+    syncState: syncState,
+    wireOnline: wireOnline,
+    markDone: markDone,
+    haptic: haptic
+  };
+})();
+</script>
+<script>/* rel-precision: theme bridge */(function(){var r=document.documentElement;
+function m(){var t=r.getAttribute('data-theme')||'system';
+r.setAttribute('data-rel-dark',t==='dark'?'1':t==='light'?'0':'auto');}
+m();new MutationObserver(m).observe(r,{attributes:true,attributeFilter:['data-theme']});})();</script>
+</body>
+</html>

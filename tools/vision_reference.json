@@ -1,0 +1,197 @@
+{
+ "_readme": "מעטפת ראייה שנמדדה מסרטונים שהראל אישר ופרסם. רק שער עם רשומה כאן רשאי לחסום.",
+ "n_videos": 16,
+ "videos": [
+  "FINAL.mp4",
+  "FINAL.mp4",
+  "FINAL.mp4",
+  "FINAL.mp4",
+  "FINAL.mp4",
+  "FINAL.mp4",
+  "FINAL.mp4",
+  "FINAL.mp4",
+  "FINAL.mp4",
+  "FINAL.mp4",
+  "FINAL.mp4",
+  "FINAL.mp4",
+  "FINAL.mp4",
+  "FINAL.mp4",
+  "FINAL.mp4",
+  "FINAL.mp4"
+ ],
+ "envelope": {
+  "V1_first_frame_alive": {
+   "min": 5.74,
+   "max": 48.73,
+   "median": 15.375,
+   "n": 16,
+   "threshold": 5.74,
+   "direction": "min"
+  },
+  "V2_change_before_2s": {
+   "min": 0.0,
+   "max": 0.0,
+   "median": 0.0,
+   "n": 16,
+   "threshold": 0.0,
+   "direction": "max"
+  },
+  "V5_dead_silence": {
+   "min": 0.0,
+   "max": 0.78,
+   "median": 0.0,
+   "n": 16,
+   "threshold": 0.78,
+   "direction": "max"
+  },
+  "V6_static_window": {
+   "min": 0.0,
+   "max": 0.5,
+   "median": 0.0,
+   "n": 16,
+   "threshold": 0.5,
+   "direction": "max"
+  },
+  "V3_first_word": {
+   "min": 0.0,
+   "max": 5.51,
+   "median": 0.0,
+   "n": 16,
+   "threshold": 5.51,
+   "direction": "max",
+   "source": "words_final (ציר הכתוביות)",
+   "measured_at": "2026-09-22",
+   "promote": false,
+   "canon_threshold": 0.3,
+   "approved_failing": 4,
+   "why_not_blocking": "הסף הקאנוני 0.3 היה פוסל 4/16 סרטונים שהראל אישר ופרסם"
+  },
+  "V4_speech_rate": {
+   "min": 121.2,
+   "max": 199.9,
+   "median": 154.45,
+   "n": 16,
+   "threshold": 121.2,
+   "direction": "min",
+   "source": "words_final (ציר הכתוביות)",
+   "measured_at": "2026-09-22",
+   "promote": false,
+   "canon_threshold": null,
+   "why_not_blocking": "אין סף קאנוני ואין מחלקה שלילית (סרטון שנפסל על זה) — מספר על השולחן, לא שער"
+  }
+ },
+ "words_measurements": [
+  {
+   "video": "/Users/hayon/rel-video-work/סקאלת-הבריאות/FINAL.mp4",
+   "first_word": 0.0,
+   "wpm": 143.6,
+   "n_words": 135,
+   "source": "words_final (יחסי-גוף: אין FINAL_PROVENANCE)"
+  },
+  {
+   "video": "/Users/hayon/rel-video-work/טעויות-נפוצות-strict-pull-ups/FINAL.mp4",
+   "first_word": 0.63,
+   "wpm": 141.3,
+   "n_words": 83,
+   "source": "words_final (יחסי-גוף: היסט פתיח לא רשום)"
+  },
+  {
+   "video": "/Users/hayon/rel-video-work/הלקח-הכי-חשוב-במכירות/FINAL.mp4",
+   "first_word": 0.53,
+   "wpm": 184.0,
+   "n_words": 181,
+   "source": "words_final (יחסי-גוף: אין FINAL_PROVENANCE)"
+  },
+  {
+   "video": "/Users/hayon/rel-video-work/מי-אמר-שמאוחר-מידיי/FINAL.mp4",
+   "first_word": 0.0,
+   "wpm": 152.4,
+   "n_words": 79,
+   "source": "words_final (יחסי-גוף: היסט פתיח לא רשום)"
+  },
+  {
+   "video": "/Users/hayon/rel-video-work/שינה-והתאוששות/FINAL.mp4",
+   "first_word": 5.51,
+   "wpm": 152.2,
+   "n_words": 135,
+   "source": "words_final (יחסי-גוף: היסט פתיח לא רשום)"
+  },
+  {
+   "video": "/Users/hayon/rel-video-work/אופן-גים-חיזוק/FINAL.mp4",
+   "first_word": 0.0,
+   "wpm": 134.1,
+   "n_words": 130,
+   "source": "words_final (יחסי-גוף: היסט פתיח לא רשום)"
+  },
+  {
+   "video": "/Users/hayon/rel-video-work/מה-זה-להיות-בעל-מועדון/FINAL.mp4",
+   "first_word": 0.23,
+   "wpm": 183.3,
+   "n_words": 161,
+   "source": "words_final (יחסי-גוף: היסט פתיח לא רשום)"
+  },
+  {
+   "video": "/Users/hayon/rel-video-work/יום-בחיים-של-הראל/FINAL.mp4",
+   "first_word": 0.0,
+   "wpm": 137.2,
+   "n_words": 72,
+   "source": "words_final (יחסי-גוף: היסט פתיח לא רשום)"
+  },
+  {
+   "video": "/Users/hayon/rel-video-work/ההבנה-האנטומית-סוגי-אחיזות/FINAL.mp4",
+   "first_word": 0.0,
+   "wpm": 180.6,
+   "n_words": 142,
+   "source": "words_final (יחסי-גוף: היסט פתיח לא רשום)"
+  },
+  {
+   "video": "/Users/hayon/rel-video-work/ניפוץ-מיתוסים-לטיפול-מגיעים-רק-כשכואב/FINAL.mp4",
+   "first_word": 0.0,
+   "wpm": 162.4,
+   "n_words": 100,
+   "source": "words_final (יחסי-גוף: היסט פתיח לא רשום)"
+  },
+  {
+   "video": "/Users/hayon/rel-video-work/אוריה-המנהלת-המקצועית/FINAL.mp4",
+   "first_word": 0.0,
+   "wpm": 162.8,
+   "n_words": 104,
+   "source": "words_final (יחסי-גוף: היסט פתיח לא רשום)"
+  },
+  {
+   "video": "/Users/hayon/rel-video-work/צעדים-קטנים-כל-יום/FINAL.mp4",
+   "first_word": 0.0,
+   "wpm": 199.9,
+   "n_words": 198,
+   "source": "words_final (יחסי-גוף: היסט פתיח לא רשום)"
+  },
+  {
+   "video": "/Users/hayon/rel-video-work/טיפ-אחד-HSPU/FINAL.mp4",
+   "first_word": 0.0,
+   "wpm": 121.2,
+   "n_words": 99,
+   "source": "words_final (יחסי-גוף: אין FINAL_PROVENANCE)"
+  },
+  {
+   "video": "/Users/hayon/rel-video-work/אופן-גים-השקה/FINAL.mp4",
+   "first_word": 0.56,
+   "wpm": 156.5,
+   "n_words": 149,
+   "source": "words_final (יחסי-גוף: היסט פתיח לא רשום)"
+  },
+  {
+   "video": "/Users/hayon/rel-video-work/עיסוי-רפואי/FINAL.mp4",
+   "first_word": 0.0,
+   "wpm": 165.8,
+   "n_words": 85,
+   "source": "words_final (יחסי-גוף: היסט פתיח לא רשום)"
+  },
+  {
+   "video": "/Users/hayon/rel-video-work/מאסל-מן-רוטטור-קאף/FINAL.mp4",
+   "first_word": 0.0,
+   "wpm": 150.3,
+   "n_words": 116,
+   "source": "words_final (יחסי-גוף: היסט פתיח לא רשום)"
+  }
+ ]
+}

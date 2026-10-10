@@ -1,0 +1,98 @@
+{
+ "schema_version": 1,
+ "project_id": "prj_vhscan986746",
+ "input_digest": "sha256:50a4fece42bd3b313e7e2325ef84c1c158b7d90a49c25ca7688ebe21322619f0",
+ "policy_digest": "sha256:04a9d9a591d5ed423be77d5f8aade8533a5e6fabc2eaaef21ebf85df68eaeaa5",
+ "reservation_digest": "sha256:1773a8415452c270ccdbaa9b149d1a30e4549abf4aa897178e88042c39d88f13",
+ "recipe": "SMART_PUNCH_IN",
+ "recipe_version": 1,
+ "candidate_id": "cand_80fc753c1d6f",
+ "timeline": {
+  "axis": "body_final",
+  "fps_num": 30,
+  "fps_den": 1,
+  "frame_count": 1118,
+  "intro_frames": 0
+ },
+ "audio_mode": "preserve",
+ "evidence": {
+  "word_ids": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16
+  ],
+  "quote": "לטיפול מגיעים רק שכואב אז לא הבנתי, גם אתם מחכים שהרכב שלכם יתקלקל כדי שתשלחו אותו לטיפול?",
+  "grade": "supported",
+  "reviewed_subjects": []
+ },
+ "assets": [],
+ "cues": [
+  {
+   "id": "cue_1",
+   "kind": "crop",
+   "start_frame": 123,
+   "end_frame": 186,
+   "interpolation": "smoothstep",
+   "keyframes": [
+    {
+     "frame": 123,
+     "rect": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "frame": 138,
+     "rect": [
+      0.028302,
+      0.028302,
+      0.943396,
+      0.943396
+     ]
+    },
+    {
+     "frame": 170,
+     "rect": [
+      0.028302,
+      0.028302,
+      0.943396,
+      0.943396
+     ]
+    },
+    {
+     "frame": 185,
+     "rect": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ]
+    }
+   ]
+  }
+ ],
+ "declared_transitions": [],
+ "selection": {
+  "actor": "harel",
+  "reason_codes": [
+   "operator_selected"
+  ]
+ },
+ "plan_digest": "sha256:48c73df8fc591635bb05998613bf07b5a1e879c682f119f6d9caf9f0004ade8b"
+}

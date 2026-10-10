@@ -1,0 +1,128 @@
+{
+ "_doc": "פסיקות הראל על סרטוני MG — דאטה, לא צ'אט. כל פסיקה הפכה לחוק/שער (lesson_registry L113-L122). מקור לכיול MG3/MG9/MG10.",
+ "verdicts": [
+  {
+   "date": "2026-10-04",
+   "demo": "grips",
+   "style": "value_layer",
+   "plan": "_motion_demo/grips/motion_plan.json",
+   "verdict": "approved",
+   "quote": "זה מדהים!! באמת אחד הדברים הכי יפים שראיתי",
+   "notes": []
+  },
+  {
+   "date": "2026-10-04",
+   "demo": "itay",
+   "style": "cinematic_athlete_story",
+   "plan": "_motion_demo/itay/motion_plan.json",
+   "verdict": "approved_minus_one",
+   "quote": "רק השנתיים מאוד קשות הייתי מוותר. כל השאר מושלם.",
+   "notes": [
+    "לא לחתוך מהמתאמן לסצנה גרפית במסך מלא ברגע וידוי רגשי (timeline 'שנתיים') — L121"
+   ]
+  },
+  {
+   "date": "2026-10-04",
+   "demo": "hspu",
+   "style": "coach_breakdown_telestrator",
+   "plan": "_motion_demo/hspu/motion_plan.json",
+   "verdict": "approved_with_fixes",
+   "notes": [
+    "הצבע נראה מוזר — שורש: ההרכבה תייגה בסיס HLG/bt2020 כ-bt709 (L116, MG11)",
+    "רואים מלבן סביב התגיות רמה 1/2 — clip-path חתך את הצל (L117)",
+    "החתימה (end_card) אחלה, אבל לא בכל סרטון — לפי שיקול (L120)"
+   ]
+  },
+  {
+   "date": "2026-10-04",
+   "demo": "owner",
+   "style": "full_mg_voiceover",
+   "plan": "_motion_demo/owner/motion_plan.json",
+   "verdict": "approved",
+   "quote": "הסרטון האחרון מטורף!! זה רמה גבוהה מאוד",
+   "notes": [
+    "להוסיף מעברים ויזואליים שתופסים את העין בין הקטעים (L119, REL.transitions)",
+    "קצת עמוס בצלילים — לגוון או למתן (L118, plan_sfx, MG9)",
+    "ב-MG מלא לשלב אותו מדי פעם במצלמה — ~80% אנימציה, ~20% הוא (L119, base_windows, MG10)"
+   ]
+  },
+  {
+   "date": "2026-10-04",
+   "demo": "all_four",
+   "style": "*",
+   "verdict": "approved",
+   "quote": "כל הסגנונות מדהימים, זה מאוד תלוי סרטון אבל קלעת בול בסגנונות",
+   "notes": [
+    "ארבעת הסגנונות מאושרים כסט הקבוע; הבחירה ביניהם — לפי הסרטון, החלטת הבמאי (סגנון אחד לסרטון)"
+   ]
+  },
+  {
+   "date": "2026-10-07",
+   "demo": "name_reveal",
+   "style": "all",
+   "plan": "monday:13225968348",
+   "verdict": "change_requested",
+   "quote": "שיחשוב על אפקט יותר ייחודי מאשר שם עם רקע בורדו. משהו אולי בצורה של קשת עם נצנצים כזה וסאונד חמוד.",
+   "notes": [
+    "נבנה name_sparkle (8.10.26) — האפקט הקבוע לשם מתאמן; propose מציע אותו לכל אדם מוצהר; צליל sparkle אוטומטי",
+    "דמו: תוצרי-אנימציה/Motion Graphics/דמו-MG-שם-מתאמן-קשת.mp4",
+    "L123"
+   ]
+  },
+  {
+   "date": "2026-10-08",
+   "demo": "name_sparkle_rainbow",
+   "style": "all",
+   "plan": "_motion_demo/name_sparkle/motion_plan.json",
+   "verdict": "change_requested",
+   "quote": "התכוונתי שהשם בקשת. אבל התחרטתי תוותר על הקשת לגמרי.. הנצנצים יפים. וברגע הצגת השם הרעיון הוא להקפיא את הפריים באיזה רגע שהוא מחייך. שזה כאילו יהפוך לתמונה שניה שיש עליה זום קטנטן כדי להוסיף אפקט של חיות",
+   "notes": [
+    "הקשת הוסרה; נשארו הנצנצים",
+    "הקפאה על פריים חיוך אוטומטי (pick_smile_frame) + פלאש + זום 1.035",
+    "דמו: דמו-MG-שם-מתאמן-הקפאה.mp4"
+   ]
+  },
+  {
+   "date": "2026-10-08",
+   "demo": "name_sparkle_freeze",
+   "style": "all",
+   "plan": "_motion_demo/name_sparkle_itay/motion_plan.json",
+   "verdict": "approved",
+   "quote": "זה פגז, רק חשוב לתפוס אותם בפריים יותר מחמיא ולא עם פה פתוח כזה כי זה מצחיק. חוץ מזה, זה פרפקט. תזכור את זה לתכנים רלוונטיים שבהם אנחנו מציגים מתאמנים למשל וכו׳. לא בכל תוכן צריך את זה. במיוחד לא לתכנים שלנו הצוות שגם ככה מכירים אותנו",
+   "notes": [
+    "pick_smile_frame: קנס לחלל פה כהה ולפה זז, בונוס לשתי עיניים פתוחות",
+    "propose מדלג על צוות (team:true / תפקידי צוות)"
+   ]
+  },
+  {
+   "date": "2026-10-08",
+   "demo": "name_sparkle_freeze",
+   "style": "all",
+   "plan": "_motion_demo/name_sparkle_itay/motion_plan.json",
+   "verdict": "change_requested",
+   "quote": "מדהים. חשוב שהפריים עומד במקום שהוא לא יפסיק לדבר. זה אמור לא להיות בתור בירול לסרטון אלא כמין קטע נוסף כזה בין הקטעים",
+   "notes": [
+    "insert: הסרטון והדיבור עוצרים לקטע של 2.6ש, ממשיכים מאותה נקודה; הציר מתארך ומילים/אירועים זזים"
+   ]
+  }
+ ],
+ "measured_reference": {
+  "_doc": "מדדי MG3 של הדמואים המאושרים (לכיול עתידי; MG3 נשאר מדווח עד שיהיו ≥3 לכל סגנון)",
+  "grips": {
+   "per_min": null,
+   "coverage": null
+  },
+  "itay": {
+   "per_min": 9.9,
+   "coverage": 0.36
+  },
+  "hspu": {
+   "per_min": 11.7,
+   "coverage": 0.76
+  },
+  "owner": {
+   "per_min": 13.4,
+   "coverage": 0.99
+  }
+ }
+}

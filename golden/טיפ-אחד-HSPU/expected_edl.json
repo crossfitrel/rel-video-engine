@@ -1,0 +1,78 @@
+{
+ "source_words": "/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/golden/טיפ-אחד-HSPU/words.json",
+ "video": "",
+ "total_dur": 55.31,
+ "kept_dur": 49.84,
+ "removed_dur": 5.47,
+ "keep_segments": [
+  {
+   "start": 1.14,
+   "end": 13.48
+  },
+  {
+   "start": 13.76,
+   "end": 24.1
+  },
+  {
+   "start": 24.9,
+   "end": 47.73
+  },
+  {
+   "start": 50.98,
+   "end": 55.31
+  }
+ ],
+ "auto_cuts": [
+  {
+   "start": 0.0,
+   "end": 1.14,
+   "reason": "שקט פתיחה ריק",
+   "confidence": "high"
+  },
+  {
+   "start": 13.48,
+   "end": 13.76,
+   "reason": "שקט 0.50ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 24.1,
+   "end": 24.9,
+   "reason": "שקט 1.02ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 47.73,
+   "end": 50.98,
+   "reason": "שקט 3.60ש → 0.35ש",
+   "confidence": "high"
+  }
+ ],
+ "manual_review_cuts": [
+  {
+   "start": 37.76,
+   "end": 37.84,
+   "reason": "שקט 0.30ש → 0.22ש",
+   "confidence": "medium",
+   "rough_start": 35.54,
+   "rough_end": 35.62
+  },
+  {
+   "start": 39.8,
+   "end": 39.9,
+   "reason": "שקט 0.32ש → 0.22ש",
+   "confidence": "medium",
+   "rough_start": 37.58,
+   "rough_end": 37.68
+  },
+  {
+   "start": 44.2,
+   "end": 44.34,
+   "reason": "שקט 0.36ש → 0.22ש",
+   "confidence": "medium",
+   "rough_start": 41.98,
+   "rough_end": 42.12
+  }
+ ],
+ "policy": "/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tools/edl-policy.json"
+}

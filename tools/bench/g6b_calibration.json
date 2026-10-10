@@ -1,0 +1,110 @@
+{
+ "_doc": "כיול G6b (P0-10) — 30.7.26. ASR אימות על EXPORT_TIGHT של פרויקטים אמיתיים מול words_final. G6 (השוואת חישוב לעצמו) מדווח 0.000ש בכל המקרים; G6b מודד בפועל.",
+ "tol": 0.35,
+ "chosen_pass": 85.0,
+ "matched_floor": 72.0,
+ "drift_block": 0.35,
+ "n": 6,
+ "score_sorted": [
+  75.9,
+  94.6,
+  97.2,
+  98.9,
+  98.9,
+  100.0
+ ],
+ "matched_pct_sorted": [
+  47.4,
+  76.5,
+  85.6,
+  88.9,
+  89.9,
+  95.8
+ ],
+ "rows": [
+  {
+   "project": "מי-אמר-שמאוחר-מידיי",
+   "measured": {
+    "n": 71,
+    "matched_pct": 89.9,
+    "mean_signed": 0.078,
+    "suggest_delay": -0.08,
+    "mean_abs": 0.103,
+    "max_abs": 0.367,
+    "within_0.15": 85.9,
+    "score": 97.2,
+    "pass": true
+   }
+  },
+  {
+   "project": "אוריה-המנהלת-המקצועית",
+   "measured": {
+    "n": 89,
+    "matched_pct": 85.6,
+    "mean_signed": -0.03,
+    "suggest_delay": 0.03,
+    "mean_abs": 0.064,
+    "max_abs": 1.17,
+    "within_0.15": 88.8,
+    "score": 98.9,
+    "pass": true
+   }
+  },
+  {
+   "project": "עיסוי-רפואי",
+   "measured": {
+    "n": 65,
+    "matched_pct": 76.5,
+    "mean_signed": -0.02,
+    "suggest_delay": 0.02,
+    "mean_abs": 0.05,
+    "max_abs": 0.277,
+    "within_0.15": 90.8,
+    "score": 100.0,
+    "pass": true
+   }
+  },
+  {
+   "project": "ניפוץ-מיתוסים-לטיפול-מגיעים-רק-כשכואב",
+   "measured": {
+    "n": 92,
+    "matched_pct": 95.8,
+    "mean_signed": -0.175,
+    "suggest_delay": 0.17,
+    "mean_abs": 0.187,
+    "max_abs": 0.527,
+    "within_0.15": 41.3,
+    "score": 94.6,
+    "pass": true
+   }
+  },
+  {
+   "project": "צעדים-קטנים-כל-יום",
+   "measured": {
+    "n": 176,
+    "matched_pct": 88.9,
+    "mean_signed": -0.092,
+    "suggest_delay": 0.09,
+    "mean_abs": 0.105,
+    "max_abs": 0.548,
+    "within_0.15": 77.3,
+    "score": 98.9,
+    "pass": true
+   }
+  },
+  {
+   "project": "מאסל-מן-רוטטור-קאף",
+   "measured": {
+    "n": 54,
+    "matched_pct": 47.4,
+    "mean_signed": 0.653,
+    "suggest_delay": -0.65,
+    "mean_abs": 0.757,
+    "max_abs": 5.153,
+    "within_0.15": 68.5,
+    "score": 75.9,
+    "pass": false
+   }
+  }
+ ]
+}

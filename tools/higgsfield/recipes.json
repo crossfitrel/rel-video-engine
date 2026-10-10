@@ -1,0 +1,185 @@
+{
+ "_doc": "ספריית אפקטים מאושרת. כל מתכון = שוט אחד עם תפקיד (hook/mid/cta), מטרה (Attention/Explanation/Emotion/Transformation/Action), KPI, ומצב הרכבה. אפקט שרק 'יפה' — לא נכנס לכאן. {placeholders} ממולאים מ-ai_plan.json.",
+ "hook_aerial_dive": {
+  "role": "hook",
+  "purpose": [
+   "Attention",
+   "Explanation"
+  ],
+  "kpi": "Hook rate (3s views / impressions), Thumbstop",
+  "when": "המשפט הראשון מזכיר מקום/קהל גאוגרפי (תושבי X והסביבה). הדובר לא בקלוז-אפ ב-1.5ש הראשונות.",
+  "compose": "replace_head",
+  "gen_duration": 3,
+  "window_max": 1.8,
+  "speed": 2.0,
+  "model_pref": [
+   "kling-video/v3.0/std/image-to-video",
+   "kling-video/o3/first-last-frame",
+   "kling-video/v3.0/pro/image-to-video"
+  ],
+  "retry_prior": "flf_transition_large_morph",
+  "first_frame": {
+   "gen": "alibaba/qwen-image-3/text-to-image",
+   "resolution": "2k",
+   "prompt": "Vertical 9:16 aerial drone photograph at sunrise over a small hilltop city in the Samaria hills of Israel: rows of white and beige Jerusalem-stone apartment buildings with some red tile roofs, pine trees, winding roads, terraced olive groves and soft green-brown hills around, warm golden low sun, light morning haze, realistic, shot on DJI drone, no text, no people visible."
+  },
+  "last_frame": "real",
+  "prompt": "Continuous drone shot: the camera dives fast from high above the hilltop city down toward a large industrial gym building, flies smoothly through the open roof into the bright gym interior and lands at eye level in front of the woman holding a medicine ball, matching the final frame exactly. Smooth, fast, cinematic, realistic, no text."
+ },
+ "mid_empty_spot_reveal": {
+  "role": "mid",
+  "purpose": [
+   "Emotion",
+   "Attention"
+  ],
+  "kpi": "Retention 25%→75% (drop-off before CTA)",
+  "when": "משפט ההצעה/Offer רץ על בירול, ומיד אחריו קאט לדובר בשוט סטטי (חצובה).",
+  "compose": "replace_window_then_matchcut",
+  "gen_duration": 3,
+  "speed": "fit",
+  "model_pref": [
+   "kling-video/v3.0/std/image-to-video",
+   "kling-video/o3/first-last-frame"
+  ],
+  "retry_prior": "flf_same_scene_light",
+  "first_frame": {
+   "local": "dim",
+   "gamma": 1.9,
+   "gain": 0.45,
+   "desat": 0.35
+  },
+  "last_frame": "clean_plate",
+  "prompt": "Static locked-off camera. The empty gym is dim and quiet. A warm soft light slowly switches on above the black plyo boxes in the center, then the whole space gently brightens to natural daylight, matching the final frame exactly. No people, no camera movement, realistic lighting change only, no text."
+ },
+ "cta_open_light_matte": {
+  "role": "cta",
+  "purpose": [
+   "Action",
+   "Transformation"
+  ],
+  "kpi": "CTR (link clicks / impressions), Leads, CPL",
+  "when": "משפט ה-CTA נאמר ע\"י הדובר בשוט סטטי. הדובר נשאר אמיתי — מבודד ב-matting; רק הרקע מתחלף.",
+  "compose": "bg_matte",
+  "gen_duration": 3,
+  "speed": "fit",
+  "push_in": 1.06,
+  "model_pref": [
+   "kling-video/v3.0/std/image-to-video",
+   "kling-video/o3/first-last-frame"
+  ],
+  "retry_prior": "static_bg_light",
+  "first_frame": "clean_plate",
+  "last_frame": {
+   "gen": "alibaba/qwen-image-3/edit",
+   "resolution": "2k",
+   "src": "clean_plate",
+   "prompt": "Same exact gym, same camera, same framing and objects. Golden sunrise light now pours in strongly through the windows at the back, warm volumetric light rays fill the space, the gym ceiling lights are on, and a bright warm beam of light stretches across the floor from the back of the gym toward the camera and the bottom center of the frame. Photorealistic, hopeful, inviting. No people, no text."
+  },
+  "prompt": "Static locked-off camera, no camera movement. Warm golden sunrise light gradually pours in through the back windows, light rays grow, the ceiling lights turn on one after another, and a warm beam of light travels across the floor toward the camera, matching the final frame exactly. No people, realistic, no text."
+ },
+ "hook_v2v_grey_shatter": {
+  "role": "hook",
+  "purpose": [
+   "Attention",
+   "Transformation",
+   "Emotion"
+  ],
+  "kpi": "Hook rate (3s views / impressions), Thumbstop",
+  "when": "פתיח שבו הדובר הולך/מדבר למצלמה ומשפט ה-Hook מדבר על 'מחפשים סיבה'/שגרה. הכי חזק כשיש תנועת מצלמה (V2V שומר אותה).",
+  "idea": "הדוברת בצבע מלא הולכת בתוך עולם שגרה אפור (משרד גשום) — ובמילה 'להתאמן' העולם האפור מתנפץ כמו זכוכית לעבר המצלמה וחושף את המועדון האמיתי.",
+  "compose": "v2v_matte_shatter",
+  "shatter_at": 2.45,
+  "shatter_dur": 0.62,
+  "n_shards": 64,
+  "grey_desat": 0.7,
+  "model_pref": [
+   "kling-video/o3/video-edit"
+  ],
+  "model_params": {
+   "mode": "std"
+  },
+  "fallback_usd_per_s": 0.126,
+  "retry_prior": "v2v_env_swap",
+  "prompt": "Keep the woman, her clothes, her face, her movement and the medicine balls exactly the same. Replace the entire environment around her with a dull, grey, lifeless corporate office: rows of grey cubicles and desks with computer monitors, flickering cold fluorescent ceiling lights, rain streaking down large windows, a gloomy overcast evening. Everything around her is desaturated grey and monotonous. Same camera movement, same framing, realistic."
+ },
+ "mid_gift_burst": {
+  "role": "mid",
+  "purpose": [
+   "Explanation",
+   "Emotion"
+  ],
+  "kpi": "Retention 25%→75% + זכירות ההצעה",
+  "when": "משפט Offer של 'מתנה' רץ על בירול ומיד אחריו קאט לדובר בשוט סטטי.",
+  "idea": "קופסת מתנה בצבע המותג על הקופסה שהדוברת תשב עליה; הסרט נפתח, המכסה עף, אור זהוב מציף את המסך → הלבנה → קאט לדוברת על אותה קופסה.",
+  "compose": "replace_window_flash",
+  "model_pref": [
+   "kling-video/v3.0/std/image-to-video"
+  ],
+  "retry_prior": "flf_same_scene_light",
+  "gift_prompt": "Same exact photo, same camera, same framing and lighting. Add one large square gift box sitting on top of the black plyo box in the foreground center: wrapped in deep burgundy red paper with a wide black satin ribbon and a big black bow on top. Photorealistic, natural shadows, nothing else changes. No text, no logos.",
+  "prompt": "Static camera, slow push-in toward the gift box. The black satin ribbon unties by itself and slides off, the lid pops open and flies upward, and a brilliant warm golden light bursts out of the box and floods the entire frame until everything is bright white-gold. No people, no text, realistic, magical."
+ },
+ "cta_portal_matte": {
+  "role": "cta",
+  "purpose": [
+   "Action",
+   "Transformation"
+  ],
+  "kpi": "CTR, Leads, CPL",
+  "when": "משפט ה-CTA נאמר ע\"י הדובר בשוט סטטי. הדובר אמיתי (matting), רק הרקע משתנה.",
+  "idea": "הקיר האחורי נפתח כמו שתי דלתות ענק, אור זהוב מציף, ושביל אור נפרש על הרצפה אל המצלמה ואל כפתור ה-CTA — 'הדלת פתוחה'.",
+  "compose": "bg_matte",
+  "gen_duration": 3,
+  "speed": "fit",
+  "push_in": 1.06,
+  "model_pref": [
+   "kling-video/v3.0/std/image-to-video"
+  ],
+  "retry_prior": "static_bg_light",
+  "last_frame_prompt": "Same exact gym, same camera, same framing, same boxes in the foreground. The whole back wall of the gym has split open in the middle like two gigantic doors swung wide open, revealing an overwhelming brilliant warm white-golden light pouring into the gym, with light rays and glowing dust in the air. A bright glowing path of warm light runs along the floor from the open doorway straight toward the camera and the bottom center of the frame. Cinematic, epic, hopeful, photorealistic. No people, no text.",
+  "prompt": "Static locked-off camera, no camera movement. The back wall of the gym slowly splits open in the middle like two massive doors swinging wide, an overwhelming warm golden light floods into the gym with light rays and glowing dust, and a glowing path of light spreads along the floor toward the camera, matching the final frame exactly. No people, no text, realistic, epic."
+ },
+ "hook_v2v_ripple": {
+  "role": "hook",
+  "purpose": [
+   "Attention",
+   "Transformation",
+   "Emotion"
+  ],
+  "kpi": "Hook rate (3s views / impressions), Thumbstop",
+  "when": "פתיח שבו הדובר הולך/מדבר למצלמה ומשפט ה-Hook מדבר על 'מחפשים סיבה'/שגרה.",
+  "idea": "הדוברת בצבע מלא הולכת בעולם שגרה אפור (V2V: משרד גשום). במילה 'להתאמן' גל צבע יוצא ממנה החוצה ומחזיר את המועדון האמיתי — שפה עם עדשה, סטייה כרומטית וזוהר חם. היא המקור של השינוי.",
+  "compose": "v2v_matte_ripple",
+  "ripple_at": 2.55,
+  "ripple_dur": 0.8,
+  "grey_desat": 0.55,
+  "model_pref": [
+   "kling-video/o3/video-edit"
+  ],
+  "model_params": {
+   "mode": "std"
+  },
+  "fallback_usd_per_s": 0.126,
+  "retry_prior": "v2v_env_swap",
+  "prompt": "Keep the woman, her clothes, her face, her movement and the medicine balls exactly the same. Replace the entire environment around her with a dull, grey, lifeless corporate office: rows of grey cubicles and desks with computer monitors, flickering cold fluorescent ceiling lights, rain streaking down large windows, a gloomy overcast evening. Everything around her is desaturated grey and monotonous. Same camera movement, same framing, realistic."
+ },
+ "cta_confetti_matte": {
+  "role": "cta",
+  "purpose": [
+   "Action",
+   "Emotion"
+  ],
+  "kpi": "CTR, Leads, CPL",
+  "when": "CTA בשוט סטטי אחרי Offer של 'מתנה' — חגיגה שסוגרת את סיפור המתנה.",
+  "idea": "הדוברת אמיתית (matting); מאחוריה האורות נדלקים ותותחי קונפטי זהב-בורדו יורים משני הצדדים והקונפטי יורד לאט על כל המועדון — 'חוגגים את ההתחלה שלך'.",
+  "compose": "bg_matte",
+  "gen_duration": 3,
+  "speed": "fit",
+  "push_in": 1.05,
+  "model_pref": [
+   "kling-video/v3.0/std/image-to-video"
+  ],
+  "retry_prior": "static_bg_light",
+  "clip_start": 0.8
+ }
+}

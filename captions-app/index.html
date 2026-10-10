@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>כתוביות הראל</title>
+<style>
+  :root{--accent:#6b7280;--accent2:#9ca3af;--bg:#0e0e10;--card:#191a1d;--line:#303136;--txt:#f4f4f5;--mut:#a1a1aa}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--txt);font-family:Heebo,Assistant,system-ui,-apple-system,Arial,sans-serif;min-height:100vh}
+  .wrap{max-width:760px;margin:0 auto;padding:calc(24px + env(safe-area-inset-top)) 18px calc(48px + env(safe-area-inset-bottom))}
+  header{display:flex;align-items:center;gap:13px;margin-bottom:22px}.logo{width:46px;height:46px;border-radius:13px;background:var(--accent);display:grid;place-items:center;font-weight:900;font-size:21px;transition:.2s}
+  h1{font-size:25px;margin:0}.sub,.hint,.meta,.status{color:var(--mut)}.sub{font-size:14px;margin-top:2px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}.step{display:none}.step.active{display:block;animation:fade .2s ease}@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+  .brand-title{font-weight:800;font-size:18px;margin-bottom:12px}.brands{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}.brand{border:2px solid var(--line);background:#121316;color:var(--txt);border-radius:15px;padding:16px 12px;cursor:pointer;text-align:right;font:inherit}.brand strong{display:block;font-size:17px}.brand small{display:block;color:var(--mut);margin-top:4px;line-height:1.45}.brand.personal.selected{border-color:#0077B6;background:#071c27}.brand.club.selected{border-color:#871d1f;background:#251012}
+  .drop{border:2px dashed #3b3c42;border-radius:16px;padding:46px 18px;text-align:center;cursor:pointer;transition:.15s}.drop:hover,.drop.hot{border-color:var(--accent);background:#15161a}.drop.disabled{opacity:.45;cursor:not-allowed}.ico{font-size:38px}.big{font-size:19px;font-weight:800}.small{color:var(--mut);font-size:14px;margin-top:7px}
+  .brand-chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--accent);border-radius:999px;padding:6px 10px;color:#fff;font-size:13px;margin-bottom:12px}.dot{width:9px;height:9px;border-radius:50%;background:var(--accent)}
+  .bar{height:10px;background:#292a2f;border-radius:99px;overflow:hidden;margin-top:18px}.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}.status{text-align:center;margin-top:13px}.spin{width:36px;height:36px;border:4px solid #303137;border-top-color:var(--accent);border-radius:50%;animation:rot 1s linear infinite;margin:auto}@keyframes rot{to{transform:rotate(360deg)}}
+  textarea{width:100%;min-height:220px;background:#0f1012;color:var(--txt);border:1px solid var(--line);border-radius:12px;padding:15px;font-size:17px;line-height:1.65;font-family:inherit;resize:vertical}.row{display:flex;gap:11px;margin-top:17px;flex-wrap:wrap}.btn{border:0;border-radius:12px;padding:14px 20px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;text-decoration:none}.btn.primary{background:var(--accent);color:#fff}.btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  .hint{font-size:13.5px;margin-top:11px;line-height:1.55}.meta{font-size:14px;margin-bottom:11px}.err{display:none;background:#2a1416;border:1px solid #61282b;color:#f3c3c5;padding:12px;border-radius:10px;margin-top:14px}.ok{color:#7dd39b;font-weight:800;font-size:18px;margin-bottom:10px}video{width:100%;max-height:60vh;border-radius:12px;background:#000}
+  @media(max-width:520px){.brands{grid-template-columns:1fr}.wrap{padding-left:14px;padding-right:14px}.card{padding:18px}.drop{padding:38px 14px}.btn{width:100%;text-align:center}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><div class="logo" id="logo">כ</div><div><h1>כתוביות הראל</h1><div class="sub">בוחרים מותג · מעלים · מתקנים · מורידים</div></div></header>
+
+  <section class="step active" id="s-upload"><div class="card">
+    <div class="brand-title">לאיזה מותג הסרטון?</div>
+    <div class="brands">
+      <button class="brand personal" data-brand="personal"><strong>אושיה — הראל חיון</strong><small>Heebo · מסגרת כחולה #0077B6</small></button>
+      <button class="brand club" data-brand="club"><strong>המועדון — CrossFit R.E.L</strong><small>Assistant ExtraBold · מסגרת אדומה #871d1f</small></button>
+    </div>
+    <div class="drop disabled" id="drop"><div class="ico">🎬</div><div class="big">בחרו מותג ואז סרטון</div><div class="small">MP4 / MOV · עד 4GB</div></div>
+    <div class="hint" id="style-hint">הבחירה מחייבת יחד את הפונט והצבע כדי למנוע ערבוב מותגים. השמע נשמר ללא שינוי.</div>
+  </div><input type="file" id="file" accept="video/*,.mp4,.mov" hidden></section>
+
+  <section class="step" id="s-progress"><div class="card"><div class="brand-chip"><i class="dot"></i><span class="brand-name"></span></div><div class="status" id="prog-title" style="font-size:18px;color:var(--txt);font-weight:800">מעלה את הסרטון…</div><div class="bar"><i id="prog-bar"></i></div><div class="status" id="prog-sub">0%</div></div></section>
+
+  <section class="step" id="s-edit"><div class="card"><div class="brand-chip"><i class="dot"></i><span class="brand-name"></span></div><div class="meta" id="edit-meta"></div><textarea id="transcript" spellcheck="false" placeholder="הטקסט שזוהה יופיע כאן…"></textarea><div class="hint">תקנו רק שגיאות תמלול ושמות. הפיסוק מוסר אוטומטית מהכתוביות.</div><div class="err" id="edit-err"></div><div class="row"><button class="btn primary" id="burn-btn">צרוב כתוביות והורד</button><button class="btn ghost" id="reset-1">התחל מחדש</button></div></div></section>
+
+  <section class="step" id="s-burn"><div class="card" style="text-align:center"><div class="brand-chip"><i class="dot"></i><span class="brand-name"></span></div><div class="spin"></div><div class="status" style="font-size:18px;color:var(--txt);font-weight:800;margin-top:16px">צורב כתוביות…</div><div class="status">הווידאו בלבד מקודד; האודיו מועתק כפי שהוא</div></div></section>
+
+  <section class="step" id="s-done"><div class="card"><div class="brand-chip"><i class="dot"></i><span class="brand-name"></span></div><div class="ok">✓ הסרטון מוכן</div><video id="result" controls playsinline></video><div class="row"><a class="btn primary" id="dl" href="#" download>הורד סרטון</a><button class="btn ghost" id="reset-2">סרטון חדש</button></div></div></section>
+</div>
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const steps=["s-upload","s-progress","s-edit","s-burn","s-done"];
+const PROFILES={personal:{label:"אושיה — הראל חיון",color:"#0077B6",logo:"ה",style:"Heebo לבן · מסגרת כחולה #0077B6"},club:{label:"המועדון — CrossFit R.E.L",color:"#871d1f",logo:"R",style:"Assistant ExtraBold לבן · מסגרת אדומה #871d1f"}};
+let JOB=null, BRAND=null;
+function show(id){steps.forEach(s=>$("#"+s).classList.toggle("active",s===id))}
+function applyBrand(brand){BRAND=brand;const p=PROFILES[brand];document.documentElement.style.setProperty("--accent",p.color);$("#logo").textContent=p.logo;$$('.brand').forEach(b=>b.classList.toggle('selected',b.dataset.brand===brand));$$('.brand-name').forEach(x=>x.textContent=p.label);$("#drop").classList.remove("disabled");$("#drop .big").textContent="בחרו או גררו סרטון";$("#style-hint").textContent=p.style+" · מילה אחת בכל פעם · השמע נשמר ללא שינוי."}
+$$('.brand').forEach(b=>b.addEventListener('click',()=>applyBrand(b.dataset.brand)));
+const drop=$("#drop"),file=$("#file");drop.addEventListener("click",()=>{if(!BRAND){alert("נא לבחור קודם אושיה או מועדון");return}file.click()});
+["dragover","dragenter"].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();if(BRAND)drop.classList.add("hot")}));["dragleave","drop"].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.remove("hot")}));drop.addEventListener("drop",ev=>{if(!BRAND){alert("נא לבחור קודם מותג");return}const f=ev.dataTransfer.files[0];if(f)startUpload(f)});file.addEventListener("change",()=>{if(file.files[0])startUpload(file.files[0])});
+function startUpload(f){if(!BRAND){alert("נא לבחור מותג");return}if(!(f.type||"").startsWith("video")&&!/\.(mp4|mov)$/i.test(f.name)){alert("נא לבחור קובץ וידאו");return}show("s-progress");$("#prog-title").textContent="מעלה את הסרטון…";$("#prog-bar").style.width="0%";$("#prog-sub").textContent="0%";const fd=new FormData();fd.append("video",f);fd.append("brand",BRAND);const xhr=new XMLHttpRequest();xhr.open("POST","/transcribe");xhr.upload.onprogress=e=>{if(e.lengthComputable){const p=Math.round(e.loaded/e.total*100);$("#prog-bar").style.width=p+"%";$("#prog-sub").textContent=p+"%";if(p>=100){$("#prog-title").textContent="מתמלל את הסרטון…";$("#prog-sub").textContent="מזהה דיבור בעברית"}}};xhr.onload=()=>{let r={};try{r=JSON.parse(xhr.responseText)}catch(e){}if(xhr.status!==200){show("s-upload");alert("שגיאה: "+(r.error||xhr.status));return}JOB=r.job;applyBrand(r.brand);$("#transcript").value=r.text||"";$("#edit-meta").textContent=`אורך: ${r.duration}s · ${r.words} מילים זוהו`;show("s-edit")};xhr.onerror=()=>{show("s-upload");alert("ההעלאה נכשלה — נסו שוב")};xhr.send(fd)}
+$("#burn-btn").addEventListener("click",async()=>{$("#edit-err").style.display="none";show("s-burn");try{const res=await fetch("/burn",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({job:JOB,text:$("#transcript").value})});const r=await res.json();if(!res.ok){show("s-edit");$("#edit-err").textContent=r.error||"שגיאת צריבה";$("#edit-err").style.display="block";return}$("#result").src=r.result+"?t="+Date.now();$("#dl").href=r.download;show("s-done")}catch(e){show("s-edit");$("#edit-err").textContent="שגיאה: "+e.message;$("#edit-err").style.display="block"}});
+function reset(){JOB=null;file.value="";$("#transcript").value="";$("#result").removeAttribute("src");show("s-upload")}$("#reset-1").addEventListener("click",reset);$("#reset-2").addEventListener("click",reset);
+(function(){const j=new URLSearchParams(location.search).get("job");if(!j)return;fetch("/resume/"+j).then(r=>r.json()).then(r=>{if(r.error)return;JOB=r.job;applyBrand(r.brand);$("#transcript").value=r.text||"";$("#edit-meta").textContent=`אורך: ${r.duration}s · ${r.words} מילים זוהו`;show("s-edit")}).catch(()=>{})})();
+</script>
+</body>
+</html>

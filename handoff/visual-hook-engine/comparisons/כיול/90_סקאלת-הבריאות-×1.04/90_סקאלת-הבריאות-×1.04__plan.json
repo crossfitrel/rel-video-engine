@@ -1,0 +1,83 @@
+{
+ "schema_version": 1,
+ "project_id": "prj_vhscan957987",
+ "input_digest": "sha256:6e0dcf86dc11ea2cbc7efae03a1f0c968c17268cb2f6fdd25e1d57e4093a332f",
+ "policy_digest": "sha256:04a9d9a591d5ed423be77d5f8aade8533a5e6fabc2eaaef21ebf85df68eaeaa5",
+ "reservation_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+ "recipe": "SMART_PUNCH_IN",
+ "recipe_version": 1,
+ "candidate_id": "cand_823d5cd60f71",
+ "timeline": {
+  "axis": "body_final",
+  "fps_num": 30,
+  "fps_den": 1,
+  "frame_count": 1698,
+  "intro_frames": 0
+ },
+ "audio_mode": "preserve",
+ "evidence": {
+  "word_ids": [
+   0,
+   1
+  ],
+  "quote": "על הלוח,",
+  "grade": "supported",
+  "reviewed_subjects": []
+ },
+ "assets": [],
+ "cues": [
+  {
+   "id": "cue_1",
+   "kind": "crop",
+   "start_frame": 24,
+   "end_frame": 79,
+   "interpolation": "smoothstep",
+   "keyframes": [
+    {
+     "frame": 24,
+     "rect": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "frame": 39,
+     "rect": [
+      0.019231,
+      0.019231,
+      0.961538,
+      0.961538
+     ]
+    },
+    {
+     "frame": 63,
+     "rect": [
+      0.019231,
+      0.019231,
+      0.961538,
+      0.961538
+     ]
+    },
+    {
+     "frame": 78,
+     "rect": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ]
+    }
+   ]
+  }
+ ],
+ "declared_transitions": [],
+ "selection": {
+  "actor": "harel",
+  "reason_codes": [
+   "operator_selected"
+  ]
+ },
+ "plan_digest": "sha256:85916c691a50bdaa4ac5e4cc6d0cb9ea66bd2694b7666658b5cc1526e16c7e4c"
+}

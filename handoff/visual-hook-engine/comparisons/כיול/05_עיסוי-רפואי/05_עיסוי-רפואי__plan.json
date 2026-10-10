@@ -1,0 +1,98 @@
+{
+ "schema_version": 1,
+ "project_id": "prj_vhscan736064",
+ "input_digest": "sha256:0fa9e4c0dc12d2b35b0bee9e27622380fc21c967ff239704fe165a0827774217",
+ "policy_digest": "sha256:04a9d9a591d5ed423be77d5f8aade8533a5e6fabc2eaaef21ebf85df68eaeaa5",
+ "reservation_digest": "sha256:c4c599be16155d2241280fe238db86e3c2fb52a5740dc38067522b729bec4167",
+ "recipe": "SMART_PUNCH_IN",
+ "recipe_version": 1,
+ "candidate_id": "cand_aea38b439b46",
+ "timeline": {
+  "axis": "body_final",
+  "fps_num": 30,
+  "fps_den": 1,
+  "frame_count": 932,
+  "intro_frames": 0
+ },
+ "audio_mode": "preserve",
+ "evidence": {
+  "word_ids": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16
+  ],
+  "quote": "בתור ספורטאי, אם היה נתון אחד שהייתי יכול לשפר בלחיצת כפתור, זה היה קצב ההתאוששות באימונים. בסוף",
+  "grade": "supported",
+  "reviewed_subjects": []
+ },
+ "assets": [],
+ "cues": [
+  {
+   "id": "cue_1",
+   "kind": "crop",
+   "start_frame": 126,
+   "end_frame": 202,
+   "interpolation": "smoothstep",
+   "keyframes": [
+    {
+     "frame": 126,
+     "rect": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ]
+    },
+    {
+     "frame": 141,
+     "rect": [
+      0.028302,
+      0.028302,
+      0.943396,
+      0.943396
+     ]
+    },
+    {
+     "frame": 186,
+     "rect": [
+      0.028302,
+      0.028302,
+      0.943396,
+      0.943396
+     ]
+    },
+    {
+     "frame": 201,
+     "rect": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ]
+    }
+   ]
+  }
+ ],
+ "declared_transitions": [],
+ "selection": {
+  "actor": "harel",
+  "reason_codes": [
+   "operator_selected"
+  ]
+ },
+ "plan_digest": "sha256:9f02140716a25e9e91ee0079971c42fc90ed9ac8ccf37a05b6fb71d51e73dfd8"
+}

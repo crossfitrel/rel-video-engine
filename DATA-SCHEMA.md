@@ -1,0 +1,130 @@
+# DATA-SCHEMA v7 — סכמות הנתונים
+עודכן 23.7.2026 (v7.2: schedule_approval). כל הקבצים UTF-8 JSON, כתיבה אטומית.
+
+## project_manifest.json
+```json
+{"project_id":"prj_<12hex>","name":"שם התיקייה","created_at":"...","monday_item_id":null,
+ "dept":null,"month":null,"content_type":"value|conversion","brand":"rel|personal|oshia",
+ "media":{"input":{"file":"INPUT.mp4","probe":{"duration":..,"width":..,"height":..,"fps":..,
+   "has_audio":true,"color_transfer":"...","rotation":0,"size_bytes":..},"checksum":"quick:<hex>"},
+  "final":{...},"export":{...}},
+ "schedule_approval":{"status":"pending|changes_requested|approved","cover_path":"thumbnail.png",
+   "caption_draft":"...","caption_approved":"...","approved_final_live_sig":[mtime,size],
+   "approved_final_checksum":"sha256:<hex>","approved_final_path":null,"approved_at":null,"note":null},
+ "updated_at":"..."}
+```
+checksum: sha256 מלא לקבצים ≤4MB, אחרת quick (גודל+1MB ראשון+אחרון).
+
+`schedule_approval` (v7.2): שער נפרד בין FINAL לתזמון. ב-`registry.set_schedule_approval(action="approve")`
+נכתבים תמיד יחד: `approved_final_live_sig` = `[mtime, size]` של FINAL.mp4 **באותו רגע** (stat בלבד, זול),
+ו-`approved_final_checksum` = sha256 מלא (יקר יותר, לתיעוד/לדיווח האימות (קריאה חוזרת ב-getScheduledPosts) בלבד — לא לגזירת state).
+**קריטי:** `derive_state` בכל קריאה עושה `stat()` חי על FINAL.mp4 בפועל ומשווה ל-`approved_final_live_sig`
+הרשום — לא סומך על checksum שנשמר במניפסט (`media.final.checksum` לא מתרענן אוטומטית כשקובץ משתנה, אז
+השוואה מולו הייתה עלולה "לפספס" קובץ שהוחלף — זה בדיוק הבאג שאותר ותוקן ב-23.7.26 בבדיקת עשן ידנית).
+אי-התאמה בין ה-stat החי ל-`approved_final_live_sig` = "הקובץ השתנה מאז האישור" → `state` חוזר אוטומטית
+ל-`awaiting_schedule_approval`, גם אם `status` עדיין רשום `"approved"`. `caption_approved`/`cover_path`/
+`approved_final_path` הם המקור היחיד שקלאוד מותר לו להשתמש בו כשמתזמן בפועל ב-Metricool.
+
+## revisions/rev_NNNN_<hex>.json
+```json
+{"revision_id":"rev_<hex>","parent_revision_id":"rev_..|null","seq":N,"ts":"...","actor":"harel|claude|machine",
+ "summary":"...","approved":false,"policy_version":"6.3","input_hash":"...","edl_hash":"sha256:...",
+ "kept_dur":..,"edl":{...snapshot מלא...},"transcript_source":"edited.txt|null","transcript":"...",
+ "transcript_hash":"...","actions":[...],"output_hash":null}
+```
+`revisions/index.json`: `{"head":id,"order":[ids],"redo":[ids]}` — undo מזיז head ל-parent ומשחזר קבצים; restore יוצר revision חדש.
+
+## comments.json (הערות = משימות קלאוד)
+```json
+[{"comment_id":"c_<hex>","revision_id":"rev בעת היצירה","edl_hash":"...","time_start":3.5,"time_end":null,
+  "frame":null,"category":"edit|transcript|hook|pacing|audio|captions|broll|cover|qa|general",
+  "priority":"low|normal|high|blocking","text":"...","actor":"harel","created_at":"...",
+  "status":"open|queued_for_claude|in_progress|resolved|rejected",
+  "resolution":null,"resolved_revision_id":null,"stale":false,"claimed_by":null}]
+```
+stale = ה-edl_hash הנוכחי שונה מזה שההערה נכתבה עליו → claim נעצר (exit 4) בלי --force.
+
+## runs/run_<hex>.json
+```json
+{"run_id":"run_<hex>","project":"...","revision_id":"...","pipeline_version":"v7.0",
+ "status":"starting|running|done|failed|cancelled|skipped_already_running","stage":"music|...",
+ "started_at":"...","finished_at":"...","command":[...],"edl_hash":"...","input_hash":"...",
+ "output_hash":"...","resume":"טקסט או null","retry_count":N,"exit_code":N,"log":"runs/run_x.log"}
+```
+`.finish.lock/meta.json`: `{"pid":N|null,"spawning":true?,"run_id":"...","started":"..."}`.
+
+## learn-state.json (v2)
+```json
+{"version":2,"projects":{"prj_x":{"name":"...","offset":N}},
+ "counts":{"value/personal":{"RC_SILENCE_RESTORE":n,...},"_legacy_v1":{...}}}
+```
+reason_codes: RC_SILENCE_RESTORE / RC_TAKE_RESTORE / RC_FILLER_RESTORE / RC_MANUAL_ADD /
+RC_BOUNDARY_ADJUST / RC_MERGE / RC_ACTIVATE / RC_HOOK / RC_TRANSCRIPT / RC_GATE_OVERRIDE /
+RC_MUSIC / RC_VIDEO_PATCH / RC_OTHER_RESTORE. אירוע יכול לשאת `reason_code` מפורש.
+
+## policy-proposals/proposal_<ts>.json
+```json
+{"proposal_id":"...","created_at":"...","policy_version_base":"6.3",
+ "changes":[{"key":"take_similarity","from":0.72,"to":0.75,"evidence":{...}}],
+ "status":"shadow|evaluated|applied","evaluation":{"regression":"PASS|FAIL","detail":{...}},
+ "applied_at":null,"policy_backup":null}
+```
+
+## music-rotation.json (v2)
+`{"version":2,"last":"track.mp3","history":{"track.mp3":"ts אחרון"}}` — חוק 90 יום; כולם בשימוש → LRU.
+
+## qa_report.json — gates: `{"gate","pass","detail","hard","warn"}`; pass כללי = אין hard fail.
+## cut_qa_report.json — `{"boundaries":[{"time","flags":["brightness_jump"...],"metrics":{...}}],"checked","flagged"}`
+## canon_report.json — `{"result":"PASS|PASS_WITH_WARNINGS|FAIL","checks":[{"rule","level":"PASS|WARNING|HARD_FAIL|INFO","detail"}]}`
+
+## artifacts/ — גרסאות הווידאו (v9.4) · פירוט מלא: `ARTIFACTS.md`
+```json
+// artifacts/art_<hex>/artifact.json
+{"artifact_id":"art_...","schema":1,"version":3,"created_at":"...","file":"FINAL.mp4",
+ "storage":"link|copy","size_bytes":27912345,"checksum":"sha256:...","duration":32.11,
+ "run_id":"run_...","revision_id":"rev_...","edl_hash":"sha256:...","input_hash":"...",
+ "kept_dur":32.1,"speed":1.0,"qa":{"pass":true,"gates":[...],"warnings":0},
+ "music":"track.mp3","broll_items":5,"brand":"rel","content_type":"value",
+ "approved_at":null,"published_at":null,"retain":false,"history":[{"ts","event","actor"}]}
+```
+```json
+// artifacts/pointers.json — ריצה מוצלחת מזיזה **רק** latest_candidate
+{"latest_candidate":"art_...","approved_final":"art_...","published_final":null,
+ "log":[{"ts","kind","from","to","actor","note"}]}
+```
+`artifacts/unmatched.json` — ריצות מוצלחות שהווידאו שלהן אינו על הדיסק:
+`{"unmatched_runs":[{"run_id","finished_at","output_hash","fault":"media_missing","detail"}]}`.
+**תקלה, לא גרסה** — לא מוצגות כגרסאות ניתנות לצפייה.
+`index.json` הוא cache בלבד (`reindex()`); `.staging_*` = יצירה שלא הושלמה, לא נספרת.
+
+## comments.json — שדות v9.4 נוספים
+`artifact_id` · `artifact_hash` · `artifact_version` — הגרסה שעליה נכתבה ההערה.
+הערות ישנות (`on_final` בלבד) נפתרות ב-`tasks.comment_artifact()` לפי זמן הכתיבה.
+
+## project_manifest.json → schedule_approval — שדות v9.4
+`artifact_id` · `artifact_version` · `artifact_checksum` · `artifact_path` —
+האישור נעול לגרסה, לא לנתיב `FINAL.mp4`. התזמון חייב לקחת את `artifact_path`.
+
+## runs/run_<id>.json — שינוי v9.4
+`output_hash` ו-`artifact_id` נחתמים **רק** כש-`status=="done"`. ריצה כושלת
+מחזירה `null` בשניהם (עד v9.4 היא ירשה את החתימה של FINAL ישן — 21 מקרים).
+
+## SQLite: _work/.index/registry.db
+טבלה יחידה `projects(project_id PK, name, state, brand, content_type, qa_state, open_comments, queued, updated_at, row_json)` — נבנית מחדש במלואה ב-rebuild; אסור לאחסן בה מידע שאין לו מקור בדיסק.
+
+## PREFLIGHT.json (v9.13) — פסק-הדין של המבקר-קדם
+`{"verdict":{"ready_for_harel":bool,"n_high","n_medium","n_low","keeps_source",
+"broll_items","out_dur","summary"},"findings":[{"check":"P1_cut_flash|...|P12_cover",
+"severity":"high|medium|low","detail","fix","why":{protects,cost_of_blocking,fallback}}]}`
+נכתב ע"י `preflight_critic.py` בסוף כל גימור (שלב 9f2). מדווח, לא חוסם.
+
+## lessons_for_director.json (v9.13) — למידה מ-n=1
+`{"version":1,"cohort":"conversion/rel","rules":[str,...],
+"harel_patterns":[{"code":"RC_*","guidance","n_events","n_projects"}]}`
+נבנה פעם אחת לפרויקט ע"י `director_lessons.py` (קפוא בלי `--rebuild`, בלי
+חותמות-זמן — יציבות digest). נכנס ל-payload הבמאי כ-`harel_lessons`.
+
+## visual_hook_*.json (11.9.26) — Visual Hook Engine
+> Optional workdir files are visual_hook_analysis.json, visual_hook_candidates.json, visual_hook_plan.json, visual_hook_render.json and visual_hook_report.json. Hook plans use schema_version 1 and integer 30fps half-open intervals on body_final, with intro_frames mapping to delivered_final. A plan binds project_id, input/policy/reservation digests, recipe version, evidence, source asset checksums, cues and declared transitions; audio_mode is preserve. Operational timestamps are excluded from semantic digests. Missing hook files are valid for legacy projects. Applied hook sidecars are immutable artifact evidence. Hook learning events use stable event IDs and distinguish explicit preference, general approval and render failure; future learned weights cannot alter frozen plans.
+
+מיקומים נוספים: `visual_hook/approved/<hex16>.json` (תוכנית מאושרת לפי digest) · `visual_hook/review/current.json` (תצוגה מקדימה טרייה; `stale_<run>.json` כשהטוקן השתנה) · `visual_hook/prep/<token>/` (עותק הכנה) · `visual_hook/analysis_cache/`. העדפות פר-פרויקט ב-`finish_prefs.visual_hook` (`mode`, `enabled`, `selected_candidate_id`, `strength`, `plan_digest`, `approved_plan_digest`, `comparison_seen`; גרסת ההעדפה נגזרת מתוכנן ומוחזרת כ-`pref_version` ל-409 על עריכה מקבילה). `APPROVAL.json.visual_hook` רק כשנקשרה תוכנית. `runs/run_<id>.json.job_kind` = `finish` | `hook_preview`.

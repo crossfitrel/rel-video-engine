@@ -1,0 +1,17 @@
+# Social Video Editing System v7 — תלויות Python
+# שתי סביבות:
+#   1. python3 המערכתי — מריץ את review-app ואת רוב כלי ה-EDL (stdlib בעיקר)
+#   2. ~/.rel-whisper/bin/python (venv) — whisper, צריבת כתוביות, thumbnail
+#
+# python3 מערכתי:
+flask>=2.0
+#
+# venv ~/.rel-whisper (מותקן שם בפועל; רשום כאן לתיעוד ושחזור):
+# faster-whisper>=1.0
+# pillow>=10
+# python-bidi>=0.4
+# numpy>=1.24
+# opencv-python>=4.8        # cover_inpaint / scan_faces
+#
+# מערכת (brew): ffmpeg (עם silencedetect/loudnorm/alimiter/xfade), curl
+# שחזור venv:  python3 -m venv ~/.rel-whisper && ~/.rel-whisper/bin/pip install faster-whisper pillow python-bidi numpy opencv-python

@@ -1,0 +1,37 @@
+{
+ "params": {
+  "band_top": 0.6,
+  "band_bot": 0.92,
+  "win_rows": 40,
+  "bright_v": 200,
+  "bright_s": 50,
+  "stroke_dilate": 4,
+  "stroke_tol": 46,
+  "stroke_colors_bgr": [
+   [
+    31,
+    29,
+    135
+   ],
+   [
+    182,
+    119,
+    0
+   ]
+  ],
+  "threshold": 0.02392,
+  "threshold_source": "measured"
+ },
+ "evidence": {
+  "projects_with_pairs": 19,
+  "clean_frames": 266,
+  "captioned_frames": 266,
+  "clean_p50": 0.0036,
+  "clean_p98": 0.01529,
+  "captioned_p05": 0.03255,
+  "captioned_p50": 0.07942,
+  "separation": true,
+  "false_block_rate": 0.0038,
+  "miss_rate": 0.0451
+ }
+}

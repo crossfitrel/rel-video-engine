@@ -1,0 +1,752 @@
+{
+ "measured_at": "2026-07-30 14:57:46",
+ "work_root": "/Users/hayon/rel-video-work",
+ "system_version": "v7.11",
+ "projects_in_work": 38,
+ "K1_boundary_adjustments": {
+  "raw_events_total": 1059,
+  "distinct_adjustments_total": 88,
+  "noop_roundtrips_total": 1,
+  "effective_adjustments_total": 87,
+  "projects_with_adjustments": 10,
+  "raw_per_project": 105.9,
+  "effective_per_project": 8.7,
+  "inflation_factor": 12.17,
+  "median_net_delta_sec": 0.4,
+  "per_project": {
+   "אופן-גים-השקה": {
+    "raw_events": 46,
+    "distinct_adjustments": 10,
+    "noop_roundtrips": 0,
+    "effective": 10
+   },
+   "אופן-גים-חיזוק": {
+    "raw_events": 0,
+    "distinct_adjustments": 0,
+    "noop_roundtrips": 0,
+    "effective": 0
+   },
+   "אוריה-המנהלת-המקצועית": {
+    "raw_events": 149,
+    "distinct_adjustments": 13,
+    "noop_roundtrips": 0,
+    "effective": 13
+   },
+   "ההבנה-האנטומית-סוגי-אחיזות": {
+    "raw_events": 393,
+    "distinct_adjustments": 14,
+    "noop_roundtrips": 0,
+    "effective": 14
+   },
+   "הלקח-הכי-חשוב-במכירות": {
+    "raw_events": 0,
+    "distinct_adjustments": 0,
+    "noop_roundtrips": 0,
+    "effective": 0
+   },
+   "טיפ-אחד-HSPU": {
+    "raw_events": 0,
+    "distinct_adjustments": 0,
+    "noop_roundtrips": 0,
+    "effective": 0
+   },
+   "טעויות-נפוצות-strict-pull-ups": {
+    "raw_events": 255,
+    "distinct_adjustments": 14,
+    "noop_roundtrips": 1,
+    "effective": 13
+   },
+   "יום-בחיים-של-הראל": {
+    "raw_events": 44,
+    "distinct_adjustments": 8,
+    "noop_roundtrips": 0,
+    "effective": 8
+   },
+   "מאסל-מן-רוטטור-קאף": {
+    "raw_events": 0,
+    "distinct_adjustments": 0,
+    "noop_roundtrips": 0,
+    "effective": 0
+   },
+   "מה-זה-להיות-בעל-מועדון": {
+    "raw_events": 0,
+    "distinct_adjustments": 0,
+    "noop_roundtrips": 0,
+    "effective": 0
+   },
+   "מי-אמר-שמאוחר-מידיי": {
+    "raw_events": 18,
+    "distinct_adjustments": 5,
+    "noop_roundtrips": 0,
+    "effective": 5
+   },
+   "ניפוץ-מיתוסים-לטיפול-מגיעים-רק-כשכואב": {
+    "raw_events": 27,
+    "distinct_adjustments": 7,
+    "noop_roundtrips": 0,
+    "effective": 7
+   },
+   "סקאלת-הבריאות": {
+    "raw_events": 48,
+    "distinct_adjustments": 6,
+    "noop_roundtrips": 0,
+    "effective": 6
+   },
+   "עיסוי-רפואי": {
+    "raw_events": 73,
+    "distinct_adjustments": 10,
+    "noop_roundtrips": 0,
+    "effective": 10
+   },
+   "צעדים-קטנים-כל-יום": {
+    "raw_events": 6,
+    "distinct_adjustments": 1,
+    "noop_roundtrips": 0,
+    "effective": 1
+   },
+   "רמז מקצה 3 - סולם": {
+    "raw_events": 0,
+    "distinct_adjustments": 0,
+    "noop_roundtrips": 0,
+    "effective": 0
+   },
+   "רמז מקצה ריצה": {
+    "raw_events": 0,
+    "distinct_adjustments": 0,
+    "noop_roundtrips": 0,
+    "effective": 0
+   },
+   "שינה-והתאוששות": {
+    "raw_events": 0,
+    "distinct_adjustments": 0,
+    "noop_roundtrips": 0,
+    "effective": 0
+   }
+  }
+ },
+ "K2_review_rounds": {
+  "projects_measured": 13,
+  "avg_rounds": 1.0,
+  "per_project": {
+   "אופן-גים-השקה": {
+    "harel_comments": 6,
+    "resolved": 6,
+    "open": 0,
+    "rounds_v6": 0
+   },
+   "אופן-גים-חיזוק": {
+    "harel_comments": 6,
+    "resolved": 4,
+    "open": 2,
+    "rounds_v6": 0
+   },
+   "אוריה-המנהלת-המקצועית": {
+    "harel_comments": 3,
+    "resolved": 2,
+    "open": 1,
+    "rounds_v6": 0
+   },
+   "ההבנה-האנטומית-סוגי-אחיזות": {
+    "harel_comments": 3,
+    "resolved": 3,
+    "open": 0,
+    "rounds_v6": 0
+   },
+   "הלקח-הכי-חשוב-במכירות": {
+    "harel_comments": 4,
+    "resolved": 4,
+    "open": 0,
+    "rounds_v6": 0
+   },
+   "טעויות-נפוצות-strict-pull-ups": {
+    "harel_comments": 1,
+    "resolved": 1,
+    "open": 0,
+    "rounds_v6": 0
+   },
+   "מאסל-מן-רוטטור-קאף": {
+    "harel_comments": 3,
+    "resolved": 1,
+    "open": 2,
+    "rounds_v6": 0
+   },
+   "מה-זה-להיות-בעל-מועדון": {
+    "harel_comments": 4,
+    "resolved": 2,
+    "open": 2,
+    "rounds_v6": 0
+   },
+   "מי-אמר-שמאוחר-מידיי": {
+    "harel_comments": 6,
+    "resolved": 5,
+    "open": 1,
+    "rounds_v6": 0
+   },
+   "ניפוץ-מיתוסים-לטיפול-מגיעים-רק-כשכואב": {
+    "harel_comments": 3,
+    "resolved": 1,
+    "open": 2,
+    "rounds_v6": 0
+   },
+   "סקאלת-הבריאות": {
+    "harel_comments": 5,
+    "resolved": 4,
+    "open": 1,
+    "rounds_v6": 0
+   },
+   "עיסוי-רפואי": {
+    "harel_comments": 3,
+    "resolved": 1,
+    "open": 2,
+    "rounds_v6": 0
+   },
+   "צעדים-קטנים-כל-יום": {
+    "harel_comments": 1,
+    "resolved": 1,
+    "open": 0,
+    "rounds_v6": 0
+   }
+  }
+ },
+ "K3_K4_K5_render": {
+  "K3_full_encodes": {
+   "measured_runs": 8,
+   "median": 5,
+   "min": 4,
+   "max": 6,
+   "static_full_path_worst_case": 7,
+   "note": "נמדד ממה שרץ בפועל; מסלול מלא עם broll+fx+speed_fit = 7"
+  },
+  "K4_aac_generations": {
+   "median": 5,
+   "min": 3,
+   "max": 5,
+   "note": "מעל INPUT שכבר aac 128k — הדור הראשון לא נמנה כאן"
+  },
+  "K5_finish_secs": {
+   "done_runs": 23,
+   "median": 51.5,
+   "p25": 27.8,
+   "max": 132.5
+  },
+  "per_project": {
+   "אופן-גים-השקה": {
+    "encode_stages": [
+     "broll",
+     "fixed_intro",
+     "captions",
+     "deliver"
+    ],
+    "n_encodes": 4,
+    "aac_stages": [
+     "fixed_intro",
+     "music",
+     "loudness"
+    ],
+    "n_aac_generations": 3,
+    "refinish": true
+   },
+   "אופן-גים-חיזוק": {
+    "encode_stages": [
+     "broll",
+     "fixed_intro",
+     "captions",
+     "deliver"
+    ],
+    "n_encodes": 4,
+    "aac_stages": [
+     "fixed_intro",
+     "music",
+     "loudness"
+    ],
+    "n_aac_generations": 3,
+    "refinish": true
+   },
+   "טעויות-נפוצות-strict-pull-ups": {
+    "encode_stages": [
+     "recut",
+     "tighten",
+     "fixed_intro",
+     "captions",
+     "deliver"
+    ],
+    "n_encodes": 5,
+    "aac_stages": [
+     "recut",
+     "tighten",
+     "fixed_intro",
+     "music",
+     "loudness"
+    ],
+    "n_aac_generations": 5,
+    "refinish": false
+   },
+   "יום-בחיים-של-הראל": {
+    "encode_stages": [
+     "recut",
+     "tighten",
+     "broll",
+     "fixed_intro",
+     "captions"
+    ],
+    "n_encodes": 5,
+    "aac_stages": [
+     "recut",
+     "tighten",
+     "fixed_intro",
+     "music",
+     "loudness"
+    ],
+    "n_aac_generations": 5,
+    "refinish": false
+   },
+   "מאסל-מן-רוטטור-קאף": {
+    "encode_stages": [
+     "recut",
+     "tighten",
+     "broll",
+     "fixed_intro",
+     "captions",
+     "deliver"
+    ],
+    "n_encodes": 6,
+    "aac_stages": [
+     "recut",
+     "tighten",
+     "fixed_intro",
+     "music",
+     "loudness"
+    ],
+    "n_aac_generations": 5,
+    "refinish": false
+   },
+   "מה-זה-להיות-בעל-מועדון": {
+    "encode_stages": [
+     "broll",
+     "fixed_intro",
+     "captions",
+     "deliver"
+    ],
+    "n_encodes": 4,
+    "aac_stages": [
+     "fixed_intro",
+     "music",
+     "loudness"
+    ],
+    "n_aac_generations": 3,
+    "refinish": true
+   },
+   "ניפוץ-מיתוסים-לטיפול-מגיעים-רק-כשכואב": {
+    "encode_stages": [
+     "recut",
+     "tighten",
+     "broll",
+     "fixed_intro",
+     "captions",
+     "deliver"
+    ],
+    "n_encodes": 6,
+    "aac_stages": [
+     "recut",
+     "tighten",
+     "fixed_intro",
+     "music",
+     "loudness"
+    ],
+    "n_aac_generations": 5,
+    "refinish": false
+   },
+   "צעדים-קטנים-כל-יום": {
+    "encode_stages": [
+     "recut",
+     "tighten",
+     "broll",
+     "fixed_intro",
+     "captions",
+     "deliver"
+    ],
+    "n_encodes": 6,
+    "aac_stages": [
+     "recut",
+     "tighten",
+     "fixed_intro",
+     "music",
+     "loudness"
+    ],
+    "n_aac_generations": 5,
+    "refinish": false
+   }
+  }
+ },
+ "K7_gates": {
+  "gates_total": 12,
+  "hard_blocking": 5,
+  "hard_gate_ids": [
+   "G1_duration",
+   "G3_av_sync",
+   "G5_format",
+   "G6_captions_sync",
+   "G6b_captions_measured"
+  ],
+  "all_gates": {
+   "G1_duration": "True",
+   "G1b_target_range": "False",
+   "G2_silence": "False",
+   "G3_av_sync": "True",
+   "G4_loudness": "False",
+   "G5_format": "True",
+   "G5b_fps_30": "False",
+   "G6_captions_sync": "True",
+   "G6b_captions_measured": "True",
+   "G6c_caption_drift_bias": "False",
+   "G8_opening_flash": "False",
+   "G7_hook_intact": "False"
+  },
+  "tool_gates": {
+   "canon_lint": {
+    "blocking": true,
+    "why": "חוסם לפני הקידום"
+   },
+   "cut_qa": {
+    "blocking": true,
+    "why": "חוסם לפני הקידום"
+   },
+   "caption_safety": {
+    "blocking": true,
+    "why": "חוסם לפני הקידום"
+   }
+  },
+  "tool_gates_blocking": 3,
+  "total_blocking_checks": 8,
+  "gates_before_promote": true
+ },
+ "K9_learning_coverage": {
+  "events_total": 1608,
+  "recognized": 1139,
+  "dropped": 469,
+  "dropped_pct": 29.2,
+  "recognized_report_only": 1134,
+  "recognized_report_only_pct_of_recognized": 99.6,
+  "recognized_calibratable": 5,
+  "kept_codes": {
+   "RC_BOUNDARY_ADJUST": 1061,
+   "RC_MANUAL_ADD": 29,
+   "RC_OTHER_RESTORE": 22,
+   "RC_ACTIVATE": 10,
+   "RC_TRANSCRIPT": 7,
+   "RC_SILENCE_RESTORE": 5,
+   "RC_VIDEO_PATCH": 2,
+   "RC_MERGE": 1,
+   "RC_GATE_OVERRIDE": 1,
+   "RC_MUSIC": 1
+  },
+  "dropped_types": {
+   "notes_update": 118,
+   "comment_updated": 81,
+   "comment_added": 48,
+   "task_resolved": 37,
+   "set_speed": 35,
+   "manual_meta": 32,
+   "schedule_review_set_draft": 21,
+   "finish_prefs": 16,
+   "refinish": 14,
+   "approve": 12,
+   "transcript_linguistic_sanity_check": 9,
+   "snap_cuts_to_words": 9,
+   "note_sent": 8,
+   "schedule_review_approve": 4,
+   "round_correct": 3,
+   "harel_note_edit": 2,
+   "restore_revision": 2,
+   "sync_review_from_keeps": 2,
+   "broll_insert": 2,
+   "audio_leveling": 1,
+   "finding": 1,
+   "reorder_segments": 1,
+   "root_cause_fix_mixed_framerate": 1,
+   "harel_note_edit_2rounds": 1,
+   "verification": 1,
+   "broll_revision": 1,
+   "caption_text_fix": 1,
+   "investigation": 1,
+   "gaze_flash_diagnosis": 1,
+   "word_clip_fix": 1,
+   "audio_bug_fix": 1,
+   "feature": 1,
+   "policy_update": 1
+  },
+  "min_evidence": 6,
+  "min_projects": 3
+ },
+ "K10_golden_coverage": {
+  "cases": 5,
+  "policy_at_capture": "6.3",
+  "auto_cuts": 38,
+  "manual_cuts": 11,
+  "families_total": 9,
+  "families_fired": 3,
+  "fired_counts": {
+   "silence": 47,
+   "take_duplicate": 2,
+   "filler": 0,
+   "director_command": 0,
+   "fragment": 0,
+   "false_start": 0,
+   "take_marker": 0,
+   "visual_opening": 2,
+   "format_intro": 0
+  },
+  "allow_missed_default": 3
+ },
+ "K11_magic_numbers": {
+  "total_float_literals_outside_policy": 71,
+  "per_file": {
+   "edl_build.py": {
+    "count": 29,
+    "samples": [
+     {
+      "line": 82,
+      "value": 0.5,
+      "code": "total = a.end or (words[-1][\"end\"] + 0.5)"
+     },
+     {
+      "line": 87,
+      "value": 0.06,
+      "code": "if e - s >= 0.06:"
+     },
+     {
+      "line": 138,
+      "value": 0.03,
+      "code": "marker_cuts.append((w_last[\"start\"] - 0.03, w_last[\"end\"] + 0.05,"
+     },
+     {
+      "line": 138,
+      "value": 0.05,
+      "code": "marker_cuts.append((w_last[\"start\"] - 0.03, w_last[\"end\"] + 0.05,"
+     },
+     {
+      "line": 144,
+      "value": 0.05,
+      "code": "marker_cuts.append((w_first[\"start\"] - 0.05, w_first[\"end\"] + 0.04,"
+     },
+     {
+      "line": 144,
+      "value": 0.04,
+      "code": "marker_cuts.append((w_first[\"start\"] - 0.05, w_first[\"end\"] + 0.04,"
+     },
+     {
+      "line": 184,
+      "value": 0.05,
+      "code": "add_cut(w_[\"start\"] - 0.05, w_[\"end\"] + 0.05,"
+     },
+     {
+      "line": 184,
+      "value": 0.05,
+      "code": "add_cut(w_[\"start\"] - 0.05, w_[\"end\"] + 0.05,"
+     },
+     {
+      "line": 210,
+      "value": 0.82,
+      "code": "if containment(short, long_) >= P.get(\"take_containment\", 0.82):"
+     },
+     {
+      "line": 242,
+      "value": 0.05,
+      "code": "add_cut(ws_[\"start\"] - 0.05, we_[\"end\"] + 0.05,"
+     },
+     {
+      "line": 242,
+      "value": 0.05,
+      "code": "add_cut(ws_[\"start\"] - 0.05, we_[\"end\"] + 0.05,"
+     },
+     {
+      "line": 252,
+      "value": 0.62,
+      "code": "if sent_sim(sents[i][\"text\"], \" \".join(nxt.split()[: len(cur_toks) + 2])) >= 0.62:"
+     }
+    ]
+   },
+   "tighten_finish.py": {
+    "count": 15,
+    "samples": [
+     {
+      "line": 9,
+      "value": 1.1,
+      "code": "python3 tighten_finish.py --in ROUGH.mp4 --out ROUGH2.mp4 [--speed 1.1]"
+     },
+     {
+      "line": 10,
+      "value": 0.6,
+      "code": "[--keep-sil 0.12] [--noise -30] [--min-sil 0.30] [--intro-keep 0.0] [--tail-keep 0.6]"
+     },
+     {
+      "line": 50,
+      "value": 0.6,
+      "code": "ap.add_argument(\"--tail-keep\", type=float, default=0.6, help=\"להשאיר עד N שניות שקט בסוף (סגיר)\")"
+     },
+     {
+      "line": 52,
+      "value": 19.7,
+      "code": "ap.add_argument(\"--protect-words\", help=\"words JSON (whisper) — שקט שחופף מילה לא נחתך (הגנה מחיתוך דיבור שקט;"
+     },
+     {
+      "line": 56,
+      "value": 19.7,
+      "code": "help=\"קרוספייד קצר (שניות) בכל תפר הידוק, נגד 'פלאש' קפיצת-פריים (לקח 19.7). 0=כבוי\")"
+     },
+     {
+      "line": 70,
+      "value": 0.05,
+      "code": "float(w[\"start\"]) + a.word_margin + 0.05)"
+     },
+     {
+      "line": 100,
+      "value": 0.02,
+      "code": "if cstart < e - 0.02:"
+     },
+     {
+      "line": 107,
+      "value": 0.05,
+      "code": "if ce - cs > 0.05:"
+     },
+     {
+      "line": 112,
+      "value": 8.0,
+      "code": "cta_zone = D - 8.0"
+     },
+     {
+      "line": 113,
+      "value": 0.8,
+      "code": "cuts = [(cs, ce) for cs, ce in cuts if cs < cta_zone or (ce - cs) >= 0.8]"
+     },
+     {
+      "line": 117,
+      "value": 5.0,
+      "code": "recent = [c for c in limited if cs - c[0] < 5.0]"
+     },
+     {
+      "line": 129,
+      "value": 0.04,
+      "code": "if cs > pos + 0.04:"
+     }
+    ]
+   },
+   "broll_pick.py": {
+    "count": 26,
+    "samples": [
+     {
+      "line": 78,
+      "value": 0.08,
+      "code": "SAFE_TAIL = 0.08"
+     },
+     {
+      "line": 84,
+      "value": 2.8,
+      "code": "\"conversion\":  {\"n\": 8, \"gap\": 0.0, \"clip_len\": 2.8, \"min_relevance\": 1.0,"
+     },
+     {
+      "line": 85,
+      "value": 0.25,
+      "code": "\"rel_ratio\": 0.25, \"anchor\": \"flow\", \"fill\": True, \"bridge_gap\": 2.5,"
+     },
+     {
+      "line": 97,
+      "value": 8.0,
+      "code": "\"value\":       {\"n\": 2, \"gap\": 8.0, \"clip_len\": 3.0, \"min_relevance\": 2.0,"
+     },
+     {
+      "line": 98,
+      "value": 0.5,
+      "code": "\"rel_ratio\": 0.5, \"anchor\": \"transcript\","
+     },
+     {
+      "line": 100,
+      "value": 8.0,
+      "code": "\"community\":   {\"n\": 2, \"gap\": 8.0, \"clip_len\": 3.0, \"min_relevance\": 2.0,"
+     },
+     {
+      "line": 101,
+      "value": 0.5,
+      "code": "\"rel_ratio\": 0.5, \"anchor\": \"transcript\"},"
+     },
+     {
+      "line": 102,
+      "value": 10.0,
+      "code": "\"testimonial\": {\"n\": 1, \"gap\": 10.0, \"clip_len\": 3.0, \"min_relevance\": 2.5,"
+     },
+     {
+      "line": 103,
+      "value": 0.5,
+      "code": "\"rel_ratio\": 0.5, \"anchor\": \"transcript\"},"
+     },
+     {
+      "line": 104,
+      "value": 7.0,
+      "code": "\"rehab\":       {\"n\": 2, \"gap\": 7.0, \"clip_len\": 3.0, \"min_relevance\": 2.0,"
+     },
+     {
+      "line": 105,
+      "value": 0.5,
+      "code": "\"rel_ratio\": 0.5, \"anchor\": \"transcript\"},"
+     },
+     {
+      "line": 106,
+      "value": 5.0,
+      "code": "\"kids\":        {\"n\": 3, \"gap\": 5.0, \"clip_len\": 2.8, \"min_relevance\": 1.5,"
+     }
+    ]
+   },
+   "story_structure.py": {
+    "count": 1,
+    "samples": [
+     {
+      "line": 87,
+      "value": 0.75,
+      "code": "if ratio > 0.75 and len(txt.split()) >= 4:"
+     }
+    ]
+   }
+  },
+  "policy_keys": 31,
+  "dead_policy_keys": [
+   "silence_between_takes_keep",
+   "punch_beat_keep"
+  ]
+ },
+ "K13_doc_drift": {
+  "checks": [
+   {
+    "check": "PIPELINE.md: music lufs",
+    "consistent": true,
+    "detail": "code=-44.0 · מחפש '44' במסמך"
+   },
+   {
+    "check": "AUDIO-MIX.md: music lufs",
+    "consistent": true,
+    "detail": "code=-44.0 · מחפש '44' במסמך"
+   },
+   {
+    "check": "tighten noise: code vs inline comment",
+    "consistent": true,
+    "detail": "code=-40dB · המסמך/ההערה חייבים לנקוב באותו מספר"
+   },
+   {
+    "check": "SKILL: stale 1.5s audio gate string absent",
+    "consistent": true,
+    "detail": "gate בפועל 0.6ש"
+   },
+   {
+    "check": "AUDIO-MIX: does not claim Descript owns the mix",
+    "consistent": true,
+    "detail": "השורה הראשונה טוענת שהמיקס ב-Descript"
+   },
+   {
+    "check": "TESTING.md unit-test count",
+    "consistent": true,
+    "detail": "actual=93"
+   }
+  ],
+  "inconsistent": 0,
+  "inconsistent_list": []
+ }
+}

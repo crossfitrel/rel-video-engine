@@ -1,0 +1,26 @@
+{
+ "_doc": "פסיקות הראל על שכבת עריכת ההוק (hook_fx). דאטה, לא צ'אט. P22 קורא: פרויקט עם פסיקת reject על מתכון = ממצא אם המתכון חוזר.",
+ "verdicts": [
+  {
+   "date": "2026-10-08",
+   "project": "ראיון-פודיומיסטים-המנצחים-מדברים",
+   "recipe": "reaction_punch",
+   "verdict": "reject",
+   "quote": "בסרטון של שיילי זה לא מתאים שם האפקט הזה"
+  },
+  {
+   "date": "2026-10-08",
+   "project": "טיפ-אחד-HSPU",
+   "recipe": "push_tension",
+   "verdict": "approve",
+   "quote": "מאשר הכל"
+  },
+  {
+   "date": "2026-10-08",
+   "project": "אפליקציית-משימות-בפרומפט-אחד",
+   "recipe": "dramatic_zoom",
+   "verdict": "approve",
+   "quote": "מאשר הכל"
+  }
+ ]
+}

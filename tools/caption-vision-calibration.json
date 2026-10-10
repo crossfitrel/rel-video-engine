@@ -1,0 +1,231 @@
+{
+ "params": {
+  "f_ok_min": 0.55,
+  "f1_min": 0.579,
+  "rev_margin": 0.041,
+  "missing_ink_ratio": 0.23,
+  "extra_ink_ratio": 0.35,
+  "sym_iou": 0.75,
+  "source": "measured",
+  "blocking": [
+   "reversed",
+   "missing",
+   "garbled",
+   "tofu",
+   "garbled_cue"
+  ],
+  "blocking_rule": "חיובי-שגוי 0 על המאושרים ותפיסה ≥95% בהזרקת כשל",
+  "min_hits": {
+   "reversed": 3,
+   "missing": 2,
+   "garbled": 3,
+   "garbled_cue": 3
+  },
+  "min_frac": {
+   "reversed": 0.2,
+   "garbled": 0.25
+  },
+  "g1_max": 0.3
+ },
+ "evidence": {
+  "videos": [
+   "סקאלת-הבריאות",
+   "טעויות-נפוצות-strict-pull-ups",
+   "הלקח-הכי-חשוב-במכירות",
+   "מי-אמר-שמאוחר-מידיי",
+   "שינה-והתאוששות",
+   "אופן-גים-חיזוק",
+   "מה-זה-להיות-בעל-מועדון",
+   "יום-בחיים-של-הראל",
+   "ההבנה-האנטומית-סוגי-אחיזות",
+   "ניפוץ-מיתוסים-לטיפול-מגיעים-רק-כשכואב",
+   "אוריה-המנהלת-המקצועית",
+   "צעדים-קטנים-כל-יום",
+   "טיפ-אחד-HSPU",
+   "אופן-גים-השקה",
+   "עיסוי-רפואי",
+   "מאסל-מן-רוטטור-קאף"
+  ],
+  "n_pos": 1225,
+  "synthetic_ok_median": 0.875,
+  "pos_f_ok": {
+   "p01": 0.754,
+   "p50": 0.875,
+   "min": 0.699
+  },
+  "neg_tofu_f_ok_p95": 0.726,
+  "pos_rev_margin_max": -0.003,
+  "neg_rev_margin_p05": 0.084,
+  "pos_ink_in_min": 0.445,
+  "neg_missing_ink_p95": 0.014,
+  "pos_ink_out_max": 0.152,
+  "neg_doubled_ink_out_p05": 0.099,
+  "pos_false_garbled": 0.0,
+  "pos_f1_min": 0.595,
+  "neg_garbled_f1_p95_max": 0.562,
+  "pos_false_reversed": 0.0,
+  "pos_false_missing": 0.0,
+  "pos_false_extra": 0.0,
+  "neg": {
+   "reversed": {
+    "n": 1210,
+    "caught": 0.9942
+   },
+   "tofu": {
+    "n": 1225,
+    "caught": 0.9837
+   },
+   "scrambled": {
+    "n": 1225,
+    "caught": 0.9869
+   },
+   "wrong_word": {
+    "n": 1223,
+    "caught": 0.9984
+   },
+   "wrong_font": {
+    "n": 1225,
+    "caught": 0.2204
+   },
+   "missing": {
+    "n": 1225,
+    "caught": 1.0
+   },
+   "doubled": {
+    "n": 1225,
+    "caught": 0.5976
+   }
+  },
+  "pos_f_ok1": {
+   "min": 0.595,
+   "p01": 0.636
+  },
+  "neg_quantiles": {
+   "reversed": {
+    "f_ok_p50": 0.684,
+    "f_ok_p95": 0.771,
+    "f_ok1_p50": 0.49,
+    "f_ok1_p95": 0.569
+   },
+   "tofu": {
+    "f_ok_p50": 0.658,
+    "f_ok_p95": 0.726,
+    "f_ok1_p50": 0.495,
+    "f_ok1_p95": 0.55
+   },
+   "scrambled": {
+    "f_ok_p50": 0.681,
+    "f_ok_p95": 0.763,
+    "f_ok1_p50": 0.487,
+    "f_ok1_p95": 0.562
+   },
+   "wrong_word": {
+    "f_ok_p50": 0.605,
+    "f_ok_p95": 0.705,
+    "f_ok1_p50": 0.426,
+    "f_ok1_p95": 0.504
+   },
+   "wrong_font": {
+    "f_ok_p50": 0.842,
+    "f_ok_p95": 0.887,
+    "f_ok1_p50": 0.618,
+    "f_ok1_p95": 0.675
+   },
+   "missing": {
+    "f_ok_p50": 0.0,
+    "f_ok_p95": 0.058,
+    "f_ok1_p50": 0.0,
+    "f_ok1_p95": 0.022
+   },
+   "doubled": {
+    "f_ok_p50": 0.844,
+    "f_ok_p95": 0.888,
+    "f_ok1_p50": 0.686,
+    "f_ok1_p95": 0.738
+   }
+  },
+  "note": "16 סרטוני reference_profile; טיפ-אחד-HSPU נמדד מול words_final3.json (הקובץ שממנו נצרב בפועל — words_final.json בתיקייה אינו תואם ל-FINAL; נמצא ע\"י הכלי עצמו). מאסל-מן: היסט פתיח 10.1ש נאמד (לא רשום ב-FINAL_PROVENANCE).",
+  "pos_false_garbled_cue": 0.0,
+  "garbled_cue_w6": {
+   "date": "2026-09-23",
+   "metric": "g1 = f_ok1 × r1 (סבולת 1px)",
+   "g1_max": 0.3,
+   "min_hits": 3,
+   "positives": "4417 cues — כל ה-cues של 50 FINAL חיים (13 Throwdown), בלי קניות-v2",
+   "worst_live_video": {
+    "cues_below": 2,
+    "project": "דרג-לי-את-הפודיום-עלית-גברים",
+    "n_cues": 70
+   },
+   "videos_with_any_cue_below": 1,
+   "next_step_thr_0.31_worst": 2,
+   "catch_per_cue_injection": {
+    "tofu": 0.9078,
+    "scrambled": 0.9967,
+    "wrong_word": 1.0,
+    "stale_prev": 0.0013
+   },
+   "known_bad_kniyot_v2": [
+    6,
+    114
+   ],
+   "true_defect_hahavana_39_25_g1": [
+    0.156
+   ],
+   "why_not_f_ok1": "f_ok1 לבד: החיובי הנמוך 0.512 (דרג-לי 'דני', רקע אירוע) מתחת ל-p95 של שליליים — דיו זר ברקע (אדום-לבן) מוריד precision ולא recall; g1 שוקל recall. רקע לבן מוריד גם recall — שם השאריות.",
+   "stale_prev_not_caught": "מילה קודמת שלא נוקתה (חפיפה במקום) — 0.13% נתפס; כשל אחר, לא garbled",
+   "evidence": "_opus55_wave6/v7_full.*.jsonl · v7_rows.*.jsonl · w6_v7_analyze3.py",
+   "residual_2_cues_by_eye": "דרג-לי 21.53ש 'בסדר' ו-23.51ש 'דני' — הכתובית נכונה, על חולצה לבנה: המילוי הלבן נבלע ברקע ⇒ recall יורד. לכן min_hits=3 ולא 1",
+   "e2e_copy": "_opus55_wave6/e2e_garbled_cue.txt — עותק נקי rc=0; 3 מילים מוזרקות ⇒ garbled_cue 6, rc=1; garbled הישן 8/71 (11%) לא היה חוסם"
+  },
+  "extra_ink_components_w6": {
+   "date": "2026-09-23",
+   "verdict": "נמדד ונפל — לא נכנס לקוד",
+   "metric": "רכיב מחובר של דיו-כתובית (שטח ≥15% מהצפוי) מחוץ ל-bbox הצפוי ±24px",
+   "fp0_threshold_far_area": 0.246,
+   "catch_at_fp0": {
+    "event:doubled": 0.285,
+    "event:doubled_far": 0.818,
+    "regular:doubled": 0.211,
+    "regular:doubled_far": 0.775
+   },
+   "ink_out_catch_at_fp0": {
+    "event:doubled": 0.738,
+    "event:doubled_far": 0.821,
+    "regular:doubled": 0.656,
+    "regular:doubled_far": 0.767
+   },
+   "combined_catch": {
+    "far_thr": 0.246,
+    "ink_thr": 0.313,
+    "doubled": 0.684,
+    "doubled_far": 0.85
+   },
+   "why": "החיוביים עם רכיב רחוק הם לוגו R.E.L על חולצת המועדון (לבן במתאר אדום) ורצועות יד — נבדק בעין (extra_far_pos_sheet.jpg). כפילות שחופפת את המילה מתמזגת לרכיב אחד."
+  },
+  "face_eyes_w6": {
+   "date": "2026-09-23",
+   "haar_hits": 35,
+   "cues": 3656,
+   "videos": 50,
+   "true_by_eye": 4,
+   "eyes_ge2": {
+    "tp": 4,
+    "fp": 0
+   },
+   "dynamic_marginv": "marginv 330 מנקה 4/4 האמיתיות — כולן ב-2 שניות סלפי של סרטון אחד (1/50). לא מומש: 4 cues מ-3,656, ומחיר של קפיצת מיקום; הגלאי המאומת מדווח אותם ל-P20",
+   "evidence": "_opus55_wave6/face_rows.json · face_eyes.json · face_sheet_0.jpg"
+  }
+ },
+ "_readme": "ספי caption_vision — נמדדו על FINAL מאושרים (חיוביים) מול הזרקת כשל על רקע EXPORT אמיתי מאותם סרטונים (שליליים). רק דגל ב-blocking חוסם.",
+ "measured_at": "2026-09-22",
+ "live_sweep": {
+  "date": "2026-09-22",
+  "n_finals": 40,
+  "note": "garbled הוצא מחסימה: דרג-לי-את-הפודיום 5 cues תקינים סומנו (רקע אירוע עמוס) — נבדק בעין. reversed בודד (ההבנה-האנטומית-סוגי-קרעים 39.25ש) היה בפועל מילה אחרת על המסך (נגע מול שזה) — ממצא ציר, לא היפוך ⇒ reversed דורש ≥3 cues ו-≥20%. קניות-v2: 59 garbled + מתאר כחול על מניפסט rel — פונט כתוביות אחר (לפני תיקון 24.8.26), ממצא אמיתי.",
+  "garbled_frac_max_ok": 0.053,
+  "garbled_frac_real_failure": 0.492,
+  "note_v930": "garbled חזר לחוסם כתקלה שיטתית בלבד (≥25% ו-≥3 cues) — מפריד 5.3% (חיובי-שגוי מקסימלי) מ-49% (תקלה אמיתית)."
+ },
+ "measured_at_w6": "2026-09-23"
+}

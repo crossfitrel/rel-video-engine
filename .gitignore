@@ -1,0 +1,30 @@
+# ספריות ונכסים כבדים — חיים ב-Drive של hayonhq (REL Video Cloud/ספריות), נמשכים ב-cloud/state_sync.sh pull
+/בירולים/
+/בירולים - מיכאל לוי 28.5/
+/brand-assets/
+*.mp4
+*.mov
+*.m4a
+*.mp3
+*.wav
+*.png
+*.jpg
+*.jpeg
+*.ttf
+*.otf
+*.task
+*.onnx
+*.zip
+*.tgz
+__pycache__/
+*.pyc
+.DS_Store
+*.bak*
+*.log
+tools/gallery_ledger.json
+handoff/.baseline/
+tools/policy-proposals/
+# סודות — לעולם לא בריפו
+*.conf
+.env*
+rclone.conf

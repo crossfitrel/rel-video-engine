@@ -1,0 +1,167 @@
+{
+ "_doc": "צלילי ההוק — Mixkit Free License (מסחרי, בלי קרדיט). peak_at = שניות מתחילת הקובץ לשיא (riser: align=end). מנורמלים ל-‎-16 LUFS; hook_fx.py קובע עוצמה יחסית לדיבור.",
+ "license": "Mixkit Free License — https://mixkit.co/license/ (מאומת 8.10.26 דרך mixkit.co/llm-info)",
+ "target_lufs": -16.0,
+ "items": [
+  {
+   "key": "swish_1",
+   "role": "swish",
+   "file": "swish_1.wav",
+   "dur": 0.872,
+   "peak_at": 0.623,
+   "align": "peak",
+   "lufs": -16.1,
+   "source": "mixkit:1492 — Cinematic whoosh fast transition"
+  },
+  {
+   "key": "swish_2",
+   "role": "swish",
+   "file": "swish_2.wav",
+   "dur": 0.9,
+   "peak_at": 0.346,
+   "align": "peak",
+   "lufs": -16.0,
+   "source": "mixkit:1490 — Fast whoosh transition"
+  },
+  {
+   "key": "swish_3",
+   "role": "swish",
+   "file": "swish_3.wav",
+   "dur": 0.679,
+   "peak_at": 0.239,
+   "align": "peak",
+   "lufs": -15.9,
+   "source": "mixkit:166 — Fast small sweep transition"
+  },
+  {
+   "key": "swish_4",
+   "role": "swish",
+   "file": "swish_4.wav",
+   "dur": 0.785,
+   "peak_at": 0.255,
+   "align": "peak",
+   "lufs": -16.0,
+   "source": "mixkit:168 — Fast air sweep transition"
+  },
+  {
+   "key": "zoom_1",
+   "role": "zoom",
+   "file": "zoom_1.wav",
+   "dur": 0.9,
+   "peak_at": 0.18,
+   "align": "peak",
+   "lufs": -15.9,
+   "source": "mixkit:2608 — Air zoom vacuum"
+  },
+  {
+   "key": "zoom_2",
+   "role": "zoom",
+   "file": "zoom_2.wav",
+   "dur": 1.0,
+   "peak_at": 0.453,
+   "align": "peak",
+   "lufs": -16.0,
+   "source": "mixkit:772 — Quick zoom impact"
+  },
+  {
+   "key": "impact_1",
+   "role": "impact",
+   "file": "impact_1.wav",
+   "dur": 2.2,
+   "peak_at": 0.398,
+   "align": "peak",
+   "lufs": -16.0,
+   "source": "mixkit:1143 — Cinematic whoosh deep impact"
+  },
+  {
+   "key": "impact_2",
+   "role": "impact",
+   "file": "impact_2.wav",
+   "dur": 1.0,
+   "peak_at": 0.061,
+   "align": "peak",
+   "lufs": -15.9,
+   "source": "mixkit:2299 — Short bass hit"
+  },
+  {
+   "key": "impact_3",
+   "role": "impact",
+   "file": "impact_3.wav",
+   "dur": 2.6,
+   "peak_at": 0.94,
+   "align": "peak",
+   "lufs": -16.0,
+   "source": "mixkit:2908 — Movie trailer epic impact"
+  },
+  {
+   "key": "impact_4",
+   "role": "impact",
+   "file": "impact_4.wav",
+   "dur": 1.6,
+   "peak_at": 1.199,
+   "align": "peak",
+   "lufs": -15.6,
+   "source": "mixkit:2300 — Knocking sub bass"
+  },
+  {
+   "key": "riser_1",
+   "role": "riser",
+   "file": "riser_1.wav",
+   "dur": 1.336,
+   "peak_at": 1.26,
+   "align": "end",
+   "lufs": -16.0,
+   "source": "mixkit:790 — Cinematic trailer riser"
+  },
+  {
+   "key": "riser_2",
+   "role": "riser",
+   "file": "riser_2.wav",
+   "dur": 3.145,
+   "peak_at": 2.852,
+   "align": "end",
+   "lufs": -16.0,
+   "source": "mixkit:1144 — Short space stutter intro riser"
+  },
+  {
+   "key": "rewind_1",
+   "role": "rewind",
+   "file": "rewind_1.wav",
+   "dur": 1.76,
+   "peak_at": 0.26,
+   "align": "peak",
+   "lufs": -16.0,
+   "source": "mixkit:1092 — Fast tape rewind cinematic transition"
+  },
+  {
+   "key": "scratch_1",
+   "role": "scratch",
+   "file": "scratch_1.wav",
+   "dur": 0.7,
+   "peak_at": 0.03,
+   "align": "peak",
+   "lufs": -18.1,
+   "source": "mixkit:704 — Vinyl stop fast scratch"
+  },
+  {
+   "key": "scratch_2",
+   "role": "scratch",
+   "file": "scratch_2.wav",
+   "dur": 1.1,
+   "peak_at": 0.237,
+   "align": "peak",
+   "lufs": -15.9,
+   "source": "mixkit:702 — Record player vinyl scratch"
+  },
+  {
+   "key": "shutter_1",
+   "role": "shutter",
+   "file": "shutter_1.wav",
+   "dur": 0.5,
+   "peak_at": 0.169,
+   "align": "peak",
+   "lufs": -17.6,
+   "source": "mixkit:1430 — Camera shutter hard click"
+  }
+ ]
+}

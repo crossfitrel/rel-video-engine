@@ -1,0 +1,36 @@
+{
+ "created_at": "2026-07-23 14:36:06",
+ "policy_at_capture": "6.3",
+ "cases": [
+  {
+   "name": "שינה-והתאוששות",
+   "end": 80.9,
+   "loose": null,
+   "content_type": "value"
+  },
+  {
+   "name": "טיפ-אחד-HSPU",
+   "end": 55.31,
+   "loose": null,
+   "content_type": "value"
+  },
+  {
+   "name": "אופן-גים-השקה",
+   "end": 91.54,
+   "loose": null,
+   "content_type": null
+  },
+  {
+   "name": "מאסל-מן-רוטטור-קאף",
+   "end": 84.27,
+   "loose": null,
+   "content_type": null
+  },
+  {
+   "name": "מי-אמר-שמאוחר-מידיי",
+   "end": 42.85,
+   "loose": null,
+   "content_type": "conversion"
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+{
+  "VISUAL_HOOK_RESEARCH.md": {
+    "sha256": "b17681c6a74096b0f86950dc5eb2f4cc42e777080a95dd5d75e9b0d5b9ed7b1d",
+    "bytes": 19950
+  },
+  "VISUAL_HOOK_ARCHITECTURE.md": {
+    "sha256": "e343e51365d78baf4f1a015e3d9fd2c91f09dc0e2ab41df81f5773f44f2ef261",
+    "bytes": 31367
+  },
+  "VISUAL_HOOK_RECIPES.md": {
+    "sha256": "58fbc40c423ebdbacf97cfb21cac27592f465249aba065421daa9044b5e90891",
+    "bytes": 17538
+  },
+  "IMPLEMENTATION_PLAN.md": {
+    "sha256": "bbb42be97d8c318d18dd3fbde6c1134438a86f788067cf63470b41e7d21d8ee2",
+    "bytes": 24389
+  },
+  "CLAUDE_OPUS_HANDOFF.md": {
+    "sha256": "c003aaa92a7676328ced68062aff02e89fc49b648cbb6e5a6b2216e9de85eb2b",
+    "bytes": 34355
+  }
+}

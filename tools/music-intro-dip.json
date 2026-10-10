@@ -1,0 +1,3340 @@
+{
+ "_doc": "v9.30 L93 — טראקים שצונחים לקטע שקט ב-8ש הראשונות (music_intro_dip). מדווח; offset מוצע.",
+ "measured_at": "2026-09-28",
+ "tracks": {
+  "afrobeat-afro-beat-dfb5fff83c.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -15.5,
+   "suggested_offset": 18.0
+  },
+  "afrobeat-afro-summer-fbad73cec4.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -12.3,
+   "suggested_offset": 10.0
+  },
+  "afrobeat-instrumental-0034acec1e.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.6,
+   "suggested_offset": 10.0
+  },
+  "baby-mandala-drill-bd797ed8d0.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -10.2,
+   "suggested_offset": 14.0
+  },
+  "dragon-studio-funky-beat-317634.mp3": {
+   "dip": false,
+   "strong_db": -16.6
+  },
+  "energetic-action-sport-bea8e8877a.mp3": {
+   "dip": false,
+   "strong_db": -11.3
+  },
+  "energetic-edm-39b6060301.mp3": {
+   "dip": false,
+   "strong_db": -13.7
+  },
+  "energysound-stomp-action-music-513718.mp3": {
+   "dip": false,
+   "strong_db": -10.9
+  },
+  "energysound-stomp-drum-percussion-513744.mp3": {
+   "dip": false,
+   "strong_db": -12.0
+  },
+  "freemusiclab-charming-phonk-i-free-background-music-i-free-music-lab-release-513626.mp3": {
+   "dip": false,
+   "strong_db": -6.3
+  },
+  "joyful-rhythm-walk-funk-74c357bc70.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -10.6,
+   "suggested_offset": 8.0
+  },
+  "korshunmusic-upbeat-cool-funk-538162.mp3": {
+   "dip": false,
+   "strong_db": -10.9
+  },
+  "lightstockmusic-strong-character-powerful-fuzz-action-sport-rock-513742.mp3": {
+   "dip": true,
+   "dip_at": 4.0,
+   "strong_db": -8.3,
+   "suggested_offset": 12.0
+  },
+  "mfcc-action-speed-racing-music-244589.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.5,
+   "suggested_offset": 18.0
+  },
+  "motivation-epic-rock-407815a564.mp3": {
+   "dip": false,
+   "strong_db": -10.0
+  },
+  "motivation-sport-rock-trailer-438da929a7.mp3": {
+   "dip": false,
+   "strong_db": -10.2
+  },
+  "nastelbom-funky-412552.mp3": {
+   "dip": false,
+   "strong_db": -13.1
+  },
+  "pixabay-acid-edm-281151.mp3": {
+   "dip": false,
+   "strong_db": -11.8
+  },
+  "pixabay-adrenaline-241530.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -9.7,
+   "suggested_offset": 12.0
+  },
+  "pixabay-afrobeat-491433.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.3,
+   "suggested_offset": 14.0
+  },
+  "pixabay-afrobeat-529537.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -19.1,
+   "suggested_offset": 18.0
+  },
+  "pixabay-afrobeat-560132.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -15.3,
+   "suggested_offset": 18.0
+  },
+  "pixabay-afrobeat-561473.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -15.7,
+   "suggested_offset": 10.0
+  },
+  "pixabay-afrobeat-569473.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.2,
+   "suggested_offset": 10.0
+  },
+  "pixabay-afrobeat-summer-560129.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.7,
+   "suggested_offset": 10.0
+  },
+  "pixabay-calm-lofi-beats-560413.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -19.5,
+   "suggested_offset": 12.0
+  },
+  "pixabay-calm-lofi-chill-560327.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -6.6,
+   "suggested_offset": 12.0
+  },
+  "pixabay-calm-lofi-chillhop-112191.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -12.2,
+   "suggested_offset": 10.0
+  },
+  "pixabay-calm-lofi-coffee-568150.mp3": {
+   "dip": false,
+   "strong_db": -12.3
+  },
+  "pixabay-calm-lofi-girl-560285.mp3": {
+   "dip": false,
+   "strong_db": -14.9
+  },
+  "pixabay-calm-lofi-music-566602.mp3": {
+   "dip": false,
+   "strong_db": -10.9
+  },
+  "pixabay-calm-lofi-rainy-568166.mp3": {
+   "dip": false,
+   "strong_db": -14.3
+  },
+  "pixabay-calm-lofi-study-568160.mp3": {
+   "dip": false,
+   "strong_db": -12.6
+  },
+  "pixabay-calm-piano-351839.mp3": {
+   "dip": false,
+   "strong_db": -21.1
+  },
+  "pixabay-calm-piano-508963.mp3": {
+   "dip": false,
+   "strong_db": -18.7
+  },
+  "pixabay-calm-piano-background-539083.mp3": {
+   "dip": false,
+   "strong_db": -18.5
+  },
+  "pixabay-calm-piano-classical-291012.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -20.0,
+   "suggested_offset": 16.0
+  },
+  "pixabay-calm-piano-inspirational-375930.mp3": {
+   "dip": false,
+   "strong_db": -22.4
+  },
+  "pixabay-calm-piano-melody-293695.mp3": {
+   "dip": false,
+   "strong_db": -23.1
+  },
+  "pixabay-calm-piano-soft-405074.mp3": {
+   "dip": false,
+   "strong_db": -22.8
+  },
+  "pixabay-calm-piano-solo-398662.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -31.3,
+   "suggested_offset": 12.0
+  },
+  "pixabay-cinematic-hiphop-315904.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.3,
+   "suggested_offset": 14.0
+  },
+  "pixabay-corporate-happy-487426.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.2,
+   "suggested_offset": 16.0
+  },
+  "pixabay-corporate-inspiring-511448.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.1,
+   "suggested_offset": 8.0
+  },
+  "pixabay-corporate-motivational-496476.mp3": {
+   "dip": false,
+   "strong_db": -13.9
+  },
+  "pixabay-corporate-success-511436.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -14.4,
+   "suggested_offset": 8.0
+  },
+  "pixabay-corporate-upbeat-323642.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -10.9,
+   "suggested_offset": 16.0
+  },
+  "pixabay-corporate-upbeat-481658.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -10.7,
+   "suggested_offset": 12.0
+  },
+  "pixabay-corporate-upbeat-513423.mp3": {
+   "dip": false,
+   "strong_db": -10.6
+  },
+  "pixabay-corporate-upbeat-533853.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -8.9,
+   "suggested_offset": 18.0
+  },
+  "pixabay-dark-trap-558266.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.0,
+   "suggested_offset": 12.0
+  },
+  "pixabay-emotional-trap-549465.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -15.0,
+   "suggested_offset": 14.0
+  },
+  "pixabay-energetic-edm-495874.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -19.0,
+   "suggested_offset": 12.0
+  },
+  "pixabay-energetic-edm-507828.mp3": {
+   "dip": false,
+   "strong_db": -10.0
+  },
+  "pixabay-energetic-edm-561463.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -7.7,
+   "suggested_offset": 12.0
+  },
+  "pixabay-energetic-edm-569427.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -5.8,
+   "suggested_offset": 12.0
+  },
+  "pixabay-energetic-rock-524193.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -7.5,
+   "suggested_offset": 10.0
+  },
+  "pixabay-energetic-rock2-524192.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.1,
+   "suggested_offset": 8.0
+  },
+  "pixabay-energetic-sport-rock-297521.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -10.3,
+   "suggested_offset": 10.0
+  },
+  "pixabay-epic-motivational-186323.mp3": {
+   "dip": false,
+   "strong_db": -17.1
+  },
+  "pixabay-epic-motivational-269520.mp3": {
+   "dip": false,
+   "strong_db": -14.0
+  },
+  "pixabay-epic-motivational-278460.mp3": {
+   "dip": false,
+   "strong_db": -17.4
+  },
+  "pixabay-epic-motivational-music-429043.mp3": {
+   "dip": false,
+   "strong_db": -15.6
+  },
+  "pixabay-epic-motivational-sport-hiphop-161522.mp3": {
+   "dip": false,
+   "strong_db": -13.2
+  },
+  "pixabay-funk-503900.mp3": {
+   "dip": false,
+   "strong_db": -10.3
+  },
+  "pixabay-funk-groove-soul-527077.mp3": {
+   "dip": false,
+   "strong_db": -9.8
+  },
+  "pixabay-funk-upbeat-240482.mp3": {
+   "dip": false,
+   "strong_db": -12.2
+  },
+  "pixabay-hard-edm-281146.mp3": {
+   "dip": true,
+   "dip_at": 4.0,
+   "strong_db": -9.0,
+   "suggested_offset": 8.0
+  },
+  "pixabay-hiphop-beat-525029.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -10.0,
+   "suggested_offset": 12.0
+  },
+  "pixabay-hiphop-beat-527067.mp3": {
+   "dip": false,
+   "strong_db": -10.2
+  },
+  "pixabay-hiphop-beat-547254.mp3": {
+   "dip": false,
+   "strong_db": -11.2
+  },
+  "pixabay-hiphop-groove-526148.mp3": {
+   "dip": false,
+   "strong_db": -10.3
+  },
+  "pixabay-hype-drill-438398.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.9,
+   "suggested_offset": 14.0
+  },
+  "pixabay-indie-rock-energetic-557621.mp3": {
+   "dip": false,
+   "strong_db": -11.5
+  },
+  "pixabay-indie-rock-sport-557622.mp3": {
+   "dip": false,
+   "strong_db": -11.5
+  },
+  "pixabay-melodic-trap-566604.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -9.9,
+   "suggested_offset": 14.0
+  },
+  "pixabay-motivation-energetic-sport-391757.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.2,
+   "suggested_offset": 10.0
+  },
+  "pixabay-motivational-485930.mp3": {
+   "dip": false,
+   "strong_db": -16.1
+  },
+  "pixabay-motivational-epic-164834.mp3": {
+   "dip": false,
+   "strong_db": -19.0
+  },
+  "pixabay-motivational-epic-254760.mp3": {
+   "dip": false,
+   "strong_db": -13.6
+  },
+  "pixabay-motivational-music-495881.mp3": {
+   "dip": false,
+   "strong_db": -16.9
+  },
+  "pixabay-our-kingdom-185609.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -14.1,
+   "suggested_offset": 10.0
+  },
+  "pixabay-phonk-aura-566589.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -10.0,
+   "suggested_offset": 12.0
+  },
+  "pixabay-phonk-drift-560136.mp3": {
+   "dip": false,
+   "strong_db": -5.4
+  },
+  "pixabay-phonk-drift-561570.mp3": {
+   "dip": false,
+   "strong_db": -14.4
+  },
+  "pixabay-phonk-gym-542544.mp3": {
+   "dip": false,
+   "strong_db": -6.9
+  },
+  "pixabay-phonk-gym-558235.mp3": {
+   "dip": false,
+   "strong_db": -5.7
+  },
+  "pixabay-phonk-gym-560143.mp3": {
+   "dip": false,
+   "strong_db": -6.7
+  },
+  "pixabay-phonk-gym-561445.mp3": {
+   "dip": false,
+   "strong_db": -5.8
+  },
+  "pixabay-phonk-music-566600.mp3": {
+   "dip": false,
+   "strong_db": -10.4
+  },
+  "pixabay-pure-motivation-158726.mp3": {
+   "dip": false,
+   "strong_db": -11.4
+  },
+  "pixabay-retro-funk-523181.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -10.7,
+   "suggested_offset": 10.0
+  },
+  "pixabay-sad-soul-hiphop-185750.mp3": {
+   "dip": true,
+   "dip_at": 4.0,
+   "strong_db": -14.0,
+   "suggested_offset": 14.0
+  },
+  "pixabay-trap-beat-566605-drop20.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -9.1,
+   "suggested_offset": 8.0
+  },
+  "pixabay-trap-beat-566605.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.7,
+   "suggested_offset": 20.0
+  },
+  "pixabay-trap-beats-557570.mp3": {
+   "dip": false,
+   "strong_db": -11.0
+  },
+  "pixabay-trap-hype-549448.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -10.0,
+   "suggested_offset": 16.0
+  },
+  "pixabay-trap-hype2-542570.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -17.6,
+   "suggested_offset": 14.0
+  },
+  "pixabay-trap-hype3-564504.mp3": {
+   "dip": false,
+   "strong_db": -7.3
+  },
+  "pixabay-vlog-hiphop-566620.mp3": {
+   "dip": false,
+   "strong_db": -10.6
+  },
+  "producesplatinum-vlog-hip-hop-483574.mp3": {
+   "dip": false,
+   "strong_db": -13.0
+  },
+  "the_mountain-funky-508017.mp3": {
+   "dip": false,
+   "strong_db": -11.2
+  },
+  "upbeat-advertising-funk-6f260dec54.mp3": {
+   "dip": false,
+   "strong_db": -10.5
+  },
+  "upbeat-funk-background-fae703a304.mp3": {
+   "dip": false,
+   "strong_db": -10.6
+  },
+  "workout-trap-beat-c0342939f5.mp3": {
+   "dip": false,
+   "strong_db": -5.8
+  },
+  "mixkit-acid-jazz-dry-gin-868.mp3": {
+   "dip": false,
+   "strong_db": -16.8
+  },
+  "mixkit-dance-pop-oh-lord-200.mp3": {
+   "dip": false,
+   "strong_db": -14.9
+  },
+  "mixkit-dance-pop-what-about-action-474.mp3": {
+   "dip": false,
+   "strong_db": -14.2
+  },
+  "mixkit-electro-house-a-game-777.mp3": {
+   "dip": false,
+   "strong_db": -15.4
+  },
+  "mixkit-electropop-fight-till-the-end-81.mp3": {
+   "dip": false,
+   "strong_db": -13.5
+  },
+  "mixkit-electropop-house-two-694.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -15.6,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -26.0,
+    -23.2,
+    -23.5,
+    -21.8,
+    -18.0,
+    -16.8,
+    -17.4,
+    -16.5,
+    -16.1,
+    -15.8,
+    -16.4,
+    -15.4,
+    -15.2,
+    -15.1,
+    -15.0
+   ]
+  },
+  "mixkit-electropop-tides-turning-439.mp3": {
+   "dip": true,
+   "dip_at": 4.0,
+   "strong_db": -17.2,
+   "suggested_offset": 12.0,
+   "profile_db": [
+    -21.7,
+    -20.6,
+    -22.1,
+    -21.7,
+    -20.4,
+    -21.6,
+    -17.2,
+    -16.7,
+    -18.0,
+    -17.2,
+    -16.7,
+    -18.0,
+    -16.9,
+    -17.9,
+    -18.8
+   ]
+  },
+  "mixkit-funk-adone-635.mp3": {
+   "dip": false,
+   "strong_db": -12.8
+  },
+  "mixkit-funk-light-it-up-boy-849.mp3": {
+   "dip": false,
+   "strong_db": -16.4
+  },
+  "mixkit-funk-too-hot-858.mp3": {
+   "dip": false,
+   "strong_db": -14.5
+  },
+  "mixkit-grime-uk-363.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -12.4,
+   "suggested_offset": 14.0,
+   "profile_db": [
+    -27.2,
+    -28.0,
+    -27.4,
+    -25.8,
+    -27.8,
+    -26.2,
+    -18.0,
+    -12.6,
+    -12.4,
+    -10.3,
+    -12.3,
+    -12.4,
+    -11.2,
+    -10.7,
+    -12.8
+   ]
+  },
+  "mixkit-hard-rock-sports-highlights-51.mp3": {
+   "dip": false,
+   "strong_db": -12.5
+  },
+  "mixkit-hiphop-c-b-p-d-400.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -14.8,
+   "suggested_offset": 14.0,
+   "profile_db": [
+    -29.4,
+    -28.8,
+    -29.1,
+    -32.7,
+    -28.7,
+    -26.9,
+    -17.8,
+    -15.5,
+    -14.7,
+    -14.2,
+    -14.8,
+    -15.6,
+    -15.0,
+    -14.8,
+    -14.5
+   ]
+  },
+  "mixkit-hiphop-dreamy-trap-295.mp3": {
+   "dip": false,
+   "strong_db": -16.9
+  },
+  "mixkit-hiphop-holiday-02-742.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.3,
+   "suggested_offset": 12.0,
+   "profile_db": [
+    -17.7,
+    -39.5,
+    -41.7,
+    -18.8,
+    -28.9,
+    -26.5,
+    -13.1,
+    -12.5,
+    -16.6,
+    -13.5,
+    -14.6,
+    -15.6,
+    -13.0,
+    -12.8,
+    -16.4
+   ]
+  },
+  "mixkit-hiphop-sweet-september-282.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.8,
+   "suggested_offset": 14.0,
+   "profile_db": [
+    -20.7,
+    -19.3,
+    -25.9,
+    -20.4,
+    -22.7,
+    -25.9,
+    -15.6,
+    -13.1,
+    -13.2,
+    -15.3,
+    -14.9,
+    -13.2,
+    -14.0,
+    -14.5,
+    -13.6
+   ]
+  },
+  "mixkit-indie-pop-party-like-it-s-your-birthday-1115.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -19.9,
+   "suggested_offset": 14.0,
+   "profile_db": [
+    -24.4,
+    -24.2,
+    -25.0,
+    -23.8,
+    -23.5,
+    -22.8,
+    -22.2,
+    -20.5,
+    -21.2,
+    -20.8,
+    -19.9,
+    -19.5,
+    -20.0,
+    -19.7,
+    -19.9
+   ]
+  },
+  "mixkit-indie-pop-pop-parapop-855.mp3": {
+   "dip": false,
+   "strong_db": -19.0
+  },
+  "mixkit-indie-pop-pop-track-02-728.mp3": {
+   "dip": false,
+   "strong_db": -11.2
+  },
+  "mixkit-jazz-funk-you-got-jazz-528.mp3": {
+   "dip": false,
+   "strong_db": -11.1
+  },
+  "mixkit-jazz-rock-holiday-seasonal-4-511.mp3": {
+   "dip": false,
+   "strong_db": -7.1
+  },
+  "mixkit-jazz-rock-suck-it-up-1125.mp3": {
+   "dip": false,
+   "strong_db": -19.3
+  },
+  "mixkit-lofi-sleepy-cat-135.mp3": {
+   "dip": false,
+   "strong_db": -11.6
+  },
+  "mixkit-nu-jazz-house-one-662.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.5,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -120.0,
+    -19.7,
+    -23.2,
+    -21.1,
+    -22.9,
+    -14.1,
+    -13.4,
+    -13.9,
+    -14.7,
+    -13.1,
+    -14.4,
+    -12.4,
+    -14.5,
+    -12.6,
+    -13.6
+   ]
+  },
+  "mixkit-nu-jazz-you-re-like-caviar-895.mp3": {
+   "dip": false,
+   "strong_db": -18.2
+  },
+  "mixkit-orchestral-hybrid-epical-drums-03-678.mp3": {
+   "dip": false,
+   "strong_db": -17.3
+  },
+  "mixkit-orchestral-hybrid-epical-drums-05-680.mp3": {
+   "dip": false,
+   "strong_db": -20.8
+  },
+  "mixkit-percussion-trailer-epical-drums-01-676.mp3": {
+   "dip": false,
+   "strong_db": -18.9
+  },
+  "mixkit-percussion-trailer-epical-drums-06-686.mp3": {
+   "dip": false,
+   "strong_db": -18.2
+  },
+  "mixkit-pop-bopper-from-memphis-1131.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -14.8,
+   "suggested_offset": 8.0,
+   "profile_db": [
+    -18.8,
+    -19.3,
+    -20.4,
+    -17.1,
+    -16.1,
+    -15.2,
+    -14.7,
+    -15.6,
+    -15.5,
+    -14.4,
+    -14.9,
+    -15.3,
+    -14.9,
+    -13.4,
+    -13.2
+   ]
+  },
+  "mixkit-pop-chicken-out-1166.mp3": {
+   "dip": false,
+   "strong_db": -17.5
+  },
+  "mixkit-pop-francisco-798.mp3": {
+   "dip": false,
+   "strong_db": -10.0
+  },
+  "mixkit-reggae-jamaican-241.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -16.5,
+   "suggested_offset": 14.0,
+   "profile_db": [
+    -24.6,
+    -22.9,
+    -22.6,
+    -23.2,
+    -20.2,
+    -19.2,
+    -23.2,
+    -17.8,
+    -16.6,
+    -16.2,
+    -15.0,
+    -16.4,
+    -17.0,
+    -16.3,
+    -16.5
+   ]
+  },
+  "mixkit-reggae-my-last-mojito-814.mp3": {
+   "dip": false,
+   "strong_db": -16.0
+  },
+  "mixkit-rnb-a-night-to-remember-864.mp3": {
+   "dip": false,
+   "strong_db": -14.3
+  },
+  "mixkit-rnb-for-those-who-don-t-sleep-869.mp3": {
+   "dip": false,
+   "strong_db": -13.1
+  },
+  "mixkit-rock-and-roll-salty-and-sweet-856.mp3": {
+   "dip": false,
+   "strong_db": -13.2
+  },
+  "mixkit-rock-and-roll-yo-chucky-861.mp3": {
+   "dip": false,
+   "strong_db": -14.8
+  },
+  "mixkit-rock-punked-up-fun-47.mp3": {
+   "dip": false,
+   "strong_db": -13.4
+  },
+  "mixkit-rock-rought-and-ready-50.mp3": {
+   "dip": false,
+   "strong_db": -13.7
+  },
+  "mixkit-rock-surf-s-up-dude-83.mp3": {
+   "dip": false,
+   "strong_db": -14.7
+  },
+  "mixkit-rock-the-duel-817.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -17.0,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -21.6,
+    -23.0,
+    -23.2,
+    -22.1,
+    -23.5,
+    -18.1,
+    -17.6,
+    -17.1,
+    -16.9,
+    -15.8,
+    -16.3,
+    -18.0,
+    -17.3,
+    -16.9,
+    -17.7
+   ]
+  },
+  "mixkit-swing-i-m-hungry-808.mp3": {
+   "dip": false,
+   "strong_db": -14.2
+  },
+  "mixkit-synthpop-better-times-are-coming-173.mp3": {
+   "dip": false,
+   "strong_db": -13.9
+  },
+  "mixkit-synthpop-lonerism-159.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.3,
+   "suggested_offset": 16.0,
+   "profile_db": [
+    -18.1,
+    -18.1,
+    -17.7,
+    -18.2,
+    -18.5,
+    -17.9,
+    -17.4,
+    -17.8,
+    -14.2,
+    -13.7,
+    -13.3,
+    -12.7,
+    -12.6,
+    -12.6,
+    -13.2
+   ]
+  },
+  "mixkit-synthpop-solitude-179.mp3": {
+   "dip": false,
+   "strong_db": -14.3
+  },
+  "mixkit-techno-deep-techno-ambience-134.mp3": {
+   "dip": false,
+   "strong_db": -7.3
+  },
+  "mixkit-techno-dub-techno-groove-133.mp3": {
+   "dip": false,
+   "strong_db": -11.1
+  },
+  "mixkit-techno-machine-drum-vibes-117.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -22.5,
+   "suggested_offset": 16.0,
+   "profile_db": [
+    -55.2,
+    -43.7,
+    -35.4,
+    -29.2,
+    -28.7,
+    -29.6,
+    -29.1,
+    -30.5,
+    -21.8,
+    -21.1,
+    -28.5,
+    -25.9,
+    -23.2,
+    -21.0,
+    -20.1
+   ]
+  },
+  "mixkit-techno-minimal-emotion-160.mp3": {
+   "dip": false,
+   "strong_db": -12.9
+  },
+  "mixkit-trailer-i-won-t-surrender-846.mp3": {
+   "dip": false,
+   "strong_db": -18.2
+  },
+  "mixkit-trailer-wedding-02-660.mp3": {
+   "dip": false,
+   "strong_db": -22.4
+  },
+  "mixkit-trap-it-s-legal-now-406.mp3": {
+   "dip": false,
+   "strong_db": -27.9
+  },
+  "mixkit-trap-trap-pack-06-456.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -10.1,
+   "suggested_offset": 18.0,
+   "profile_db": [
+    -17.4,
+    -15.9,
+    -15.9,
+    -16.8,
+    -17.4,
+    -16.9,
+    -15.2,
+    -16.9,
+    -12.7,
+    -10.1,
+    -10.0,
+    -9.4,
+    -9.4,
+    -9.6,
+    -10.7
+   ]
+  },
+  "mixkit-world-fusion-never-say-die-1070.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -24.7,
+   "suggested_offset": 14.0,
+   "profile_db": [
+    -33.8,
+    -38.2,
+    -34.5,
+    -35.2,
+    -34.0,
+    -36.2,
+    -28.8,
+    -24.1,
+    -25.9,
+    -24.0,
+    -26.4,
+    -24.4,
+    -23.7,
+    -25.0,
+    -25.3
+   ]
+  },
+  "mixkit-world-fusion-nield-grohm-hanging-1-538.mp3": {
+   "dip": false,
+   "strong_db": -15.3
+  },
+  "mixkit-world-fusion-oscar-el-asesino-1071.mp3": {
+   "dip": false,
+   "strong_db": -19.3
+  },
+  "mixkit-world-just-forget-about-it-835.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.8,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -19.8,
+    -21.9,
+    -20.5,
+    -19.9,
+    -20.3,
+    -12.9,
+    -12.1,
+    -12.1,
+    -11.9,
+    -12.1,
+    -10.8,
+    -11.1,
+    -11.7,
+    -10.4,
+    -12.2
+   ]
+  },
+  "mixkit-world-percussions-01-733.mp3": {
+   "dip": false,
+   "strong_db": -18.6
+  },
+  "mixkit-world-percussions-02-734.mp3": {
+   "dip": true,
+   "dip_at": 6.0,
+   "strong_db": -13.6,
+   "suggested_offset": 12.0,
+   "profile_db": [
+    -20.5,
+    -16.6,
+    -16.1,
+    -20.1,
+    -18.6,
+    -17.0,
+    -14.6,
+    -16.2,
+    -16.4,
+    -13.8,
+    -13.6,
+    -13.3,
+    -13.4,
+    -13.0,
+    -13.6
+   ]
+  },
+  "mixkit-world-vocal-percussions-527.mp3": {
+   "dip": false,
+   "strong_db": -21.2
+  },
+  "pixabay-acoustic-folk-acoustic-upbeat-301015.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -12.6,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -19.5,
+    -19.6,
+    -19.3,
+    -19.1,
+    -19.6,
+    -12.3,
+    -12.6,
+    -12.7,
+    -12.2,
+    -15.2,
+    -12.7,
+    -12.7,
+    -12.7,
+    -12.5,
+    -13.0
+   ]
+  },
+  "pixabay-acoustic-folk-folk-acoustic-upbeat-591941.mp3": {
+   "dip": false,
+   "strong_db": -13.0
+  },
+  "pixabay-acoustic-folk-upbeat-folk-acoustic-guitar-337290.mp3": {
+   "dip": false,
+   "strong_db": -16.0
+  },
+  "pixabay-afro-house-dirty-house-afro-house-459542.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -12.2,
+   "suggested_offset": 16.0,
+   "profile_db": [
+    -26.1,
+    -23.9,
+    -26.1,
+    -23.9,
+    -25.3,
+    -24.8,
+    -25.1,
+    -17.6,
+    -11.7,
+    -12.0,
+    -12.0,
+    -12.3,
+    -12.5,
+    -11.5,
+    -12.4
+   ]
+  },
+  "pixabay-afro-house-my-love-melodic-afro-deep-house-343626.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.6,
+   "suggested_offset": 16.0,
+   "profile_db": [
+    -20.3,
+    -25.0,
+    -20.2,
+    -20.4,
+    -15.2,
+    -17.8,
+    -15.4,
+    -15.7,
+    -13.7,
+    -14.8,
+    -14.0,
+    -13.5,
+    -9.5,
+    -9.5,
+    -9.5
+   ]
+  },
+  "pixabay-afro-house-para-aqui-para-ali-afro-house-243835.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -12.2,
+   "suggested_offset": 14.0,
+   "profile_db": [
+    -25.3,
+    -27.1,
+    -20.5,
+    -14.1,
+    -14.2,
+    -14.8,
+    -14.8,
+    -11.9,
+    -12.1,
+    -12.5,
+    -12.3,
+    -12.0,
+    -12.5,
+    -11.6,
+    -12.5
+   ]
+  },
+  "pixabay-afro-house-trap-afro-house-356389.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.9,
+   "suggested_offset": 20.0,
+   "profile_db": [
+    -28.8,
+    -22.8,
+    -28.6,
+    -22.8,
+    -23.8,
+    -16.1,
+    -17.6,
+    -16.8,
+    -18.6,
+    -16.9,
+    -14.5,
+    -13.1,
+    -13.3,
+    -13.1,
+    -12.8
+   ]
+  },
+  "pixabay-afrobeats-afro-drill-pop-311100.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.8,
+   "suggested_offset": 14.0,
+   "profile_db": [
+    -23.9,
+    -24.8,
+    -24.0,
+    -24.4,
+    -25.1,
+    -24.7,
+    -17.5,
+    -12.0,
+    -9.0,
+    -15.4,
+    -9.2,
+    -12.1,
+    -10.2,
+    -11.6,
+    -14.3
+   ]
+  },
+  "pixabay-afrobeats-feelings-afro-beats-254639.mp3": {
+   "dip": false,
+   "strong_db": -13.6
+  },
+  "pixabay-afrobeats-water-afro-pop-445661.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.6,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -21.5,
+    -19.5,
+    -20.7,
+    -19.2,
+    -13.3,
+    -11.5,
+    -11.4,
+    -11.2,
+    -11.7,
+    -11.3,
+    -11.7,
+    -13.7,
+    -15.5,
+    -13.0,
+    -12.5
+   ]
+  },
+  "pixabay-amapiano-amapiano-beat-208167.mp3": {
+   "dip": false,
+   "strong_db": -18.0
+  },
+  "pixabay-amapiano-amapiano-vibez-208172.mp3": {
+   "dip": false,
+   "strong_db": -16.6
+  },
+  "pixabay-amapiano-amatry-artbybigvee-171818.mp3": {
+   "dip": false,
+   "strong_db": -9.4
+  },
+  "pixabay-amapiano-unlock-me-amapiano-music-149058.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -12.1,
+   "suggested_offset": 18.0,
+   "profile_db": [
+    -20.0,
+    -18.8,
+    -21.3,
+    -19.6,
+    -21.1,
+    -19.1,
+    -18.8,
+    -21.1,
+    -15.9,
+    -11.6,
+    -10.5,
+    -12.5,
+    -10.3,
+    -12.9,
+    -10.6
+   ]
+  },
+  "pixabay-balkan-bucuresti-142346.mp3": {
+   "dip": false,
+   "strong_db": -25.3
+  },
+  "pixabay-bass-house-black-box-bass-house-13217.mp3": {
+   "dip": false,
+   "strong_db": -6.5
+  },
+  "pixabay-bass-house-future-bass-house-298878.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -9.5,
+   "suggested_offset": 18.0,
+   "profile_db": [
+    -25.7,
+    -15.1,
+    -15.4,
+    -15.7,
+    -14.8,
+    -13.9,
+    -14.3,
+    -16.2,
+    -11.8,
+    -9.5,
+    -9.2,
+    -9.1,
+    -9.4,
+    -9.6,
+    -9.5
+   ]
+  },
+  "pixabay-bass-house-house-music-250236.mp3": {
+   "dip": false,
+   "strong_db": -9.4
+  },
+  "pixabay-big-band-swing-bubble-parade-500396.mp3": {
+   "dip": false,
+   "strong_db": -17.3
+  },
+  "pixabay-big-band-swing-swing-brass-big-band-miller-style-2671.mp3": {
+   "dip": false,
+   "strong_db": -29.4
+  },
+  "pixabay-blues-rock-blues-rock-193812.mp3": {
+   "dip": false,
+   "strong_db": -13.5
+  },
+  "pixabay-blues-rock-blues-rock-energetic-203364.mp3": {
+   "dip": false,
+   "strong_db": -11.0
+  },
+  "pixabay-boom-bap-boom-bap-emotional-storytelling-rap-beat-311099.mp3": {
+   "dip": false,
+   "strong_db": -23.9
+  },
+  "pixabay-boom-bap-falling-isaiah-mathew-21584.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.7,
+   "suggested_offset": 12.0,
+   "profile_db": [
+    -16.7,
+    -18.8,
+    -18.5,
+    -15.1,
+    -15.5,
+    -15.9,
+    -12.2,
+    -13.2,
+    -11.0,
+    -11.3,
+    -12.9,
+    -10.1,
+    -12.1,
+    -13.2,
+    -11.0
+   ]
+  },
+  "pixabay-boom-bap-indian-boombap-freestyle-type-rap-beat-p-227244.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -15.2,
+   "suggested_offset": 12.0,
+   "profile_db": [
+    -57.4,
+    -22.2,
+    -25.8,
+    -26.1,
+    -25.7,
+    -23.8,
+    -16.4,
+    -15.4,
+    -14.5,
+    -15.4,
+    -15.3,
+    -14.9,
+    -14.7,
+    -15.3,
+    -15.1
+   ]
+  },
+  "pixabay-boom-bap-old-school-hip-hop-boom-bap-1-weirdo-176238.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -18.8,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -24.3,
+    -23.0,
+    -24.6,
+    -25.5,
+    -27.0,
+    -19.3,
+    -19.1,
+    -17.2,
+    -19.9,
+    -17.9,
+    -18.9,
+    -18.6,
+    -18.2,
+    -19.7,
+    -20.1
+   ]
+  },
+  "pixabay-brass-marching-music-on-the-tramp-by-john-phil-95350.mp3": {
+   "dip": true,
+   "dip_at": 4.0,
+   "strong_db": -21.4,
+   "suggested_offset": 8.0,
+   "profile_db": [
+    -21.1,
+    -20.1,
+    -31.0,
+    -28.5,
+    -22.9,
+    -21.4,
+    -29.8,
+    -26.3,
+    -21.3,
+    -21.7,
+    -31.9,
+    -30.2,
+    -23.0,
+    -21.5,
+    -30.8
+   ]
+  },
+  "pixabay-brass-upbeat-big-band-132244.mp3": {
+   "dip": false,
+   "strong_db": -14.6
+  },
+  "pixabay-brazilian-funk-brazilian-funk-484083.mp3": {
+   "dip": false,
+   "strong_db": -8.4
+  },
+  "pixabay-brazilian-funk-brazilian-funk-toca-toca-484084.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -5.5,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -11.5,
+    -12.6,
+    -11.9,
+    -10.4,
+    -11.0,
+    -6.8,
+    -5.3,
+    -5.6,
+    -5.8,
+    -5.3,
+    -5.7,
+    -6.1,
+    -5.0,
+    -5.4,
+    -5.7
+   ]
+  },
+  "pixabay-brazilian-funk-festa-no-ritmo-429383.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -8.2,
+   "suggested_offset": 8.0,
+   "profile_db": [
+    -11.6,
+    -18.6,
+    -19.3,
+    -18.0,
+    -9.5,
+    -8.3,
+    -8.2,
+    -8.4,
+    -8.2,
+    -8.5,
+    -8.1,
+    -8.2,
+    -8.7,
+    -8.5,
+    -8.4
+   ]
+  },
+  "pixabay-brazilian-funk-festa-no-ritmo-iii-448356.mp3": {
+   "dip": false,
+   "strong_db": -9.5
+  },
+  "pixabay-breakbeat-drive-breakbeat-173062.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.0,
+   "suggested_offset": 22.0,
+   "profile_db": [
+    -26.1,
+    -26.2,
+    -26.0,
+    -21.4,
+    -21.2,
+    -20.6,
+    -17.9,
+    -18.2,
+    -15.3,
+    -15.2,
+    -14.6,
+    -11.4,
+    -10.6,
+    -11.2,
+    -10.9
+   ]
+  },
+  "pixabay-breakbeat-drive-ethnic-breakbeat-238985.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -10.7,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -25.9,
+    -25.6,
+    -26.0,
+    -26.5,
+    -14.2,
+    -10.4,
+    -10.8,
+    -10.2,
+    -10.9,
+    -11.0,
+    -10.6,
+    -10.8,
+    -9.8,
+    -10.9,
+    -11.7
+   ]
+  },
+  "pixabay-breakbeat-extreme-chase-breakbeat-rock-194269.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -5.9,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -16.1,
+    -13.6,
+    -15.6,
+    -15.9,
+    -12.7,
+    -6.3,
+    -6.1,
+    -5.9,
+    -5.8,
+    -6.0,
+    -6.1,
+    -6.1,
+    -5.5,
+    -6.1,
+    -5.9
+   ]
+  },
+  "pixabay-breakbeat-jabali-breakbeat-of-africa-253188.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.1,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -15.3,
+    -15.3,
+    -15.3,
+    -16.2,
+    -14.3,
+    -9.8,
+    -11.9,
+    -10.3,
+    -10.7,
+    -12.7,
+    -13.2,
+    -11.9,
+    -11.5,
+    -12.5,
+    -10.4
+   ]
+  },
+  "pixabay-breakbeat-so-low-so-cool-195059.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -9.9,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -16.5,
+    -17.3,
+    -16.8,
+    -17.4,
+    -17.3,
+    -11.1,
+    -10.0,
+    -11.0,
+    -9.2,
+    -9.4,
+    -12.4,
+    -10.6,
+    -9.6,
+    -9.9,
+    -12.5
+   ]
+  },
+  "pixabay-cumbia-cumbia-a-446533.mp3": {
+   "dip": false,
+   "strong_db": -19.0
+  },
+  "pixabay-cumbia-cumbiaton-rompiendo-bocina-espinal-recor-139379.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -17.0,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -22.4,
+    -23.0,
+    -23.4,
+    -22.4,
+    -21.2,
+    -17.0,
+    -16.7,
+    -17.2,
+    -16.9,
+    -16.9,
+    -17.0,
+    -16.9,
+    -17.4,
+    -17.6,
+    -17.1
+   ]
+  },
+  "pixabay-cumbia-midnight-in-the-concrete-571664.mp3": {
+   "dip": true,
+   "dip_at": 6.0,
+   "strong_db": -18.2,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -21.1,
+    -25.4,
+    -20.2,
+    -24.9,
+    -23.4,
+    -19.1,
+    -20.0,
+    -19.0,
+    -19.8,
+    -19.8,
+    -17.3,
+    -23.0,
+    -16.1,
+    -16.0,
+    -16.2
+   ]
+  },
+  "pixabay-dancehall-afrobeat-x-afro-type-beat-x-dancehall-be-192549.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.0,
+   "suggested_offset": 16.0,
+   "profile_db": [
+    -33.5,
+    -33.7,
+    -26.0,
+    -24.6,
+    -23.9,
+    -26.5,
+    -25.1,
+    -19.9,
+    -10.9,
+    -11.1,
+    -10.9,
+    -11.0,
+    -10.9,
+    -11.0,
+    -11.1
+   ]
+  },
+  "pixabay-dancehall-afrobeat-x-afro-type-beat-x-dancehall-be-194140.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.9,
+   "suggested_offset": 16.0,
+   "profile_db": [
+    -23.2,
+    -19.8,
+    -23.0,
+    -19.8,
+    -20.5,
+    -19.5,
+    -19.9,
+    -22.3,
+    -12.3,
+    -11.2,
+    -12.2,
+    -11.6,
+    -11.2,
+    -11.3,
+    -12.3
+   ]
+  },
+  "pixabay-dancehall-whip-afro-dancehall-music-110235.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -10.6,
+   "suggested_offset": 20.0,
+   "profile_db": [
+    -21.0,
+    -19.2,
+    -20.0,
+    -20.3,
+    -19.3,
+    -20.5,
+    -19.3,
+    -19.3,
+    -20.3,
+    -24.8,
+    -10.8,
+    -9.6,
+    -9.2,
+    -10.4,
+    -10.2
+   ]
+  },
+  "pixabay-deep-house-deep-house-instrumental-354596.mp3": {
+   "dip": false,
+   "strong_db": -19.6
+  },
+  "pixabay-deep-house-deep-house-m-448915.mp3": {
+   "dip": false,
+   "strong_db": -20.8
+  },
+  "pixabay-deep-house-total-deep-house-109735.mp3": {
+   "dip": false,
+   "strong_db": -10.6
+  },
+  "pixabay-disco-disco-fever-retro-70s-459307.mp3": {
+   "dip": false,
+   "strong_db": -17.2
+  },
+  "pixabay-disco-disco-funk-520385.mp3": {
+   "dip": false,
+   "strong_db": -9.6
+  },
+  "pixabay-disco-fairies-disco-145381.mp3": {
+   "dip": false,
+   "strong_db": -14.3
+  },
+  "pixabay-disco-high-end-hustle-fashion-luxury-disco-253184.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.3,
+   "suggested_offset": 16.0,
+   "profile_db": [
+    -18.8,
+    -18.3,
+    -17.7,
+    -18.3,
+    -17.2,
+    -17.3,
+    -16.7,
+    -16.4,
+    -14.3,
+    -13.5,
+    -11.6,
+    -13.2,
+    -11.9,
+    -13.7,
+    -11.7
+   ]
+  },
+  "pixabay-drill-bugatti-drill-165438.mp3": {
+   "dip": false,
+   "strong_db": -11.4
+  },
+  "pixabay-drill-emotional-drill-beat-420884.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -12.7,
+   "suggested_offset": 18.0,
+   "profile_db": [
+    -32.1,
+    -27.4,
+    -24.1,
+    -22.0,
+    -20.3,
+    -20.6,
+    -21.1,
+    -21.3,
+    -18.7,
+    -13.3,
+    -12.0,
+    -10.9,
+    -10.0,
+    -13.5,
+    -10.7
+   ]
+  },
+  "pixabay-drill-into-the-night-uk-drill-20928.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.7,
+   "suggested_offset": 16.0,
+   "profile_db": [
+    -29.8,
+    -25.8,
+    -25.7,
+    -24.2,
+    -26.6,
+    -23.4,
+    -15.0,
+    -14.3,
+    -9.1,
+    -12.8,
+    -12.3,
+    -11.1,
+    -10.7,
+    -10.7,
+    -14.0
+   ]
+  },
+  "pixabay-drum-and-bass-background-drum-and-bass-117717.mp3": {
+   "dip": false,
+   "strong_db": -15.2
+  },
+  "pixabay-drum-and-bass-glass-buildings-liquid-jungle-breakbeat-358429.mp3": {
+   "dip": false,
+   "strong_db": -11.4
+  },
+  "pixabay-drum-and-bass-hyper-garden-jungle-breakbeat-drum-and-b-356528.mp3": {
+   "dip": false,
+   "strong_db": -11.7
+  },
+  "pixabay-drum-and-bass-proximity-liquid-drum-and-bass-186378.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.2,
+   "suggested_offset": 20.0,
+   "profile_db": [
+    -19.0,
+    -26.0,
+    -20.1,
+    -21.6,
+    -26.0,
+    -19.2,
+    -17.6,
+    -17.4,
+    -16.2,
+    -16.9,
+    -14.5,
+    -11.8,
+    -10.8,
+    -11.9,
+    -11.2
+   ]
+  },
+  "pixabay-drumline-dominate-the-field-368534.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -16.4,
+   "suggested_offset": 8.0,
+   "profile_db": [
+    -12.9,
+    -27.2,
+    -32.2,
+    -20.5,
+    -16.7,
+    -17.8,
+    -18.3,
+    -17.3,
+    -16.2,
+    -16.1,
+    -17.2,
+    -15.9,
+    -18.1,
+    -17.0,
+    -16.7
+   ]
+  },
+  "pixabay-electro-swing-swing-that-thing-electro-swing-357836.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -15.6,
+   "suggested_offset": 18.0,
+   "profile_db": [
+    -28.9,
+    -25.2,
+    -25.8,
+    -24.0,
+    -22.6,
+    -22.5,
+    -23.1,
+    -21.6,
+    -18.2,
+    -15.5,
+    -15.7,
+    -14.8,
+    -15.2,
+    -15.5,
+    -15.7
+   ]
+  },
+  "pixabay-funk-rock-disco-funk-305745.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -14.3,
+   "suggested_offset": 8.0,
+   "profile_db": [
+    -19.9,
+    -23.3,
+    -23.1,
+    -22.8,
+    -14.2,
+    -14.4,
+    -14.3,
+    -14.2,
+    -14.5,
+    -14.5,
+    -14.4,
+    -14.0,
+    -14.4,
+    -14.5,
+    -14.4
+   ]
+  },
+  "pixabay-funk-rock-fun-upbeat-pop-funkpower-surge-148925.mp3": {
+   "dip": false,
+   "strong_db": -11.6
+  },
+  "pixabay-funk-rock-funk-groove-ensemble-129930.mp3": {
+   "dip": false,
+   "strong_db": -14.7
+  },
+  "pixabay-funk-rock-rock-9046.mp3": {
+   "dip": false,
+   "strong_db": -11.6
+  },
+  "pixabay-future-bass-energetic-upbeat-future-bass-514142.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -10.4,
+   "suggested_offset": 14.0,
+   "profile_db": [
+    -24.1,
+    -19.1,
+    -19.6,
+    -17.7,
+    -18.5,
+    -18.6,
+    -17.2,
+    -11.5,
+    -7.5,
+    -12.2,
+    -7.7,
+    -11.2,
+    -8.2,
+    -11.9,
+    -9.6
+   ]
+  },
+  "pixabay-future-bass-future-bass-494562.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.3,
+   "suggested_offset": 14.0,
+   "profile_db": [
+    -15.6,
+    -16.7,
+    -15.8,
+    -15.3,
+    -15.0,
+    -14.9,
+    -14.0,
+    -11.5,
+    -10.5,
+    -11.7,
+    -11.8,
+    -11.4,
+    -10.8,
+    -10.9,
+    -11.1
+   ]
+  },
+  "pixabay-future-bass-future-bass-499609.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -9.2,
+   "suggested_offset": 14.0,
+   "profile_db": [
+    -21.6,
+    -14.7,
+    -14.4,
+    -15.5,
+    -14.4,
+    -12.7,
+    -16.4,
+    -10.0,
+    -9.4,
+    -8.3,
+    -9.0,
+    -9.8,
+    -8.7,
+    -7.5,
+    -9.6
+   ]
+  },
+  "pixabay-gospel-gospel-so-gospel-331487.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -14.2,
+   "suggested_offset": 20.0,
+   "profile_db": [
+    -32.2,
+    -19.0,
+    -21.1,
+    -16.6,
+    -19.7,
+    -16.9,
+    -18.0,
+    -16.7,
+    -16.6,
+    -16.3,
+    -13.7,
+    -14.7,
+    -13.1,
+    -13.6,
+    -13.3
+   ]
+  },
+  "pixabay-guitar-rock-action-rock-514148.mp3": {
+   "dip": false,
+   "strong_db": -11.1
+  },
+  "pixabay-guitar-rock-hard-guitar-rock-598349.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -10.6,
+   "suggested_offset": 12.0,
+   "profile_db": [
+    -23.5,
+    -20.4,
+    -19.4,
+    -17.8,
+    -16.6,
+    -13.3,
+    -11.6,
+    -11.7,
+    -10.9,
+    -13.5,
+    -10.9,
+    -9.9,
+    -10.3,
+    -10.2,
+    -10.2
+   ]
+  },
+  "pixabay-guitar-rock-upbeat-rock-514146.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.8,
+   "suggested_offset": 18.0,
+   "profile_db": [
+    -14.6,
+    -21.2,
+    -17.8,
+    -14.6,
+    -15.6,
+    -15.1,
+    -15.0,
+    -13.6,
+    -20.8,
+    -12.1,
+    -11.6,
+    -11.7,
+    -11.0,
+    -11.2,
+    -11.8
+   ]
+  },
+  "pixabay-hardstyle-rizzlas-hardstyle-180369.mp3": {
+   "dip": false,
+   "strong_db": -20.8
+  },
+  "pixabay-hardstyle-rizzlas-the-portal-224647.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -7.4,
+   "suggested_offset": 20.0,
+   "profile_db": [
+    -18.8,
+    -19.3,
+    -18.7,
+    -18.6,
+    -17.6,
+    -16.7,
+    -15.8,
+    -14.9,
+    -14.6,
+    -12.7,
+    -7.4,
+    -7.2,
+    -7.1,
+    -7.2,
+    -7.4
+   ]
+  },
+  "pixabay-hiphop-oldschool-goldn-uk-drill-music-116392.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -9.6,
+   "suggested_offset": 14.0,
+   "profile_db": [
+    -23.8,
+    -26.9,
+    -26.3,
+    -17.4,
+    -16.0,
+    -15.4,
+    -13.3,
+    -9.6,
+    -9.9,
+    -8.3,
+    -10.0,
+    -8.6,
+    -8.7,
+    -9.7,
+    -10.6
+   ]
+  },
+  "pixabay-hiphop-oldschool-urban-hip-hop-beat-523746.mp3": {
+   "dip": false,
+   "strong_db": -10.5
+  },
+  "pixabay-house-house-526226.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.2,
+   "suggested_offset": 8.0,
+   "profile_db": [
+    -20.7,
+    -19.1,
+    -18.3,
+    -18.5,
+    -12.5,
+    -11.4,
+    -10.9,
+    -11.2,
+    -11.2,
+    -11.3,
+    -10.9,
+    -11.6,
+    -11.4,
+    -11.1,
+    -10.7
+   ]
+  },
+  "pixabay-house-house-flying-580004.mp3": {
+   "dip": false,
+   "strong_db": -19.4
+  },
+  "pixabay-house-house-version-1-537877.mp3": {
+   "dip": false,
+   "strong_db": -9.3
+  },
+  "pixabay-house-minimal-house-556459.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.5,
+   "suggested_offset": 16.0,
+   "profile_db": [
+    -17.2,
+    -17.7,
+    -18.2,
+    -19.9,
+    -18.2,
+    -17.9,
+    -17.0,
+    -16.5,
+    -12.9,
+    -13.6,
+    -13.5,
+    -14.1,
+    -13.5,
+    -12.9,
+    -12.5
+   ]
+  },
+  "pixabay-hyperpop-eurodance-hyperpop-140-10865.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -12.2,
+   "suggested_offset": 14.0,
+   "profile_db": [
+    -51.4,
+    -50.7,
+    -49.3,
+    -45.8,
+    -52.7,
+    -44.9,
+    -23.9,
+    -11.3,
+    -12.2,
+    -12.2,
+    -12.2,
+    -12.2,
+    -12.3,
+    -12.4,
+    -11.5
+   ]
+  },
+  "pixabay-hyperpop-minutes-hyperpop-186889.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.5,
+   "suggested_offset": 14.0,
+   "profile_db": [
+    -20.5,
+    -18.6,
+    -18.2,
+    -19.3,
+    -19.8,
+    -19.3,
+    -13.3,
+    -11.7,
+    -11.4,
+    -12.8,
+    -10.9,
+    -11.4,
+    -11.4,
+    -11.6,
+    -14.0
+   ]
+  },
+  "pixabay-indie-rock-indie-rock-204846.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -15.0,
+   "suggested_offset": 18.0,
+   "profile_db": [
+    -24.7,
+    -20.8,
+    -21.4,
+    -21.0,
+    -20.4,
+    -20.8,
+    -20.0,
+    -20.2,
+    -17.7,
+    -14.4,
+    -14.9,
+    -14.8,
+    -15.3,
+    -14.2,
+    -15.2
+   ]
+  },
+  "pixabay-indie-rock-indie-rock-sport-upbeat-594197.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.4,
+   "suggested_offset": 6.0,
+   "profile_db": [
+    -17.7,
+    -20.4,
+    -15.9,
+    -12.5,
+    -12.7,
+    -11.0,
+    -12.0,
+    -12.7,
+    -11.0,
+    -11.3,
+    -10.5,
+    -11.4,
+    -12.8,
+    -12.7,
+    -12.6
+   ]
+  },
+  "pixabay-indie-rock-inspiring-uplifting-indie-rock-328509.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.8,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -32.3,
+    -19.9,
+    -21.2,
+    -21.2,
+    -19.8,
+    -12.6,
+    -13.1,
+    -13.1,
+    -13.8,
+    -11.3,
+    -11.7,
+    -11.8,
+    -12.2,
+    -11.3,
+    -11.8
+   ]
+  },
+  "pixabay-jazz-hop-funky-saxophone-hip-hop-type-beat-out-my-211576.mp3": {
+   "dip": false,
+   "strong_db": -13.8
+  },
+  "pixabay-jazz-hop-kickn-back-176243.mp3": {
+   "dip": false,
+   "strong_db": -17.0
+  },
+  "pixabay-jazz-hop-sunset-vibes-lo-fichillhop-9503.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -8.8,
+   "suggested_offset": 12.0,
+   "profile_db": [
+    -20.2,
+    -18.4,
+    -19.4,
+    -19.6,
+    -25.9,
+    -15.4,
+    -8.8,
+    -9.0,
+    -8.9,
+    -8.8,
+    -8.3,
+    -9.6,
+    -8.5,
+    -9.8,
+    -9.7
+   ]
+  },
+  "pixabay-jersey-club-french-drill-jersey-prod-by-yoshybeats-176016.mp3": {
+   "dip": false,
+   "strong_db": -22.7
+  },
+  "pixabay-jersey-club-j-club-gyat-beat-233516.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.0,
+   "suggested_offset": 8.0,
+   "profile_db": [
+    -25.5,
+    -23.9,
+    -24.3,
+    -18.3,
+    -10.0,
+    -9.5,
+    -9.8,
+    -11.9,
+    -29.2,
+    -27.4,
+    -28.2,
+    -17.4,
+    -14.6,
+    -14.2,
+    -14.8
+   ]
+  },
+  "pixabay-jersey-club-modern-jersey-club-edm-hip-hop-type-beat-223095.mp3": {
+   "dip": false,
+   "strong_db": -13.8
+  },
+  "pixabay-kpop-style-battle-song-455615.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -15.7,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -25.6,
+    -26.3,
+    -24.1,
+    -23.2,
+    -22.6,
+    -16.8,
+    -16.2,
+    -15.7,
+    -15.4,
+    -15.6,
+    -15.8,
+    -15.3,
+    -16.1,
+    -16.7,
+    -16.4
+   ]
+  },
+  "pixabay-kpop-style-diamonds-kpop-254799.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -10.1,
+   "suggested_offset": 20.0,
+   "profile_db": [
+    -22.4,
+    -23.2,
+    -21.9,
+    -23.2,
+    -25.3,
+    -22.3,
+    -23.0,
+    -21.0,
+    -23.7,
+    -23.6,
+    -9.7,
+    -10.4,
+    -9.2,
+    -8.7,
+    -8.7
+   ]
+  },
+  "pixabay-latin-happy-latin-382672.mp3": {
+   "dip": true,
+   "dip_at": 6.0,
+   "strong_db": -13.1,
+   "suggested_offset": 12.0,
+   "profile_db": [
+    -23.2,
+    -18.9,
+    -16.5,
+    -21.2,
+    -19.5,
+    -16.9,
+    -14.2,
+    -12.8,
+    -14.2,
+    -13.4,
+    -13.3,
+    -13.8,
+    -11.7,
+    -12.8,
+    -12.7
+   ]
+  },
+  "pixabay-latin-house-subida-latin-house-544813.mp3": {
+   "dip": true,
+   "dip_at": 4.0,
+   "strong_db": -14.4,
+   "suggested_offset": 16.0,
+   "profile_db": [
+    -18.6,
+    -17.5,
+    -19.6,
+    -21.0,
+    -17.9,
+    -17.6,
+    -17.5,
+    -16.6,
+    -14.4,
+    -14.5,
+    -14.4,
+    -14.1,
+    -14.3,
+    -14.4,
+    -14.4
+   ]
+  },
+  "pixabay-latin-latin-535117.mp3": {
+   "dip": false,
+   "strong_db": -11.9
+  },
+  "pixabay-latin-urban-latin-beat-232688.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -9.4,
+   "suggested_offset": 12.0,
+   "profile_db": [
+    -16.5,
+    -14.6,
+    -13.9,
+    -14.5,
+    -14.7,
+    -16.7,
+    -10.3,
+    -8.8,
+    -9.7,
+    -8.7,
+    -9.0,
+    -10.1,
+    -10.8,
+    -8.6,
+    -9.9
+   ]
+  },
+  "pixabay-mediterranean-flamenco-608302.mp3": {
+   "dip": false,
+   "strong_db": -12.6
+  },
+  "pixabay-mediterranean-greek-pop-rock-instrumental-343543.mp3": {
+   "dip": false,
+   "strong_db": -14.7
+  },
+  "pixabay-mediterranean-greek-tales-140-bpm-372885.mp3": {
+   "dip": false,
+   "strong_db": -17.7
+  },
+  "pixabay-melodic-techno-melodic-techno-loop-04-3822.mp3": {
+   "dip": false,
+   "strong_db": -17.0
+  },
+  "pixabay-melodic-techno-night-trains-melodic-techno-155050.mp3": {
+   "dip": false,
+   "strong_db": -15.2
+  },
+  "pixabay-middle-eastern-middle-east-ballad-188926.mp3": {
+   "dip": false,
+   "strong_db": -11.5
+  },
+  "pixabay-middle-eastern-middle-eastern-moon-201542.mp3": {
+   "dip": false,
+   "strong_db": -19.3
+  },
+  "pixabay-middle-eastern-middle-eastern-mystic-desert-188927.mp3": {
+   "dip": false,
+   "strong_db": -12.9
+  },
+  "pixabay-moombahton-freccero-apaga-la-luz-120710.mp3": {
+   "dip": false,
+   "strong_db": -12.1
+  },
+  "pixabay-moombahton-freccero-mueve-que-te-120714.mp3": {
+   "dip": false,
+   "strong_db": -7.5
+  },
+  "pixabay-moombahton-global-djs-part-nine-moombahton-style-5056.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -17.2,
+   "suggested_offset": 18.0,
+   "profile_db": [
+    -22.2,
+    -25.7,
+    -25.1,
+    -25.9,
+    -23.6,
+    -22.2,
+    -20.3,
+    -21.0,
+    -20.7,
+    -17.7,
+    -16.1,
+    -15.8,
+    -16.7,
+    -17.6,
+    -15.9
+   ]
+  },
+  "pixabay-motown-ix27d-do-anything-for-you-motown-fun-gro-282741.mp3": {
+   "dip": false,
+   "strong_db": -14.1
+  },
+  "pixabay-motown-keep-moving-on-132033.mp3": {
+   "dip": false,
+   "strong_db": -15.0
+  },
+  "pixabay-motown-soul-essential-487921.mp3": {
+   "dip": false,
+   "strong_db": -15.7
+  },
+  "pixabay-nu-disco-attraction-nudisco-450602.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -18.7,
+   "suggested_offset": 18.0,
+   "profile_db": [
+    -35.9,
+    -36.7,
+    -35.5,
+    -34.0,
+    -27.6,
+    -23.5,
+    -23.6,
+    -23.1,
+    -21.9,
+    -18.5,
+    -18.0,
+    -19.4,
+    -18.1,
+    -17.7,
+    -18.9
+   ]
+  },
+  "pixabay-nu-disco-back-in-the-day-397320.mp3": {
+   "dip": true,
+   "dip_at": 4.0,
+   "strong_db": -23.7,
+   "suggested_offset": 16.0,
+   "profile_db": [
+    -40.0,
+    -27.7,
+    -29.2,
+    -38.8,
+    -31.2,
+    -30.6,
+    -31.9,
+    -30.7,
+    -23.8,
+    -23.6,
+    -22.9,
+    -24.3,
+    -24.0,
+    -23.6,
+    -22.7
+   ]
+  },
+  "pixabay-nu-disco-nu-disco-dance-party-293228.mp3": {
+   "dip": false,
+   "strong_db": -11.7
+  },
+  "pixabay-phonk-viral-d3ath-202001.mp3": {
+   "dip": false,
+   "strong_db": -12.8
+  },
+  "pixabay-phonk-viral-high-speed-phonk-250413.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -16.6,
+   "suggested_offset": 16.0,
+   "profile_db": [
+    -23.3,
+    -22.9,
+    -24.0,
+    -23.2,
+    -23.8,
+    -22.7,
+    -23.9,
+    -18.5,
+    -16.6,
+    -15.7,
+    -16.6,
+    -16.7,
+    -16.4,
+    -16.7,
+    -12.2
+   ]
+  },
+  "pixabay-pluggnb-pluggnb-forest-mix-182809.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -22.6,
+   "suggested_offset": 20.0,
+   "profile_db": [
+    -29.4,
+    -29.6,
+    -44.3,
+    -29.4,
+    -45.8,
+    -59.4,
+    -46.1,
+    -37.0,
+    -30.5,
+    -31.6,
+    -21.6,
+    -18.9,
+    -23.5,
+    -14.3,
+    -15.8
+   ]
+  },
+  "pixabay-pluggnb-trends-pluggnb-585438.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.3,
+   "suggested_offset": 16.0,
+   "profile_db": [
+    -21.9,
+    -22.1,
+    -21.9,
+    -22.2,
+    -21.2,
+    -22.4,
+    -21.4,
+    -19.8,
+    -13.0,
+    -13.2,
+    -13.3,
+    -13.5,
+    -13.1,
+    -13.2,
+    -13.5
+   ]
+  },
+  "pixabay-punk-funny-punk-rock-203366.mp3": {
+   "dip": false,
+   "strong_db": -11.2
+  },
+  "pixabay-punk-punk-rock-287442.mp3": {
+   "dip": false,
+   "strong_db": -10.9
+  },
+  "pixabay-punk-rock-star-251632.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.5,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -120.0,
+    -18.6,
+    -17.5,
+    -17.4,
+    -16.5,
+    -14.9,
+    -14.3,
+    -13.9,
+    -14.0,
+    -13.7,
+    -13.5,
+    -12.7,
+    -12.9,
+    -12.9,
+    -13.4
+   ]
+  },
+  "pixabay-rage-rage-2-187959.mp3": {
+   "dip": false,
+   "strong_db": -14.1
+  },
+  "pixabay-rage-speed-phonk-245889.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -13.2,
+   "suggested_offset": 18.0,
+   "profile_db": [
+    -19.8,
+    -19.3,
+    -18.9,
+    -19.7,
+    -18.8,
+    -19.6,
+    -19.5,
+    -18.9,
+    -16.9,
+    -14.2,
+    -13.2,
+    -13.1,
+    -12.5,
+    -12.9,
+    -12.6
+   ]
+  },
+  "pixabay-reels-pop-trending-reels-music-499599.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -15.1,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -21.8,
+    -21.2,
+    -22.3,
+    -19.9,
+    -17.6,
+    -15.6,
+    -16.0,
+    -16.4,
+    -15.0,
+    -14.3,
+    -15.1,
+    -15.6,
+    -14.2,
+    -15.3,
+    -14.0
+   ]
+  },
+  "pixabay-reels-pop-trending-vlog-reel-447247.mp3": {
+   "dip": false,
+   "strong_db": -16.6
+  },
+  "pixabay-reggaeton-caminando-reggaeton-3582.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -12.7,
+   "suggested_offset": 20.0,
+   "profile_db": [
+    -19.3,
+    -21.5,
+    -23.5,
+    -25.2,
+    -38.1,
+    -18.4,
+    -20.3,
+    -22.0,
+    -23.0,
+    -22.0,
+    -11.5,
+    -11.9,
+    -12.4,
+    -12.4,
+    -13.0
+   ]
+  },
+  "pixabay-reggaeton-modern-reggaeton-pop-type-beat-caviar-210829.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -15.7,
+   "suggested_offset": 12.0,
+   "profile_db": [
+    -22.2,
+    -20.9,
+    -20.6,
+    -21.1,
+    -22.5,
+    -17.5,
+    -15.8,
+    -15.7,
+    -15.2,
+    -15.8,
+    -17.3,
+    -15.7,
+    -15.5,
+    -15.7,
+    -15.5
+   ]
+  },
+  "pixabay-reggaeton-perreando-con-mi-sombra-reggaeton-3584.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -16.4,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -19.6,
+    -21.5,
+    -21.2,
+    -21.1,
+    -21.3,
+    -16.2,
+    -16.6,
+    -16.4,
+    -16.3,
+    -16.5,
+    -16.1,
+    -16.7,
+    -16.4,
+    -16.3,
+    -16.9
+   ]
+  },
+  "pixabay-samba-latin-jazz-two-octaves-piano-1846.mp3": {
+   "dip": false,
+   "strong_db": -21.5
+  },
+  "pixabay-samba-samba-180403.mp3": {
+   "dip": false,
+   "strong_db": -16.5
+  },
+  "pixabay-samba-samba-rio-202804.mp3": {
+   "dip": false,
+   "strong_db": -16.1
+  },
+  "pixabay-ska-reggae-mind-yourself-brotheration-records-2016-138164.mp3": {
+   "dip": false,
+   "strong_db": -10.8
+  },
+  "pixabay-ska-reggae-never-far-from-you-ska-brotheration-regg-135981.mp3": {
+   "dip": false,
+   "strong_db": -10.6
+  },
+  "pixabay-ska-reggae-rude-rude-rudie-instrumental-brotheratio-140259.mp3": {
+   "dip": false,
+   "strong_db": -12.1
+  },
+  "pixabay-slap-house-slap-house-116515.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -10.7,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -17.5,
+    -18.1,
+    -20.1,
+    -18.8,
+    -16.6,
+    -11.9,
+    -10.7,
+    -11.1,
+    -10.2,
+    -9.9,
+    -11.2,
+    -11.3,
+    -11.0,
+    -10.8,
+    -10.6
+   ]
+  },
+  "pixabay-slap-house-slap-house-arrogant-446296.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -16.5,
+   "suggested_offset": 20.0,
+   "profile_db": [
+    -120.0,
+    -31.1,
+    -37.8,
+    -30.8,
+    -35.7,
+    -31.2,
+    -36.6,
+    -30.0,
+    -38.4,
+    -19.7,
+    -16.7,
+    -16.0,
+    -15.7,
+    -15.5,
+    -16.3
+   ]
+  },
+  "pixabay-soul-chillout-soul-174805.mp3": {
+   "dip": false,
+   "strong_db": -18.3
+  },
+  "pixabay-soul-ghetto-soul-210123.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -17.7,
+   "suggested_offset": 16.0,
+   "profile_db": [
+    -22.7,
+    -24.1,
+    -24.6,
+    -26.7,
+    -22.8,
+    -23.1,
+    -23.0,
+    -24.1,
+    -18.4,
+    -17.6,
+    -17.8,
+    -17.7,
+    -17.7,
+    -17.2,
+    -17.2
+   ]
+  },
+  "pixabay-soul-jazzy-soul-trap-gentle-158756.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -14.5,
+   "suggested_offset": 20.0,
+   "profile_db": [
+    -22.8,
+    -23.5,
+    -23.6,
+    -25.1,
+    -24.0,
+    -21.4,
+    -22.1,
+    -21.8,
+    -22.6,
+    -23.2,
+    -13.4,
+    -15.6,
+    -11.4,
+    -12.4,
+    -12.0
+   ]
+  },
+  "pixabay-sped-up-pop-good-love-sped-up-324036.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -12.4,
+   "suggested_offset": 12.0,
+   "profile_db": [
+    -20.4,
+    -17.5,
+    -19.5,
+    -17.4,
+    -16.8,
+    -15.8,
+    -13.4,
+    -12.4,
+    -12.4,
+    -12.7,
+    -11.8,
+    -13.3,
+    -12.4,
+    -12.0,
+    -11.8
+   ]
+  },
+  "pixabay-sped-up-pop-trip-sped-up-332573.mp3": {
+   "dip": false,
+   "strong_db": -15.8
+  },
+  "pixabay-sport-rock-extreme-sport-rock-603564.mp3": {
+   "dip": false,
+   "strong_db": -11.9
+  },
+  "pixabay-sport-rock-hard-rock-sport-603074.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -16.6,
+   "suggested_offset": 22.0,
+   "profile_db": [
+    -31.2,
+    -31.6,
+    -30.9,
+    -30.5,
+    -29.4,
+    -27.4,
+    -26.0,
+    -22.6,
+    -21.0,
+    -19.0,
+    -18.3,
+    -14.8,
+    -9.0,
+    -14.5,
+    -12.5
+   ]
+  },
+  "pixabay-sport-rock-sport-rock-591006.mp3": {
+   "dip": false,
+   "strong_db": -13.5
+  },
+  "pixabay-stomp-percussion-percussion-stomp-claps-442820.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -16.7,
+   "suggested_offset": 8.0,
+   "profile_db": [
+    -20.0,
+    -23.8,
+    -24.7,
+    -22.5,
+    -16.9,
+    -17.1,
+    -17.7,
+    -16.7,
+    -16.5,
+    -16.8,
+    -17.9,
+    -16.5,
+    -16.3,
+    -16.8,
+    -17.5
+   ]
+  },
+  "pixabay-stomp-percussion-stomp-drum-percussion-power-up-577424.mp3": {
+   "dip": false,
+   "strong_db": -10.2
+  },
+  "pixabay-stomp-percussion-stomps-percussion-544149.mp3": {
+   "dip": false,
+   "strong_db": -16.1
+  },
+  "pixabay-surf-rock-surf-rock-204622.mp3": {
+   "dip": false,
+   "strong_db": -17.2
+  },
+  "pixabay-surf-rock-surf-rock-minus-1-174446.mp3": {
+   "dip": false,
+   "strong_db": -13.4
+  },
+  "pixabay-surf-rock-sweat-and-blood-183099.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -16.5,
+   "suggested_offset": 6.0,
+   "profile_db": [
+    -21.8,
+    -21.2,
+    -22.3,
+    -17.5,
+    -16.6,
+    -17.1,
+    -16.6,
+    -16.5,
+    -16.9,
+    -16.6,
+    -16.8,
+    -16.2,
+    -16.4,
+    -16.9,
+    -16.2
+   ]
+  },
+  "pixabay-synthwave-80s-80s-pop-110346.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -11.8,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -26.7,
+    -22.2,
+    -16.0,
+    -15.1,
+    -14.3,
+    -12.5,
+    -12.3,
+    -11.6,
+    -11.5,
+    -11.4,
+    -12.1,
+    -12.2,
+    -11.9,
+    -11.5,
+    -12.0
+   ]
+  },
+  "pixabay-synthwave-80s-romantic-energetic-synthwave-of-80s-147673.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -17.1,
+   "suggested_offset": 8.0,
+   "profile_db": [
+    -32.8,
+    -27.3,
+    -22.5,
+    -22.3,
+    -18.0,
+    -17.2,
+    -17.0,
+    -17.5,
+    -17.7,
+    -16.8,
+    -17.4,
+    -17.2,
+    -16.9,
+    -16.8,
+    -17.7
+   ]
+  },
+  "pixabay-synthwave-80s-synth-wave-life-159947.mp3": {
+   "dip": false,
+   "strong_db": -12.9
+  },
+  "pixabay-synthwave-80s-way-to-go-80s-90s-beat-272017.mp3": {
+   "dip": false,
+   "strong_db": -14.4
+  },
+  "pixabay-taiko-drums-action-drums-4-154694.mp3": {
+   "dip": false,
+   "strong_db": -14.7
+  },
+  "pixabay-taiko-drums-epic-orchestral-drums-171728.mp3": {
+   "dip": false,
+   "strong_db": -19.2
+  },
+  "pixabay-tech-house-afro-house-455843.mp3": {
+   "dip": false,
+   "strong_db": -13.9
+  },
+  "pixabay-tech-house-rizzlas-distortion-182747.mp3": {
+   "dip": false,
+   "strong_db": -22.7
+  },
+  "pixabay-tech-house-tech-house-edm-music-002-290944.mp3": {
+   "dip": false,
+   "strong_db": -16.6
+  },
+  "pixabay-tiktok-style-tiktok-phonk-394617.mp3": {
+   "dip": false,
+   "strong_db": -8.5
+  },
+  "pixabay-tiktok-style-upbeat-384735.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -9.1,
+   "suggested_offset": 16.0,
+   "profile_db": [
+    -21.1,
+    -21.4,
+    -19.5,
+    -20.1,
+    -16.6,
+    -15.5,
+    -11.6,
+    -12.1,
+    -8.7,
+    -9.2,
+    -9.6,
+    -8.8,
+    -9.8,
+    -9.1,
+    -9.1
+   ]
+  },
+  "pixabay-trap-soul-black-box-trap-beat-13221.mp3": {
+   "dip": false,
+   "strong_db": -3.9
+  },
+  "pixabay-trap-soul-smooth-dark-type-beat-121595.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -16.0,
+   "suggested_offset": 14.0,
+   "profile_db": [
+    -29.9,
+    -28.0,
+    -27.3,
+    -26.9,
+    -28.3,
+    -29.9,
+    -26.5,
+    -15.9,
+    -16.0,
+    -16.2,
+    -15.5,
+    -16.1,
+    -16.2,
+    -15.2,
+    -16.1
+   ]
+  },
+  "pixabay-tropical-house-happy-tropical-house-555953.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -15.0,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -19.0,
+    -19.7,
+    -20.4,
+    -20.5,
+    -17.4,
+    -14.8,
+    -15.4,
+    -14.9,
+    -15.1,
+    -14.9,
+    -14.9,
+    -15.3,
+    -17.3,
+    -16.5,
+    -15.5
+   ]
+  },
+  "pixabay-tropical-house-save-me-tropical-house-463566.mp3": {
+   "dip": false,
+   "strong_db": -20.2
+  },
+  "pixabay-tropical-house-tropical-house-121742.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -12.3,
+   "suggested_offset": 10.0,
+   "profile_db": [
+    -24.5,
+    -17.1,
+    -17.6,
+    -17.0,
+    -17.2,
+    -13.7,
+    -12.3,
+    -12.8,
+    -13.1,
+    -19.1,
+    -11.9,
+    -12.4,
+    -11.7,
+    -12.2,
+    -11.6
+   ]
+  },
+  "pixabay-uk-garage-push-thru-222492.mp3": {
+   "dip": false,
+   "strong_db": -15.6
+  },
+  "pixabay-uk-garage-uk-garage-123271.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -14.1,
+   "suggested_offset": 6.0,
+   "profile_db": [
+    -28.7,
+    -30.6,
+    -19.6,
+    -14.9,
+    -14.0,
+    -14.8,
+    -13.4,
+    -14.6,
+    -13.4,
+    -14.2,
+    -13.9,
+    -14.3,
+    -14.6,
+    -14.5,
+    -14.4
+   ]
+  },
+  "pixabay-uk-garage-uk-garage-2-123272.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -9.5,
+   "suggested_offset": 8.0,
+   "profile_db": [
+    -25.9,
+    -24.2,
+    -24.9,
+    -15.6,
+    -9.5,
+    -9.4,
+    -9.1,
+    -10.6,
+    -13.8,
+    -10.9,
+    -9.6,
+    -10.2,
+    -9.9,
+    -10.4,
+    -9.1
+   ]
+  },
+  "pixabay-workout-edm-sport-workout-gym-511260.mp3": {
+   "dip": true,
+   "dip_at": 2.0,
+   "strong_db": -8.8,
+   "suggested_offset": 6.0,
+   "profile_db": [
+    -16.8,
+    -18.9,
+    -12.9,
+    -8.6,
+    -9.5,
+    -8.8,
+    -9.5,
+    -9.3,
+    -8.5,
+    -10.0,
+    -8.8,
+    -11.6,
+    -10.0,
+    -8.4,
+    -9.8
+   ]
+  },
+  "pixabay-workout-edm-workout-music-540854.mp3": {
+   "dip": false,
+   "strong_db": -9.9
+  }
+ }
+}

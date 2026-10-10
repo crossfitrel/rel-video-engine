@@ -1,0 +1,69 @@
+{
+ "_doc": "Visual Hook Engine — מדיניות קפואה (v1, 11.9.26). ברירת מחדל off. אין קוהורט מאושר ל-auto: מצב auto לעולם לא מחיל טיפול שנבחר בציון עד שהראל מאשר מעטפת+קוהורט במפורש. המשקלים והספים כאן ניסיוניים ולא מכוילים — הם קובעים רק זכאות מועמד (ספק ⇒ NO_OP) ודירוג ב-shadow, לעולם לא שער חוסם על סרטון. לא חלק מ-edl-policy.json.",
+ "version": 1,
+ "default_mode": "off",
+ "auto_cohorts": [],
+ "auto_min_margin": null,
+ "max_treatments": 1,
+ "max_accents": 0,
+ "analysis_window_frames": 300,
+ "fps": 30,
+ "full_intro_decision": "NO_OP",
+ "crop_envelope": {
+  "calibrated": false,
+  "note": "מעטפת אודישן לפיילוט — לא מקסימום בטוח שנמדד",
+  "peak_scale_candidates": [
+   1.06,
+   1.04
+  ],
+  "ramp_in_frames": 15,
+  "ramp_out_frames": 15,
+  "min_hold_frames": 24,
+  "max_hold_frames": 45,
+  "anchor_window_sec": [
+   1.0,
+   5.0
+  ],
+  "margin_frac": 0.03
+ },
+ "eligibility_heuristics": {
+  "calibrated": false,
+  "note": "היוריסטיקות שמרניות: כל כשל ⇒ המועמד לא זכאי ⇒ NO_OP. אינן שערים על התוצר.",
+  "min_single_face_ratio": 0.7,
+  "multi_face_ratio": 0.3,
+  "max_window_motion_mad": 14.0,
+  "max_camera_scale_drift": 0.025,
+  "min_face_height_frac": 0.06,
+  "cut_mad_floor": 28.0,
+  "cut_hist_corr_max": 0.6,
+  "entrance_face_absent_sec": 0.5
+ },
+ "shadow_weights": {
+  "calibrated": false,
+  "benefit": {
+   "semantic_fit": 0.3,
+   "hook_reinforcement": 0.25,
+   "visual_fit": 0.2,
+   "authenticity": 0.15,
+   "asset_readiness": 0.1
+  },
+  "cost": {
+   "distraction": 0.35,
+   "collision_uncertainty": 0.25,
+   "render_complexity": 0.2,
+   "existing_motion_redundancy": 0.2
+  }
+ },
+ "renderer": {
+  "abi": "vh-crop-perspective-1",
+  "v1_crf": 18,
+  "v1_preset": "medium",
+  "interpolation": "cubic"
+ },
+ "banned_asset_kinds": [
+  "generated_media",
+  "stock_people",
+  "graphic_text",
+  "kinetic_words"
+ ]
+}

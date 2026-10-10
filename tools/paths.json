@@ -1,0 +1,6 @@
+{
+ "_doc": "נתיב תיקיית העבודה. הועבר מ-iCloud לדיסק מקומי (v8.6, P0-11) — eviction באמצע גימור + סריקה איטית. תוצרים סופיים ממשיכים ל-iCloud. לחזרה אחורה: python3 tools/migrate_work_root.py --rollback",
+ "work_root": "/Users/hayon/rel-video-work",
+ "migrated_at": "2026-07-30 14:38:27",
+ "migrated_from": "/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/_work"
+}

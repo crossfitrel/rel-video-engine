@@ -1,0 +1,69 @@
+{
+ "source_words": "/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/golden/מי-אמר-שמאוחר-מידיי/words.json",
+ "video": "",
+ "total_dur": 42.85,
+ "kept_dur": 36.37,
+ "removed_dur": 6.48,
+ "keep_segments": [
+  {
+   "start": 1.28,
+   "end": 7.58
+  },
+  {
+   "start": 9.16,
+   "end": 16.44
+  },
+  {
+   "start": 17.38,
+   "end": 23.5
+  },
+  {
+   "start": 24.4,
+   "end": 31.25
+  },
+  {
+   "start": 32.06,
+   "end": 41.88
+  }
+ ],
+ "auto_cuts": [
+  {
+   "start": 0.0,
+   "end": 1.28,
+   "reason": "שקט פתיחה ריק",
+   "confidence": "high"
+  },
+  {
+   "start": 7.58,
+   "end": 9.16,
+   "reason": "שקט 1.80ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 16.44,
+   "end": 17.38,
+   "reason": "שקט 1.16ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 23.5,
+   "end": 24.4,
+   "reason": "שקט 1.12ש → 0.22ש",
+   "confidence": "high"
+  },
+  {
+   "start": 31.25,
+   "end": 32.06,
+   "reason": "שקט 1.16ש → 0.35ש",
+   "confidence": "high"
+  },
+  {
+   "start": 41.88,
+   "end": 42.85,
+   "reason": "שקט סיום ריק",
+   "confidence": "high"
+  }
+ ],
+ "manual_review_cuts": [],
+ "policy": "/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tools/edl-policy.json"
+}

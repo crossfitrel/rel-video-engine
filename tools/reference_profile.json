@@ -1,0 +1,199 @@
+{
+ "_readme": "מעטפת שנמדדה מסרטונים שהראל אישר ופרסם. כל סף במערכת שנוגע לקצב/שקט/תפרים חייב להיגזר מכאן ולא מניחוש. לבנייה מחדש: output_profile.py --build-reference",
+ "built_at": "2026-07-31 08:26",
+ "n_projects": 16,
+ "envelope": {
+  "silence_pct": {
+   "min": 13.2,
+   "max": 31.7,
+   "median": 21.4,
+   "n": 16
+  },
+  "longest_pause": {
+   "min": 0.44,
+   "max": 5.83,
+   "median": 0.81,
+   "n": 16
+  },
+  "cuts_per_sec": {
+   "min": 0.043,
+   "max": 0.296,
+   "median": 0.187,
+   "n": 16
+  },
+  "seam_median": {
+   "min": 6.8,
+   "max": 32.6,
+   "median": 21.2,
+   "n": 16
+  },
+  "seam_max": {
+   "min": 11.5,
+   "max": 65.6,
+   "median": 29.6,
+   "n": 16
+  }
+ },
+ "projects": [
+  {
+   "project": "סקאלת-הבריאות",
+   "dur_sec": 56.61,
+   "silence_pct": 14.7,
+   "longest_pause": 0.66,
+   "n_cuts": 12,
+   "cuts_per_sec": 0.212,
+   "seam_median": 6.8,
+   "seam_max": 20.9
+  },
+  {
+   "project": "טעויות-נפוצות-strict-pull-ups",
+   "dur_sec": 35.99,
+   "silence_pct": 20.5,
+   "longest_pause": 0.81,
+   "n_cuts": 10,
+   "cuts_per_sec": 0.278,
+   "seam_median": 27.4,
+   "seam_max": 65.6
+  },
+  {
+   "project": "הלקח-הכי-חשוב-במכירות",
+   "dur_sec": 59.94,
+   "silence_pct": 21.6,
+   "longest_pause": 0.8,
+   "n_cuts": 5,
+   "cuts_per_sec": 0.083,
+   "seam_median": 14.7,
+   "seam_max": 16.4
+  },
+  {
+   "project": "מי-אמר-שמאוחר-מידיי",
+   "dur_sec": 31.18,
+   "silence_pct": 13.2,
+   "longest_pause": 0.44,
+   "n_cuts": 4,
+   "cuts_per_sec": 0.128,
+   "seam_median": 25.7,
+   "seam_max": 32.8
+  },
+  {
+   "project": "שינה-והתאוששות",
+   "dur_sec": 59.0,
+   "silence_pct": 31.7,
+   "longest_pause": 5.83,
+   "n_cuts": 7,
+   "cuts_per_sec": 0.119,
+   "seam_median": 21.2,
+   "seam_max": 29.6
+  },
+  {
+   "project": "אופן-גים-חיזוק",
+   "dur_sec": 58.75,
+   "silence_pct": 21.4,
+   "longest_pause": 0.76,
+   "n_cuts": 11,
+   "cuts_per_sec": 0.187,
+   "seam_median": 15.8,
+   "seam_max": 19.2
+  },
+  {
+   "project": "מה-זה-להיות-בעל-מועדון",
+   "dur_sec": 61.61,
+   "silence_pct": 21.9,
+   "longest_pause": 0.96,
+   "n_cuts": 6,
+   "cuts_per_sec": 0.097,
+   "seam_median": 29.8,
+   "seam_max": 44.1
+  },
+  {
+   "project": "יום-בחיים-של-הראל",
+   "dur_sec": 32.11,
+   "silence_pct": 24.6,
+   "longest_pause": 0.79,
+   "n_cuts": 9,
+   "cuts_per_sec": 0.28,
+   "seam_median": 28.7,
+   "seam_max": 46.1
+  },
+  {
+   "project": "ההבנה-האנטומית-סוגי-אחיזות",
+   "dur_sec": 47.29,
+   "silence_pct": 18.1,
+   "longest_pause": 0.63,
+   "n_cuts": 14,
+   "cuts_per_sec": 0.296,
+   "seam_median": 18.5,
+   "seam_max": 24.5
+  },
+  {
+   "project": "ניפוץ-מיתוסים-לטיפול-מגיעים-רק-כשכואב",
+   "dur_sec": 38.31,
+   "silence_pct": 19.2,
+   "longest_pause": 0.77,
+   "n_cuts": 8,
+   "cuts_per_sec": 0.209,
+   "seam_median": 26.2,
+   "seam_max": 37.4
+  },
+  {
+   "project": "אוריה-המנהלת-המקצועית",
+   "dur_sec": 38.43,
+   "silence_pct": 18.9,
+   "longest_pause": 1.1,
+   "n_cuts": 10,
+   "cuts_per_sec": 0.26,
+   "seam_median": 13.6,
+   "seam_max": 24.2
+  },
+  {
+   "project": "צעדים-קטנים-כל-יום",
+   "dur_sec": 59.67,
+   "silence_pct": 19.9,
+   "longest_pause": 0.64,
+   "n_cuts": 6,
+   "cuts_per_sec": 0.101,
+   "seam_median": 8.3,
+   "seam_max": 11.7
+  },
+  {
+   "project": "טיפ-אחד-HSPU",
+   "dur_sec": 46.03,
+   "silence_pct": 23.6,
+   "longest_pause": 0.94,
+   "n_cuts": 2,
+   "cuts_per_sec": 0.043,
+   "seam_median": 9.9,
+   "seam_max": 11.5
+  },
+  {
+   "project": "אופן-גים-השקה",
+   "dur_sec": 58.21,
+   "silence_pct": 22.5,
+   "longest_pause": 0.84,
+   "n_cuts": 10,
+   "cuts_per_sec": 0.172,
+   "seam_median": 12.0,
+   "seam_max": 16.4
+  },
+  {
+   "project": "עיסוי-רפואי",
+   "dur_sec": 32.17,
+   "silence_pct": 17.0,
+   "longest_pause": 0.98,
+   "n_cuts": 5,
+   "cuts_per_sec": 0.155,
+   "seam_median": 32.6,
+   "seam_max": 44.0
+  },
+  {
+   "project": "מאסל-מן-רוטטור-קאף",
+   "dur_sec": 46.72,
+   "silence_pct": 24.3,
+   "longest_pause": 0.84,
+   "n_cuts": 9,
+   "cuts_per_sec": 0.193,
+   "seam_median": 23.7,
+   "seam_max": 42.0
+  }
+ ]
+}

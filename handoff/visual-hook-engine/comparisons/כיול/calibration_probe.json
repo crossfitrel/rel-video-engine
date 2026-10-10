@@ -1,0 +1,1329 @@
+{
+ "n": 8,
+ "rows": [
+  {
+   "project": "אוריה-המנהלת-המקצועית",
+   "reasons": [
+    "unsafe_crop"
+   ],
+   "overflow": {
+    "scale": 1.04,
+    "center": "center",
+    "head_over": 0.0,
+    "motion_over": 0.0129
+   },
+   "relaxation": "head_only",
+   "relaxation_he": "רק הראש מוגן — ידיים/גוף מותר שייחתכו בשוליים",
+   "candidate": {
+    "candidate_id": "cand_9dbb9ee77d12",
+    "recipe": "SMART_PUNCH_IN",
+    "recipe_version": 1,
+    "eligible": true,
+    "checks": [
+     {
+      "check": "recipe_released",
+      "pass": true,
+      "reason_code": null,
+      "detail": "SMART_PUNCH_IN במצב mvp ומיושם ברשומה"
+     },
+     {
+      "check": "no_full_intro",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פתיח מלא: אין (None)"
+     },
+     {
+      "check": "timeline_supported",
+      "pass": true,
+      "reason_code": null,
+      "detail": "1080×1920@30/1"
+     },
+     {
+      "check": "transcript_provenance",
+      "pass": true,
+      "reason_code": null,
+      "detail": "המילים תואמות את משך הגוף · יישור לאודיו: היסט מיטבי 0.05ש (ציון 0.774→0.777)"
+     },
+     {
+      "check": "verbal_anchor",
+      "pass": true,
+      "reason_code": null,
+      "detail": "מילת עוגן: המקצועית @ 1.91ש"
+     },
+     {
+      "check": "no_intentional_entrance",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פנים ראשונות בפריים 0"
+     },
+     {
+      "check": "no_multi_person_opening",
+      "pass": true,
+      "reason_code": null,
+      "detail": "יותר מפנים אחת ב-0.0 מהדגימות ב-0-10ש (כולל פנים מודפסות — ספק ⇒ NO_OP)"
+     },
+     {
+      "check": "cue_bounds",
+      "pass": true,
+      "reason_code": null,
+      "detail": "חלון [42,118) מול גבול 300"
+     },
+     {
+      "check": "no_reservation_overlap",
+      "pass": true,
+      "reason_code": null,
+      "detail": "אין חפיפה לשכבה מוגנת"
+     },
+     {
+      "check": "no_hard_cut_in_window",
+      "pass": true,
+      "reason_code": null,
+      "detail": "אין חיתוך קשה בחלון"
+     },
+     {
+      "check": "subject_known",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פנים יחידות ב-15/15 דגימות בחלון (גלאי פנים אינו אימות זהות)"
+     },
+     {
+      "check": "single_person_in_window",
+      "pass": true,
+      "reason_code": null,
+      "detail": "יותר מפנים אחת ב-0/15 דגימות בחלון"
+     },
+     {
+      "check": "no_strong_motion",
+      "pass": true,
+      "reason_code": null,
+      "detail": "MAD חציוני בחלון 1.35"
+     },
+     {
+      "check": "no_existing_camera_push",
+      "pass": true,
+      "reason_code": null,
+      "detail": "סקייל מצלמה מרבי 0.0016 בין פריימים 3ש זה מזה, מרקע סטטי (8 טווחים)"
+     },
+     {
+      "check": "crop_containment",
+      "pass": true,
+      "reason_code": null,
+      "detail": "ראש+מעטפת תנועה בתוך המסגרת עם שוליים 0.03"
+     }
+    ],
+    "reason_codes": [],
+    "evidence_grade": "supported",
+    "cues": [
+     {
+      "id": "cue_1",
+      "kind": "crop",
+      "start_frame": 42,
+      "end_frame": 118,
+      "interpolation": "smoothstep",
+      "keyframes": [
+       {
+        "frame": 42,
+        "rect": [
+         0.0,
+         0.0,
+         1.0,
+         1.0
+        ]
+       },
+       {
+        "frame": 57,
+        "rect": [
+         0.028302,
+         0.028302,
+         0.943396,
+         0.943396
+        ]
+       },
+       {
+        "frame": 102,
+        "rect": [
+         0.028302,
+         0.028302,
+         0.943396,
+         0.943396
+        ]
+       },
+       {
+        "frame": 117,
+        "rect": [
+         0.0,
+         0.0,
+         1.0,
+         1.0
+        ]
+       }
+      ]
+     }
+    ],
+    "assets": [],
+    "params": {
+     "peak_scale": 1.06,
+     "center": "center",
+     "ramp_in_frames": 15,
+     "hold_frames": 45,
+     "ramp_out_frames": 15,
+     "anchor_word_id": 5
+    },
+    "features": {
+     "semantic_fit": 0.6,
+     "hook_reinforcement": 0.9033,
+     "visual_fit": 1.0,
+     "authenticity": 0.9,
+     "asset_readiness": 1.0,
+     "distraction": 0.75,
+     "collision_uncertainty": 0.0,
+     "render_complexity": 0.2,
+     "existing_motion_redundancy": 0.0967
+    },
+    "score": {
+     "benefit": 0.8408,
+     "cost": 0.3218,
+     "net": 0.519,
+     "calibrated": false
+    }
+   }
+  },
+  {
+   "project": "דקה-להורים-אימוני-כוח-לילדים",
+   "reasons": [
+    "semantic_unknown"
+   ],
+   "overflow": {
+    "scale": 1.04,
+    "center": "center",
+    "head_over": 0.0,
+    "motion_over": 0.0098
+   },
+   "relaxation": null,
+   "relaxation_he": null,
+   "candidate": null
+  },
+  {
+   "project": "טיפ-אחד-דאבל-אנדרס",
+   "reasons": [
+    "unsafe_crop"
+   ],
+   "overflow": {
+    "scale": 1.04,
+    "center": "center",
+    "head_over": 0.0,
+    "motion_over": 0.0129
+   },
+   "relaxation": "head_only_margin0",
+   "relaxation_he": "רק הראש מוגן ובלי שוליים",
+   "candidate": {
+    "candidate_id": "cand_e128d1d9d528",
+    "recipe": "SMART_PUNCH_IN",
+    "recipe_version": 1,
+    "eligible": true,
+    "checks": [
+     {
+      "check": "recipe_released",
+      "pass": true,
+      "reason_code": null,
+      "detail": "SMART_PUNCH_IN במצב mvp ומיושם ברשומה"
+     },
+     {
+      "check": "no_full_intro",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פתיח מלא: אין (None)"
+     },
+     {
+      "check": "timeline_supported",
+      "pass": true,
+      "reason_code": null,
+      "detail": "1080×1920@30/1"
+     },
+     {
+      "check": "transcript_provenance",
+      "pass": true,
+      "reason_code": null,
+      "detail": "המילים תואמות את משך הגוף · יישור לאודיו: היסט מיטבי 0.2ש (ציון 0.725→0.776)"
+     },
+     {
+      "check": "verbal_anchor",
+      "pass": true,
+      "reason_code": null,
+      "detail": "מילת עוגן: אנדרס. @ 2.044ש"
+     },
+     {
+      "check": "no_intentional_entrance",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פנים ראשונות בפריים 0"
+     },
+     {
+      "check": "no_multi_person_opening",
+      "pass": true,
+      "reason_code": null,
+      "detail": "יותר מפנים אחת ב-0.2667 מהדגימות ב-0-10ש (כולל פנים מודפסות — ספק ⇒ NO_OP)"
+     },
+     {
+      "check": "cue_bounds",
+      "pass": true,
+      "reason_code": null,
+      "detail": "חלון [46,122) מול גבול 300"
+     },
+     {
+      "check": "no_reservation_overlap",
+      "pass": true,
+      "reason_code": null,
+      "detail": "אין חפיפה לשכבה מוגנת"
+     },
+     {
+      "check": "no_hard_cut_in_window",
+      "pass": true,
+      "reason_code": null,
+      "detail": "אין חיתוך קשה בחלון"
+     },
+     {
+      "check": "subject_known",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פנים יחידות ב-12/15 דגימות בחלון (גלאי פנים אינו אימות זהות)"
+     },
+     {
+      "check": "single_person_in_window",
+      "pass": true,
+      "reason_code": null,
+      "detail": "יותר מפנים אחת ב-3/15 דגימות בחלון"
+     },
+     {
+      "check": "no_strong_motion",
+      "pass": true,
+      "reason_code": null,
+      "detail": "MAD חציוני בחלון 2.84"
+     },
+     {
+      "check": "no_existing_camera_push",
+      "pass": true,
+      "reason_code": null,
+      "detail": "סקייל מצלמה מרבי 0.0221 בין פריימים 3ש זה מזה, מרקע סטטי (14 טווחים)"
+     },
+     {
+      "check": "crop_containment",
+      "pass": true,
+      "reason_code": null,
+      "detail": "ראש+מעטפת תנועה בתוך המסגרת עם שוליים 0.0"
+     }
+    ],
+    "reason_codes": [],
+    "evidence_grade": "supported",
+    "cues": [
+     {
+      "id": "cue_1",
+      "kind": "crop",
+      "start_frame": 46,
+      "end_frame": 122,
+      "interpolation": "smoothstep",
+      "keyframes": [
+       {
+        "frame": 46,
+        "rect": [
+         0.0,
+         0.0,
+         1.0,
+         1.0
+        ]
+       },
+       {
+        "frame": 61,
+        "rect": [
+         0.028302,
+         0.028302,
+         0.943396,
+         0.943396
+        ]
+       },
+       {
+        "frame": 106,
+        "rect": [
+         0.028302,
+         0.028302,
+         0.943396,
+         0.943396
+        ]
+       },
+       {
+        "frame": 121,
+        "rect": [
+         0.0,
+         0.0,
+         1.0,
+         1.0
+        ]
+       }
+      ]
+     }
+    ],
+    "assets": [],
+    "params": {
+     "peak_scale": 1.06,
+     "center": "center",
+     "ramp_in_frames": 15,
+     "hold_frames": 45,
+     "ramp_out_frames": 15,
+     "anchor_word_id": 3
+    },
+    "features": {
+     "semantic_fit": 0.6,
+     "hook_reinforcement": 0.7972,
+     "visual_fit": 0.0056,
+     "authenticity": 0.9,
+     "asset_readiness": 1.0,
+     "distraction": 0.75,
+     "collision_uncertainty": 0.2,
+     "render_complexity": 0.2,
+     "existing_motion_redundancy": 0.2028
+    },
+    "score": {
+     "benefit": 0.6154,
+     "cost": 0.3931,
+     "net": 0.2224,
+     "calibrated": false
+    }
+   }
+  },
+  {
+   "project": "טעויות-נפוצות-strict-pull-ups",
+   "reasons": [
+    "unsafe_crop"
+   ],
+   "overflow": {
+    "scale": 1.04,
+    "center": "center",
+    "head_over": 0.0,
+    "motion_over": 0.0026
+   },
+   "relaxation": "head_only",
+   "relaxation_he": "רק הראש מוגן — ידיים/גוף מותר שייחתכו בשוליים",
+   "candidate": {
+    "candidate_id": "cand_848db410743d",
+    "recipe": "SMART_PUNCH_IN",
+    "recipe_version": 1,
+    "eligible": true,
+    "checks": [
+     {
+      "check": "recipe_released",
+      "pass": true,
+      "reason_code": null,
+      "detail": "SMART_PUNCH_IN במצב mvp ומיושם ברשומה"
+     },
+     {
+      "check": "no_full_intro",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פתיח מלא: אין (None)"
+     },
+     {
+      "check": "timeline_supported",
+      "pass": true,
+      "reason_code": null,
+      "detail": "1080×1920@30/1"
+     },
+     {
+      "check": "transcript_provenance",
+      "pass": true,
+      "reason_code": null,
+      "detail": "המילים תואמות את משך הגוף · יישור לאודיו: היסט מיטבי 0.25ש (ציון 0.806→0.815)"
+     },
+     {
+      "check": "verbal_anchor",
+      "pass": true,
+      "reason_code": null,
+      "detail": "מילת עוגן: באוזניים @ 1.31ש"
+     },
+     {
+      "check": "no_intentional_entrance",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פנים ראשונות בפריים 0"
+     },
+     {
+      "check": "no_multi_person_opening",
+      "pass": true,
+      "reason_code": null,
+      "detail": "יותר מפנים אחת ב-0.15 מהדגימות ב-0-10ש (כולל פנים מודפסות — ספק ⇒ NO_OP)"
+     },
+     {
+      "check": "cue_bounds",
+      "pass": true,
+      "reason_code": null,
+      "detail": "חלון [24,88) מול גבול 300"
+     },
+     {
+      "check": "no_reservation_overlap",
+      "pass": true,
+      "reason_code": null,
+      "detail": "אין חפיפה לשכבה מוגנת"
+     },
+     {
+      "check": "no_hard_cut_in_window",
+      "pass": true,
+      "reason_code": null,
+      "detail": "אין חיתוך קשה בחלון"
+     },
+     {
+      "check": "subject_known",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פנים יחידות ב-10/13 דגימות בחלון (גלאי פנים אינו אימות זהות)"
+     },
+     {
+      "check": "single_person_in_window",
+      "pass": true,
+      "reason_code": null,
+      "detail": "יותר מפנים אחת ב-0/13 דגימות בחלון"
+     },
+     {
+      "check": "no_strong_motion",
+      "pass": true,
+      "reason_code": null,
+      "detail": "MAD חציוני בחלון 6.00"
+     },
+     {
+      "check": "no_existing_camera_push",
+      "pass": true,
+      "reason_code": null,
+      "detail": "סקייל מצלמה מרבי 0.0063 בין פריימים 3ש זה מזה, מרקע סטטי (3 טווחים)"
+     },
+     {
+      "check": "crop_containment",
+      "pass": true,
+      "reason_code": null,
+      "detail": "ראש+מעטפת תנועה בתוך המסגרת עם שוליים 0.03"
+     }
+    ],
+    "reason_codes": [],
+    "evidence_grade": "supported",
+    "cues": [
+     {
+      "id": "cue_1",
+      "kind": "crop",
+      "start_frame": 24,
+      "end_frame": 88,
+      "interpolation": "smoothstep",
+      "keyframes": [
+       {
+        "frame": 24,
+        "rect": [
+         0.0,
+         0.0,
+         1.0,
+         1.0
+        ]
+       },
+       {
+        "frame": 39,
+        "rect": [
+         0.028302,
+         0.028302,
+         0.943396,
+         0.943396
+        ]
+       },
+       {
+        "frame": 72,
+        "rect": [
+         0.028302,
+         0.028302,
+         0.943396,
+         0.943396
+        ]
+       },
+       {
+        "frame": 87,
+        "rect": [
+         0.0,
+         0.0,
+         1.0,
+         1.0
+        ]
+       }
+      ]
+     }
+    ],
+    "assets": [],
+    "params": {
+     "peak_scale": 1.06,
+     "center": "center",
+     "ramp_in_frames": 15,
+     "hold_frames": 33,
+     "ramp_out_frames": 15,
+     "anchor_word_id": 4
+    },
+    "features": {
+     "semantic_fit": 0.6,
+     "hook_reinforcement": 0.5717,
+     "visual_fit": 1.0,
+     "authenticity": 0.9,
+     "asset_readiness": 1.0,
+     "distraction": 0.75,
+     "collision_uncertainty": 0.2308,
+     "render_complexity": 0.2,
+     "existing_motion_redundancy": 0.4283
+    },
+    "score": {
+     "benefit": 0.7579,
+     "cost": 0.4459,
+     "net": 0.3121,
+     "calibrated": false
+    }
+   }
+  },
+  {
+   "project": "מה-זה-להיות-בעל-מועדון",
+   "reasons": [
+    "unsafe_crop"
+   ],
+   "overflow": {
+    "scale": 1.04,
+    "center": "center",
+    "head_over": 0.0,
+    "motion_over": 0.0136
+   },
+   "relaxation": "head_only",
+   "relaxation_he": "רק הראש מוגן — ידיים/גוף מותר שייחתכו בשוליים",
+   "candidate": {
+    "candidate_id": "cand_04b8f1d5c15d",
+    "recipe": "SMART_PUNCH_IN",
+    "recipe_version": 1,
+    "eligible": true,
+    "checks": [
+     {
+      "check": "recipe_released",
+      "pass": true,
+      "reason_code": null,
+      "detail": "SMART_PUNCH_IN במצב mvp ומיושם ברשומה"
+     },
+     {
+      "check": "no_full_intro",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פתיח מלא: אין (None)"
+     },
+     {
+      "check": "timeline_supported",
+      "pass": true,
+      "reason_code": null,
+      "detail": "1080×1920@30/1"
+     },
+     {
+      "check": "transcript_provenance",
+      "pass": true,
+      "reason_code": null,
+      "detail": "המילים תואמות את משך הגוף · יישור לאודיו: היסט מיטבי 0.15ש (ציון 0.814→0.844)"
+     },
+     {
+      "check": "verbal_anchor",
+      "pass": true,
+      "reason_code": null,
+      "detail": "מילת עוגן: מתאמן @ 2.443ש"
+     },
+     {
+      "check": "no_intentional_entrance",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פנים ראשונות בפריים 0"
+     },
+     {
+      "check": "no_multi_person_opening",
+      "pass": true,
+      "reason_code": null,
+      "detail": "יותר מפנים אחת ב-0.0 מהדגימות ב-0-10ש (כולל פנים מודפסות — ספק ⇒ NO_OP)"
+     },
+     {
+      "check": "cue_bounds",
+      "pass": true,
+      "reason_code": null,
+      "detail": "חלון [58,134) מול גבול 300"
+     },
+     {
+      "check": "no_reservation_overlap",
+      "pass": true,
+      "reason_code": null,
+      "detail": "אין חפיפה לשכבה מוגנת"
+     },
+     {
+      "check": "no_hard_cut_in_window",
+      "pass": true,
+      "reason_code": null,
+      "detail": "אין חיתוך קשה בחלון"
+     },
+     {
+      "check": "subject_known",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פנים יחידות ב-15/15 דגימות בחלון (גלאי פנים אינו אימות זהות)"
+     },
+     {
+      "check": "single_person_in_window",
+      "pass": true,
+      "reason_code": null,
+      "detail": "יותר מפנים אחת ב-0/15 דגימות בחלון"
+     },
+     {
+      "check": "no_strong_motion",
+      "pass": true,
+      "reason_code": null,
+      "detail": "MAD חציוני בחלון 0.93"
+     },
+     {
+      "check": "no_existing_camera_push",
+      "pass": true,
+      "reason_code": null,
+      "detail": "סקייל מצלמה מרבי 0.002 בין פריימים 3ש זה מזה, מרקע סטטי (6 טווחים)"
+     },
+     {
+      "check": "crop_containment",
+      "pass": true,
+      "reason_code": null,
+      "detail": "ראש+מעטפת תנועה בתוך המסגרת עם שוליים 0.03"
+     }
+    ],
+    "reason_codes": [],
+    "evidence_grade": "supported",
+    "cues": [
+     {
+      "id": "cue_1",
+      "kind": "crop",
+      "start_frame": 58,
+      "end_frame": 134,
+      "interpolation": "smoothstep",
+      "keyframes": [
+       {
+        "frame": 58,
+        "rect": [
+         0.0,
+         0.0,
+         1.0,
+         1.0
+        ]
+       },
+       {
+        "frame": 73,
+        "rect": [
+         0.028302,
+         0.028302,
+         0.943396,
+         0.943396
+        ]
+       },
+       {
+        "frame": 118,
+        "rect": [
+         0.028302,
+         0.028302,
+         0.943396,
+         0.943396
+        ]
+       },
+       {
+        "frame": 133,
+        "rect": [
+         0.0,
+         0.0,
+         1.0,
+         1.0
+        ]
+       }
+      ]
+     }
+    ],
+    "assets": [],
+    "params": {
+     "peak_scale": 1.06,
+     "center": "center",
+     "ramp_in_frames": 15,
+     "hold_frames": 45,
+     "ramp_out_frames": 15,
+     "anchor_word_id": 7
+    },
+    "features": {
+     "semantic_fit": 0.6,
+     "hook_reinforcement": 0.9334,
+     "visual_fit": 1.0,
+     "authenticity": 0.9,
+     "asset_readiness": 1.0,
+     "distraction": 0.75,
+     "collision_uncertainty": 0.0,
+     "render_complexity": 0.2,
+     "existing_motion_redundancy": 0.0666
+    },
+    "score": {
+     "benefit": 0.8484,
+     "cost": 0.3158,
+     "net": 0.5325,
+     "calibrated": false
+    }
+   }
+  },
+  {
+   "project": "ניפוץ-מיתוסים-לטיפול-מגיעים-רק-כשכואב",
+   "reasons": [
+    "unsafe_crop"
+   ],
+   "overflow": {
+    "scale": 1.04,
+    "center": "center",
+    "head_over": 0.0,
+    "motion_over": 0.0067
+   },
+   "relaxation": "head_only",
+   "relaxation_he": "רק הראש מוגן — ידיים/גוף מותר שייחתכו בשוליים",
+   "candidate": {
+    "candidate_id": "cand_80fc753c1d6f",
+    "recipe": "SMART_PUNCH_IN",
+    "recipe_version": 1,
+    "eligible": true,
+    "checks": [
+     {
+      "check": "recipe_released",
+      "pass": true,
+      "reason_code": null,
+      "detail": "SMART_PUNCH_IN במצב mvp ומיושם ברשומה"
+     },
+     {
+      "check": "no_full_intro",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פתיח מלא: אין (None)"
+     },
+     {
+      "check": "timeline_supported",
+      "pass": true,
+      "reason_code": null,
+      "detail": "1080×1920@30/1"
+     },
+     {
+      "check": "transcript_provenance",
+      "pass": true,
+      "reason_code": null,
+      "detail": "המילים תואמות את משך הגוף · יישור לאודיו: היסט מיטבי 0.05ש (ציון 0.819→0.83)"
+     },
+     {
+      "check": "verbal_anchor",
+      "pass": true,
+      "reason_code": null,
+      "detail": "מילת עוגן: יתקלקל @ 4.588ש"
+     },
+     {
+      "check": "no_intentional_entrance",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פנים ראשונות בפריים 0"
+     },
+     {
+      "check": "no_multi_person_opening",
+      "pass": true,
+      "reason_code": null,
+      "detail": "יותר מפנים אחת ב-0.1833 מהדגימות ב-0-10ש (כולל פנים מודפסות — ספק ⇒ NO_OP)"
+     },
+     {
+      "check": "cue_bounds",
+      "pass": true,
+      "reason_code": null,
+      "detail": "חלון [123,186) מול גבול 300"
+     },
+     {
+      "check": "no_reservation_overlap",
+      "pass": true,
+      "reason_code": null,
+      "detail": "אין חפיפה לשכבה מוגנת"
+     },
+     {
+      "check": "no_hard_cut_in_window",
+      "pass": true,
+      "reason_code": null,
+      "detail": "אין חיתוך קשה בחלון"
+     },
+     {
+      "check": "subject_known",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פנים יחידות ב-11/13 דגימות בחלון (גלאי פנים אינו אימות זהות)"
+     },
+     {
+      "check": "single_person_in_window",
+      "pass": true,
+      "reason_code": null,
+      "detail": "יותר מפנים אחת ב-2/13 דגימות בחלון"
+     },
+     {
+      "check": "no_strong_motion",
+      "pass": true,
+      "reason_code": null,
+      "detail": "MAD חציוני בחלון 0.73"
+     },
+     {
+      "check": "no_existing_camera_push",
+      "pass": true,
+      "reason_code": null,
+      "detail": "סקייל מצלמה מרבי 0.0006 בין פריימים 3ש זה מזה, מרקע סטטי (6 טווחים)"
+     },
+     {
+      "check": "crop_containment",
+      "pass": true,
+      "reason_code": null,
+      "detail": "ראש+מעטפת תנועה בתוך המסגרת עם שוליים 0.03"
+     }
+    ],
+    "reason_codes": [],
+    "evidence_grade": "supported",
+    "cues": [
+     {
+      "id": "cue_1",
+      "kind": "crop",
+      "start_frame": 123,
+      "end_frame": 186,
+      "interpolation": "smoothstep",
+      "keyframes": [
+       {
+        "frame": 123,
+        "rect": [
+         0.0,
+         0.0,
+         1.0,
+         1.0
+        ]
+       },
+       {
+        "frame": 138,
+        "rect": [
+         0.028302,
+         0.028302,
+         0.943396,
+         0.943396
+        ]
+       },
+       {
+        "frame": 170,
+        "rect": [
+         0.028302,
+         0.028302,
+         0.943396,
+         0.943396
+        ]
+       },
+       {
+        "frame": 185,
+        "rect": [
+         0.0,
+         0.0,
+         1.0,
+         1.0
+        ]
+       }
+      ]
+     }
+    ],
+    "assets": [],
+    "params": {
+     "peak_scale": 1.06,
+     "center": "center",
+     "ramp_in_frames": 15,
+     "hold_frames": 32,
+     "ramp_out_frames": 15,
+     "anchor_word_id": 12
+    },
+    "features": {
+     "semantic_fit": 0.6,
+     "hook_reinforcement": 0.9479,
+     "visual_fit": 1.0,
+     "authenticity": 0.9,
+     "asset_readiness": 1.0,
+     "distraction": 0.75,
+     "collision_uncertainty": 0.1538,
+     "render_complexity": 0.2,
+     "existing_motion_redundancy": 0.0521
+    },
+    "score": {
+     "benefit": 0.852,
+     "cost": 0.3514,
+     "net": 0.5006,
+     "calibrated": false
+    }
+   }
+  },
+  {
+   "project": "עיסוי-רפואי",
+   "reasons": [
+    "unsafe_crop"
+   ],
+   "overflow": {
+    "scale": 1.04,
+    "center": "center",
+    "head_over": 0.0,
+    "motion_over": 0.0136
+   },
+   "relaxation": "head_only",
+   "relaxation_he": "רק הראש מוגן — ידיים/גוף מותר שייחתכו בשוליים",
+   "candidate": {
+    "candidate_id": "cand_aea38b439b46",
+    "recipe": "SMART_PUNCH_IN",
+    "recipe_version": 1,
+    "eligible": true,
+    "checks": [
+     {
+      "check": "recipe_released",
+      "pass": true,
+      "reason_code": null,
+      "detail": "SMART_PUNCH_IN במצב mvp ומיושם ברשומה"
+     },
+     {
+      "check": "no_full_intro",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פתיח מלא: אין (None)"
+     },
+     {
+      "check": "timeline_supported",
+      "pass": true,
+      "reason_code": null,
+      "detail": "1080×1920@30/1"
+     },
+     {
+      "check": "transcript_provenance",
+      "pass": true,
+      "reason_code": null,
+      "detail": "המילים תואמות את משך הגוף · יישור לאודיו: היסט מיטבי 0.2ש (ציון 0.816→0.84)"
+     },
+     {
+      "check": "verbal_anchor",
+      "pass": true,
+      "reason_code": null,
+      "detail": "מילת עוגן: ההתאוששות @ 4.698ש"
+     },
+     {
+      "check": "no_intentional_entrance",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פנים ראשונות בפריים 0"
+     },
+     {
+      "check": "no_multi_person_opening",
+      "pass": true,
+      "reason_code": null,
+      "detail": "יותר מפנים אחת ב-0.05 מהדגימות ב-0-10ש (כולל פנים מודפסות — ספק ⇒ NO_OP)"
+     },
+     {
+      "check": "cue_bounds",
+      "pass": true,
+      "reason_code": null,
+      "detail": "חלון [126,202) מול גבול 300"
+     },
+     {
+      "check": "no_reservation_overlap",
+      "pass": true,
+      "reason_code": null,
+      "detail": "אין חפיפה לשכבה מוגנת"
+     },
+     {
+      "check": "no_hard_cut_in_window",
+      "pass": true,
+      "reason_code": null,
+      "detail": "אין חיתוך קשה בחלון"
+     },
+     {
+      "check": "subject_known",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פנים יחידות ב-15/15 דגימות בחלון (גלאי פנים אינו אימות זהות)"
+     },
+     {
+      "check": "single_person_in_window",
+      "pass": true,
+      "reason_code": null,
+      "detail": "יותר מפנים אחת ב-0/15 דגימות בחלון"
+     },
+     {
+      "check": "no_strong_motion",
+      "pass": true,
+      "reason_code": null,
+      "detail": "MAD חציוני בחלון 1.31"
+     },
+     {
+      "check": "no_existing_camera_push",
+      "pass": true,
+      "reason_code": null,
+      "detail": "סקייל מצלמה מרבי 0.0031 בין פריימים 3ש זה מזה, מרקע סטטי (8 טווחים)"
+     },
+     {
+      "check": "crop_containment",
+      "pass": true,
+      "reason_code": null,
+      "detail": "ראש+מעטפת תנועה בתוך המסגרת עם שוליים 0.03"
+     }
+    ],
+    "reason_codes": [],
+    "evidence_grade": "supported",
+    "cues": [
+     {
+      "id": "cue_1",
+      "kind": "crop",
+      "start_frame": 126,
+      "end_frame": 202,
+      "interpolation": "smoothstep",
+      "keyframes": [
+       {
+        "frame": 126,
+        "rect": [
+         0.0,
+         0.0,
+         1.0,
+         1.0
+        ]
+       },
+       {
+        "frame": 141,
+        "rect": [
+         0.028302,
+         0.028302,
+         0.943396,
+         0.943396
+        ]
+       },
+       {
+        "frame": 186,
+        "rect": [
+         0.028302,
+         0.028302,
+         0.943396,
+         0.943396
+        ]
+       },
+       {
+        "frame": 201,
+        "rect": [
+         0.0,
+         0.0,
+         1.0,
+         1.0
+        ]
+       }
+      ]
+     }
+    ],
+    "assets": [],
+    "params": {
+     "peak_scale": 1.06,
+     "center": "center",
+     "ramp_in_frames": 15,
+     "hold_frames": 45,
+     "ramp_out_frames": 15,
+     "anchor_word_id": 14
+    },
+    "features": {
+     "semantic_fit": 0.6,
+     "hook_reinforcement": 0.9063,
+     "visual_fit": 1.0,
+     "authenticity": 0.9,
+     "asset_readiness": 1.0,
+     "distraction": 0.75,
+     "collision_uncertainty": 0.0,
+     "render_complexity": 0.2,
+     "existing_motion_redundancy": 0.0937
+    },
+    "score": {
+     "benefit": 0.8416,
+     "cost": 0.3212,
+     "net": 0.5203,
+     "calibrated": false
+    }
+   }
+  },
+  {
+   "project": "צעדים-קטנים-כל-יום",
+   "reasons": [
+    "unsafe_crop"
+   ],
+   "overflow": {
+    "scale": 1.04,
+    "center": "center",
+    "head_over": 0.0,
+    "motion_over": 0.0067
+   },
+   "relaxation": "head_only",
+   "relaxation_he": "רק הראש מוגן — ידיים/גוף מותר שייחתכו בשוליים",
+   "candidate": {
+    "candidate_id": "cand_da505e55a335",
+    "recipe": "SMART_PUNCH_IN",
+    "recipe_version": 1,
+    "eligible": true,
+    "checks": [
+     {
+      "check": "recipe_released",
+      "pass": true,
+      "reason_code": null,
+      "detail": "SMART_PUNCH_IN במצב mvp ומיושם ברשומה"
+     },
+     {
+      "check": "no_full_intro",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פתיח מלא: אין (None)"
+     },
+     {
+      "check": "timeline_supported",
+      "pass": true,
+      "reason_code": null,
+      "detail": "1080×1920@30/1"
+     },
+     {
+      "check": "transcript_provenance",
+      "pass": true,
+      "reason_code": null,
+      "detail": "המילים תואמות את משך הגוף · יישור לאודיו: היסט מיטבי 0.1ש (ציון 0.787→0.795)"
+     },
+     {
+      "check": "verbal_anchor",
+      "pass": true,
+      "reason_code": null,
+      "detail": "מילת עוגן: מצעדים @ 3.058ש"
+     },
+     {
+      "check": "no_intentional_entrance",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פנים ראשונות בפריים 0"
+     },
+     {
+      "check": "no_multi_person_opening",
+      "pass": true,
+      "reason_code": null,
+      "detail": "יותר מפנים אחת ב-0.05 מהדגימות ב-0-10ש (כולל פנים מודפסות — ספק ⇒ NO_OP)"
+     },
+     {
+      "check": "cue_bounds",
+      "pass": true,
+      "reason_code": null,
+      "detail": "חלון [77,153) מול גבול 300"
+     },
+     {
+      "check": "no_reservation_overlap",
+      "pass": true,
+      "reason_code": null,
+      "detail": "אין חפיפה לשכבה מוגנת"
+     },
+     {
+      "check": "no_hard_cut_in_window",
+      "pass": true,
+      "reason_code": null,
+      "detail": "אין חיתוך קשה בחלון"
+     },
+     {
+      "check": "subject_known",
+      "pass": true,
+      "reason_code": null,
+      "detail": "פנים יחידות ב-13/15 דגימות בחלון (גלאי פנים אינו אימות זהות)"
+     },
+     {
+      "check": "single_person_in_window",
+      "pass": true,
+      "reason_code": null,
+      "detail": "יותר מפנים אחת ב-2/15 דגימות בחלון"
+     },
+     {
+      "check": "no_strong_motion",
+      "pass": true,
+      "reason_code": null,
+      "detail": "MAD חציוני בחלון 3.18"
+     },
+     {
+      "check": "no_existing_camera_push",
+      "pass": true,
+      "reason_code": null,
+      "detail": "סקייל מצלמה מרבי 0.0166 בין פריימים 3ש זה מזה, מרקע סטטי (13 טווחים)"
+     },
+     {
+      "check": "crop_containment",
+      "pass": true,
+      "reason_code": null,
+      "detail": "ראש+מעטפת תנועה בתוך המסגרת עם שוליים 0.03"
+     }
+    ],
+    "reason_codes": [],
+    "evidence_grade": "supported",
+    "cues": [
+     {
+      "id": "cue_1",
+      "kind": "crop",
+      "start_frame": 77,
+      "end_frame": 153,
+      "interpolation": "smoothstep",
+      "keyframes": [
+       {
+        "frame": 77,
+        "rect": [
+         0.0,
+         0.0,
+         1.0,
+         1.0
+        ]
+       },
+       {
+        "frame": 92,
+        "rect": [
+         0.028302,
+         0.028302,
+         0.943396,
+         0.943396
+        ]
+       },
+       {
+        "frame": 137,
+        "rect": [
+         0.028302,
+         0.028302,
+         0.943396,
+         0.943396
+        ]
+       },
+       {
+        "frame": 152,
+        "rect": [
+         0.0,
+         0.0,
+         1.0,
+         1.0
+        ]
+       }
+      ]
+     }
+    ],
+    "assets": [],
+    "params": {
+     "peak_scale": 1.06,
+     "center": "center",
+     "ramp_in_frames": 15,
+     "hold_frames": 45,
+     "ramp_out_frames": 15,
+     "anchor_word_id": 9
+    },
+    "features": {
+     "semantic_fit": 0.6,
+     "hook_reinforcement": 0.7731,
+     "visual_fit": 1.0,
+     "authenticity": 0.9,
+     "asset_readiness": 1.0,
+     "distraction": 0.75,
+     "collision_uncertainty": 0.1333,
+     "render_complexity": 0.2,
+     "existing_motion_redundancy": 0.2269
+    },
+    "score": {
+     "benefit": 0.8083,
+     "cost": 0.3812,
+     "net": 0.4271,
+     "calibrated": false
+    }
+   }
+  }
+ ]
+}

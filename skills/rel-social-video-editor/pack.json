@@ -1,0 +1,96 @@
+{
+ "_doc": "תצורת tools/skill_pack.py — איזה סעיף H2 של המאסטר נכנס לאיזה reference. סעיף חדש שלא תואם אף match נכנס ל-misc.md (לא נאבד) ומדווח ב-build. description = התיאור המותקן (≤1024; יעד SKILL-STANDARD v2 ≤350).",
+ "description": "מערכת עריכת סרטוני הסושיאל המקומית של קרוספיט אריאל: Monday → הכנה (Whisper+EDL) → review-app (5112) → גימור → אישור קאבר+קפשן → Metricool. TRIGGERS: ערוך סרטון, תרוץ על הסרטונים, הערות מהאפליקציה, גימור, מוכן לתזמון, תזמן ב-Metricool, EDITPLAN, סרטון אפליקציה. NEGATIVE: תסריט → rel-script-writer · קפשן → rel-cta-psychology · פודקאסט מלא → rel-podcast-descript-editor.",
+ "routes": [
+  {
+   "file": "hook-edit.md",
+   "match": "ארגז העריכה של ההוק",
+   "when": "עריכת הוק: תנועות/מעברים/צלילים (hook_fx), 12 מתכונים, שערי HFX, --hook-fx"
+  },
+  {
+   "file": "hook-build.md",
+   "match": "בניית הוק",
+   "when": "שלב 2.5: ארגז כלי ההוק, HOOK_PLAN, P22, מגברי spotlight/then_now"
+  },
+  {
+   "file": "motion-graphics.md",
+   "match": "Motion Graphics",
+   "when": "שכבת MG: תבניות, motion_plan, שערי MG0-MG8, --motion בגימור, אזורים ומינון"
+  },
+  {
+   "file": "concept.md",
+   "match": "תפיסת העל",
+   "when": "רקע: למה מקומי, גרסאות וידאו (artifacts)"
+  },
+  {
+   "file": "constants.md",
+   "match": "קונסטנטות",
+   "when": "צריך ID/עמודה/נתיב כלי/API שלא בליבה"
+  },
+  {
+   "file": "v3-decision-engine.md",
+   "match": "^V3|מנוע ההחלטה",
+   "when": "--director, מעטפת נמדדת, תקציב שקט/תפרים, best_split"
+  },
+  {
+   "file": "iron-rules.md",
+   "match": "חוקי ברזל",
+   "when": "הנוסח המלא והנימוק של חוק ברזל (בירול, המחשה, תזמון…)"
+  },
+  {
+   "file": "vision-law.md",
+   "match": "חוק הראייה",
+   "when": "QA ויזואלי, vision_check, גיליונות מגע"
+  },
+  {
+   "file": "edit-layer.md",
+   "match": "שכבת העריכה|EDIT-LAYER",
+   "when": "שלב 1.5: קריאת ⟦SCRIPT⟧/⟦EDIT-LAYER⟧, טבלת פער, ⟦EDITPLAN⟧"
+  },
+  {
+   "file": "visual-hook.md",
+   "match": "פתיחה חזותית|Visual Hook",
+   "when": "Visual Hook Engine (NO_OP / SMART_PUNCH_IN)"
+  },
+  {
+   "file": "harel-ai-apps.md",
+   "match": "הראל חיון",
+   "when": "מחלקת הראל חיון + סרטון אפליקציה/פרומפט (Flow, SmartLink, P17)"
+  },
+  {
+   "file": "intake-guard.md",
+   "match": "שומרי הגלם|intake_guard",
+   "when": "קליטת גלם: סיבוב, מטמון ישן, חורי כתוביות"
+  },
+  {
+   "file": "ops-rules.md",
+   "match": "כללי תפעול",
+   "when": "טבלת כללי התפעול המלאה (lessons_canon)"
+  },
+  {
+   "file": "workflow.md",
+   "match": "^Workflow",
+   "when": "ביצוע שלב בפועל (0-7): פקודות, סדר, QA"
+  },
+  {
+   "file": "failures.md",
+   "match": "טיפול בכשלים|ערוץ ידני",
+   "when": "משהו נכשל / בקשה ידנית חריגה"
+  },
+  {
+   "file": "fix-verify.md",
+   "match": "שלושת החוזים|מה תוקן|אימות תיקונים",
+   "when": "סבב תיקונים: changelog פר-גרסה, verify-fixes, fix-verdict"
+  },
+  {
+   "file": "ai-enhancement.md",
+   "match": "שכבת AI לממומן|higgsfield",
+   "when": "שכבת AI לסרטון ממומן (higgsfield-ai-enhancement)"
+  },
+  {
+   "file": "version-history.md",
+   "match": "^גרסה$|^גרסה ",
+   "when": "היסטוריה בלבד — כמעט אף פעם"
+  }
+ ]
+}
