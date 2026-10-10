@@ -12,7 +12,7 @@ need_apt=()
 command -v ffmpeg >/dev/null || need_apt+=(ffmpeg)
 command -v fc-cache >/dev/null || need_apt+=(fontconfig)
 if ((${#need_apt[@]})); then log "apt: ${need_apt[*]}"; apt-get update -qq && apt-get install -y -qq "${need_apt[@]}" >/dev/null; fi
-ffmpeg -hide_banner -filters 2>/dev/null | grep -qE ' (subtitles|ass) ' && log "ffmpeg: libass ✓" || log "ffmpeg: אין libass (הכתוביות ב-PIL — לא חוסם)"
+FF="$(ffmpeg -hide_banner -filters 2>/dev/null || true)"; grep -qE ' (subtitles|ass) ' <<<"$FF" && log "ffmpeg: libass ✓" || log "ffmpeg: אין libass (הכתוביות ב-PIL — לא חוסם)"
 if ! command -v rclone >/dev/null; then
   log "rclone"; tmp=$(mktemp -d); (cd "$tmp" && curl -fsSLO https://downloads.rclone.org/rclone-current-linux-amd64.zip \
     && python3 -m zipfile -e rclone-current-linux-amd64.zip . && install -m755 rclone-*-linux-amd64/rclone /usr/local/bin/rclone); rm -rf "$tmp"
@@ -30,6 +30,9 @@ from huggingface_hub import snapshot_download
 p = snapshot_download("ivrit-ai/whisper-large-v3-turbo-ct2")
 print("[bootstrap] model:", p)
 PY
+
+# 3b. puppeteer-core לשכבת ה-MG (node_modules לא בריפו)
+( cd "$REL_HOME/tools/illustration" && [[ -d node_modules/puppeteer-core ]] || npm ci --silent ) && log "puppeteer ✓ (CHROME_PATH=${CHROME_PATH:-?})"
 
 # 4. תאימות לנתיבי מק היסטוריים בקונפיגים (רשת ביטחון, לא מנגנון ראשי)
 bash "$HERE/mac_compat.sh"

@@ -1,0 +1,266 @@
+<title>רוויו סושיאל R.E.L</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;800&display=swap">
+<style>
+/* layout: אפליקציית טלפון RTL — רשימת "דורש אותך" למעלה, מסך סרטון אחד בכל פעם */
+:root{
+  --bg:#f6f3f2; --surface:#ffffff; --fg:#1d1617; --muted:#6f6264; --line:#e6dcdb;
+  --brand:#871d1f; --brand-ink:#ffffff; --ok:#1f7a4d; --warn:#a86400; --bad:#b3261e; --info:#2a5d8f;
+  --chip:#efe7e6;
+  --f-display:'Assistant','Ploni','Arial Hebrew',system-ui,sans-serif;
+  --f-body:'Assistant','Ploni','Arial Hebrew',system-ui,sans-serif;
+  --f-mono:ui-monospace,'SF Mono',Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141011; --surface:#1f1819; --fg:#f3ecec; --muted:#a8999b; --line:#352a2b;
+  --brand:#c2453f; --brand-ink:#ffffff; --ok:#5cc28c; --warn:#e0a24a; --bad:#ef7a70; --info:#7fb0e0; --chip:#2b2223; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141011; --surface:#1f1819; --fg:#f3ecec; --muted:#a8999b; --line:#352a2b;
+  --brand:#c2453f; --brand-ink:#ffffff; --ok:#5cc28c; --warn:#e0a24a; --bad:#ef7a70; --info:#7fb0e0; --chip:#2b2223; color-scheme:dark}
+html{direction:rtl}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.45}
+.wrap{max-width:640px;margin:0 auto;padding-inline:16px;padding-block:12px 40px;display:grid;gap:14px}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px 8px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line)}
+h1{font-family:var(--f-display);font-weight:800;font-size:22px;margin:0;letter-spacing:-.01em}
+h1 b{color:var(--brand)}
+h2{font-family:var(--f-display);font-weight:800;font-size:19px;margin:0;text-wrap:balance}
+h3{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--muted);margin:0}
+.sync{font-size:12px;color:var(--muted);text-align:left}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:6px 12px;font:600 14px var(--f-body);cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.tab .n{font-variant-numeric:tabular-nums;opacity:.7;margin-inline-start:4px}
+.list{display:grid;gap:8px}
+.item{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;text-align:start;color:var(--fg);font:inherit;width:100%}
+.item:focus-visible,.btn:focus-visible,.tab:focus-visible{outline:3px solid var(--info);outline-offset:2px}
+.item .t{font-weight:700;min-width:0}
+.item .meta{grid-column:1/-1;font-size:13px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap}
+.pill{font-size:12px;font-weight:700;border-radius:999px;padding:3px 9px;white-space:nowrap;background:var(--chip);color:var(--fg)}
+.pill.need{background:var(--brand);color:var(--brand-ink)}
+.pill.ok{color:var(--ok)} .pill.wait{color:var(--info)} .pill.bad{color:var(--bad)}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:18px;color:var(--muted);font-size:15px}
+.back{background:none;border:0;color:var(--info);font:600 15px var(--f-body);padding:4px 0;cursor:pointer}
+.player{position:relative;background:#000;border-radius:14px;overflow:hidden;aspect-ratio:9/16;max-height:70vh;margin-inline:auto;width:100%;max-width:min(100%,calc(70vh*9/16))}
+.player video{width:100%;height:100%;display:block;object-fit:contain;background:#000}
+.player .novideo{position:absolute;inset:0;display:grid;place-items:center;color:#d8cfcf;font-size:14px;padding:20px;text-align:center}
+.tc{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:8px}
+.verdict{display:flex;gap:8px;align-items:flex-start}
+.verdict .dot{width:10px;height:10px;border-radius:50%;margin-top:7px;flex:none;background:var(--muted)}
+.verdict.ok .dot{background:var(--ok)} .verdict.bad .dot{background:var(--bad)}
+.lines{margin:0;padding-inline-start:18px;font-size:14px;color:var(--muted)}
+.compose{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:center}
+.compose .at{font-size:14px;background:var(--chip);border-radius:8px;padding:8px 10px}
+textarea,select,input[type=text]{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px;width:100%;min-width:0;box-sizing:border-box}
+textarea{min-height:76px;resize:vertical}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font:700 15px var(--f-body);border-radius:10px;padding:11px 14px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.btn.go{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.grow{flex:1 1 140px}
+.comments{display:grid;gap:6px}
+.cm{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:start;padding:8px 0;border-top:1px solid var(--line)}
+.cm:first-child{border-top:0}
+.cm button.t{background:var(--chip);border:0;border-radius:6px;padding:2px 7px;color:var(--fg);cursor:pointer}
+.cm .txt{min-width:0;overflow-wrap:anywhere}
+.cm .reply{font-size:13px;color:var(--muted)}
+.note{font-size:13px;color:var(--muted)}
+.cover{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:start}
+.cover img{width:120px;aspect-ratio:9/16;object-fit:cover;border-radius:8px;background:var(--chip)}
+@media (max-width:420px){.cover{grid-template-columns:1fr}.cover img{width:100%;max-width:220px}}
+.confirm{border:1px solid var(--brand);border-radius:12px;padding:12px;display:grid;gap:8px;background:var(--surface)}
+.health{background:var(--surface);border:1px solid var(--bad);color:var(--fg);border-radius:12px;padding:10px 14px;font-size:14px}
+.toast{position:fixed;inset-inline:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:12px 14px;border-radius:12px;font-weight:600;z-index:9}
+@media (prefers-reduced-motion:no-preference){.item{transition:transform .12s}.item:active{transform:scale(.99)}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <h1>רוויו <b>R.E.L</b></h1>
+    <div class="sync" id="sync">מתחבר…</div>
+  </header>
+
+  <div class="health" id="health" hidden></div>
+  <section id="home">
+    <div class="tabs" role="group" aria-label="סינון">
+      <button class="tab" data-f="need" aria-pressed="true">דורש אותך<span class="n" id="n-need"></span></button>
+      <button class="tab" data-f="work" aria-pressed="false">בעבודה<span class="n" id="n-work"></span></button>
+      <button class="tab" data-f="done" aria-pressed="false">תוזמן<span class="n" id="n-done"></span></button>
+    </div>
+    <div class="list" id="list" style="margin-top:12px">
+      <div class="empty">כאן יופיעו הסרטונים שעברו מבקר-קדם ומחכים לך. סרטון נכנס לכאן אחרי שהעלית גלם לגאנט וסימנת "מוכן לעריכה".</div>
+    </div>
+  </section>
+
+  <section id="detail" hidden>
+    <button class="back" id="back">→ כל הסרטונים</button>
+    <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;margin-block:6px 10px">
+      <h2 id="d-title"></h2><span class="pill" id="d-state"></span>
+    </div>
+    <div class="player"><video id="vid" playsinline controls preload="metadata"></video><div class="novideo" id="novideo" hidden>הגרסה הזו עוד לא עלתה. היא תופיע אחרי הריצה הבאה.</div></div>
+    <div class="note" style="margin-top:6px">גרסה <span id="d-ver" class="tc"></span> · <span id="d-dur" class="tc"></span> · פרסום מתוכנן <span id="d-date"></span></div>
+
+    <div class="box" id="pf" style="margin-top:12px"></div>
+    <div class="box" id="fixed" hidden><h3>מה תוקן בגרסה הזו</h3><ul class="lines" id="fixed-l"></ul></div>
+
+    <div class="box" id="notes-box" style="margin-top:12px">
+      <h3>הערות</h3>
+      <div class="compose">
+        <span class="at tc" id="at">0:00</span>
+        <input type="text" id="c-text" placeholder="מה לתקן ברגע הזה?" autocomplete="off">
+      </div>
+      <div class="row">
+        <select id="c-cat" class="grow" aria-label="קטגוריה">
+          <option value="cut">חיתוך / קצב</option><option value="captions">כתוביות</option><option value="broll">בירול</option>
+          <option value="music">מוזיקה</option><option value="hook">הוק / פתיחה</option><option value="mg">גרפיקה</option><option value="other">אחר</option>
+        </select>
+        <button class="btn primary" id="c-add">הוסף הערה</button>
+      </div>
+      <div class="comments" id="c-list"></div>
+      <div class="row">
+        <button class="btn grow" id="send">📤 שלח הערות לקלאוד</button>
+        <button class="btn go grow" id="approve">✔ אשר והתחל גימור</button>
+      </div>
+      <div class="confirm" id="approve-confirm" hidden>
+        <div>לאשר את הגרסה <span class="tc" id="ac-ver"></span> לגימור? הקלאוד יגמר אותה בריצה הבאה, ואחר כך יכין קאבר וקפשן לאישורך.</div>
+        <div class="row"><button class="btn go" id="approve-yes">כן, לגימור</button><button class="btn" id="approve-no">ביטול</button></div>
+      </div>
+      <div class="note" id="pending-note" hidden></div>
+    </div>
+
+    <div class="box" id="cc" hidden style="margin-top:12px">
+      <h3>קאבר וקפשן</h3>
+      <div class="cover"><img id="cover" alt="קאבר"><div style="display:grid;gap:8px;min-width:0">
+        <textarea id="caption" rows="8" aria-label="קפשן"></textarea>
+        <div class="row"><button class="btn go grow" id="cc-ok">✔ אשר קאבר וקפשן</button><button class="btn grow" id="cc-change">✏️ בקש שינוי</button></div>
+        <input type="text" id="cc-note" placeholder="מה לשנות בקאבר או בקפשן?" hidden>
+      </div></div>
+    </div>
+  </section>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const STATE = {
+  draft:{t:'בהכנה',c:'wait',g:'work'}, review:{t:'מחכה לך',c:'need',g:'need'}, fixing:{t:'בתיקון',c:'wait',g:'work'},
+  approved:{t:'אושר — בגימור',c:'wait',g:'work'}, finishing:{t:'בגימור',c:'wait',g:'work'},
+  cover_review:{t:'קאבר+קפשן לאישור',c:'need',g:'need'}, ready_to_schedule:{t:'מוכן לתזמון',c:'ok',g:'work'},
+  scheduled:{t:'📅 תוזמן',c:'ok',g:'done'}, published:{t:'🚀 פורסם',c:'ok',g:'done'}, blocked:{t:'נעצר — ראה הערה',c:'bad',g:'need'}
+};
+let db=null, me=null, projects=[], comments=[], actions=[], filter='need', open=null, unsub=[];
+const fmt = (s) => { s=Math.max(0,Math.round(s||0)); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); };
+function toast(t){ const el=$('toast'); el.textContent=t; el.hidden=false; clearTimeout(toast.h); toast.h=setTimeout(()=>el.hidden=true,2600); }
+function st(p){ return STATE[p.state] || {t:p.state||'—',c:'',g:'work'}; }
+function pendingFor(pid){ return actions.filter(a=>a.project===pid && !a.consumed); }
+
+function renderList(){
+  const groups={need:[],work:[],done:[]};
+  projects.forEach(p=>groups[st(p).g].push(p));
+  for(const k of Object.keys(groups)) $('n-'+k).textContent=groups[k].length?String(groups[k].length):'';
+  const rows=groups[filter].sort((a,b)=>String(a.publish_date||'9').localeCompare(String(b.publish_date||'9')));
+  const L=$('list'); L.textContent='';
+  if(!rows.length){ const e=document.createElement('div'); e.className='empty';
+    e.textContent = !db ? 'אין חיבור לנתונים בתצוגה הזו. פתח את העמוד מתוך claude.ai כשאתה מחובר.' :
+      filter==='need' ? 'אין כרגע משהו שמחכה לך. סרטון חדש מגיע לכאן אחרי מבקר-קדם תקין.' : 'אין סרטונים בקבוצה הזו.';
+    L.append(e); return; }
+  for(const p of rows){
+    const b=document.createElement('button'); b.className='item'; b.type='button';
+    const t=document.createElement('span'); t.className='t'; t.textContent=p.title||p.id;
+    const s=document.createElement('span'); s.className='pill '+st(p).c; s.textContent=st(p).t;
+    const m=document.createElement('span'); m.className='meta';
+    const open_c=comments.filter(c=>c.project===p.id && c.status!=='verified').length;
+    m.textContent=[p.dept, p.publish_date?('פרסום '+p.publish_date):'', p.duration?fmt(p.duration):'', open_c?(open_c+' הערות פתוחות'):'', pendingFor(p.id).length?'ממתין לריצה הבאה':''].filter(Boolean).join(' · ');
+    b.append(t,s,m); b.onclick=()=>openProject(p.id); L.append(b);
+  }
+}
+
+function renderDetail(){
+  const p=projects.find(x=>x.id===open); if(!p) return;
+  $('d-title').textContent=p.title||p.id;
+  const s=st(p); $('d-state').className='pill '+s.c; $('d-state').textContent=s.t;
+  $('d-ver').textContent=p.version||'—'; $('ac-ver').textContent=p.version||''; $('d-dur').textContent=p.duration?fmt(p.duration):'—';
+  $('d-date').textContent=p.publish_date||'לא נקבע';
+  const v=$('vid'); const url=p.video_url||'';
+  if(url){ if(v.dataset.src!==url){ v.src=url; v.dataset.src=url; } $('novideo').hidden=true; } else { v.removeAttribute('src'); v.dataset.src=''; $('novideo').hidden=false; }
+  // מבקר-קדם
+  const pf=$('pf'); pf.textContent=''; const pre=p.preflight||{};
+  const vd=document.createElement('div'); vd.className='verdict '+(pre.ready?'ok':(pre.ready===false?'bad':''));
+  const dot=document.createElement('span'); dot.className='dot';
+  const tx=document.createElement('div'); tx.textContent = pre.verdict || (pre.ready?'מבקר-קדם: מוכן לך':'מבקר-קדם עוד לא רץ על הגרסה הזו');
+  vd.append(dot,tx); pf.append(vd);
+  if(Array.isArray(pre.lines)&&pre.lines.length){ const ul=document.createElement('ul'); ul.className='lines'; pre.lines.slice(0,6).forEach(l=>{const li=document.createElement('li'); li.textContent=l; ul.append(li);}); pf.append(ul); }
+  // מה תוקן
+  const fx=Array.isArray(p.fixed)?p.fixed:[]; $('fixed').hidden=!fx.length; const fl=$('fixed-l'); fl.textContent='';
+  fx.forEach(f=>{const li=document.createElement('li'); li.textContent=(f.verdict==='verified'?'✓ ':'• ')+(f.text||''); fl.append(li);});
+  // הערות
+  const mine=comments.filter(c=>c.project===p.id).sort((a,b)=>(a.t||0)-(b.t||0)); const cl=$('c-list'); cl.textContent='';
+  if(!mine.length){ const e=document.createElement('div'); e.className='note'; e.textContent='עצור את הסרטון ברגע שצריך תיקון וכתוב מה לשנות. ההערה נצמדת לזמן ולגרסה.'; cl.append(e); }
+  mine.forEach(c=>{
+    const r=document.createElement('div'); r.className='cm';
+    const tb=document.createElement('button'); tb.className='t tc'; tb.textContent=fmt(c.t); tb.onclick=()=>{ v.currentTime=c.t||0; v.play().catch(()=>{}); };
+    const body=document.createElement('div'); body.className='txt'; body.textContent=c.text||'';
+    if(c.reply){ const rp=document.createElement('div'); rp.className='reply'; rp.textContent='🤖 '+c.reply; body.append(rp); }
+    const sp=document.createElement('span'); const map={open:['פתוחה',''],sent:['נשלחה','wait'],fixed:['תוקן — לבדיקתך','need'],verified:['✓ אומת','ok'],not_fixed:['חוזר לתיקון','bad']};
+    const m=map[c.status]||[c.status||'',''] ; sp.className='pill '+m[1]; sp.textContent=m[0];
+    r.append(tb,body,sp); cl.append(r);
+  });
+  const pend=pendingFor(p.id); const pn=$('pending-note');
+  pn.hidden=!pend.length; pn.textContent = pend.length ? 'נשלח: '+pend.map(a=>({send_notes:'הערות',approve_publish:'אישור לגימור',approve_cover_caption:'אישור קאבר+קפשן',request_cover_change:'בקשת שינוי בקאבר/קפשן'})[a.type]||a.type).join(', ')+'. הקלאוד יטפל בזה בריצה הבאה (עד שעה).' : '';
+  const reviewable = ['review','fixing','blocked'].includes(p.state);
+  $('approve').disabled = !reviewable || !p.video_url || pend.some(a=>a.type==='approve_publish');
+  $('send').disabled = !mine.some(c=>c.status==='open');
+  // קאבר+קפשן
+  const showCC = p.state==='cover_review' || (p.cover_url && ['ready_to_schedule','scheduled','published'].includes(p.state));
+  $('cc').hidden=!showCC;
+  if(showCC){ $('cover').src=p.cover_url||''; const ta=$('caption'); if(document.activeElement!==ta && !ta.dataset.dirty) ta.value=p.caption||'';
+    const locked = p.state!=='cover_review'; ta.readOnly=locked; $('cc-ok').disabled=locked||pend.some(a=>a.type==='approve_cover_caption'); $('cc-change').disabled=locked; }
+}
+
+function render(){ renderList(); if(open) renderDetail(); }
+function openProject(id){ open=id; $('home').hidden=true; $('detail').hidden=false; $('caption').dataset.dirty=''; renderDetail(); window.scrollTo(0,0); }
+$('back').onclick=()=>{ open=null; $('vid').pause(); $('detail').hidden=true; $('home').hidden=false; renderList(); };
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{ filter=b.dataset.f; document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); renderList(); });
+$('vid').addEventListener('timeupdate',()=>{ $('at').textContent=fmt($('vid').currentTime); });
+$('caption').addEventListener('input',e=>e.target.dataset.dirty='1');
+
+async function addAction(type, extra={}){
+  if(!db) return toast('אין חיבור לנתונים');
+  const p=projects.find(x=>x.id===open);
+  await db.collection('actions').add({project:open, type, version:p?.version||null, at:new Date().toISOString(), by:me, consumed:false, ...extra});
+}
+$('c-add').onclick=async()=>{
+  const text=$('c-text').value.trim(); if(!text) return toast('כתוב מה לתקן');
+  if(!db) return toast('אין חיבור לנתונים');
+  const p=projects.find(x=>x.id===open);
+  try{ await db.collection('comments').add({project:open, version:p?.version||null, t:Math.round(($('vid').currentTime||0)*10)/10, text, category:$('c-cat').value, status:'open', by:me, at:new Date().toISOString()});
+    $('c-text').value=''; toast('ההערה נשמרה'); }catch(e){ toast('ההערה לא נשמרה: '+(e.message||e.code)); }
+};
+$('c-text').addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); $('c-add').click(); } });
+$('send').onclick=async()=>{
+  try{ const open_c=comments.filter(c=>c.project===open && c.status==='open');
+    for(const c of open_c) await db.doc('comments/'+c.id).update({status:'sent'});
+    await addAction('send_notes',{count:open_c.length}); toast('נשלח לקלאוד ('+open_c.length+' הערות)'); }catch(e){ toast('השליחה נכשלה: '+(e.message||e.code)); }
+};
+$('approve').onclick=()=>{ $('approve-confirm').hidden=false; };
+$('approve-no').onclick=()=>{ $('approve-confirm').hidden=true; };
+$('approve-yes').onclick=async()=>{ $('approve-confirm').hidden=true; try{ await addAction('approve_publish'); toast('אושר לגימור'); }catch(e){ toast('האישור לא נשמר: '+(e.message||e.code)); } };
+$('cc-ok').onclick=async()=>{ try{ await addAction('approve_cover_caption',{caption:$('caption').value}); $('caption').dataset.dirty=''; toast('קאבר וקפשן אושרו'); }catch(e){ toast('לא נשמר: '+(e.message||e.code)); } };
+$('cc-change').onclick=async()=>{ const n=$('cc-note'); if(n.hidden){ n.hidden=false; n.focus(); return; }
+  const note=n.value.trim(); if(!note) return toast('כתוב מה לשנות');
+  try{ await addAction('request_cover_change',{note, caption:$('caption').value}); n.value=''; n.hidden=true; toast('הבקשה נשלחה'); }catch(e){ toast('לא נשמר: '+(e.message||e.code)); } };
+
+function stamp(){ $('sync').textContent='עודכן '+new Date().toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'}); }
+(async()=>{
+  renderList();
+  try{ const user=await claude.use('user'); if(user){ me=await user.id().catch(()=>null); } }catch(_){}
+  db=await claude.use('db');
+  if(!db){ $('sync').textContent='לא מחובר'; renderList(); return; }
+  const snap=(name,setter)=>db.collection(name).onSnapshot(s=>{ setter(s.docs.map(d=>({id:d.id,...d.data()}))); stamp(); render(); }, e=>{ $('sync').textContent='שגיאת חיבור'; });
+  unsub.push(snap('projects',v=>projects=v), snap('comments',v=>comments=v), snap('actions',v=>actions=v));
+  db.doc('system/health').onSnapshot(d=>{ const h=d.exists?d.data():null; const el=$('health');
+    const bad = h && Object.entries(h).some(([k,v])=>!['at','note'].includes(k) && v && v!=='ok');
+    el.hidden=!bad; el.textContent = bad ? ('⚠️ המערכת בענן צריכה אותך: '+(h.note||'ראה פרטים בצ׳אט הריצה')) : ''; }, ()=>{});
+})();
+</script>

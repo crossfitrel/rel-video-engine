@@ -57,6 +57,8 @@ class TestMaterialize(unittest.TestCase):
             self.assertEqual(rep["downloaded"], 1)
             self.assertEqual(rep["failed"], [])
 
+    @unittest.skipIf(hasattr(os, "geteuid") and os.geteuid() == 0,
+                     "root קורא גם קובץ chmod 000 — בסשן ענן (root) הבדיקה לא מסוגלת לייצר קובץ בלתי-קריא")
     def test_an_unreadable_file_is_reported_not_swallowed(self):
         """שער שבולע כשל גרוע משער שאין — הכישלון חייב להגיע לדוח."""
         with tempfile.TemporaryDirectory() as d:

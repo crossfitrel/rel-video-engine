@@ -39,13 +39,14 @@ from __future__ import annotations
 
 import argparse
 import base64
+import os
 import json
 import subprocess
 import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+CHROME = os.environ.get("CHROME_PATH") or "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"  # ענן: CHROME_PATH מ-cloud/env.sh
 
 CARD_W, CARD_H = 1040, 1090      # קנבס הקומפוזיציה (2x גודל הקלף על המסך)
 FPS = 30

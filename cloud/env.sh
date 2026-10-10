@@ -13,3 +13,8 @@ export HF_HOME="${HF_HOME:-$HOME/.cache/huggingface}"
 #   RCLONE_CONFIG_HAYONHQ_TYPE=drive  RCLONE_CONFIG_HAYONHQ_SCOPE=drive  RCLONE_CONFIG_HAYONHQ_TOKEN='{...}'
 export RCLONE_CONFIG_HAYONHQ_TYPE="${RCLONE_CONFIG_HAYONHQ_TYPE:-drive}"
 export RCLONE_CONFIG_HAYONHQ_SCOPE="${RCLONE_CONFIG_HAYONHQ_SCOPE:-drive}"
+# Chromium לרינדור שכבת ה-MG/המחשה (puppeteer-core) — מותקן מראש בתמונת הענן
+if [[ -z "${CHROME_PATH:-}" ]]; then
+  for c in /opt/pw-browsers/chromium /opt/pw-browsers/chromium-*/chrome-linux/chrome "$(command -v chromium 2>/dev/null)"; do
+    [[ -n "$c" && -x "$c" ]] && { export CHROME_PATH="$c"; break; }; done
+fi
