@@ -45,6 +45,9 @@ RCLONE_CONFIG_HAYONHQ_TOKEN={"access_token":...,"refresh_token":...}
 ⚠️ rclone מזהיר שה-client_id המשותף שלו יוצא משימוש במהלך 2026 — כדאי ליצור client_id משלך ב-Google Cloud ולהוסיף `RCLONE_CONFIG_HAYONHQ_CLIENT_ID/SECRET`.
 
 ## אימות (10.10.26)
-- **baseline בענן:** 938 בדיקות כמו במק; 9 נכשלות רק מחוסר ספריות (מוזיקה/בירול/פתיח) עד שה-Drive נמשך, 1 תוקנה (הרשאות root). gates 216/0, lessons 138/0.
+- **baseline בענן (ריצה אחרונה, 199ש):** 941 בדיקות · 935 עוברות · 6 נכשלות רק מחוסר ספריות שעוד לא נמשכו מ-Drive (מאגר הבירולים עם ראיות vision, נכס הפתיח הקבוע, ספריית המוזיקה המלאה) — נסגרות כשהטוקן מוגדר. doctor 0 FAIL · gates 216/0 · lessons 140/0 · skill pack תואם (v10.0).
+- **שער HDR:** מכויל מול tonemap.swift על ריל מאושר: SSIM 0.981 על INPUT, 0.971 FINAL↔FINAL.
+- **סקילים:** rel-social-video-editor v10.0 הותקן (v13 ב-claude.ai) + a-rel-router, rel-broll-creator, rel-audience-video-editor, rel-thumbnail-creator עודכנו (VIDEO-CANON v10, hdr_gate, סנכרון בירולים ל-Drive אחרי קציר).
+- **פרויקט claude.ai:** ידע 1,996,132 → 828,443 מתוך 2,000,000 (62 מסמכים). 853 קבצי המדיה שהועלו לפרויקט (5.6GB) — עותק מאומת ב-Drive (מניפסט `מניפסט/manifest-2026-10-10.tsv`, md5 לכל קובץ); הסרתם מהפרויקט ממתינה לאישור הראל. שומר: `tools/project_hygiene.py` + L134.
 - **תמלול:** דיבור נקי — הענן שונה מהמק ב-1 מילה מ-45 (2.2%), בדיוק כמו ההפרש בין שני מנועי המק עצמם; תזמונים זהים. שטח רועש (קהל): הפרש גבוה יותר, באותו סדר גודל כמו MLX↔ct2 במק.
 - **ריל מלא במקביל:** ראו `cloud/E2E-REPORT.md`.
