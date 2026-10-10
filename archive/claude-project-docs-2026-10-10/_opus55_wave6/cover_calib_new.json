@@ -1,0 +1,89 @@
+{
+ "params": {
+  "box_row_frac": 0.85,
+  "white_min": 225,
+  "line_gap": 4,
+  "order_min": 0.55,
+  "order_margin": 0.086,
+  "size_ratio_min": 1.018,
+  "leak_threshold": null,
+  "title_word_min": 0.95,
+  "source": "measured",
+  "blocking": [
+   "reversed",
+   "title_not_bigger",
+   "line_count",
+   "caption_leak",
+   "garbled_word"
+  ],
+  "blocking_rule": "חיובי-שגוי 0 על קאברים שנבנו ב-cover_make ותפיסה ≥95% בהזרקה"
+ },
+ "evidence": {
+  "n_pos": 58,
+  "n_pos_with_text": 33,
+  "pos_line_count": [
+   2
+  ],
+  "pre_canon_line_count": [
+   1,
+   2,
+   3
+  ],
+  "pos_ratio_min": 1.076,
+  "pos_f_ok_min": 0.555,
+  "pos_rev_margin_max": -0.09300000000000008,
+  "pos_leak_max": 0.00819,
+  "pos_flags": {
+   "אופן-גים-חיזוק": [
+    "line_count"
+   ],
+   "הלקח-הכי-חשוב-במכירות": [
+    "line_count"
+   ],
+   "ניפוץ-מיתוסים-לטיפול-מגיעים-רק-כשכואב": [
+    "line_count"
+   ],
+   "פרק-מיוחד-איך-בנינו-תחרות": [
+    "line_count"
+   ],
+   "שינה-והתאוששות": [
+    "line_count"
+   ]
+  },
+  "neg": {
+   "reversed": {
+    "n": 31,
+    "caught": 1.0,
+    "pos_false_rate": 0.0
+   },
+   "scrambled": {
+    "n": 31,
+    "caught": 0.5161,
+    "pos_false_rate": 0.0
+   },
+   "sub_bigger": {
+    "n": 31,
+    "caught": 1.0,
+    "pos_false_rate": 0.0
+   },
+   "one_line": {
+    "n": 31,
+    "caught": 1.0,
+    "pos_false_rate": 0.0
+   },
+   "leak": {
+    "n": 31,
+    "caught": 1.0,
+    "pos_false_rate": 0.0
+   },
+   "scr_word_title": {
+    "n": 31,
+    "caught": 0.9677,
+    "pos_false_rate": 0.0
+   }
+  },
+  "pos_title_word_min": 0.991,
+  "neg_scr_word_title_max": 0.909
+ },
+ "_readme": "ספי cover_vision — חיוביים: thumbnail.png של פרויקטים שנבנו ב-cover_make; שליליים: אותו פריים ואותו טקסט דרך הבונה הקנוני עם כשל מוזרק."
+}

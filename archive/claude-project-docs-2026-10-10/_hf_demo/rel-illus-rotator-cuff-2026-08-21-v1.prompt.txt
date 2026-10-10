@@ -1,0 +1,20 @@
+GENERATION ENGINE:   Nano Banana 2 (Gemini "Create images" — gemini.google.com)
+ACCOUNT:             hayonhq@gmail.com
+CHAT URL:            https://gemini.google.com/app/a6769b867c2f7abd
+REFERENCES:          none (both illustrations text-to-image, second one in the same chat for style carry-over)
+TEXT STRATEGY:       none — the illustration carries no text by design (the burned captions already say the muscle name)
+CANVA USED:          no — this is a raw illustration asset consumed by the video pipeline, not a laid-out graphic. No typography, no logo, no format variants. Canva would add nothing.
+FINAL EXPORT:        anat/gem_base.png (posterior) + anat/gem_ant.png (anterior), 1200x896 each
+ROUNDS:              1 round each, no corrections needed
+COST:                0 — replaces the paid Higgsfield path
+
+--- PROMPT 1 — POSTERIOR VIEW ---
+Create a premium editorial medical illustration of the RIGHT SHOULDER, posterior (back) view, in 4:3 landscape format. SUBJECT: anatomically accurate scapula and proximal humerus rendered as clean off-white bone with soft ivory shading and subtle surface texture; the four rotator cuff muscles clearly separated and individually distinguishable — supraspinatus in the supraspinous fossa above the scapular spine, infraspinatus as the large fan filling the infraspinous fossa below it, teres minor as a distinct elongated belly along the lower lateral border with a clear visible gap separating it from the infraspinatus, and the subscapularis hinted on the far side of the blade. STYLE: high-end vector-quality medical illustration, clean crisp edges, muscles in rich desaturated brick red with crisp visible muscle fibre striations running along each muscle's line of pull, pale glossy fibrous tendons converging and inserting onto the greater tubercle of the humeral head. LIGHTING: soft studio key light from the upper left, gentle rim light, no harsh shadows. COLOR: flat near-black charcoal background, colour #141011. COMPOSITION: centered, full scapula and upper humerus visible, generous empty margins on all sides. NEGATIVES: absolutely no text, no letters, no labels, no leader lines, no arrows, no ruler, no watermark, no logo, no border frame, no colour-coding of individual muscles.
+
+--- PROMPT 2 — ANTERIOR VIEW (same chat) ---
+Now create a SECOND, different illustration: the ANTERIOR (FRONT) view of the same right shoulder. Keep the exact same illustration style, bone colour, muscle colour, fibre-striation rendering, line quality, lighting direction, scale, centering, 4:3 landscape format and the same flat near-black charcoal #141011 background as the previous image — but this is the opposite side of the body, so the drawing itself must be different. CRITICAL: the spine of the scapula and the acromion ridge must NOT be visible, because they are on the back of the shoulder blade. From this front view we are looking at the smooth costal (rib-facing) surface of the scapula. HERO: the SUBSCAPULARIS is the only rotator cuff muscle visible here — a broad triangular muscle that completely covers the front surface of the shoulder blade, with clearly visible fan-shaped muscle fibre striations converging laterally into a single pale glossy tendon that crosses in front of the shoulder joint and inserts onto the lesser tubercle of the humerus. Show the clavicle and coracoid process in off-white bone, the humerus descending on the same side as before. NEGATIVES: no text, no letters, no labels, no leader lines, no arrows, no watermark, no logo, no border frame, no scapular spine, no supraspinatus, no infraspinatus, no teres minor.
+
+--- LESSONS ---
+1. In the Gemini image UI, Enter does NOT submit a long prompt (multi-line textarea) — click the Submit arrow.
+2. Asking for a second, opposite view IN THE SAME CHAT carries the style over correctly. On Higgsfield the same request with the first image as a reference just returned the posterior view again — the explicit "the spine of the scapula must NOT be visible" negative is what forces a true anterior view.
+3. Nano Banana 2 outputs 1200x896. Enough for a 500px-wide insert card; not enough for print.

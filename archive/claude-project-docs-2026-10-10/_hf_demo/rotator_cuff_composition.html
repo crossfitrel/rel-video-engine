@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="he" style="overflow:hidden; margin:0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=980, height=700" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@hyperframes/core/dist/hyperframe.runtime.iife.js"></script>
+    <style>
+      :root {
+        --bg: #141011;
+        --bone: #EDE7DF;
+        --bone-2: #BDB4A8;
+        --muscle-off: rgba(196,120,112,0.22);
+        --muscle-line: rgba(237,231,223,0.30);
+        --hot: #C2222B;
+        --hot-deep: #871d1f;
+      }
+      * { margin:0; padding:0; box-sizing:border-box; }
+      html, body { width:980px; height:700px; overflow:hidden; background:var(--bg); }
+      .scene { position:absolute; top:0; left:0; width:980px; height:700px; overflow:hidden; }
+      .scene-content { width:100%; height:100%; position:relative; z-index:1; }
+      .vignette { position:absolute; inset:0; z-index:2; pointer-events:none;
+        background: radial-gradient(ellipse at 46% 48%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.55) 100%); }
+      .grain { position:absolute; inset:0; pointer-events:none; z-index:3; opacity:0.14; mix-blend-mode:overlay;
+        background-image: radial-gradient(rgba(255,255,255,.08) 1px, transparent 1.2px), radial-gradient(rgba(0,0,0,.18) 1px, transparent 1.2px);
+        background-size: 3px 3px, 5px 5px; background-position: 0 0, 1px 2px; }
+      .muscle { fill: var(--muscle-off); stroke: var(--muscle-line); stroke-width: 2; }
+      .bone   { fill: var(--bone); stroke: var(--bone-2); stroke-width: 2.5; }
+      .bone-soft { fill: #DBD3C8; fill-opacity: 0.48; stroke: var(--bone-2); stroke-width: 2; }
+    </style>
+  </head>
+  <body>
+    <div id="main" data-composition-id="main" data-width="980" data-height="700" data-start="0" data-duration="6">
+      <div class="scene clip" id="s1" data-start="0" data-duration="6" data-track-index="0">
+        <div class="scene-content">
+          <svg id="rig" width="980" height="700" viewBox="0 0 980 700" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+                <feGaussianBlur stdDeviation="14" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <linearGradient id="hotgrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#E0393F"/>
+                <stop offset="100%" stop-color="#871d1f"/>
+              </linearGradient>
+            </defs>
+
+            <g id="frame" transform="translate(492,352) scale(1.20) translate(-505,-400)">
+              <g id="grp" transform="translate(0,0)">
+
+              <!-- ===== SUBSCAPULARIS (anterior — drawn UNDER the scapula plate) ===== -->
+              <g id="m-sub" class="muscle-g">
+                <path id="p-sub" class="muscle"
+                  d="M470 300 C 540 268, 620 272, 668 316 C 690 372, 686 430, 656 470
+                     C 596 462, 528 448, 476 420 C 462 380, 460 336, 470 300 Z"/>
+                <path id="t-sub" class="muscle"
+                  d="M470 300 C 430 296, 392 288, 366 276 C 352 288, 348 306, 356 320
+                     C 388 332, 432 340, 476 340 C 470 326, 468 312, 470 300 Z"/>
+              </g>
+
+              <!-- ===== SCAPULA PLATE ===== -->
+              <g id="scap">
+                <path class="bone-soft"
+                  d="M452 168 C 560 154, 660 168, 706 212 C 726 300, 716 404, 676 486
+                     C 640 546, 596 574, 566 566 C 520 470, 478 350, 452 168 Z"/>
+                <!-- spine of scapula -->
+                <path class="bone"
+                  d="M436 236 C 520 226, 630 236, 706 258 C 706 286, 700 300, 690 306
+                     C 616 286, 512 276, 434 282 C 428 268, 428 248, 436 236 Z"/>
+                <!-- acromion -->
+                <path class="bone" d="M436 236 C 402 226, 372 224, 352 232 C 340 250, 342 272, 356 284
+                     C 380 288, 410 288, 434 282 C 428 268, 428 248, 436 236 Z"/>
+              </g>
+
+              <!-- ===== HUMERUS ===== -->
+              <g id="hum">
+                <path class="bone" d="M330 300 C 356 322, 366 366, 362 430 L 352 620
+                  C 350 646, 328 660, 306 652 C 288 644, 282 624, 286 600 L 300 424
+                  C 302 366, 306 326, 330 300 Z"/>
+                <circle class="bone" cx="352" cy="252" r="74"/>
+                <!-- greater tubercle -->
+                <path class="bone" d="M392 196 C 416 202, 428 224, 424 248 C 420 274, 404 290, 384 292
+                  C 378 258, 380 222, 392 196 Z"/>
+              </g>
+
+              <!-- ===== SUPRASPINATUS (above the spine) ===== -->
+              <g id="m-suprasp" class="muscle-g">
+                <path id="p-sup" class="muscle"
+                  d="M470 180 C 552 168, 632 178, 690 206 C 700 226, 700 244, 692 254
+                     C 626 234, 534 226, 462 232 C 456 214, 458 194, 470 180 Z"/>
+                <path id="t-sup" class="muscle"
+                  d="M462 232 C 428 226, 404 214, 392 198 C 378 208, 372 226, 376 244
+                     C 402 256, 430 262, 458 262 C 456 252, 456 240, 462 232 Z"/>
+              </g>
+
+              <!-- ===== INFRASPINATUS (below the spine) ===== -->
+              <g id="m-infrasp" class="muscle-g">
+                <path id="p-inf" class="muscle"
+                  d="M446 300 C 540 296, 634 308, 694 340 C 698 386, 686 424, 664 448
+                     C 592 424, 512 400, 452 380 C 442 352, 440 322, 446 300 Z"/>
+                <path id="t-inf" class="muscle"
+                  d="M446 300 C 414 300, 392 294, 378 282 C 366 296, 364 316, 372 330
+                     C 398 340, 424 344, 452 342 C 448 328, 446 314, 446 300 Z"/>
+              </g>
+
+              <!-- ===== TERES MINOR (lower lateral border) ===== -->
+              <g id="m-teres" class="muscle-g">
+                <path id="p-ter" class="muscle"
+                  d="M462 408 C 534 420, 606 442, 654 474 C 646 504, 628 524, 606 530
+                     C 552 500, 500 466, 464 436 C 458 426, 458 416, 462 408 Z"/>
+                <path id="t-ter" class="muscle"
+                  d="M462 408 C 430 402, 406 392, 392 378 C 380 392, 378 412, 386 426
+                     C 412 438, 440 444, 466 442 C 462 430, 460 418, 462 408 Z"/>
+              </g>
+
+              </g>
+            </g>
+          </svg>
+          <div class="vignette"></div>
+          <div class="grain"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+
+      var HOT = "url(#hotgrad)";
+      var OFF = "rgba(196,120,112,0.22)";
+
+      // subscapularis sits behind the scapula plate -> mark it visually distinct when lit
+      var CUES = [
+        { g: "#m-infrasp", on: 1.30, off: 2.72 },  // אינפרספינטוס
+        { g: "#m-suprasp", on: 2.80, off: 3.70 },  // סופרספינטוס
+        { g: "#m-sub",     on: 3.75, off: 4.70 },  // סאבסקפולריס
+        { g: "#m-teres",   on: 4.75, off: 5.66 }   // טרס מינור
+      ];
+
+      // --- establishing: rig settles in, bones draw, muscles ghost in ---
+      tl.from("#grp", { scale: 1.16, transformOrigin: "48% 46%", autoAlpha: 0, duration: 0.85, ease: "power3.out" }, 0.10);
+      tl.from(".muscle", { autoAlpha: 0, duration: 0.55, ease: "power2.out", stagger: { each: 0.07, from: "start" } }, 0.45);
+
+      // --- mid-scene activity: slow parallax drift of the whole rig (deterministic yoyo) ---
+      tl.to("#grp", { x: 16, y: -8, duration: 2.9, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0.2);
+
+      // --- per-muscle highlight cues, locked to the spoken word ---
+      CUES.forEach(function (c) {
+        var parts = c.g === "#m-infrasp" ? ["#p-inf", "#t-inf"]
+                  : c.g === "#m-suprasp" ? ["#p-sup", "#t-sup"]
+                  : c.g === "#m-sub"     ? ["#p-sub", "#t-sub"]
+                  : ["#p-ter", "#t-ter"];
+
+        tl.to(parts, { fill: HOT, stroke: "#F2C9C0", strokeWidth: 3, duration: 0.22, ease: "power2.out" }, c.on);
+        tl.to(c.g, { filter: "url(#glow)", duration: 0.01 }, c.on);
+        tl.fromTo(c.g, { scale: 1, transformOrigin: "50% 50%" },
+                        { scale: 1.045, duration: 0.30, ease: "back.out(2.2)" }, c.on);
+        // breathing while lit
+        tl.to(c.g, { scale: 1.015, duration: (c.off - c.on - 0.30) / 2, ease: "sine.inOut", yoyo: true, repeat: 1 }, c.on + 0.30);
+        // release
+        tl.to(parts, { fill: OFF, stroke: "rgba(237,231,223,0.30)", strokeWidth: 2, duration: 0.26, ease: "power2.in" }, c.off);
+        tl.to(c.g, { filter: "none", scale: 1, duration: 0.26, ease: "power2.in" }, c.off);
+      });
+
+      // --- outro: all four light together for the "קבוצה של ארבעה" payoff ---
+      tl.to(["#p-inf","#t-inf","#p-sup","#t-sup","#p-sub","#t-sub","#p-ter","#t-ter"],
+            { fill: HOT, stroke: "#F2C9C0", strokeWidth: 3, duration: 0.30, ease: "power3.out",
+              stagger: { each: 0.05, from: "start" } }, 5.66);
+      tl.to("#grp", { scale: 1.05, transformOrigin: "48% 46%", duration: 0.34, ease: "power2.out" }, 5.66);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

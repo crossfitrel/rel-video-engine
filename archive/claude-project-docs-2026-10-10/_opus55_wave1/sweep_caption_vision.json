@@ -1,0 +1,569 @@
+[
+ {
+  "project": "טרה-ראן-באיזה-מקום-תסיים-לפני-הריצה",
+  "ok": true,
+  "n": 76,
+  "cues": 76,
+  "f_med": 0.873,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 5.5
+ },
+ {
+  "project": "אחרי-הריצה-עקפתי-את-פיין",
+  "ok": true,
+  "n": 64,
+  "cues": 64,
+  "f_med": 0.883,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 3.9
+ },
+ {
+  "project": "מי-יסיים-מקום-אחד-מעליך",
+  "ok": true,
+  "n": 55,
+  "cues": 55,
+  "f_med": 0.827,
+  "counts": {
+   "garbled": 1,
+   "extra_ink": 1
+  },
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 3.4
+ },
+ {
+  "project": "אחרי-הריצה-איך-היה",
+  "ok": true,
+  "n": 74,
+  "cues": 74,
+  "f_med": 0.869,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 3.9
+ },
+ {
+  "project": "משפט-סיכום-חוק-המזרונים",
+  "ok": true,
+  "n": 108,
+  "cues": 108,
+  "f_med": 0.872,
+  "counts": {
+   "face": 1,
+   "extra_ink": 1
+  },
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 5.2
+ },
+ {
+  "project": "נכנס-בדקה-התשעים-וסיים-ראשון",
+  "ok": true,
+  "n": 117,
+  "cues": 117,
+  "f_med": 0.875,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 7.0
+ },
+ {
+  "project": "שירלי-והמתחרה-שבא-לעבוד",
+  "ok": true,
+  "n": 77,
+  "cues": 77,
+  "f_med": 0.803,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 4.6
+ },
+ {
+  "project": "דרג-לי-את-הפודיום-עלית-גברים",
+  "ok": false,
+  "n": 94,
+  "cues": 94,
+  "f_med": 0.862,
+  "counts": {
+   "garbled": 5,
+   "face": 1
+  },
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 6.4
+ },
+ {
+  "project": "פנוי-או-תפוס-חלק-א",
+  "ok": true,
+  "n": 61,
+  "cues": 61,
+  "f_med": 0.875,
+  "counts": {
+   "face": 1
+  },
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 5.5
+ },
+ {
+  "project": "איגור-תחזית-מול-מציאות",
+  "ok": true,
+  "n": 77,
+  "cues": 77,
+  "f_med": 0.861,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 6.4
+ },
+ {
+  "project": "מי-יותר-ממי-משחק-שאלות",
+  "ok": true,
+  "n": 30,
+  "cues": 30,
+  "f_med": 0.89,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 2.8
+ },
+ {
+  "project": "ראיון-פודיומיסטים-המנצחים-מדברים",
+  "ok": false,
+  "n": 119,
+  "cues": 119,
+  "f_med": 0.863,
+  "counts": {
+   "garbled": 2,
+   "face": 2
+  },
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 7.9
+ },
+ {
+  "project": "הזוכה-שלא-האמין-חזרה-אחרי-פציעה",
+  "ok": true,
+  "n": 49,
+  "cues": 49,
+  "f_med": 0.878,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 3.5
+ },
+ {
+  "project": "למה-אני-מתחרה-חלק-א",
+  "ok": true,
+  "n": 60,
+  "cues": 60,
+  "f_med": 0.789,
+  "counts": {
+   "garbled": 1
+  },
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 4.4
+ },
+ {
+  "project": "ההבטחה-מהבוקר-פיין-טאוויל",
+  "ok": false,
+  "n": 83,
+  "cues": 84,
+  "f_med": 0.799,
+  "counts": {
+   "garbled": 2,
+   "no_frame": 1
+  },
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 4.7
+ },
+ {
+  "project": "טיפ-אחד-דאבל-אנדרס",
+  "ok": true,
+  "n": 81,
+  "cues": 81,
+  "f_med": 0.87,
+  "counts": {
+   "face": 3
+  },
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 4.5
+ },
+ {
+  "project": "על-הלוח-כמה-זמן-לתוצאות",
+  "ok": true,
+  "n": 107,
+  "cues": 107,
+  "f_med": 0.862,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 5.4
+ },
+ {
+  "project": "איך-הכרנו-הראל-ואוריה",
+  "ok": true,
+  "n": 107,
+  "cues": 107,
+  "f_med": 0.875,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 5.9
+ },
+ {
+  "project": "דקה-להורים-כמה-פעמים-בשבוע",
+  "ok": true,
+  "n": 104,
+  "cues": 104,
+  "f_med": 0.885,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 5.2
+ },
+ {
+  "project": "בריאות-להרים-כבד-מהרצפה",
+  "ok": true,
+  "n": 84,
+  "cues": 84,
+  "f_med": 0.881,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 4.7
+ },
+ {
+  "project": "גאה-בצוות",
+  "ok": true,
+  "n": 121,
+  "cues": 121,
+  "f_med": 0.879,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "personal",
+  "brand_found": "personal",
+  "sec": 8.8
+ },
+ {
+  "project": "קניות-v2",
+  "ok": false,
+  "n": 120,
+  "cues": 121,
+  "f_med": 0.665,
+  "counts": {
+   "missing": 6,
+   "garbled": 59,
+   "brand": 114
+  },
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "personal",
+  "sec": 9.8
+ },
+ {
+  "project": "ההבנה-האנטומית-סוגי-קרעים",
+  "ok": false,
+  "n": 85,
+  "cues": 85,
+  "f_med": 0.872,
+  "counts": {
+   "reversed": 1
+  },
+  "offset": 0.1,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 4.4
+ },
+ {
+  "project": "ממומן-ת2-תושבים",
+  "ok": true,
+  "n": 70,
+  "cues": 70,
+  "f_med": 0.882,
+  "counts": {
+   "face": 1
+  },
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 3.5
+ },
+ {
+  "project": "ממומן-ת4-סטודנטים",
+  "ok": true,
+  "n": 106,
+  "cues": 106,
+  "f_med": 0.88,
+  "counts": {
+   "face": 1
+  },
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 5.4
+ },
+ {
+  "project": "ממומן-ת4-תושבים",
+  "ok": true,
+  "n": 101,
+  "cues": 101,
+  "f_med": 0.881,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 5.1
+ },
+ {
+  "project": "ממומן-ת3-סטודנטים",
+  "ok": true,
+  "n": 108,
+  "cues": 108,
+  "f_med": 0.882,
+  "counts": {
+   "face": 1
+  },
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 5.7
+ },
+ {
+  "project": "ממומן-ת3-תושבים",
+  "ok": true,
+  "n": 108,
+  "cues": 108,
+  "f_med": 0.883,
+  "counts": {
+   "face": 1
+  },
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 5.7
+ },
+ {
+  "project": "ממומן-ת2-סטודנטים",
+  "ok": true,
+  "n": 69,
+  "cues": 69,
+  "f_med": 0.881,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 3.5
+ },
+ {
+  "project": "ממומן-ת1-סטודנטים",
+  "ok": true,
+  "n": 105,
+  "cues": 105,
+  "f_med": 0.883,
+  "counts": {
+   "face": 1
+  },
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 5.4
+ },
+ {
+  "project": "ממומן-ת1-תושבים",
+  "ok": true,
+  "n": 103,
+  "cues": 103,
+  "f_med": 0.883,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 5.7
+ },
+ {
+  "project": "דקה-להורים-אימוני-כוח-לילדים",
+  "ok": true,
+  "n": 71,
+  "cues": 71,
+  "f_med": 0.875,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 3.5
+ },
+ {
+  "project": "על-הלוח-כוח-וגיל",
+  "ok": false,
+  "n": 125,
+  "cues": 125,
+  "f_med": 0.849,
+  "counts": {
+   "garbled": 2
+  },
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 6.6
+ },
+ {
+  "project": "בריאות-לקום-מכיסא",
+  "ok": true,
+  "n": 104,
+  "cues": 104,
+  "f_med": 0.879,
+  "counts": {
+   "face": 1
+  },
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 6.0
+ },
+ {
+  "project": "טיפ-אחד-בטן-בר",
+  "ok": true,
+  "n": 112,
+  "cues": 112,
+  "f_med": 0.869,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 6.1
+ },
+ {
+  "project": "מאסל-מן-סיבוב-כתף",
+  "ok": true,
+  "n": 78,
+  "cues": 78,
+  "f_med": 0.867,
+  "counts": {},
+  "offset": 10.133,
+  "offset_source": "provenance",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 2.2
+ },
+ {
+  "project": "טעויות-נפוצות-strict-pull-ups",
+  "ok": true,
+  "n": 73,
+  "cues": 73,
+  "f_med": 0.818,
+  "counts": {
+   "face": 1
+  },
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 3.8
+ },
+ {
+  "project": "צעדים-קטנים-כל-יום",
+  "ok": true,
+  "n": 138,
+  "cues": 138,
+  "f_med": 0.878,
+  "counts": {
+   "face": 4
+  },
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "personal",
+  "brand_found": "personal",
+  "sec": 6.1
+ },
+ {
+  "project": "עיסוי-רפואי",
+  "ok": true,
+  "n": 69,
+  "cues": 69,
+  "f_med": 0.849,
+  "counts": {},
+  "offset": 0.0,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 3.3
+ },
+ {
+  "project": "מאסל-מן-רוטטור-קאף",
+  "ok": true,
+  "n": 86,
+  "cues": 86,
+  "f_med": 0.878,
+  "counts": {
+   "face": 2
+  },
+  "offset": 10.1,
+  "offset_source": "estimated",
+  "brand": "rel",
+  "brand_found": "club",
+  "sec": 7.8
+ }
+]

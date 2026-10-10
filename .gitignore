@@ -28,3 +28,7 @@ tools/policy-proposals/
 *.conf
 .env*
 rclone.conf
+node_modules/
+
+# ארכיון מסמכי הפרויקט (טקסט בלבד)
+!archive/**

@@ -1,0 +1,14 @@
+{"project": "אופן-גים-חיזוק", "ok": true, "n": 105, "counts": {}, "blocking_hits": {}, "face_raw": 2, "sec": 17.9}
+{"project": "איך-הכרנו-הראל-ואוריה", "ok": true, "n": 107, "counts": {}, "blocking_hits": {}, "face_raw": 0, "sec": 15.9}
+{"project": "דקה-להורים-אימוני-כוח-לילדים", "ok": true, "n": 71, "counts": {}, "blocking_hits": {}, "face_raw": 0, "sec": 11.0}
+{"project": "ההבנה-האנטומית-סוגי-אחיזות", "ok": true, "n": 106, "counts": {}, "blocking_hits": {}, "face_raw": 0, "sec": 17.4}
+{"project": "טיפ-אחד-HSPU", "ok": true, "n": 79, "counts": {}, "blocking_hits": {}, "face_raw": 1, "sec": 15.4}
+{"project": "יום-בחיים-של-הראל", "ok": true, "n": 58, "counts": {"brand": 58}, "blocking_hits": {}, "face_raw": 0, "sec": 9.1}
+{"project": "מה-זה-להיות-בעל-מועדון", "ok": true, "n": 118, "counts": {"face": 6}, "blocking_hits": {}, "face_raw": 6, "sec": 16.3}
+{"project": "ממומן-ת1-תושבים", "ok": true, "n": 103, "counts": {}, "blocking_hits": {}, "face_raw": 0, "sec": 16.3}
+{"project": "ממומן-ת3-תושבים", "ok": true, "n": 108, "counts": {}, "blocking_hits": {}, "face_raw": 1, "sec": 19.0}
+{"project": "ניפוץ-מיתוסים-לטיפול-מגיעים-רק-כשכואב", "ok": true, "n": 79, "counts": {}, "blocking_hits": {}, "face_raw": 0, "sec": 12.2}
+{"project": "על-הלוח-כוח-וגיל", "ok": true, "n": 125, "counts": {"garbled": 2}, "blocking_hits": {}, "face_raw": 0, "sec": 14.3}
+{"project": "קניות-v2", "ok": false, "n": 120, "counts": {"missing": 6, "garbled": 59, "garbled_cue": 5, "brand": 114}, "blocking_hits": {"missing": 6, "garbled": 59, "garbled_cue": 5}, "face_raw": 0, "sec": 12.5}
+{"project": "שירלי-והמתחרה-שבא-לעבוד", "ok": true, "n": 41, "counts": {}, "blocking_hits": {}, "face_raw": 0, "sec": 1.6}
+DONE

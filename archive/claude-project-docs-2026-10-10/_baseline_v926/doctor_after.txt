@@ -1,0 +1,47 @@
+✅ python: 3.12.6
+✅ ffmpeg: /opt/homebrew/bin/ffmpeg
+✅ ffprobe: /opt/homebrew/bin/ffprobe
+✅ ffmpeg filter silencedetect: 
+✅ ffmpeg filter loudnorm: 
+✅ ffmpeg filter alimiter: 
+✅ ffmpeg filter gblur: 
+✅ ffmpeg filter xfade: 
+✅ rel-whisper venv (faster_whisper+PIL+bidi+numpy): 
+✅ faster-whisper importable: 
+✅ flask: python3 מערכתי
+✅ font Assistant ExtraBold: /Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/brand-assets/Assistant-ExtraBold.ttf
+✅ dir rel-video-work writable: /Users/hayon/rel-video-work
+✅ dir tools writable: /Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tools
+✅ dir review-app writable: /Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/review-app
+✅ work root off iCloud: /Users/hayon/rel-video-work (מקור: paths.json)
+⚠️ legacy _work leftover: /Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/_work עדיין קיימת — למחוק אחרי אימות שהמיגרציה תקינה
+✅ review-app :5112: רץ ועונה
+✅ sqlite registry: 89 פרויקטים באינדקס (rebuild הצליח)
+✅ sync ציר↔חיתוך: כל הפרויקטים מסונכרנים
+⚠️ sync ציר↔FINAL: 2 פרויקטים שהציר בהם חדש מה-FINAL: בריאות-להרים-כבד-מהרצפה, דקה-להורים-כמה-פעמים-בשבוע
+✅ music catalog: 105 טראקים
+✅ broll catalog: 541 קליפים
+✅ free disk: 144GB פנויים
+✅ iCloud eviction in work root: הכל מקומי
+✅ V3 reference profile: 16 סרטונים · תפרים/ש 0.043–0.296 · שקט 13.2–31.7%
+✅ V3 broll shortlist: בריכה 54 קליפים · אפס דיבור-למצלמה
+✅ B-roll pool gender balance: 33 נשים · 21 גברים · 10 לא נספר · 9 ללא אימות ויזואלי (מאוזן — מיעוט 39%)
+⚠️ B-roll vision coverage: 55/64 קליפים עם ראיה — **9 לא ייכנסו למצע בהמרה.** להריץ broll_vision_model.py request: ['בירול מיכאל לוי - 01 הדרכה.mp4', 'בירול מיכאל לוי - 02 קהילה.mp4']
+✅ edl-policy version: version=6.7
+✅ SKILL↔code consistency (audio gate): תואם
+✅ SKILL↔code consistency (music LUFS): קוד=-46
+✅ relvid package importable: 
+✅ בירול חוצה קאט בלי חשיפת דובר: כל פריים בגבול מכוסה בבירול
+✅ פונט תת-כותרת קיים: Studentit-Full.ttf
+✅ פונט תת-כותרת מכסה תווים נדרשים: 271 תווים
+✅ כל בוני-הקאבר משתמשים ב-Studentit: אין בונה שמצייר תת-כותרת בפונט אחר
+✅ סף גלאי-הכתובית בקאבר נמדד: ‏19 פרויקטים · נקי p98=0.01529 < צרוב p05=0.03255 · חסימת-שווא 0.0038
+✅ שער כניסה אחד לקאבר: cover_make.py הוא המסלול היחיד; השערים בתוך הבונה
+✅ קאבר נבנה גם למותג אישי: שני המותגים עוברים ב-cover_make מ-EXPORT הנקי
+✅ gate registry audit: 155 שערים ברשומה
+✅ lesson registry audit: 75 לקחים, כולם אכופים
+✅ face cascade available: cv2 4.13.0 · haarcascade קיים
+✅ preflight critic wired: רץ בצנרת אחרי qa_gates
+✅ review-app python: launchd pid 18788 · /Users/hayon/.rel-whisper/bin/python · flask
+
+✅ סיכום: 0 FAIL, 3 WARN, 42 PASS

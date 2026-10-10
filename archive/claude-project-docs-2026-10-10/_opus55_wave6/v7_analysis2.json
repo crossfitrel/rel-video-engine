@@ -1,0 +1,1078 @@
+{
+ "f_ok1": {
+  "0.25": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.0,
+    "scrambled": 0.0,
+    "wrong_word": 0.016
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.26": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.0,
+    "scrambled": 0.0,
+    "wrong_word": 0.018
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.27": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.0,
+    "scrambled": 0.0,
+    "wrong_word": 0.025
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.28": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.0,
+    "scrambled": 0.0,
+    "wrong_word": 0.035
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.29": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.0,
+    "scrambled": 0.0,
+    "wrong_word": 0.048
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.3": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.0,
+    "scrambled": 0.0,
+    "wrong_word": 0.058
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.31": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.0,
+    "scrambled": 0.0,
+    "wrong_word": 0.081
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.32": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.002,
+    "scrambled": 0.001,
+    "wrong_word": 0.101
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.33": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.002,
+    "scrambled": 0.001,
+    "wrong_word": 0.117
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.34": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.002,
+    "scrambled": 0.001,
+    "wrong_word": 0.139
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.35": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.002,
+    "scrambled": 0.001,
+    "wrong_word": 0.162
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.36": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.002,
+    "scrambled": 0.003,
+    "wrong_word": 0.197
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.37": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.005,
+    "scrambled": 0.005,
+    "wrong_word": 0.227
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.38": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.005,
+    "scrambled": 0.009,
+    "wrong_word": 0.259
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.39": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.007,
+    "scrambled": 0.013,
+    "wrong_word": 0.294
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.4": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.008,
+    "scrambled": 0.024,
+    "wrong_word": 0.336
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.41": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.011,
+    "scrambled": 0.043,
+    "wrong_word": 0.38
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.42": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.026,
+    "scrambled": 0.077,
+    "wrong_word": 0.433
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.43": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.041,
+    "scrambled": 0.119,
+    "wrong_word": 0.517
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.44": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.063,
+    "scrambled": 0.164,
+    "wrong_word": 0.587
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.45": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.109,
+    "scrambled": 0.23,
+    "wrong_word": 0.67
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.46": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.18,
+    "scrambled": 0.308,
+    "wrong_word": 0.741
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.47": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.266,
+    "scrambled": 0.383,
+    "wrong_word": 0.805
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.48": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.358,
+    "scrambled": 0.463,
+    "wrong_word": 0.863
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.49": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.495,
+    "scrambled": 0.552,
+    "wrong_word": 0.904
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.5": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.627,
+    "scrambled": 0.636,
+    "wrong_word": 0.926
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.51": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.731,
+    "scrambled": 0.728,
+    "wrong_word": 0.949
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.52": {
+   "worst_live": [
+    1,
+    0.017,
+    "דרג-לי-את-הפודיום-עלית-גברים"
+   ],
+   "catch": {
+    "tofu": 0.831,
+    "scrambled": 0.799,
+    "wrong_word": 0.971
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.53": {
+   "worst_live": [
+    1,
+    0.017,
+    "דרג-לי-את-הפודיום-עלית-גברים"
+   ],
+   "catch": {
+    "tofu": 0.888,
+    "scrambled": 0.863,
+    "wrong_word": 0.977
+   },
+   "known_bad_frac": 0.1
+  },
+  "0.54": {
+   "worst_live": [
+    1,
+    0.017,
+    "דרג-לי-את-הפודיום-עלית-גברים"
+   ],
+   "catch": {
+    "tofu": 0.923,
+    "scrambled": 0.901,
+    "wrong_word": 0.986
+   },
+   "known_bad_frac": 0.15
+  },
+  "0.55": {
+   "worst_live": [
+    1,
+    0.017,
+    "דרג-לי-את-הפודיום-עלית-גברים"
+   ],
+   "catch": {
+    "tofu": 0.955,
+    "scrambled": 0.936,
+    "wrong_word": 0.99
+   },
+   "known_bad_frac": 0.183
+  },
+  "0.56": {
+   "worst_live": [
+    1,
+    0.017,
+    "דרג-לי-את-הפודיום-עלית-גברים"
+   ],
+   "catch": {
+    "tofu": 0.971,
+    "scrambled": 0.95,
+    "wrong_word": 0.993
+   },
+   "known_bad_frac": 0.3
+  },
+  "0.57": {
+   "worst_live": [
+    3,
+    0.05,
+    "דרג-לי-את-הפודיום-עלית-גברים"
+   ],
+   "catch": {
+    "tofu": 0.978,
+    "scrambled": 0.969,
+    "wrong_word": 0.995
+   },
+   "known_bad_frac": 0.483
+  },
+  "0.58": {
+   "worst_live": [
+    3,
+    0.05,
+    "דרג-לי-את-הפודיום-עלית-גברים"
+   ],
+   "catch": {
+    "tofu": 0.984,
+    "scrambled": 0.984,
+    "wrong_word": 0.997
+   },
+   "known_bad_frac": 0.567
+  },
+  "0.59": {
+   "worst_live": [
+    4,
+    0.067,
+    "דרג-לי-את-הפודיום-עלית-גברים"
+   ],
+   "catch": {
+    "tofu": 0.992,
+    "scrambled": 0.989,
+    "wrong_word": 0.999
+   },
+   "known_bad_frac": 0.6
+  },
+  "0.6": {
+   "worst_live": [
+    5,
+    0.083,
+    "למה-אני-מתחרה-חלק-א"
+   ],
+   "catch": {
+    "tofu": 0.999,
+    "scrambled": 0.995,
+    "wrong_word": 0.999
+   },
+   "known_bad_frac": 0.65
+  },
+  "0.61": {
+   "worst_live": [
+    6,
+    0.146,
+    "שירלי-והמתחרה-שבא-לעבוד"
+   ],
+   "catch": {
+    "tofu": 0.999,
+    "scrambled": 0.997,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.683
+  },
+  "0.62": {
+   "worst_live": [
+    10,
+    0.167,
+    "למה-אני-מתחרה-חלק-א"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 0.997,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.683
+  },
+  "0.63": {
+   "worst_live": [
+    13,
+    0.217,
+    "למה-אני-מתחרה-חלק-א"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 0.999,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.683
+  },
+  "0.64": {
+   "worst_live": [
+    20,
+    0.333,
+    "למה-אני-מתחרה-חלק-א"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 0.999,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.7
+  },
+  "0.65": {
+   "worst_live": [
+    25,
+    0.417,
+    "למה-אני-מתחרה-חלק-א"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 0.999,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.7
+  }
+ },
+ "f1*r1": {
+  "0.25": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.433,
+    "scrambled": 0.937,
+    "wrong_word": 0.986
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.26": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.565,
+    "scrambled": 0.951,
+    "wrong_word": 0.992
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.27": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.7,
+    "scrambled": 0.975,
+    "wrong_word": 0.995
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.28": {
+   "worst_live": [
+    0,
+    0.0,
+    ""
+   ],
+   "catch": {
+    "tofu": 0.793,
+    "scrambled": 0.986,
+    "wrong_word": 0.999
+   },
+   "known_bad_frac": 0.067
+  },
+  "0.29": {
+   "worst_live": [
+    1,
+    0.017,
+    "דרג-לי-את-הפודיום-עלית-גברים"
+   ],
+   "catch": {
+    "tofu": 0.851,
+    "scrambled": 0.995,
+    "wrong_word": 0.999
+   },
+   "known_bad_frac": 0.083
+  },
+  "0.3": {
+   "worst_live": [
+    1,
+    0.017,
+    "דרג-לי-את-הפודיום-עלית-גברים"
+   ],
+   "catch": {
+    "tofu": 0.908,
+    "scrambled": 0.997,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.117
+  },
+  "0.31": {
+   "worst_live": [
+    1,
+    0.017,
+    "דרג-לי-את-הפודיום-עלית-גברים"
+   ],
+   "catch": {
+    "tofu": 0.944,
+    "scrambled": 0.997,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.183
+  },
+  "0.32": {
+   "worst_live": [
+    2,
+    0.033,
+    "ההבטחה-מהבוקר-פיין-טאוויל"
+   ],
+   "catch": {
+    "tofu": 0.963,
+    "scrambled": 0.999,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.283
+  },
+  "0.33": {
+   "worst_live": [
+    3,
+    0.05,
+    "ההבטחה-מהבוקר-פיין-טאוויל"
+   ],
+   "catch": {
+    "tofu": 0.973,
+    "scrambled": 0.999,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.417
+  },
+  "0.34": {
+   "worst_live": [
+    5,
+    0.122,
+    "שירלי-והמתחרה-שבא-לעבוד"
+   ],
+   "catch": {
+    "tofu": 0.988,
+    "scrambled": 0.999,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.517
+  },
+  "0.35": {
+   "worst_live": [
+    8,
+    0.133,
+    "דרג-לי-את-הפודיום-עלית-גברים"
+   ],
+   "catch": {
+    "tofu": 0.992,
+    "scrambled": 0.999,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.633
+  },
+  "0.36": {
+   "worst_live": [
+    13,
+    0.217,
+    "למה-אני-מתחרה-חלק-א"
+   ],
+   "catch": {
+    "tofu": 0.999,
+    "scrambled": 0.999,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.667
+  },
+  "0.37": {
+   "worst_live": [
+    22,
+    0.367,
+    "למה-אני-מתחרה-חלק-א"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 0.999,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.683
+  },
+  "0.38": {
+   "worst_live": [
+    27,
+    0.45,
+    "למה-אני-מתחרה-חלק-א"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.717
+  },
+  "0.39": {
+   "worst_live": [
+    35,
+    0.583,
+    "ההבטחה-מהבוקר-פיין-טאוויל"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.75
+  },
+  "0.4": {
+   "worst_live": [
+    39,
+    0.65,
+    "ההבטחה-מהבוקר-פיין-טאוויל"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.783
+  },
+  "0.41": {
+   "worst_live": [
+    52,
+    0.867,
+    "ההבטחה-מהבוקר-פיין-טאוויל"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.817
+  },
+  "0.42": {
+   "worst_live": [
+    56,
+    0.933,
+    "ההבטחה-מהבוקר-פיין-טאוויל"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.85
+  },
+  "0.43": {
+   "worst_live": [
+    58,
+    0.967,
+    "טעויות-נפוצות-strict-pull-ups"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.933
+  },
+  "0.44": {
+   "worst_live": [
+    59,
+    0.983,
+    "טעויות-נפוצות-strict-pull-ups"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 0.967
+  },
+  "0.45": {
+   "worst_live": [
+    60,
+    1.0,
+    "על-הלוח-כמה-זמן-לתוצאות"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.46": {
+   "worst_live": [
+    60,
+    1.0,
+    "טיפ-אחד-דאבל-אנדרס"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.47": {
+   "worst_live": [
+    60,
+    1.0,
+    "אחרי-הריצה-עקפתי-את-פיין"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.48": {
+   "worst_live": [
+    60,
+    1.0,
+    "אחרי-הריצה-עקפתי-את-פיין"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.49": {
+   "worst_live": [
+    60,
+    1.0,
+    "אחרי-הריצה-עקפתי-את-פיין"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.5": {
+   "worst_live": [
+    60,
+    1.0,
+    "אחרי-הריצה-עקפתי-את-פיין"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.51": {
+   "worst_live": [
+    60,
+    1.0,
+    "אחרי-הריצה-עקפתי-את-פיין"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.52": {
+   "worst_live": [
+    60,
+    1.0,
+    "אחרי-הריצה-עקפתי-את-פיין"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.53": {
+   "worst_live": [
+    60,
+    1.0,
+    "אחרי-הריצה-עקפתי-את-פיין"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.54": {
+   "worst_live": [
+    60,
+    1.0,
+    "אחרי-הריצה-עקפתי-את-פיין"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.55": {
+   "worst_live": [
+    60,
+    1.0,
+    "אחרי-הריצה-עקפתי-את-פיין"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.56": {
+   "worst_live": [
+    60,
+    1.0,
+    "אחרי-הריצה-עקפתי-את-פיין"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.57": {
+   "worst_live": [
+    60,
+    1.0,
+    "אחרי-הריצה-עקפתי-את-פיין"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.58": {
+   "worst_live": [
+    60,
+    1.0,
+    "אחרי-הריצה-עקפתי-את-פיין"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.59": {
+   "worst_live": [
+    60,
+    1.0,
+    "V3-לולאה"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.6": {
+   "worst_live": [
+    60,
+    1.0,
+    "V3-לולאה"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.61": {
+   "worst_live": [
+    60,
+    1.0,
+    "V3-לולאה"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.62": {
+   "worst_live": [
+    60,
+    1.0,
+    "V3-לולאה"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.63": {
+   "worst_live": [
+    60,
+    1.0,
+    "V3-לולאה"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.64": {
+   "worst_live": [
+    60,
+    1.0,
+    "V3-לולאה"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  },
+  "0.65": {
+   "worst_live": [
+    60,
+    1.0,
+    "V3-לולאה"
+   ],
+   "catch": {
+    "tofu": 1.0,
+    "scrambled": 1.0,
+    "wrong_word": 1.0
+   },
+   "known_bad_frac": 1.0
+  }
+ },
+ "extra_combined": {
+  "far_thr": 0.246,
+  "ink_thr": 0.313,
+  "doubled": 0.684,
+  "doubled_far": 0.85
+ }
+}

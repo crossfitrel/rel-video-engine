@@ -1,0 +1,814 @@
+{
+ "n_projects": 51,
+ "event_projects": 13,
+ "n_pos": {
+  "event": 686,
+  "regular": 2218
+ },
+ "garbled::f_ok1": {
+  "event": {
+   "pos_min": 0.512,
+   "pos_p01": 0.582,
+   "neg_p95": {
+    "tofu": 0.533,
+    "scrambled": 0.56,
+    "wrong_word": 0.506,
+    "stale_prev": 0.719
+   },
+   "neg_p50": {
+    "tofu": 0.486,
+    "scrambled": 0.477,
+    "wrong_word": 0.428,
+    "stale_prev": 0.659
+   }
+  },
+  "regular": {
+   "pos_min": 0.454,
+   "pos_p01": 0.636,
+   "neg_p95": {
+    "tofu": 0.551,
+    "scrambled": 0.562,
+    "wrong_word": 0.511,
+    "stale_prev": 0.717
+   },
+   "neg_p50": {
+    "tofu": 0.492,
+    "scrambled": 0.487,
+    "wrong_word": 0.429,
+    "stale_prev": 0.668
+   }
+  }
+ },
+ "garbled::r1": {
+  "event": {
+   "pos_min": 0.515,
+   "pos_p01": 0.54,
+   "neg_p95": {
+    "tofu": 0.592,
+    "scrambled": 0.478,
+    "wrong_word": 0.464,
+    "stale_prev": 0.613
+   },
+   "neg_p50": {
+    "tofu": 0.524,
+    "scrambled": 0.4,
+    "wrong_word": 0.359,
+    "stale_prev": 0.579
+   }
+  },
+  "regular": {
+   "pos_min": 0.344,
+   "pos_p01": 0.539,
+   "neg_p95": {
+    "tofu": 0.581,
+    "scrambled": 0.466,
+    "wrong_word": 0.447,
+    "stale_prev": 0.603
+   },
+   "neg_p50": {
+    "tofu": 0.517,
+    "scrambled": 0.4,
+    "wrong_word": 0.354,
+    "stale_prev": 0.573
+   }
+  }
+ },
+ "garbled::p1": {
+  "event": {
+   "pos_min": 0.48,
+   "pos_p01": 0.587,
+   "neg_p95": {
+    "tofu": 0.524,
+    "scrambled": 0.729,
+    "wrong_word": 0.676,
+    "stale_prev": 0.932
+   },
+   "neg_p50": {
+    "tofu": 0.457,
+    "scrambled": 0.589,
+    "wrong_word": 0.544,
+    "stale_prev": 0.767
+   }
+  },
+  "regular": {
+   "pos_min": 0.574,
+   "pos_p01": 0.712,
+   "neg_p95": {
+    "tofu": 0.548,
+    "scrambled": 0.736,
+    "wrong_word": 0.689,
+    "stale_prev": 0.932
+   },
+   "neg_p50": {
+    "tofu": 0.474,
+    "scrambled": 0.629,
+    "wrong_word": 0.57,
+    "stale_prev": 0.801
+   }
+  }
+ },
+ "garbled::r3": {
+  "event": {
+   "pos_min": 0.717,
+   "pos_p01": 0.742,
+   "neg_p95": {
+    "tofu": 0.886,
+    "scrambled": 0.765,
+    "wrong_word": 0.755,
+    "stale_prev": 0.832
+   },
+   "neg_p50": {
+    "tofu": 0.79,
+    "scrambled": 0.64,
+    "wrong_word": 0.58,
+    "stale_prev": 0.791
+   }
+  },
+  "regular": {
+   "pos_min": 0.546,
+   "pos_p01": 0.742,
+   "neg_p95": {
+    "tofu": 0.872,
+    "scrambled": 0.736,
+    "wrong_word": 0.717,
+    "stale_prev": 0.824
+   },
+   "neg_p50": {
+    "tofu": 0.779,
+    "scrambled": 0.639,
+    "wrong_word": 0.575,
+    "stale_prev": 0.788
+   }
+  }
+ },
+ "lowest_f_ok1": [
+  {
+   "project": "ההבנה-האנטומית-סוגי-קרעים",
+   "t": 39.25,
+   "text": "שזה",
+   "f_ok1": 0.454,
+   "r1": 0.344,
+   "p1": 0.666,
+   "ink_out": 0.008
+  },
+  {
+   "project": "דרג-לי-את-הפודיום-עלית-גברים",
+   "t": 23.51,
+   "text": "דני",
+   "f_ok1": 0.512,
+   "r1": 0.55,
+   "p1": 0.48,
+   "ink_out": 0.072
+  },
+  {
+   "project": "דרג-לי-את-הפודיום-עלית-גברים",
+   "t": 9.2,
+   "text": "כל נאמבר",
+   "f_ok1": 0.565,
+   "r1": 0.597,
+   "p1": 0.537,
+   "ink_out": 0.009
+  },
+  {
+   "project": "ההבטחה-מהבוקר-פיין-טאוויל",
+   "t": 4.87,
+   "text": "הנה",
+   "f_ok1": 0.567,
+   "r1": 0.556,
+   "p1": 0.577,
+   "ink_out": 0.006
+  },
+  {
+   "project": "דרג-לי-את-הפודיום-עלית-גברים",
+   "t": 27.3,
+   "text": "אתם",
+   "f_ok1": 0.569,
+   "r1": 0.558,
+   "p1": 0.58,
+   "ink_out": 0.002
+  },
+  {
+   "project": "ההבטחה-מהבוקר-פיין-טאוויל",
+   "t": 41.33,
+   "text": "חבר",
+   "f_ok1": 0.571,
+   "r1": 0.541,
+   "p1": 0.604,
+   "ink_out": 0.006
+  },
+  {
+   "project": "ראיון-פודיומיסטים-המנצחים-מדברים",
+   "t": 23.0,
+   "text": "שני",
+   "f_ok1": 0.573,
+   "r1": 0.577,
+   "p1": 0.569,
+   "ink_out": 0.002
+  },
+  {
+   "project": "על-הלוח-כוח-וגיל",
+   "t": 42.99,
+   "text": "והדבר",
+   "f_ok1": 0.573,
+   "r1": 0.552,
+   "p1": 0.597,
+   "ink_out": 0.066
+  },
+  {
+   "project": "על-הלוח-כוח-וגיל",
+   "t": 19.76,
+   "text": "כבר",
+   "f_ok1": 0.574,
+   "r1": 0.574,
+   "p1": 0.574,
+   "ink_out": 0.038
+  },
+  {
+   "project": "למה-אני-מתחרה-חלק-א",
+   "t": 27.35,
+   "text": "אחד",
+   "f_ok1": 0.576,
+   "r1": 0.555,
+   "p1": 0.599,
+   "ink_out": 0.07
+  },
+  {
+   "project": "פנוי-או-תפוס-חלק-א",
+   "t": 17.45,
+   "text": "נשוי",
+   "f_ok1": 0.582,
+   "r1": 0.571,
+   "p1": 0.593,
+   "ink_out": 0.0
+  },
+  {
+   "project": "דרג-לי-את-הפודיום-עלית-גברים",
+   "t": 10.19,
+   "text": "תמיד",
+   "f_ok1": 0.583,
+   "r1": 0.574,
+   "p1": 0.592,
+   "ink_out": 0.003
+  }
+ ],
+ "lowest_r1": [
+  {
+   "project": "ההבנה-האנטומית-סוגי-קרעים",
+   "t": 39.25,
+   "text": "שזה",
+   "f_ok1": 0.454,
+   "r1": 0.344,
+   "p1": 0.666,
+   "ink_out": 0.008
+  },
+  {
+   "project": "רמז מקצה ריצה",
+   "t": 5.07,
+   "text": "חום",
+   "f_ok1": 0.68,
+   "r1": 0.515,
+   "p1": 1.0,
+   "ink_out": 0.008
+  },
+  {
+   "project": "איגור-תחזית-מול-מציאות",
+   "t": 41.65,
+   "text": "רוח",
+   "f_ok1": 0.681,
+   "r1": 0.516,
+   "p1": 1.0,
+   "ink_out": 0.001
+  },
+  {
+   "project": "דקה-להורים-אימוני-כוח-לילדים",
+   "t": 18.52,
+   "text": "תחת",
+   "f_ok1": 0.683,
+   "r1": 0.519,
+   "p1": 1.0,
+   "ink_out": 0.0
+  },
+  {
+   "project": "הלקח-הכי-חשוב-במכירות",
+   "t": 23.59,
+   "text": "חדר",
+   "f_ok1": 0.688,
+   "r1": 0.524,
+   "p1": 0.999,
+   "ink_out": 0.0
+  },
+  {
+   "project": "שירלי-והמתחרה-שבא-לעבוד",
+   "t": 16.43,
+   "text": "תחזור",
+   "f_ok1": 0.592,
+   "r1": 0.528,
+   "p1": 0.673,
+   "ink_out": 0.014
+  },
+  {
+   "project": "טעויות-נפוצות-strict-pull-ups",
+   "t": 19.21,
+   "text": "ונותן",
+   "f_ok1": 0.614,
+   "r1": 0.529,
+   "p1": 0.731,
+   "ink_out": 0.0
+  },
+  {
+   "project": "עיסוי-רפואי",
+   "t": 1.87,
+   "text": "נתון",
+   "f_ok1": 0.671,
+   "r1": 0.529,
+   "p1": 0.92,
+   "ink_out": 0.018
+  },
+  {
+   "project": "בריאות-להרים-כבד-מהרצפה",
+   "t": 29.83,
+   "text": "ונדחוף",
+   "f_ok1": 0.692,
+   "r1": 0.529,
+   "p1": 1.0,
+   "ink_out": 0.0
+  },
+  {
+   "project": "מאסל-מן-רוטטור-קאף",
+   "t": 29.41,
+   "text": "תורם",
+   "f_ok1": 0.693,
+   "r1": 0.53,
+   "p1": 1.0,
+   "ink_out": 0.0
+  },
+  {
+   "project": "ההבטחה-מהבוקר-פיין-טאוויל",
+   "t": 10.39,
+   "text": "התחרות",
+   "f_ok1": 0.66,
+   "r1": 0.532,
+   "p1": 0.869,
+   "ink_out": 0.001
+  },
+  {
+   "project": "V3-לולאה",
+   "t": 5.41,
+   "text": "רחבת",
+   "f_ok1": 0.67,
+   "r1": 0.532,
+   "p1": 0.906,
+   "ink_out": 0.048
+  }
+ ],
+ "extra::ink_out": {
+  "event": {
+   "pos_max": 0.313,
+   "pos_p99": 0.244,
+   "neg_p05": {
+    "doubled": 0.114,
+    "doubled_far": 0.213
+   },
+   "neg_p50": {
+    "doubled": 0.488,
+    "doubled_far": 0.527
+   }
+  },
+  "regular": {
+   "pos_max": 0.251,
+   "pos_p99": 0.116,
+   "neg_p05": {
+    "doubled": 0.114,
+    "doubled_far": 0.189
+   },
+   "neg_p50": {
+    "doubled": 0.407,
+    "doubled_far": 0.456
+   }
+  }
+ },
+ "extra::n_far": {
+  "event": {
+   "pos_max": 1,
+   "pos_p99": 0,
+   "neg_p05": {
+    "doubled": 0,
+    "doubled_far": 0
+   },
+   "neg_p50": {
+    "doubled": 0,
+    "doubled_far": 1
+   }
+  },
+  "regular": {
+   "pos_max": 1,
+   "pos_p99": 0,
+   "neg_p05": {
+    "doubled": 0,
+    "doubled_far": 0
+   },
+   "neg_p50": {
+    "doubled": 0,
+    "doubled_far": 1
+   }
+  }
+ },
+ "extra::far_area": {
+  "event": {
+   "pos_max": 0.246,
+   "pos_p99": 0.0,
+   "neg_p05": {
+    "doubled": 0.0,
+    "doubled_far": 0.0
+   },
+   "neg_p50": {
+    "doubled": 0.0,
+    "doubled_far": 0.435
+   }
+  },
+  "regular": {
+   "pos_max": 0.219,
+   "pos_p99": 0.0,
+   "neg_p05": {
+    "doubled": 0.0,
+    "doubled_far": 0.0
+   },
+   "neg_p50": {
+    "doubled": 0.0,
+    "doubled_far": 0.372
+   }
+  }
+ },
+ "extra::ext_cols": {
+  "event": {
+   "pos_max": 1.537,
+   "pos_p99": 1.037,
+   "neg_p05": {
+    "doubled": 0.188,
+    "doubled_far": 0.345
+   },
+   "neg_p50": {
+    "doubled": 0.806,
+    "doubled_far": 0.901
+   }
+  },
+  "regular": {
+   "pos_max": 1.303,
+   "pos_p99": 0.766,
+   "neg_p05": {
+    "doubled": 0.19,
+    "doubled_far": 0.347
+   },
+   "neg_p50": {
+    "doubled": 0.711,
+    "doubled_far": 0.822
+   }
+  }
+ },
+ "extra::n_comp": {
+  "event": {
+   "pos_max": 3,
+   "pos_p99": 2,
+   "neg_p05": {
+    "doubled": 1,
+    "doubled_far": 2
+   },
+   "neg_p50": {
+    "doubled": 2,
+    "doubled_far": 2
+   }
+  },
+  "regular": {
+   "pos_max": 3,
+   "pos_p99": 2,
+   "neg_p05": {
+    "doubled": 1,
+    "doubled_far": 2
+   },
+   "neg_p50": {
+    "doubled": 2,
+    "doubled_far": 2
+   }
+  }
+ },
+ "highest_far_area": [
+  {
+   "project": "ראיון-פודיומיסטים-המנצחים-מדברים",
+   "t": 18.75,
+   "text": "תראי",
+   "n_far": 1,
+   "far_area": 0.246,
+   "ext_cols": 0.81,
+   "ink_out": 0.258
+  },
+  {
+   "project": "ההבנה-האנטומית-סוגי-קרעים",
+   "t": 1.65,
+   "text": "קרע",
+   "n_far": 1,
+   "far_area": 0.219,
+   "ext_cols": 0.832,
+   "ink_out": 0.232
+  },
+  {
+   "project": "ראיון-פודיומיסטים-המנצחים-מדברים",
+   "t": 19.33,
+   "text": "בשנה",
+   "n_far": 1,
+   "far_area": 0.208,
+   "ext_cols": 0.73,
+   "ink_out": 0.219
+  },
+  {
+   "project": "ראיון-פודיומיסטים-המנצחים-מדברים",
+   "t": 14.19,
+   "text": "למד?",
+   "n_far": 1,
+   "far_area": 0.195,
+   "ext_cols": 0.748,
+   "ink_out": 0.255
+  },
+  {
+   "project": "משפט-סיכום-חוק-המזרונים",
+   "t": 0.24,
+   "text": "איך",
+   "n_far": 1,
+   "far_area": 0.175,
+   "ext_cols": 1.064,
+   "ink_out": 0.239
+  },
+  {
+   "project": "משפט-סיכום-חוק-המזרונים",
+   "t": 15.92,
+   "text": "שלך",
+   "n_far": 1,
+   "far_area": 0.168,
+   "ext_cols": 0.797,
+   "ink_out": 0.313
+  },
+  {
+   "project": "ההבנה-האנטומית-סוגי-קרעים",
+   "t": 1.16,
+   "text": "יש לי",
+   "n_far": 1,
+   "far_area": 0.168,
+   "ext_cols": 0.558,
+   "ink_out": 0.171
+  },
+  {
+   "project": "ההבנה-האנטומית-סוגי-קרעים",
+   "t": 2.46,
+   "text": "אוקיי",
+   "n_far": 1,
+   "far_area": 0.167,
+   "ext_cols": 0.538,
+   "ink_out": 0.197
+  },
+  {
+   "project": "פנוי-או-תפוס-חלק-א",
+   "t": 35.98,
+   "text": "יש לי",
+   "n_far": 1,
+   "far_area": 0.155,
+   "ext_cols": 0.693,
+   "ink_out": 0.207
+  },
+  {
+   "project": "אחרי-הריצה-עקפתי-את-פיין",
+   "t": 0.15,
+   "text": "הנה",
+   "n_far": 0,
+   "far_area": 0.0,
+   "ext_cols": 0.0,
+   "ink_out": 0.0
+  },
+  {
+   "project": "אחרי-הריצה-עקפתי-את-פיין",
+   "t": 0.55,
+   "text": "מרון",
+   "n_far": 0,
+   "far_area": 0.0,
+   "ext_cols": 0.0,
+   "ink_out": 0.0
+  },
+  {
+   "project": "אחרי-הריצה-עקפתי-את-פיין",
+   "t": 1.04,
+   "text": "מרון!",
+   "n_far": 0,
+   "far_area": 0.0,
+   "ext_cols": 0.0,
+   "ink_out": 0.0
+  }
+ ],
+ "highest_ext_cols": [
+  {
+   "project": "משפט-סיכום-חוק-המזרונים",
+   "t": 11.31,
+   "text": "הזו",
+   "n_far": 0,
+   "far_area": 0.0,
+   "ext_cols": 1.537,
+   "ink_out": 0.234
+  },
+  {
+   "project": "משפט-סיכום-חוק-המזרונים",
+   "t": 8.35,
+   "text": "תן לי",
+   "n_far": 0,
+   "far_area": 0.0,
+   "ext_cols": 1.488,
+   "ink_out": 0.255
+  },
+  {
+   "project": "V3-לולאה",
+   "t": 38.81,
+   "text": "289",
+   "n_far": 0,
+   "far_area": 0.0,
+   "ext_cols": 1.303,
+   "ink_out": 0.251
+  },
+  {
+   "project": "על-הלוח-כמה-זמן-לתוצאות",
+   "t": 7.98,
+   "text": "אני",
+   "n_far": 0,
+   "far_area": 0.0,
+   "ext_cols": 1.273,
+   "ink_out": 0.146
+  },
+  {
+   "project": "על-הלוח-כמה-זמן-לתוצאות",
+   "t": 48.11,
+   "text": "יותר",
+   "n_far": 0,
+   "far_area": 0.0,
+   "ext_cols": 1.211,
+   "ink_out": 0.127
+  },
+  {
+   "project": "V3-לולאה",
+   "t": 31.76,
+   "text": "לנו",
+   "n_far": 0,
+   "far_area": 0.0,
+   "ext_cols": 1.161,
+   "ink_out": 0.198
+  },
+  {
+   "project": "על-הלוח-כמה-זמן-לתוצאות",
+   "t": 52.7,
+   "text": "כדי",
+   "n_far": 0,
+   "far_area": 0.0,
+   "ext_cols": 1.151,
+   "ink_out": 0.169
+  },
+  {
+   "project": "משפט-סיכום-חוק-המזרונים",
+   "t": 23.95,
+   "text": "לוקח",
+   "n_far": 0,
+   "far_area": 0.0,
+   "ext_cols": 1.137,
+   "ink_out": 0.233
+  },
+  {
+   "project": "ההבנה-האנטומית-סוגי-קרעים",
+   "t": 26.9,
+   "text": "קרע",
+   "n_far": 0,
+   "far_area": 0.0,
+   "ext_cols": 1.105,
+   "ink_out": 0.16
+  },
+  {
+   "project": "רמז מקצה ריצה",
+   "t": 19.54,
+   "text": "יש את",
+   "n_far": 0,
+   "far_area": 0.0,
+   "ext_cols": 1.099,
+   "ink_out": 0.176
+  },
+  {
+   "project": "משפט-סיכום-חוק-המזרונים",
+   "t": 11.95,
+   "text": "נראה",
+   "n_far": 0,
+   "far_area": 0.0,
+   "ext_cols": 1.089,
+   "ink_out": 0.3
+  },
+  {
+   "project": "על-הלוח-כמה-זמן-לתוצאות",
+   "t": 47.52,
+   "text": "והוא",
+   "n_far": 0,
+   "far_area": 0.0,
+   "ext_cols": 1.083,
+   "ink_out": 0.103
+  }
+ ],
+ "known_bad": {
+  "n": 60,
+  "f_ok1<0.579": 33,
+  "r1_p50": 0.579
+ },
+ "rules": {
+  "garbled:f_ok1": {
+   "thr_at_fp0": 0.512,
+   "event:tofu": 0.805,
+   "event:scrambled": 0.795,
+   "event:wrong_word": 0.952,
+   "event:stale_prev": 0.0,
+   "regular:tofu": 0.729,
+   "regular:scrambled": 0.713,
+   "regular:wrong_word": 0.953,
+   "regular:stale_prev": 0.002
+  },
+  "garbled:r1": {
+   "thr_at_fp0": 0.515,
+   "event:tofu": 0.397,
+   "event:scrambled": 0.995,
+   "event:wrong_word": 0.997,
+   "event:stale_prev": 0.0,
+   "regular:tofu": 0.452,
+   "regular:scrambled": 0.994,
+   "regular:wrong_word": 0.997,
+   "regular:stale_prev": 0.0
+  },
+  "garbled:min(f1,r1+0.1)": {
+   "thr_at_fp0": 0.512,
+   "event:tofu": 0.805,
+   "event:scrambled": 0.8,
+   "event:wrong_word": 0.966,
+   "event:stale_prev": 0.0,
+   "regular:tofu": 0.729,
+   "regular:scrambled": 0.723,
+   "regular:wrong_word": 0.957,
+   "regular:stale_prev": 0.002
+  },
+  "garbled:f1*r1": {
+   "thr_at_fp0": 0.282,
+   "event:tofu": 0.813,
+   "event:scrambled": 0.979,
+   "event:wrong_word": 1.0,
+   "event:stale_prev": 0.0,
+   "regular:tofu": 0.798,
+   "regular:scrambled": 0.99,
+   "regular:wrong_word": 0.998,
+   "regular:stale_prev": 0.001
+  },
+  "extra:far_area": {
+   "thr_at_fp0": 0.246,
+   "event:doubled": 0.285,
+   "event:doubled_far": 0.818,
+   "regular:doubled": 0.211,
+   "regular:doubled_far": 0.775
+  },
+  "extra:ink_out": {
+   "thr_at_fp0": 0.313,
+   "event:doubled": 0.738,
+   "event:doubled_far": 0.821,
+   "regular:doubled": 0.656,
+   "regular:doubled_far": 0.767
+  },
+  "extra:ext_cols": {
+   "thr_at_fp0": 1.537,
+   "event:doubled": 0.09,
+   "event:doubled_far": 0.108,
+   "regular:doubled": 0.073,
+   "regular:doubled_far": 0.083
+  }
+ },
+ "pos_event_f_ok1_min5": [
+  0.512,
+  0.565,
+  0.567,
+  0.569,
+  0.571
+ ],
+ "pos_event_far_area_max5": [
+  0.246,
+  0.208,
+  0.195,
+  0.175,
+  0.168
+ ],
+ "pos_regular_f_ok1_min5": [
+  0.573,
+  0.574,
+  0.595,
+  0.602,
+  0.605
+ ],
+ "pos_regular_far_area_max5": [
+  0.219,
+  0.168,
+  0.167,
+  0.0,
+  0.0
+ ]
+}

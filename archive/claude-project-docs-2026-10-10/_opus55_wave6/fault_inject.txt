@@ -1,0 +1,17 @@
+── garbled_cue כבוי
+FAIL: test_clutter_lowers_precision_not_recall (tests.test_vision_wave6_v934.TestGarbledCue.test_clutter_lowers_precision_not_recall)
+FAIL: test_two_cues_report_but_do_not_block (tests.test_vision_wave6_v934.TestGarbledCue.test_two_cues_report_but_do_not_block)
+FAIL: test_wrong_words_on_screen_block_by_count (tests.test_vision_wave6_v934.TestGarbledCue.test_wrong_words_on_screen_block_by_count)
+FAILED (failures=3)
+   sha 0cd6486327b6 → 0cd6486327b6
+── אימות עיניים כבוי
+FAIL: test_haar_hit_without_eyes_is_not_face (tests.test_vision_wave6_v934.TestFaceNeedsEyes.test_haar_hit_without_eyes_is_not_face)
+FAILED (failures=1)
+   sha 0cd6486327b6 → 0cd6486327b6
+── ייחוס מילה בכותרת כבוי
+FAIL: test_one_scrambled_title_word_blocks (tests.test_vision_wave6_v934.TestCoverTitleWord.test_one_scrambled_title_word_blocks)
+FAILED (failures=1)
+   sha 4527ac246b2e → 4527ac246b2e
+── אחרי שחזור:
+Ran 14 tests in 5.836s
+OK

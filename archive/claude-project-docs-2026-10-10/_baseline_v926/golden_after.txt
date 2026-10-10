@@ -1,0 +1,6 @@
+✅ שינה-והתאוששות: false=0 missed=0 Δkept=0.0 
+✅ טיפ-אחד-HSPU: false=0 missed=0 Δkept=0.0 
+✅ אופן-גים-השקה: false=0 missed=0 Δkept=0.0 
+✅ מאסל-מן-רוטטור-קאף: false=0 missed=0 Δkept=0.0 
+✅ מי-אמר-שמאוחר-מידיי: false=0 missed=0 Δkept=0.0 
+{"ok": true}

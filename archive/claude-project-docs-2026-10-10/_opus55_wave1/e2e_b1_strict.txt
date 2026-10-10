@@ -1,0 +1,5 @@
+OK-CASE ממומן-ת1-תושבים rc=0 :: ✅ בירולים ב-FINAL: 8 · אפס ממצאים · B4 not_measured · ספים: measured
+OK-CASE ממומן-ת3-סטודנטים rc=0 :: ✅ בירולים ב-FINAL: 8 · אפס ממצאים · B4 not_measured · ספים: measured
+OK-CASE בריאות-לקום-מכיסא rc=0 :: ✅ בירולים ב-FINAL: 2 · אפס ממצאים · B4 fresh · ספים: measured
+INJECTED-CASE rc=1 :: 🔴 בירולים ב-FINAL: 2 · not_landed 1 · B4 not_measured · ספים: measured
+DONE

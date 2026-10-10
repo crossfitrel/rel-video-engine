@@ -1,0 +1,8 @@
+✅ unittest: 798 · 0 FAIL · 37.8ש parallel×4
+❌ doctor: 1 FAIL · 2 WARN · 46 PASS
+   ❌ sync ציר↔חיתוך: 1 פרויקטים עם ציר לא מסונכרן: דרג-לי-את-הפודיום-עלית-גברים — תיקון: review_cli.py sync-all
+✅ gates: ✅ אודיט רשומה: 183 שערים · 0 כשלים
+✅ lessons: ✅ אודיט לקחים: 102 לקחים · 283 אוכפים · 0 בעיות
+✅ skill pack: OK: dist תואם (v9.31 — 2026-09-22, ליבה 11362 תווים)
+שינויים מהריצה הקודמת: Δ בדיקות: +4 | 🆕❌ doctor: sync ציר↔חיתוך
+⏱ 37.8ש · handoff/.baseline/last.json

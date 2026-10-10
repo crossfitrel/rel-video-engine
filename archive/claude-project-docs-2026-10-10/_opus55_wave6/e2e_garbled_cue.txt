@@ -1,0 +1,22 @@
+== מקור (עותק נקי):
+✅ V7 כתוביות: 70/70 cues נמדדו על הפיקסלים · f_ok חציון 0.857 · garbled 4 · garbled_cue 2 · ספים: measured
+   גיליון: /tmp/w6_e2e_garbled_cue/caption_vision_sheet.jpg
+   ⚠️ t=9.2ש 'כל נאמבר' garbled (f=0.649 rev=0.615)
+   ⚠️ t=21.53ש 'בסדר' garbled,garbled_cue (f=0.625 rev=0.606)
+   ⚠️ t=23.51ש 'דני' garbled,garbled_cue (f=0.586 rev=0.559)
+   ⚠️ t=27.3ש 'אתם' garbled (f=0.664 rev=0.63)
+rc=0
+הוזרקו 3 מילים שונות בקובץ המילים: {10: 'מזרון', 25: 'קטלבל', 40: 'סקוואט'}
+== אחרי הזרקה:
+🔴 V7 כתוביות: 71/71 cues נמדדו על הפיקסלים · f_ok חציון 0.857 · extra_ink 1 · garbled 8 · garbled_cue 6 · ספים: measured
+   גיליון: /tmp/w6_e2e_garbled_cue/caption_vision_sheet.jpg
+   ⚠️ t=4.69ש 'מזרון' garbled,garbled_cue (f=0.674 rev=0.681)
+   ⚠️ t=9.2ש 'כל נאמבר' garbled (f=0.649 rev=0.615)
+   ⚠️ t=10.92ש 'קטלבל' garbled,garbled_cue (f=0.661 rev=0.617)
+   ⚠️ t=19.46ש 'סקוואט' garbled,garbled_cue,extra_ink (f=0.744 rev=0.747)
+   ⚠️ t=20.1ש 'מההתחלה' garbled,garbled_cue (f=0.655 rev=0.635)
+   ⚠️ t=21.53ש 'בסדר' garbled,garbled_cue (f=0.625 rev=0.606)
+   ⚠️ t=23.51ש 'דני' garbled,garbled_cue (f=0.586 rev=0.559)
+   ⚠️ t=27.3ש 'אתם' garbled (f=0.664 rev=0.63)
+rc=1
+counts {'garbled': 8, 'garbled_cue': 6, 'extra_ink': 1} blocking_hits {'garbled_cue': 6}

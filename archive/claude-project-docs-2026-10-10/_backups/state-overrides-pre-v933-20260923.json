@@ -1,0 +1,541 @@
+{
+ "taken_at": "2026-09-23 11:33:58",
+ "by": "scheduled-state-v933",
+ "work_root": "/Users/hayon/rel-video-work",
+ "projects": {
+  "V3-לולאה": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": null,
+   "manifest_updated_at": "2026-07-31 18:14:35"
+  },
+  "אביגיל-המקום-השני-מאסטרס": {
+   "state_override": null,
+   "derived_state": "failed",
+   "monday_item_id": 13085799884,
+   "manifest_updated_at": "2026-09-19 16:34:49"
+  },
+  "אופן-גים-השקה": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12530347068,
+   "manifest_updated_at": "2026-07-29 17:00:52"
+  },
+  "אופן-גים-חיזוק": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12530348607,
+   "manifest_updated_at": "2026-07-31 18:19:52"
+  },
+  "אוריה-המנהלת-המקצועית": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12413818918,
+   "manifest_updated_at": "2026-07-25 17:51:15"
+  },
+  "אחרי-הריצה-איך-היה": {
+   "state_override": null,
+   "derived_state": "awaiting_schedule_approval",
+   "monday_item_id": 13085825420,
+   "manifest_updated_at": "2026-09-23 11:23:09"
+  },
+  "אחרי-הריצה-עקפתי-את-פיין": {
+   "state_override": null,
+   "derived_state": "awaiting_schedule_approval",
+   "monday_item_id": 13085799821,
+   "manifest_updated_at": "2026-09-22 13:45:28"
+  },
+  "איגור-תחזית-מול-מציאות": {
+   "state_override": null,
+   "derived_state": "awaiting_schedule_approval",
+   "monday_item_id": 13085799760,
+   "manifest_updated_at": "2026-09-21 22:15:01"
+  },
+  "איך-הכרנו-הראל-ואוריה": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12796476024,
+   "manifest_updated_at": "2026-09-11 19:44:31"
+  },
+  "איך-התחילה-התחרות": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13085880280,
+   "manifest_updated_at": "2026-09-19 16:36:47"
+  },
+  "איתי-עוזרי-הדרך-לפודיום": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13082373409,
+   "manifest_updated_at": "2026-09-19 16:49:44"
+  },
+  "אסטרטגיה-לאיוונט-הבא": {
+   "state_override": null,
+   "derived_state": "in_review",
+   "monday_item_id": 13085793046,
+   "manifest_updated_at": "2026-09-19 16:34:49"
+  },
+  "אפטר-מובי-REL-Throwdown-2026": {
+   "state_override": null,
+   "derived_state": "in_review",
+   "monday_item_id": 13082341032,
+   "manifest_updated_at": "2026-09-20 20:05:13"
+  },
+  "בריאות-להרים-כבד-מהרצפה": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12942913119,
+   "manifest_updated_at": "2026-09-11 19:44:31"
+  },
+  "בריאות-לקום-מכיסא": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12689063339,
+   "manifest_updated_at": "2026-08-23 10:24:41"
+  },
+  "גאה-בצוות": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": "12689119907",
+   "manifest_updated_at": "2026-08-27 18:17:00"
+  },
+  "דור-מכונה": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13085850600,
+   "manifest_updated_at": "2026-09-19 16:36:47"
+  },
+  "דקה-להורים-אימוני-כוח-לילדים": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12617686463,
+   "manifest_updated_at": "2026-08-23 10:24:41"
+  },
+  "דקה-להורים-כמה-פעמים-בשבוע": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12990219072,
+   "manifest_updated_at": "2026-09-11 19:44:31"
+  },
+  "דרג-לי-את-הפודיום-מאסטרס": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13085916409,
+   "manifest_updated_at": "2026-09-19 16:36:47"
+  },
+  "דרג-לי-את-הפודיום-עלית-גברים": {
+   "state_override": null,
+   "derived_state": "awaiting_schedule_approval",
+   "monday_item_id": 13082385914,
+   "manifest_updated_at": "2026-09-23 10:34:05"
+  },
+  "הבטיח-לשרוף-את-הרחבה": {
+   "state_override": null,
+   "derived_state": "in_review",
+   "monday_item_id": 13082393183,
+   "manifest_updated_at": "2026-09-19 16:34:49"
+  },
+  "הגאנטלט-איך-היה": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13082386901,
+   "manifest_updated_at": "2026-09-19 16:36:47"
+  },
+  "ההבטחה-מהבוקר-פיין-טאוויל": {
+   "state_override": null,
+   "derived_state": "awaiting_schedule_approval",
+   "monday_item_id": 13085825401,
+   "manifest_updated_at": "2026-09-21 16:12:20"
+  },
+  "ההבנה-האנטומית-סוגי-אחיזות": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12413818950,
+   "manifest_updated_at": "2026-07-26 14:31:39"
+  },
+  "ההבנה-האנטומית-סוגי-קרעים": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12687056069,
+   "manifest_updated_at": "2026-08-23 13:16:20"
+  },
+  "הזוכה-שלא-האמין-חזרה-אחרי-פציעה": {
+   "state_override": null,
+   "derived_state": "awaiting_schedule_approval",
+   "monday_item_id": 13085799822,
+   "manifest_updated_at": "2026-09-21 21:46:45"
+  },
+  "היריבות-של-רייצל-ונופר": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13085890779,
+   "manifest_updated_at": "2026-09-19 16:36:47"
+  },
+  "הכירו-את-המתחרות-עלית-נשים": {
+   "state_override": null,
+   "derived_state": "in_review",
+   "monday_item_id": 13085799437,
+   "manifest_updated_at": "2026-09-19 16:34:49"
+  },
+  "הכירו-את-המתחרים-גברים": {
+   "state_override": null,
+   "derived_state": "in_review",
+   "monday_item_id": 13085799885,
+   "manifest_updated_at": "2026-09-19 16:34:49"
+  },
+  "הלקח-הכי-חשוב-במכירות": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12500774503,
+   "manifest_updated_at": "2026-08-01 16:37:07"
+  },
+  "המאסטריות-הקמע-שלי-פה-איתי": {
+   "state_override": null,
+   "derived_state": "in_review",
+   "monday_item_id": 13085799883,
+   "manifest_updated_at": "2026-09-19 16:34:49"
+  },
+  "הקהל-של-התחרות": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13085799823,
+   "manifest_updated_at": "2026-09-19 16:36:47"
+  },
+  "זוג-על-הרחבה-ליזה-וסלאבה": {
+   "state_override": null,
+   "derived_state": "in_review",
+   "monday_item_id": 13082374491,
+   "manifest_updated_at": "2026-09-19 16:34:49"
+  },
+  "טיפ-אחד-HSPU": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12413818919,
+   "manifest_updated_at": "2026-07-26 14:31:20"
+  },
+  "טיפ-אחד-בטן-בר": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12689128755,
+   "manifest_updated_at": "2026-08-23 10:24:41"
+  },
+  "טיפ-אחד-דאבל-אנדרס": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12942913401,
+   "manifest_updated_at": "2026-09-11 19:44:31"
+  },
+  "טעויות-נפוצות-strict-pull-ups": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12413818947,
+   "manifest_updated_at": "2026-08-02 17:21:58"
+  },
+  "טרה-ראן-באיזה-מקום-תסיים-לפני-הריצה": {
+   "state_override": null,
+   "derived_state": "awaiting_schedule_approval",
+   "monday_item_id": 13082363508,
+   "manifest_updated_at": "2026-09-23 11:33:09"
+  },
+  "טרה-ראן-תחזיות-לפני-הריצה-חלק-ב": {
+   "state_override": null,
+   "derived_state": "in_review",
+   "monday_item_id": 13085793236,
+   "manifest_updated_at": "2026-09-19 16:34:49"
+  },
+  "יום-בחיים-של-הראל": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12510947669,
+   "manifest_updated_at": "2026-08-02 17:21:52"
+  },
+  "יום-תחרות-מחמש-בבוקר": {
+   "state_override": null,
+   "derived_state": "in_review",
+   "monday_item_id": 13082386950,
+   "manifest_updated_at": "2026-09-19 16:34:49"
+  },
+  "כמה-מתאמנים-שלך-מתחרים-היום": {
+   "state_override": null,
+   "derived_state": "in_review",
+   "monday_item_id": 13082392022,
+   "manifest_updated_at": "2026-09-19 16:34:49"
+  },
+  "למה-אני-מתחרה-חלק-א": {
+   "state_override": null,
+   "derived_state": "awaiting_schedule_approval",
+   "monday_item_id": 13082392096,
+   "manifest_updated_at": "2026-09-21 16:39:18"
+  },
+  "למה-אני-מתחרה-חלק-ב": {
+   "state_override": null,
+   "derived_state": "in_review",
+   "monday_item_id": 13082386949,
+   "manifest_updated_at": "2026-09-19 16:34:49"
+  },
+  "למה-אני-מתחרה-חלק-ג": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13082403238,
+   "manifest_updated_at": "2026-09-19 16:36:47"
+  },
+  "מאחורי-הקלעים-בין-המקצים": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13085793238,
+   "manifest_updated_at": "2026-09-19 16:36:47"
+  },
+  "מאסטרס-פיין-ומרון-יריבות-של-חברים": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13082394545,
+   "manifest_updated_at": "2026-09-19 16:52:51"
+  },
+  "מאסל-מן-סיבוב-כתף": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12687056039,
+   "manifest_updated_at": "2026-08-18 12:12:19"
+  },
+  "מאסל-מן-רוטטור-קאף": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12413818945,
+   "manifest_updated_at": "2026-08-02 17:21:40"
+  },
+  "מה-האסטרטגיה-לדדליפט": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13085851141,
+   "manifest_updated_at": "2026-09-19 16:36:47"
+  },
+  "מה-זה-להיות-בעל-מועדון": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12500800935,
+   "manifest_updated_at": "2026-08-02 13:28:54"
+  },
+  "מי-אמר-שמאוחר-מידיי": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12413818944,
+   "manifest_updated_at": "2026-07-25 12:16:56"
+  },
+  "מי-יותר-ממי-זוג-שני": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13085825517,
+   "manifest_updated_at": "2026-09-19 16:36:47"
+  },
+  "מי-יותר-ממי-משחק-שאלות": {
+   "state_override": null,
+   "derived_state": "awaiting_schedule_approval",
+   "monday_item_id": 13082386040,
+   "manifest_updated_at": "2026-09-21 22:15:01"
+  },
+  "מי-יסיים-מעליך-אף-אחד": {
+   "state_override": null,
+   "derived_state": "in_review",
+   "monday_item_id": 13085816344,
+   "manifest_updated_at": "2026-09-19 16:34:49"
+  },
+  "מי-יסיים-מקום-אחד-מעליך": {
+   "state_override": null,
+   "derived_state": "awaiting_schedule_approval",
+   "monday_item_id": 13082365455,
+   "manifest_updated_at": "2026-09-23 11:31:23"
+  },
+  "מי-עקף-את-מי-אחרי-הדדליפט": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13085890825,
+   "manifest_updated_at": "2026-09-19 16:36:47"
+  },
+  "ממומן-ת1-סטודנטים": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12761851987,
+   "manifest_updated_at": "2026-08-23 10:24:41"
+  },
+  "ממומן-ת1-תושבים": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12689095014,
+   "manifest_updated_at": "2026-08-23 10:24:41"
+  },
+  "ממומן-ת2-סטודנטים": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12761852482,
+   "manifest_updated_at": "2026-08-23 10:24:41"
+  },
+  "ממומן-ת2-תושבים": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12761825235,
+   "manifest_updated_at": "2026-08-23 10:24:41"
+  },
+  "ממומן-ת3-סטודנטים": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12762051196,
+   "manifest_updated_at": "2026-08-23 10:24:41"
+  },
+  "ממומן-ת3-תושבים": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12762059755,
+   "manifest_updated_at": "2026-08-23 10:24:41"
+  },
+  "ממומן-ת4-סטודנטים": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12762179143,
+   "manifest_updated_at": "2026-08-23 10:24:41"
+  },
+  "ממומן-ת4-תושבים": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12762075170,
+   "manifest_updated_at": "2026-08-23 10:24:41"
+  },
+  "ממקום-אחרון-לגמר": {
+   "state_override": null,
+   "derived_state": "in_review",
+   "monday_item_id": 13082374490,
+   "manifest_updated_at": "2026-09-19 16:34:49"
+  },
+  "משפט-סיכום-חוק-המזרונים": {
+   "state_override": null,
+   "derived_state": "awaiting_schedule_approval",
+   "monday_item_id": 13085799886,
+   "manifest_updated_at": "2026-09-23 10:16:32"
+  },
+  "ניפוץ-מיתוסים-לטיפול-מגיעים-רק-כשכואב": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12413818946,
+   "manifest_updated_at": "2026-08-02 17:21:28"
+  },
+  "נכנס-בדקה-התשעים-וסיים-ראשון": {
+   "state_override": null,
+   "derived_state": "awaiting_schedule_approval",
+   "monday_item_id": 13085793125,
+   "manifest_updated_at": "2026-09-23 10:32:45"
+  },
+  "סקאלת-הבריאות": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12413818920,
+   "manifest_updated_at": "2026-07-26 19:26:53"
+  },
+  "עיסוי-רפואי": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12413818962,
+   "manifest_updated_at": "2026-08-02 17:21:46"
+  },
+  "על-הלוח-כוח-וגיל": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12689108131,
+   "manifest_updated_at": "2026-08-23 10:24:41"
+  },
+  "על-הלוח-כמה-זמן-לתוצאות": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12942913273,
+   "manifest_updated_at": "2026-09-11 19:44:31"
+  },
+  "עלית-נשים-היום-של-שיילי-מתחזית-לפודיום": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13082386137,
+   "manifest_updated_at": "2026-09-19 16:51:10"
+  },
+  "פנוי-או-תפוס-חלק-א": {
+   "state_override": null,
+   "derived_state": "awaiting_schedule_approval",
+   "monday_item_id": 13082374475,
+   "manifest_updated_at": "2026-09-23 10:33:36"
+  },
+  "פנוי-או-תפוס-חלק-ב": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13085825421,
+   "manifest_updated_at": "2026-09-19 16:36:47"
+  },
+  "צעדים-קטנים-כל-יום": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12500800402,
+   "manifest_updated_at": "2026-08-02 17:21:34"
+  },
+  "קליפ-מקצה-דדליפט-וגמר-מונטאז": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13082424517,
+   "manifest_updated_at": "2026-09-19 16:36:47"
+  },
+  "קליפ-מקצה-טרה-ראן-מונטאז": {
+   "state_override": null,
+   "derived_state": "in_review",
+   "monday_item_id": 13082385816,
+   "manifest_updated_at": "2026-09-19 16:35:35"
+  },
+  "ראיון-פודיומיסטים-המנצחים-מדברים": {
+   "state_override": null,
+   "derived_state": "awaiting_schedule_approval",
+   "monday_item_id": 13082341033,
+   "manifest_updated_at": "2026-09-21 21:50:09"
+  },
+  "ראיונות-אווירה": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13082417923,
+   "manifest_updated_at": "2026-09-19 16:36:47"
+  },
+  "רמז מקצה 3 - סולם": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 11534408742,
+   "manifest_updated_at": "2026-07-26 14:31:32"
+  },
+  "רמז מקצה ריצה": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12588323186,
+   "manifest_updated_at": "2026-07-26 19:25:39"
+  },
+  "שאלות-לפני-הגמר-טובה-בפיסטולים": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13082392278,
+   "manifest_updated_at": "2026-09-19 16:36:47"
+  },
+  "שיילי-תחרות-ראשונה-ביחידים": {
+   "state_override": null,
+   "derived_state": "not_started",
+   "monday_item_id": 13085850599,
+   "manifest_updated_at": "2026-09-19 16:36:47"
+  },
+  "שינה-והתאוששות": {
+   "state_override": "published",
+   "derived_state": "published",
+   "monday_item_id": 12500774088,
+   "manifest_updated_at": "2026-07-26 19:25:29"
+  },
+  "שירלי-והמתחרה-שבא-לעבוד": {
+   "state_override": null,
+   "derived_state": "awaiting_schedule_approval",
+   "monday_item_id": 13085799438,
+   "manifest_updated_at": "2026-09-23 11:15:45"
+  },
+  "תחרות-ראשונה-שלי": {
+   "state_override": null,
+   "derived_state": "in_review",
+   "monday_item_id": 13085824447,
+   "manifest_updated_at": "2026-09-19 16:34:49"
+  }
+ }
+}

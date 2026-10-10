@@ -1,0 +1,232 @@
+[
+ {
+  "project": "V3-לולאה",
+  "n": 13,
+  "counts": {},
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "not_measured"
+ },
+ {
+  "project": "אופן-גים-השקה",
+  "n": 10,
+  "counts": {},
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "not_measured"
+ },
+ {
+  "project": "אופן-גים-חיזוק",
+  "n": 10,
+  "counts": {},
+  "source": "items_applied",
+  "planned_not_applied": 1,
+  "harel": [],
+  "B4": "not_measured"
+ },
+ {
+  "project": "בריאות-לקום-מכיסא",
+  "n": 2,
+  "counts": {},
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "fresh"
+ },
+ {
+  "project": "דקה-להורים-אימוני-כוח-לילדים",
+  "n": 2,
+  "counts": {},
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "not_measured"
+ },
+ {
+  "project": "ההבטחה-מהבוקר-פיין-טאוויל",
+  "n": 1,
+  "counts": {},
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "not_measured"
+ },
+ {
+  "project": "ההבנה-האנטומית-סוגי-אחיזות",
+  "n": 3,
+  "counts": {},
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "not_measured"
+ },
+ {
+  "project": "הזוכה-שלא-האמין-חזרה-אחרי-פציעה",
+  "n": 1,
+  "counts": {},
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "not_measured"
+ },
+ {
+  "project": "טיפ-אחד-בטן-בר",
+  "n": 1,
+  "counts": {},
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "not_measured"
+ },
+ {
+  "project": "יום-בחיים-של-הראל",
+  "n": 4,
+  "counts": {
+   "harel_in_club": 4
+  },
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [
+   "בירול - מלווה שיעור בקבוצה - 2025-06-17.mp4",
+   "בירול - עם אוריה ביום החתונה - 2025-02-24.mp4",
+   "בירול - שני הכלבים במועדון - 2025-10-07.mp4",
+   "בירול - דדליפט סומו כבד מאוד - 2025-05-14.mp4"
+  ],
+  "B4": "not_measured"
+ },
+ {
+  "project": "מה-זה-להיות-בעל-מועדון",
+  "n": 9,
+  "counts": {
+   "burned_text": 2
+  },
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "not_measured"
+ },
+ {
+  "project": "מי-אמר-שמאוחר-מידיי",
+  "n": 3,
+  "counts": {
+   "harel_in_club": 1
+  },
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [
+   "בירול מיכאל לוי - 10 פגישת-יעדים.mp4"
+  ],
+  "B4": "not_measured"
+ },
+ {
+  "project": "ממומן-ת1-סטודנטים",
+  "n": 11,
+  "counts": {
+   "not_landed": 2
+  },
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "not_measured"
+ },
+ {
+  "project": "ממומן-ת1-תושבים",
+  "n": 11,
+  "counts": {
+   "not_landed": 2
+  },
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "not_measured"
+ },
+ {
+  "project": "ממומן-ת2-סטודנטים",
+  "n": 8,
+  "counts": {
+   "not_landed": 1
+  },
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "not_measured"
+ },
+ {
+  "project": "ממומן-ת2-תושבים",
+  "n": 8,
+  "counts": {},
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "not_measured"
+ },
+ {
+  "project": "ממומן-ת3-סטודנטים",
+  "n": 11,
+  "counts": {
+   "not_landed": 2
+  },
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "not_measured"
+ },
+ {
+  "project": "ממומן-ת3-תושבים",
+  "n": 11,
+  "counts": {
+   "not_landed": 2
+  },
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "not_measured"
+ },
+ {
+  "project": "ממומן-ת4-סטודנטים",
+  "n": 8,
+  "counts": {},
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "not_measured"
+ },
+ {
+  "project": "ממומן-ת4-תושבים",
+  "n": 8,
+  "counts": {},
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "not_measured"
+ },
+ {
+  "project": "משפט-סיכום-חוק-המזרונים",
+  "n": 2,
+  "counts": {},
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "fresh"
+ },
+ {
+  "project": "ניפוץ-מיתוסים-לטיפול-מגיעים-רק-כשכואב",
+  "n": 2,
+  "counts": {},
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "not_measured"
+ },
+ {
+  "project": "על-הלוח-כוח-וגיל",
+  "n": 1,
+  "counts": {},
+  "source": "items_applied",
+  "planned_not_applied": 0,
+  "harel": [],
+  "B4": "not_measured"
+ }
+]

@@ -1,0 +1,141 @@
+............................/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tools/relvid/registry.py:125: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpfw9zn4cj/פרויקט-API/corrections.jsonl' mode='r' encoding='utf-8'>
+  n_corr = sum(1 for _ in open(corr, encoding="utf-8")) if corr.exists() else 0
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tests/test_artifacts_api.py:159: ResourceWarning: unclosed file <_io.BufferedReader name='/tmp/tmpfw9zn4cj/פרויקט-API/artifacts/art_fad954760607/FINAL.mp4'>
+  self.assertEqual(self.c.get(f"/artifact-media/{self.d.name}/{a2}").data,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+./Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tests/test_artifacts_api.py:77: ResourceWarning: unclosed file <_io.BufferedReader name='/tmp/tmpnjwt3786/פרויקט-API/artifacts/art_2cb4d4d18de9/FINAL.mp4'>
+  m = self.c.get(f"/artifact-media/{self.d.name}/{aid}")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tests/test_artifacts_api.py:77: ResourceWarning: unclosed file <_io.BufferedReader name='/tmp/tmpnjwt3786/פרויקט-API/artifacts/art_79c09dec923e/FINAL.mp4'>
+  m = self.c.get(f"/artifact-media/{self.d.name}/{aid}")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tests/test_artifacts_api.py:77: ResourceWarning: unclosed file <_io.BufferedReader name='/tmp/tmpnjwt3786/פרויקט-API/artifacts/art_960ceb73da70/FINAL.mp4'>
+  m = self.c.get(f"/artifact-media/{self.d.name}/{aid}")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tests/test_artifacts_api.py:77: ResourceWarning: unclosed file <_io.BufferedReader name='/tmp/tmpnjwt3786/פרויקט-API/artifacts/art_b2fe6eb2367b/FINAL.mp4'>
+  m = self.c.get(f"/artifact-media/{self.d.name}/{aid}")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/case.py:589: ResourceWarning: unclosed file <_io.BufferedReader name='/tmp/tmpnjwt3786/פרויקט-API/artifacts/art_278f8223c033/FINAL.mp4'>
+  if method() is not None:
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+./Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tools/relvid/registry.py:125: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp7zoyrl9y/פרויקט-API/corrections.jsonl' mode='r' encoding='utf-8'>
+  n_corr = sum(1 for _ in open(corr, encoding="utf-8")) if corr.exists() else 0
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tests/test_artifacts_api.py:103: ResourceWarning: unclosed file <_io.BufferedReader name='/tmp/tmp7zoyrl9y/פרויקט-API/artifacts/art_a1fe1fc94d42/FINAL.mp4'>
+  self.assertEqual(self.c.get(f"/artifact-media/{self.d.name}/{a2}").data,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/case.py:589: ResourceWarning: unclosed file <_io.BufferedReader name='/tmp/tmp7zoyrl9y/פרויקט-API/artifacts/art_e675d9c56098/FINAL.mp4'>
+  if method() is not None:
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+./Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tools/relvid/registry.py:125: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpd8o2b3aj/פרויקט-API/corrections.jsonl' mode='r' encoding='utf-8'>
+  n_corr = sum(1 for _ in open(corr, encoding="utf-8")) if corr.exists() else 0
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.../Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tools/relvid/registry.py:125: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpvv8xgi9k/פרויקט-API/corrections.jsonl' mode='r' encoding='utf-8'>
+  n_corr = sum(1 for _ in open(corr, encoding="utf-8")) if corr.exists() else 0
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+...../Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tests/test_bed_covered_seams.py:35: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpiayrwee_/broll_plan.json' mode='w' encoding='UTF-8'>
+  json.dump({"plan": [{"start": 5.0, "end": 20.0}]},
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tests/test_bed_covered_seams.py:43: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpiayrwee_/broll_plan.json' mode='w' encoding='UTF-8'>
+  json.dump({"plan": [{"start": 1.0, "end": 1.1}]},
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+...............F............................................................................................................/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tools/relvid/registry.py:125: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmpjgyl9pst/סרטון-אחד/corrections.jsonl' mode='r' encoding='utf-8'>
+  n_corr = sum(1 for _ in open(corr, encoding="utf-8")) if corr.exists() else 0
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+............/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tests/test_cover_gates.py:62: ResourceWarning: unclosed file <_io.TextIOWrapper name='/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tools/thumbnail/cover-guard-calibration.json' mode='r' encoding='utf-8'>
+  c = json.load(open(p, encoding="utf-8"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+......<frozen importlib._bootstrap_external>:753: ResourceWarning: unclosed file <_io.BufferedReader name='/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tools/thumbnail/fonts/Studentit-Full.ttf'>
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.../Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tests/test_cover_gates.py:140: ResourceWarning: unclosed file <_io.TextIOWrapper name='/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tools/thumbnail/thumbnail_build.py' mode='r' encoding='utf-8'>
+  src = open(os.path.join(THUMB, name), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tests/test_cover_gates.py:140: ResourceWarning: unclosed file <_io.TextIOWrapper name='/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tools/thumbnail/cover_build.py' mode='r' encoding='utf-8'>
+  src = open(os.path.join(THUMB, name), encoding="utf-8").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+...../Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/encoder.py:260: ResourceWarning: unclosed file <_io.FileIO name='/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tools/thumbnail/fonts/Studentit-Full.ttf' mode='rb' closefd=True>
+  def _make_iterencode(markers, _default, _encoder, _indent, _floatstr,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/encoder.py:260: ResourceWarning: unclosed file <_io.FileIO name='/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tools/thumbnail/fonts/Bagira-Specimen-Subset.otf' mode='rb' closefd=True>
+  def _make_iterencode(markers, _default, _encoder, _indent, _floatstr,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+...............................................................................................................................F.......................................................................................................................................................................................<string>:0: ResourceWarning: unclosed file <_io.BufferedReader name='/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tools/thumbnail/fonts/Bagira-Specimen-Subset.otf'>
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.............................................................................................................................................................................................................................../Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/unittest/mock.py:2195: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/tmp_ryahjgj/p/runs/run_97fff365b127.log' mode='a' encoding='UTF-8'>
+  def __init__(self, name, parent):
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/review-app/server.py:630: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/vh_srv_a17pzq8x/a3/corrections.jsonl' mode='r' encoding='utf-8'>
+  n_corr = sum(1 for _ in open(d / "corrections.jsonl", encoding="utf-8"))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+......................
+======================================================================
+FAIL: test_every_pool_clip_has_vision_evidence (test_brief_gate.TestRealPool.test_every_pool_clip_has_vision_evidence)
+בלי כיסוי מלא, השער נכשל-סגור וחוסם קליפים תקינים.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tests/test_brief_gate.py", line 125, in test_every_pool_clip_has_vision_evidence
+    self.assertEqual(missing, [], f"{len(missing)} קליפים בלי ראיה ויזואלית")
+AssertionError: Lists differ: ['בירול מיכאל לוי - 01 הדרכה.mp4', 'בירול [329 chars]mp4'] != []
+
+First list contains 9 additional elements.
+First extra element 0:
+'בירול מיכאל לוי - 01 הדרכה.mp4'
+
++ []
+- ['בירול מיכאל לוי - 01 הדרכה.mp4',
+-  'בירול מיכאל לוי - 02 קהילה.mp4',
+-  'בירול מיכאל לוי - 07 תדרוך.mp4',
+-  'בירול מיכאל לוי - 08 פתיחה-סיום.mp4',
+-  'בירול מיכאל לוי - 10 פגישת-יעדים.mp4',
+-  'בירול מיכאל לוי - 11 מפגש-מבוא (גרסה חדשה מדיסקריפט).mp4',
+-  'בירול מיכאל לוי - 11 מפגש-מבוא.mp4',
+-  'בירול מיכאל לוי - 12 שירות-לקוחות.mp4',
+-  'בירול מיכאל לוי - 13 אבחון-תנועה (R.E.L Therapy).mp4'] : 9 קליפים בלי ראיה ויזואלית
+
+======================================================================
+FAIL: test_whole_pool_visually_verified (test_gender_balance.TestPoolBalance.test_whole_pool_visually_verified)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/קרוספיט אריאל/01 - שיווק/תוכן שיווקי/Social Video Editing System/tests/test_gender_balance.py", line 74, in test_whole_pool_visually_verified
+    self.assertEqual(missing, [],
+AssertionError: Lists differ: ['בירול מיכאל לוי - 01 הדרכה.mp4', 'בירול [329 chars]mp4'] != []
+
+First list contains 9 additional elements.
+First extra element 0:
+'בירול מיכאל לוי - 01 הדרכה.mp4'
+
++ []
+- ['בירול מיכאל לוי - 01 הדרכה.mp4',
+-  'בירול מיכאל לוי - 02 קהילה.mp4',
+-  'בירול מיכאל לוי - 07 תדרוך.mp4',
+-  'בירול מיכאל לוי - 08 פתיחה-סיום.mp4',
+-  'בירול מיכאל לוי - 10 פגישת-יעדים.mp4',
+-  'בירול מיכאל לוי - 11 מפגש-מבוא (גרסה חדשה מדיסקריפט).mp4',
+-  'בירול מיכאל לוי - 11 מפגש-מבוא.mp4',
+-  'בירול מיכאל לוי - 12 שירות-לקוחות.mp4',
+-  'בירול מיכאל לוי - 13 אבחון-תנועה (R.E.L Therapy).mp4'] : 9 קליפים בבריכה בלי אימות ויזואלי
+
+----------------------------------------------------------------------
+Ran 745 tests in 78.271s
+
+FAILED (failures=2)
+OK raqm=True title_size=260 sub_size=221 band=(1034,1751) -> /tmp/tmp9s93hp0v/o.png
+   פונט כותרת: PloniBold.otf
+   פונט תת-כותרת: Studentit-Full.ttf
+✅ קאבר: /tmp/tmp9s93hp0v/o.png
+   מקור: c.png · פריים t=Nones
+   שער כתובית: score=0.0 < סף 0.02392 (measured)
+   איכות פריים: אין פנים בפריים (ציון 0.0)
+   שתי שורות · תת-כותרת ב-Studentit-Full.ttf
+OK raqm=True title_size=182 sub_size=154 band=(1128,1656) -> /tmp/tmp38l9jod6/o.png
+   פונט כותרת: PloniBold.otf
+   פונט תת-כותרת: Studentit-Full.ttf
+✅ קאבר: /tmp/tmp38l9jod6/o.png
+   מקור: c.png · פריים t=Nones
+   שער כתובית: score=0.0 < סף 0.02392 (measured)
+   איכות פריים: אין פנים בפריים (ציון 0.0)
+   שתי שורות · תת-כותרת ב-Studentit-Full.ttf
+  [proofreader] 3 מילים נבדקו · 0 תוקנו · 0 להכרעה ידנית
+  [proofreader] 3 מילים נבדקו · 0 תוקנו · 0 להכרעה ידנית
+✅ הציר השתנה בזמן ההכנה — התצוגה נזרקה

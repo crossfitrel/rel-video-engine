@@ -1,0 +1,345 @@
+<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="utf-8">
+<title>V2 — הדמיית עריכה: אופן ג'ים</title>
+<style>
+:root{--bg:#0e0f12;--card:#16181d;--line:#262a33;--tx:#e8e9ec;--dim:#9aa0ad;
+--red:#871d1f;--hi:#2e7d5b;--mid:#8a6d1f;--lo:#6b3030;--acc:#c8452e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);
+font-family:'Assistant','Ploni','Heebo',system-ui,sans-serif;line-height:1.6}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 22px 80px}
+h1{font-size:40px;font-weight:800;margin:0 0 6px;letter-spacing:-.5px}
+h2{font-size:27px;font-weight:800;margin:44px 0 8px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+h3{font-size:19px;font-weight:700;margin:22px 0 6px;color:#cfd3db}
+.sub{color:var(--dim);font-size:15px;margin-bottom:26px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:14px 0}
+.grid{display:grid;gap:14px}
+.g4{grid-template-columns:repeat(4,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:1fr 1fr}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.stat b{display:block;font-size:32px;font-weight:800;line-height:1.15}
+.stat span{color:var(--dim);font-size:13px}
+.stat .d{color:var(--hi);font-size:13px;font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+th{text-align:right;font-weight:700;color:var(--dim);font-size:12px;
+text-transform:uppercase;letter-spacing:.4px;padding:8px 9px;border-bottom:1px solid var(--line)}
+td{padding:10px 9px;border-bottom:1px solid #1d2026;vertical-align:top}
+td.t{white-space:nowrap;font-variant-numeric:tabular-nums;color:#b9bec8;font-size:13px}
+td.num{font-weight:800;font-size:17px}
+td.v1{color:#8b7f7f} td.v2{color:#8fd3b0;font-weight:700}
+td.why{max-width:330px} td.meta{color:var(--dim);font-size:12px;max-width:190px}
+.conf{display:inline-block;padding:2px 9px;border-radius:20px;font-weight:800;font-size:12px}
+.conf.hi{background:#12331f;color:#6ee7a0} .conf.mid{background:#33290f;color:#f0c04a}
+.conf.lo{background:#331414;color:#f08a8a}
+.tag{display:inline-block;padding:2px 9px;border-radius:6px;background:#20242c;
+color:#a9b1bf;font-size:12px;white-space:nowrap}
+.bar{display:inline-block;width:78px;height:7px;background:#22262e;border-radius:4px;
+overflow:hidden;vertical-align:middle;margin-left:7px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--red),var(--acc))}
+.g{display:inline-block;padding:4px 10px;margin:3px 3px 3px 0;border-radius:7px;font-size:12px;font-weight:700}
+.g.ok{background:#122b1e;color:#7bd6a3} .g.warn{background:#2e2712;color:#e8c15f}
+.g.bad{background:#331414;color:#f08a8a}
+.quote{border-right:3px solid var(--red);padding:10px 16px;margin:14px 0;
+background:#1a1214;color:#d9c3c4;border-radius:0 10px 10px 0}
+.big{font-size:20px;font-weight:800;color:#fff}
+ul{margin:8px 0;padding-right:20px} li{margin:6px 0}
+.foot{color:var(--dim);font-size:12.5px;margin-top:50px;border-top:1px solid var(--line);padding-top:16px}
+.pill{display:inline-block;background:#20242c;border:1px solid var(--line);border-radius:20px;
+padding:4px 13px;font-size:12.5px;color:#b9bec8;margin:0 0 0 6px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.vs>div{padding:16px 18px} .vs .a{background:#191216;border-left:1px solid var(--line)}
+.vs .b{background:#121a16}
+.vs h4{margin:0 0 8px;font-size:15px;font-weight:800;color:var(--dim)}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;color:#a9b1bf}
+</style></head><body><div class="wrap">
+
+<h1>הדמיית V2 — עריכה בשיפוט, לא בכללים</h1>
+<div class="sub">סרטון אמיתי בעריכה: <b>אופן ג'ים — חיזוק</b> · מרחב מועמדים נמדד, החלטות מנומקות, ביצוע דטרמיניסטי
+<span class="pill">30.07.2026</span><span class="pill">מנוע החלטה V2</span><span class="pill">מנוע רינדור v2</span></div>
+
+<div class="quote"><b>שתי ההערות שלך על הסרטון הזה:</b><br>
+„יש קטעים של קפיצות לקראת סוף הסרטון שצריך לסדר" · „למחוק את הבירול הראשון מהמאגר ולהחליף אותו כאן"<br>
+<span style="color:#9aa0ad;font-size:13.5px">ההערה הראשונה היא בדיוק מה שהמערכת הישנה מייצרת מבנית — וזה מה שמודגם כאן.</span></div>
+
+<div class="grid g4">
+<div class="stat"><b>40</b><span>מועמדי עריכה שנמדדו</span><div class="d">6.6ש מדידה</div></div>
+<div class="stat"><b>21</b><span>החלטות מנומקות</span><div class="d">כל אחת עם ביטחון וסיכון</div></div>
+<div class="stat"><b style="font-size:27px;white-space:nowrap"><bdi dir="ltr">61.65 &#8594; 57.12</bdi></b><span>ציר לפני / אחרי (שניות)</span><div class="d">FINAL בפועל 52.2ש</div></div>
+<div class="stat"><b>7.62/10</b><span>ציון איכות (סף 7.5)</span><div class="d">1 סבב חזרה · עלה מ-7.44</div></div>
+</div>
+
+<h2>ההבדל בשורה אחת</h2>
+<div class="vs">
+<div class="a"><h4>v1 — מנוע כללים</h4>
+<div class="big">11 חיתוכים</div>
+<div class="mono" style="margin-top:8px">
+שקט 2.26ש → 0.22ש<br>שקט 1.30ש → 0.22ש<br>שקט 0.62ש → 0.22ש<br>שקט 3.74ש → 0.22ש<br>
+שקט 1.04ש → 0.22ש<br>שקט 0.90ש → 0.22ש<br>שקט 0.58ש → 0.22ש<br>שקט 1.24ש → 0.22ש<br>
+שקט 1.46ש → 0.22ש<br>שקט 1.24ש → 0.22ש<br>שקט 0.68ש → 0.45ש</div>
+<p style="color:#9aa0ad;font-size:13.5px;margin-bottom:0">אותה תשובה לכל פער. ההבדל היחיד בין פאוזה דרמטית
+לדד-אייר הוא כמה שניות נמחקו — לא <i>אם</i> למחוק.</p></div>
+<div class="b"><h4>V2 — שיפוט על מרחב מועמדים</h4>
+<div class="big">8 חיתוכים · 7 פאוזות נשמרו במכוון</div>
+<div class="mono" style="margin-top:8px">
+דד-אייר 3.74ש → 0.22ש &nbsp;<span style="color:#6ee7a0">95%</span><br>
+דד-אייר 2.26ש → 0.22ש &nbsp;<span style="color:#6ee7a0">93%</span><br>
+נשימה 0.62ש → <b style="color:#8fd3b0">נשמרת</b> &nbsp;<span style="color:#6ee7a0">86%</span><br>
+דרמטית 1.24ש → <b style="color:#8fd3b0">0.60ש</b> (לפני המחיר) &nbsp;<span style="color:#6ee7a0">87%</span><br>
+דרמטית 0.90ש → <b style="color:#8fd3b0">0.55ש</b> (מחווה) &nbsp;<span style="color:#f0c04a">81%</span><br>
+תוכן: הסרת 8.5ש שפונות לקהל אחר &nbsp;<span style="color:#f0c04a">79%</span></div>
+<p style="color:#9aa0ad;font-size:13.5px;margin-bottom:0">כל פער נשאל <b>למה הוא קיים</b> — ורק אז מה לעשות איתו.</p></div>
+</div>
+
+<h2>פאס 1 — הבנה (בלי לגעת בעריכה)</h2>
+<div class="card"><h3>קשת הסיפור</h3>
+<table><tr><th>זמן</th><th>תפקיד</th><th>עוצמה</th><th>מה קורה</th></tr><tr><td class="t"><bdi dir="ltr">0.00–6.00</bdi></td><td><b>hook</b></td><td><div class="bar"><i style="width:78%"></i></div>0.78</td><td>ניגוד ישיר: &#x27;בחדר כושר צפוף מטר על מטר — אצלנו כל המקום שלכם&#x27;. טענה ולא שאלה, ובקצב הגבוה בפתיחה (2.26 מילים/שנייה).</td></tr><tr><td class="t"><bdi dir="ltr">8.26–18.14</bdi></td><td><b>promise</b></td><td><div class="bar"><i style="width:85%"></i></div>0.85</td><td>שלוש הבטחות קצרות ברצף: הרחבה פתוחה · בלי תור ובלי המתנה · כניסה בטביעת אצבע. שני המשפטים האחרונים בני 4 מילים כל אחד — מכה, מכה.</td></tr><tr><td class="t"><bdi dir="ltr">21.88–34.24</bdi></td><td><b>development</b></td><td><div class="bar"><i style="width:80%"></i></div>0.80</td><td>החוויה בפועל (אוזניות, האימון שרצית) ואז השעות המדויקות — 14 מילים של מידע תפעולי.</td></tr><tr><td class="t"><bdi dir="ltr">35.14–49.00</bdi></td><td><b>objection</b></td><td><div class="bar"><i style="width:55%"></i></div>0.55</td><td>טיפול בהתנגדות המחויבות. sent_006 אומר את זה ב-11 מילים חדות; sent_007 חוזר על אותו רעיון ב-23 מילים (דמיון 0.237 ל-sent_006).</td></tr><tr><td class="t"><bdi dir="ltr">50.24–55.28</bdi></td><td><b>proof</b></td><td><div class="bar"><i style="width:82%"></i></div>0.82</td><td>מחיר מפורש — 289 שקלים בחודש. הרגע החזק ביותר בחצי השני של הסרטון.</td></tr><tr><td class="t"><bdi dir="ltr">56.74–65.28</bdi></td><td><b>off_audience</b></td><td><div class="bar"><i style="width:25%"></i></div>0.25</td><td>הצעה לחברי מועדון קיימים ב-149 שקלים. קהל אחר לגמרי מזה שה-CTA פונה אליו, ומחיר שני שמופיע 1.46ש אחרי המחיר הראשי.</td></tr><tr><td class="t"><bdi dir="ltr">66.52–71.28</bdi></td><td><b>scarcity</b></td><td><div class="bar"><i style="width:70%"></i></div>0.70</td><td>מקומות מוגבלים בשעות הצהריים — דחיפות שמכינה את הקרקע ל-CTA.</td></tr><tr><td class="t"><bdi dir="ltr">71.96–76.04</bdi></td><td><b>cta</b></td><td><div class="bar"><i style="width:75%"></i></div>0.75</td><td>&#x27;תשאירו לנו פרטים&#x27; — CTA יחיד וברור, בקצב 2.2 מילים/שנייה.</td></tr></table></div>
+<div class="grid g2">
+<div class="card"><h3>מה נמדד מהמדיה</h3><ul>
+<li><b>מעטפת אנרגיה</b> ברזולוציית 10ms — רצפת רעש, אנרגיה בכל פער, זיהוי נשימה</li>
+<li><b>קצב דיבור</b> פר-מילה: <bdi dir="ltr">0.85–2.76</bdi> מילים/שנייה</li>
+<li><b>תנועה גלובלית ותנועת שליש-תחתון</b> (ידיים) על 574 פריימים</li>
+<li><b>פנים</b> — נמצאו ב-554 פריימים (96.5%)</li>
+<li><b>שינויי סצנה</b>: 3</li>
+<li><b>דמיון טייקים</b> (difflib) לכל משפט מול 6 הקודמים</li></ul>
+<p style="color:#9aa0ad;font-size:13px;margin:6px 0 0">אף מספר בעמוד הזה לא הוערך. הכל מדידה.</p></div>
+<div class="card"><h3>סיכוני נטישה שזוהו</h3><ul><li><b><bdi dir="ltr">39.80–49.00</bdi>ש</b> (סיכון 72%) — sent_006 כבר אמר &#x27;המנוי הוא חודש בחודשו&#x27; ב-11 מילים. sent_007 מסביר את אותו דבר ב-23 מילים ו-9.2 שניות (דמיון 0.237 ל-sent_006). זה הקטע הארוך בסרטון והרעיון בו כבר נמסר.</li><li><b><bdi dir="ltr">56.74–65.28</bdi>ש</b> (סיכון 81%) — 8.54 שניות שפונות לחברי מועדון קיימים בתוך סרטון גיוס. הן יושבות 1.46ש אחרי חשיפת המחיר, כלומר גונבות את הרגע החזק בחצי השני, ומציגות מחיר שני (149) שמתחרה בראשון (289).</li></ul>
+<p style="color:#9aa0ad;font-size:13px;margin:6px 0 0">הקאנון עצמו מתעד את הקיר:
+„זו בעיית שפת-גוף, לא שקט. אין דרך אוטומטית לזהות זאת עדיין" — לכן נמדדת גם תנועה, לא רק אודיו.</p></div>
+</div>
+
+<h2>פאס 2 — כל החלטה, עם נימוק וסיכון</h2>
+<div class="card" style="padding:12px 14px">
+<table><tr><th>זמן</th><th>v1</th><th>V2</th><th>טיפוס הפאוזה</th><th>ביטחון</th><th>למה</th><th>ראיה נמדדת</th><th>רווח / סיכון</th></tr>
+<tr>
+<td class="t"><bdi dir="ltr">3.76–3.96</bdi></td>
+<td class="v1">לא נגע</td>
+<td class="v2">נשמר במלואו</td>
+<td><span class="tag">קצב טבעי</span></td>
+<td><span class="conf hi">90%</span></td>
+<td class="why">0.20ש בתוך משפט ההוק — זה הפסיק המדובר שמפריד בין &#x27;צפוף מטר על מטר&#x27; ל&#x27;אצלנו&#x27;. הניגוד עצמו יושב על הפער הזה.</td>
+<td class="meta">פער 0.2ש · תנועת ידיים 0.0501</td>
+<td class="meta">✔ שומר על קצב טבעי בהוק<br>⚠ לא חוסך זמן</td></tr><tr>
+<td class="t"><bdi dir="ltr">4.68–4.82</bdi></td>
+<td class="v1">לא נגע</td>
+<td class="v2">נשמר במלואו</td>
+<td><span class="tag">קצב טבעי</span></td>
+<td><span class="conf hi">90%</span></td>
+<td class="why">0.14ש בתוך ההוק. חיתוך כאן ישבור את המשפט שנושא את כל הטענה.</td>
+<td class="meta">פער 0.14ש · תנועת ידיים 0.0398</td>
+<td class="meta">✔ שומר על קצב טבעי<br>⚠ לא חוסך זמן</td></tr><tr>
+<td class="t"><bdi dir="ltr">6.00–8.26</bdi></td>
+<td class="v1">קוצץ ל-0.22ש</td>
+<td class="v2">קוצץ ל-0.22ש</td>
+<td><span class="tag">דד-אייר</span></td>
+<td><span class="conf hi">93%</span></td>
+<td class="why">2.26ש שקט אמיתי מתחת לרצפת הרעש, בלי נשימה — המתנה בין טייקים. אין כאן משמעות לשמר.</td>
+<td class="meta">פער 2.26ש · שקט אמיתי · תנועת ידיים 0.0432</td>
+<td class="meta">✔ ‎-2.04ש<br>⚠ מעבר חד מההוק להבטחה; מקובל אחרי טענת ניגוד</td></tr><tr>
+<td class="t"><bdi dir="ltr">12.18–13.48</bdi></td>
+<td class="v1">קוצץ ל-0.22ש</td>
+<td class="v2">קוצץ ל-0.22ש</td>
+<td><span class="tag">דד-אייר</span></td>
+<td><span class="conf hi">90%</span></td>
+<td class="why">1.30ש שקט אמיתי בגבול משפט טכני, בלי נשימה. הצופה לא מרוויח ממנה כלום.</td>
+<td class="meta">פער 1.3ש · שקט אמיתי · תנועת ידיים 0.0338</td>
+<td class="meta">✔ ‎-1.08ש<br>⚠ אין</td></tr><tr>
+<td class="t"><bdi dir="ltr">15.32–15.94</bdi></td>
+<td class="v1">קוצץ ל-0.22ש</td>
+<td class="v2">נשמר במלואו</td>
+<td><span class="tag">נשימה</span></td>
+<td><span class="conf hi">86%</span></td>
+<td class="why">נשימה של 0.62ש בין שתי הבטחות בנות 4 מילים, והתנועה כאן 0.0071 — הערך הנמוך בכל הסרטון, כלומר הוא עומד דומם לגמרי. הנשימה היא מה שהופך את &#x27;בלי תור ובלי המתנה&#x27; ואת &#x27;אתם נכנסים בטביעת אצבע&#x27; לשתי מכות נפרדות.</td>
+<td class="meta">פער 0.62ש · נשימה · תנועת ידיים 0.0087</td>
+<td class="meta">✔ רצף ההבטחות נשאר שתי מכות ולא משפט אחד ארוך<br>⚠ 0.40ש יותר מקיצוץ אחיד</td></tr><tr>
+<td class="t"><bdi dir="ltr">18.14–21.88</bdi></td>
+<td class="v1">קוצץ ל-0.22ש</td>
+<td class="v2">קוצץ ל-0.22ש</td>
+<td><span class="tag">דד-אייר</span></td>
+<td><span class="conf hi">95%</span></td>
+<td class="why">3.74ש — הפער הארוך בסרטון, שקט אמיתי, בלי נשימה, תנועה 0.018. דד-אייר מובהק.</td>
+<td class="meta">פער 3.74ש · שקט אמיתי · תנועת ידיים 0.0264</td>
+<td class="meta">✔ ‎-3.52ש<br>⚠ אין</td></tr><tr>
+<td class="t"><bdi dir="ltr">26.00–27.04</bdi></td>
+<td class="v1">קוצץ ל-0.22ש</td>
+<td class="v2">קוצץ ל-0.28ש</td>
+<td><span class="tag">קצב טבעי</span></td>
+<td><span class="conf mid">78%</span></td>
+<td class="why">1.04ש מעבר בין החוויה לשעות. האנרגיה לא מתאפסת (‎-90.7dB) ואין נשימה — סימן מעורב. משאירים beat קצר במקום למחוק לגמרי.</td>
+<td class="meta">פער 1.04ש · תנועת ידיים 0.0219</td>
+<td class="meta">✔ ‎-0.76ש והמעבר לרשימת השעות מסומן<br>⚠ אם המעבר יישמע חד — להחזיר ל-0.45ש</td></tr><tr>
+<td class="t"><bdi dir="ltr">28.48–28.68</bdi></td>
+<td class="v1">לא נגע</td>
+<td class="v2">נשמר במלואו</td>
+<td><span class="tag">קצב טבעי</span></td>
+<td><span class="conf hi">90%</span></td>
+<td class="why">0.20ש בתוך רשימת השעות — הפסיק של הרשימה.</td>
+<td class="meta">פער 0.2ש · תנועת ידיים 0.0229</td>
+<td class="meta">✔ שומר על קצב טבעי<br>⚠ לא חוסך זמן</td></tr><tr>
+<td class="t"><bdi dir="ltr">31.10–31.44</bdi></td>
+<td class="v1">לא נגע</td>
+<td class="v2">נשמר במלואו</td>
+<td><span class="tag">קצב טבעי</span></td>
+<td><span class="conf hi">92%</span></td>
+<td class="why">0.34ש עם אנרגיה ‎-64.1dB — 32dB מעל הרצפה, כלומר בכלל לא פאוזה שקטה. הקצב עולה אחריה מ-2.12 ל-2.30.</td>
+<td class="meta">פער 0.34ש · תנועת ידיים 0.0268</td>
+<td class="meta">✔ ההאצה בתוך הרשימה נשמרת<br>⚠ לא חוסך זמן</td></tr><tr>
+<td class="t"><bdi dir="ltr">32.38–32.60</bdi></td>
+<td class="v1">לא נגע</td>
+<td class="v2">נשמר במלואו</td>
+<td><span class="tag">נשימה</span></td>
+<td><span class="conf hi">88%</span></td>
+<td class="why">0.22ש נשימה בתוך הרשימה, והקצב אחריה קופץ מ-1.93 ל-2.50 — הקפיצה החדה בסרטון. הנשימה היא מה שמאפשר אותה.</td>
+<td class="meta">פער 0.22ש · נשימה · תנועת ידיים 0.0364</td>
+<td class="meta">✔ שומר על קצב טבעי<br>⚠ לא חוסך זמן</td></tr><tr>
+<td class="t"><bdi dir="ltr">34.24–35.14</bdi></td>
+<td class="v1">קוצץ ל-0.22ש</td>
+<td class="v2">קוצץ ל-0.55ש</td>
+<td><span class="tag">פאוזה דרמטית</span></td>
+<td><span class="conf mid">81%</span></td>
+<td class="why">0.90ש: נשימה וגם תנועת שליש-תחתון 0.0612 — הגבוהה עד לנקודה הזו. הוא מזיז ידיים לפני שהוא פותח טיעון חדש (מחויבות). מקצרים אך משאירים את המחווה שלמה.</td>
+<td class="meta">פער 0.9ש · נשימה · תנועת ידיים 0.0612</td>
+<td class="meta">✔ ‎-0.35ש והמעבר לטיעון החדש נשאר מסומן<br>⚠ 0.33ש יותר מקיצוץ אחיד</td></tr><tr>
+<td class="t"><bdi dir="ltr">37.50–37.74</bdi></td>
+<td class="v1">לא נגע</td>
+<td class="v2">נשמר במלואו</td>
+<td><span class="tag">נשימה</span></td>
+<td><span class="conf hi">88%</span></td>
+<td class="why">0.24ש נשימה בתוך המשפט המהיר בסרטון (2.76 מילים/שנייה). אין מה לחסוך.</td>
+<td class="meta">פער 0.24ש · נשימה · תנועת ידיים 0.0254</td>
+<td class="meta">✔ שומר על קצב טבעי<br>⚠ לא חוסך זמן</td></tr><tr>
+<td class="t"><bdi dir="ltr">39.22–39.80</bdi></td>
+<td class="v1">קוצץ ל-0.22ש</td>
+<td class="v2">קוצץ ל-0.35ש</td>
+<td><span class="tag">מחשבה</span></td>
+<td><span class="conf mid">75%</span></td>
+<td class="why">0.58ש נשימה לפני המשפט הארוך בסרטון (23 מילים). מקצרים אך לא מוחקים — נשימה לפני משפט ארוך עוזרת לצופה להיערך.</td>
+<td class="meta">פער 0.58ש · נשימה · תנועת ידיים 0.0224</td>
+<td class="meta">✔ ‎-0.23ש<br>⚠ אין</td></tr><tr>
+<td class="t"><bdi dir="ltr">39.80–49.00</bdi></td>
+<td class="v1">לא נגע</td>
+<td class="v2">סומן בלבד</td>
+<td><span class="tag">—</span></td>
+<td><span class="conf lo">45%</span></td>
+<td class="why">23 מילים ו-9.2 שניות שחוזרות על מה ש-sent_006 כבר אמר ב-11 מילים (דמיון 0.237). סיכון נטישה 0.72. הקיצור הנכון הוא חצי-משפט — להשאיר &#x27;לשלוח לנו הודעה, בלי עמלה ובלי התחייבות&#x27; ולהוריד את ההקדמה — וזה דורש מועמדי תת-משפט שאינם קיימים במרחב ההחלטות הנוכחי. לכן מסמן ולא חותך. הביקורת חזרה על אותו ממצא; ההחלטה לא משתנה כי אין מועמד תת-משפט במרחב — זה חוב של שכבת המדידה, לא של השיפוט.</td>
+<td class="meta">דמיון 0.237</td>
+<td class="meta">✔ —<br>⚠ חיתוך המשפט כולו מוחק את טיפול ההתנגדות — שהוא בדיוק מה שמפיל לידים בשלב המחיר</td></tr><tr>
+<td class="t"><bdi dir="ltr">47.68–48.06</bdi></td>
+<td class="v1">לא נגע</td>
+<td class="v2">נשמר במלואו</td>
+<td><span class="tag">קצב טבעי</span></td>
+<td><span class="conf hi">85%</span></td>
+<td class="why">0.38ש בתוך &#x27;בלי עמלה ובלי התחייבות, בלי אותיות קטנות&#x27; — הקצב של הרשימה הוא המסר, והידיים מלוות אותו (0.0592).</td>
+<td class="meta">פער 0.38ש · שקט אמיתי · תנועת ידיים 0.0592</td>
+<td class="meta">✔ שומר על קצב טבעי<br>⚠ לא חוסך זמן</td></tr><tr>
+<td class="t"><bdi dir="ltr">49.00–50.24</bdi></td>
+<td class="v1">קוצץ ל-0.22ש</td>
+<td class="v2">קוצץ ל-0.6ש</td>
+<td><span class="tag">פאוזה דרמטית</span></td>
+<td><span class="conf hi">87%</span></td>
+<td class="why">1.24ש: נשימה + תנועת שליש-תחתון 0.0578, מיד לפני חשיפת המחיר. beat לפני מספר הוא הכלי הבסיסי ביותר של עורך — קיצוץ אחיד כאן גורם למחיר להיבלע.</td>
+<td class="meta">פער 1.24ש · נשימה · תנועת ידיים 0.0578</td>
+<td class="meta">✔ ‎-0.64ש ו&#x27;289 שקלים&#x27; נוחת עם משקל<br>⚠ 0.38ש יותר מקיצוץ אחיד</td></tr><tr>
+<td class="t"><bdi dir="ltr">52.56–52.76</bdi></td>
+<td class="v1">לא נגע</td>
+<td class="v2">נשמר במלואו</td>
+<td><span class="tag">פאוזה דרמטית</span></td>
+<td><span class="conf hi">88%</span></td>
+<td class="why">0.20ש שקט אמיתי בין &#x27;שווה,&#x27; ל&#x27;289&#x27; — ה-beat שלפני המספר עצמו. קיצוצו מוחק את ההדגשה.</td>
+<td class="meta">פער 0.2ש · שקט אמיתי · תנועת ידיים 0.0403</td>
+<td class="meta">✔ המחיר נוחת<br>⚠ אין</td></tr><tr>
+<td class="t"><bdi dir="ltr">55.28–56.74</bdi></td>
+<td class="v1">קוצץ ל-0.22ש</td>
+<td class="v2">נשמר במלואו</td>
+<td><span class="tag">דד-אייר</span></td>
+<td><span class="conf mid">79%</span></td>
+<td class="why">נבלע בחיתוך של sent_009 — הגבול נקבע שם, לא כאן.</td>
+<td class="meta">פער 1.46ש · שקט אמיתי · תנועת ידיים 0.035</td>
+<td class="meta">✔ —<br>⚠ —</td></tr><tr>
+<td class="t"><bdi dir="ltr">56.74–65.28</bdi></td>
+<td class="v1">לא נגע</td>
+<td class="v2">הוסר</td>
+<td><span class="tag">—</span></td>
+<td><span class="conf mid">79%</span></td>
+<td class="why">8.54 שניות שמציעות לחברי מועדון קיימים להוסיף את השירות למנוי ב-149 שקלים — קהל אחר לגמרי מזה שה-CTA פונה אליו (&#x27;תשאירו לנו פרטים&#x27; = ליד חדש), ומחיר שני שמתחרה בראשון. הקטע יושב 1.46ש אחרי חשיפת המחיר, כלומר גונב את הרגע החזק בחצי השני. סרטון אחד = קהל אחד = CTA אחד. הגבולות נמתחים לתוך האוויר משני הצדדים כדי להשאיר beat אחד נקי במקום שני פערים יתומים. הגבול האחורי הוזז מ-66.37 ל-66.07 בעקבות ביקורת: מספר צריך אוויר גם אחריו, ולכן אחרי ’289 שקלים בחודש’ נשארות 0.60ש רצופות — בדיוק כמו ה-beat שלפניו.</td>
+<td class="meta">דמיון 0.376</td>
+<td class="meta">✔ ‎-10.64ש; המשפך מתיישר: מחיר ← מקומות מוגבלים ← CTA, והמחיר מקבל 0.60ש לנחות<br>⚠ מאבדים upsell לחברים קיימים. אם המטרה כוללת גם אותם — לבטל את החיתוך הזה ולקצץ במקום זה את sent_007.</td></tr><tr>
+<td class="t"><bdi dir="ltr">65.28–66.52</bdi></td>
+<td class="v1">קוצץ ל-0.22ש</td>
+<td class="v2">נשמר במלואו</td>
+<td><span class="tag">דד-אייר</span></td>
+<td><span class="conf mid">79%</span></td>
+<td class="why">נבלע בחיתוך של sent_009 — הגבול נקבע שם, לא כאן.</td>
+<td class="meta">פער 1.24ש · שקט אמיתי · תנועת ידיים 0.038</td>
+<td class="meta">✔ —<br>⚠ —</td></tr><tr>
+<td class="t"><bdi dir="ltr">71.28–71.96</bdi></td>
+<td class="v1">קוצץ ל-0.45ש</td>
+<td class="v2">נשמר במלואו</td>
+<td><span class="tag">פאוזה דרמטית</span></td>
+<td><span class="conf mid">84%</span></td>
+<td class="why">0.68ש בגבול חלון ה-CTA, שקט אמיתי לפני &#x27;אם בא לכם&#x27;. הפסקה מלאה לפני קריאה לפעולה היא כלי המרה, לא דד-אייר — למרות שהמדידה האודיו-בלבד נראית זהה לדד-אייר.</td>
+<td class="meta">פער 0.68ש · שקט אמיתי · תנועת ידיים 0.0451</td>
+<td class="meta">✔ ה-CTA מקבל מסגרת<br>⚠ 0.23ש יותר מקיצוץ אחיד</td></tr></table></div>
+
+<h2>פאס 3 — ביצוע דטרמיניסטי</h2>
+<div class="grid g3">
+<div class="card"><h3>שער התוכנית</h3>
+<p style="font-size:13.5px">בריצה הזו התוכנית עברה אימות <b>בניסיון הראשון</b>, עם אזהרה אחת:
+הסרת התוכן של <span class="mono">sent_009</span> מוצהרת ולכן מותרת — 21 מילים.
+תוכנית שנכשלת חוזרת לבמאי עם רשימת הכשלים, עד 2 פעמים. אם לא עברה — לא נגעו במדיה.</p>
+<p style="font-size:13.5px;color:#9aa0ad">שני חוקי הברזל של ה-validator נולדו מדחיות אמיתיות בפיתוח:
+גבול חיתוך שמכיל מילים שלמות ולא הוצהר, ו-<b>tighten_to מתחת ל-0.20ש</b>.</p>
+<p style="font-size:13.5px;color:#8fd3b0"><b>ממצא:</b> הרצפה היא 2×0.10 מרווח מילה — האוויר שנשמר מתחלק לשני
+צדי החיתוך. זה ההסבר לכך ש-v1 בחר 0.22ש: לא מספר שרירותי אלא הפיזיקה.</p></div>
+<div class="card"><h3>קומפילציה ל-EDL</h3>
+<p style="font-size:13.5px">התוכנית מקומפלת ל-<span class="mono">edl.json</span> בסכמה הקיימת.
+מכאן והלאה — <span class="mono">edl_cut</span>, <span class="mono">tighten</span>, מנוע הרינדור,
+אפליקציית הרוויו, revisions ונעילות — <b>הכל נשאר כמו שהוא</b>.</p>
+<p style="font-size:13.5px">4 חיתוכים אוטומטיים (ביטחון ≥85%) ·
+4 מסומנים להכרעה שלך.</p></div>
+<div class="card"><h3>רינדור</h3>
+<p style="font-size:13.5px">17 סגמנטים · 31.4ש קידוד ב-8.1ש wall
+· <b>דור וידאו אחד</b> במקום 4-7.</p>
+<p style="font-size:13.5px">כתוביות ובירולים נצרבים בתוך הקידוד של החיתוך; המוזיקה בסוף.
+שלב הכתוביות ושלב ה-deliver ירדו ל-<b>0.0ש</b> — שינוי שם במקום קידוד.</p></div>
+</div>
+
+<h2>פאס 4 — ביקורת עיוורת</h2>
+<div class="card">
+<p style="font-size:14px;margin-top:0">המבקר מקבל את מה שהצופה מקבל — התמלול אחרי העריכה עם משכי הפערים בפועל —
+ו<b>לא</b> את הנימוקים, לא את הביטחון ולא את הראיות. זה מכוון: נימוק משכנע גורם לאשר עריכה גרועה.</p>
+<table><tr><th>חומרה</th><th>מועמד</th><th>מה לא עובד — מנקודת מבט הצופה</th><th>הצעה</th></tr><tr><td><span class="tag" style="background:#b8860b22;color:#b8860b">מהותי</span></td><td class="mono">sent_007</td><td class="why">אחרי &#x27;המנוי הוא חודש בחודשו&#x27; מגיעות עוד 9.2 שניות שאומרות את אותו דבר. זה הקטע הארוך בסרטון והוא יושב בדיוק לפני המחיר — הרגע שבו הצופה הכי קרוב להחלטה.</td><td class="meta">shorten</td></tr><tr><td><span class="tag" style="background:#6b728022;color:#6b7280">קל</span></td><td class="mono">—</td><td class="why">&#x27;כל הציעות זמין&#x27; ו&#x27;בשוט הצהריים&#x27; נשמעות כשגיאות תמלול. בעריכה לא נשמע, אבל אם הכתוביות נצרבות מהתמלול — הצופה יראה שתי שגיאות.</td><td class="meta">none</td></tr><tr><td><span class="tag" style="background:#6b728022;color:#6b7280">קל</span></td><td class="mono">—</td><td class="why">57.1 שניות — בקצה העליון של היעד, בלי מרווח. כל תוספת עתידית תדרוש לוותר על משהו.</td><td class="meta">none</td></tr></table>
+<p style="margin-top:12px;font-size:14.5px">„המחיר מקבל 0.60 שניות לפניו ו-0.60 אחריו והוא נוחת; הרצף מחיר ← מקומות מוגבלים ← &#x27;תשאירו פרטים&#x27; נקי; מה שנשאר הוא תשע שניות של חזרה שאי אפשר לקצר בלי למחוק את כל טיפול ההתנגדות."</p></div>
+
+<div class="card" style="border-color:#2e7d5b">
+<h3>הלולאה — המערכת תיקנה את עצמה</h3>
+<p style="font-size:14px">סבב חזרה אחד. הציון הראשון היה 7.44 — מתחת לסף — ולכן התוכנית חזרה לפאס 2.</p>
+<p style="font-size:14px">הביקורת הראשונה מצאה שני ממצאים מהותיים. אחד מהם ניתן לתיקון:
+המחיר קיבל <b>0.30ש</b> בלבד אחריו לפני שמשפט הדחיפות התחיל. הבמאי החזיר תוכנית מתוקנת שמשכה את
+הגבול האחורי של החיתוך מ-66.37 ל-66.07 — כלומר <b>0.60ש רצופות אחרי „289 שקלים בחודש", בדיוק כמו ה-beat שלפניו</b>.
+הציון עלה מ-<b>7.44</b> ל-<b>7.62</b> וחצה את הסף.</p>
+<p style="font-size:14px;color:#9aa0ad">הממצא השני (9.2 שניות חזרה ב-sent_007) <b>לא</b> תוקן, ולא הוסתר:
+הקיצור הנכון הוא חצי-משפט, ואין מועמדי תת-משפט במרחב ההחלטות. זה חוב של שכבת המדידה — לא כשל שיפוט.</p></div>
+
+<h2>פאס 5 — ציון ושערים</h2>
+<div class="card"><h3>שערים שרצו על התוצר</h3><div style="margin:8px 0"><span class="g ok">✓ G1_duration</span><span class="g ok">✓ G1b_target_range</span><span class="g ok">✓ G2_silence</span><span class="g ok">✓ G3_av_sync</span><span class="g ok">✓ G4_loudness</span><span class="g ok">✓ G5_format</span><span class="g ok">✓ G5b_fps_30</span><span class="g ok">✓ G6_captions_sync</span><span class="g ok">✓ G6b_captions_measured</span><span class="g warn">! G6c_caption_drift_bias</span><span class="g ok">✓ G8_opening_flash</span><span class="g ok">✓ G7_hook_intact</span></div>
+<p style="font-size:13.5px;color:#9aa0ad">כל בדיקות החסימה רצו <b>לפני</b> הקידום ל-FINAL. שער חוסם שנכשל = אין FINAL.</p></div>
+<div class="card"><h3>ציון איכות</h3>
+<table><tr><th>ממד</th><th>ציון</th><th></th><th>הערה</th></tr><tr><td>hook</td><td class="num">7.8</td><td><div class="bar"><i style="width:78%"></i></div></td><td>הטענה נאמרת מיד — אין שקט פתיחה למחוק. שני הפערים בתוך ההוק (0.20ש ו-0.14ש) נשמרו, כך שהמשפט שנושא את הניגוד לא נשבר.</td></tr><tr><td>retention</td><td class="num">7.0</td><td><div class="bar"><i style="width:70%"></i></div></td><td>סיכון הנטישה הגדול (0.81) הוסר — 10.64ש שפנו לקהל אחר. הסיכון השני (0.72, sent_007) נשאר ומדווח כ-major.</td></tr><tr><td>story</td><td class="num">8.2</td><td><div class="bar"><i style="width:82%"></i></div></td><td>שמונה חלקים: הוק ← הבטחה ← חוויה ← התנגדות ← מחיר ← דחיפות ← CTA. CTA יחיד, בלי קהל שני, וכל ששת פריטי must_keep בפנים.</td></tr><tr><td>flow</td><td class="num">8.0</td><td><div class="bar"><i style="width:80%"></i></div></td><td>ארבע פאוזות נשמרו במכוון (0.62 / 0.55 / 0.60 / 0.68ש) ורק ארבע קוצצו ל-0.22 — אין רצף פערים באורך זהה. ה-beat אחרי המחיר עלה מ-0.30 ל-0.60ש בעקבות סבב הביקורת.</td></tr><tr><td>emotion</td><td class="num">7.2</td><td><div class="bar"><i style="width:72%"></i></div></td><td>המחיר מוקף 0.60ש משני הצדדים והוא הרגע הרגשי היחיד שסומן — ועכשיו הוא גם נוחת. הטון עצמו עקבי ורגוע לאורך תשעת הקטעים.</td></tr><tr><td>visual</td><td class="num">7.4</td><td><div class="bar"><i style="width:74%"></i></div></td><td>דובר יחיד, מסגור יציב, פנים ב-554 מתוך 574 פריימים (96.5%), שלושה שינויי סצנה בלבד.</td></tr><tr><td>educational</td><td class="num">7.0</td><td><div class="bar"><i style="width:70%"></i></div></td><td>כל ששת פריטי must_keep שרדו: שעות, מחיר, ביטול, טביעת אצבע, בלי תור, מקומות מוגבלים. מוריד: sent_007 עדיין חוזר על sent_006.</td></tr><tr><td>entertainment</td><td class="num">6.5</td><td><div class="bar"><i style="width:65%"></i></div></td><td>סרטון מידע, לא בידור. הקצב (0.85–2.76 מילים/שנייה) נושא אותו; אין פאנץ&#x27; ואין הפתעה, וזה תקין לסוג התוכן.</td></tr><tr><td>platform_readiness</td><td class="num">9.0</td><td><div class="bar"><i style="width:90%"></i></div></td><td>כל שערי החסימה עברו. אף שער קשיח לא נכשל.</td></tr></table>
+<p style="margin-top:12px;font-size:15px"><b>כולל: 7.62/10</b> — 7.63 — מעל הסף 7.5, אחרי סבב חזרה אחד שהאריך את ה-beat אחרי המחיר מ-0.30ש ל-0.60ש. ממצא major אחד נשאר פתוח ומדווח במפורש: 9.2 שניות חזרה ב-sent_007, שאי אפשר לקצר בלי מועמדי תת-משפט — חוב של שכבת המדידה, לא של השיפוט.</p></div>
+
+<h2>מה נשאר להכרעה שלך</h2>
+<div class="card"><ul style="font-size:14.5px">
+<li>ארבעה חיתוכים בביטחון 75–84% סומנו <b>לבדיקה</b> ולא הוחלו בעיוורון — הם מופיעים כתומים בציר באפליקציה.</li></ul>
+<p style="color:#9aa0ad;font-size:13.5px;margin-bottom:0">
+ההחלטה הכי גדולה כאן היא הסרת 8.5 השניות שפונות לחברים קיימים. היא בביטחון 79% ולא 95% בכוונה —
+זו החלטה אסטרטגית על קהל, לא החלטה טכנית על שקט. אם הסרטון אמור לדבר גם לחברים קיימים, מבטלים אותה בקליק.</p></div>
+
+<div class="foot">
+נבנה מהנתונים בפועל של <span class="mono">בדיקת-V2-לולאה</span> — ריצה מלאה של חמשת הפאסים · הפרויקט המקורי שלך לא נגע.<br>
+מקורות: <span class="mono">candidates.json</span> · <span class="mono">understanding.json</span> ·
+<span class="mono">edit_plan.json</span> · <span class="mono">edl.json</span> ·
+<span class="mono">qa_report.json</span> · <span class="mono">render_v2_report.json</span> ·
+<span class="mono">review.json</span> · <span class="mono">quality_score.json</span> · <span class="mono">director_run.json</span><br>
+מנוע ההחלטה רץ ב-backend <span class="mono">chat</span> — כלומר קלאוד בצ'אט הוא ה-Director.
+עם מפתח API אותה לולאה רצה בלי אדם בלולאה.
+</div>
+</div></body></html>
