@@ -86,6 +86,23 @@ class TestMeasuredGate(unittest.TestCase):
         self.assertEqual(rc, 0)
         self.assertGreaterEqual(rec["measured"]["gap_lu"], 21.0 - 0.6)
 
+    def test_closed_loop_retry_lands_above_floor(self):
+        """L137 — מבקשים בדיוק את הרצפה אבל עם 'הטיה' מלאכותית של 1.5LU חזק מדי:
+        הסבב הראשון נכשל במדידה, הסבב השני מתקן לפי המדידה ועובר."""
+        orig = AM.apply_dialog_relative_levels
+        def biased(args, dialog_i, D=None):
+            r = orig(args, dialog_i, D)
+            if r and not getattr(args, "_gap_nudge", 0):
+                args.music_lufs += 1.5
+            return r
+        AM.apply_dialog_relative_levels = biased
+        try:
+            rc, rec = self._mix(music_lufs=-25.0, min_gap=21.0, gap_tolerance=0.6)
+        finally:
+            AM.apply_dialog_relative_levels = orig
+        self.assertEqual(rc, 0)
+        self.assertGreaterEqual(rec["measured"]["gap_lu"], 21.0 - 0.6)
+
     def test_gate_catches_loud_bed(self):
         a = ns(music=self.music, music_lufs=-25.0)
         m = AM.measure_lufs(self.music)

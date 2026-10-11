@@ -224,6 +224,14 @@ def apply_dialog_relative_levels(args, dialog_i, D=None):
             args.music_lufs = speech
     else:
         args.music_lufs = speech
+    # L137 — תיקון בלולאה סגורה: אם המדידה מצאה שהמצע יצא קרוב לדיבור מהמתוכנן,
+    # cmd_mix מריץ שוב פעם אחת עם הזזה בגודל החוסר הנמדד (לא ניחוש).
+    nudge = float(getattr(args, "_gap_nudge", 0) or 0)
+    if nudge:
+        speech = round(speech - nudge, 1)
+        args.music_lufs = round(args.music_lufs - nudge, 1)
+        if intro:
+            args.speech_lufs = speech
     return {"dialog_i": round(dialog_i, 2), "speech_lufs": speech, "intro_lufs": args.music_lufs if intro else None,
             "speech_gap": round(dialog_i - speech, 2), "clamped": clamped}
 
@@ -429,6 +437,13 @@ def cmd_mix(args):
         tol = float(getattr(args, "gap_tolerance", 0.6) or 0.6)
         print(f"   G_music_gap   : מצע בדיבור {g['bed_speech_lufs']:.1f} · דיבור {g['dialog_i']:.1f} → gap {g['gap_lu']:.1f} LU")
         if args.min_gap is not None and g["gap_lu"] < args.min_gap - tol:
+            if not getattr(args, "_gap_nudge", 0):
+                # L137 — 11.10.26: ריל שנחתך בדיוק לרצפה נמדד 0.66 LU קרוב מהמבוקש ונכשל ב-0.03.
+                # המדידה היא האמת: מזיזים בגודל החוסר הנמדד + 0.3 ומרנדרים פעם אחת. שנייה נכשלת ⇒ חוסם.
+                args._gap_nudge = round(args.min_gap - g["gap_lu"] + 0.3, 2)
+                args.music_offset = None          # המוזיקה כבר גזורה מה-offset בסבב הראשון
+                print(f"   ↻ G_music_gap: נמדד {g['gap_lu']:.1f} < {args.min_gap} — מנמיך את המצע ב-{args._gap_nudge} LU ומרנדר שוב")
+                return cmd_mix(args)
             print(f"   ❌ G_music_gap: המוזיקה {g['gap_lu']:.1f} LU מתחת לדיבור < רצפה {args.min_gap} — חזק מדי", file=sys.stderr)
             return 3
     print(f"✅ נשמר: {args.out}  (מוזיקה קבועה, סאונד מלא לכל האורך)")

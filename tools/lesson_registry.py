@@ -1601,7 +1601,13 @@ LESSONS: dict[str, dict] = {
     'broll',
     [{'kind': 'code', 'file': 'tools/broll_vision_model.py', 'pattern': 'def resolve_key'},
      {'kind': 'code', 'file': 'tools/broll_vision.py', 'pattern': 'L136'},
-     {'kind': 'test', 'file': 'tests/test_clip_key_copy_l136.py', 'pattern': 'test_lookup_survives_mtime_change'}]),
+     {'kind': 'test', 'file': 'tests/test_clip_key_copy_l136.py', 'pattern': 'test_lookup_survives_mtime_change'}]), 'L137_music_gap_closed_loop': L(
+    'שער G_music_gap לא נכשל על חוסר שנמדד אחרי שהמפלס תוכנן נכון: מזיזים את המצע בגודל החוסר הנמדד (+0.3) '
+    'ומרנדרים פעם אחת. רק כשל אחרי התיקון חוסם.',
+    'אימות E2E בענן 11.10.26: ריל אביגיל נחתך לרצפה 21.0, נמדד 20.37 (0.66 LU קרוב מהמבוקש) והגימור כולו נפל ב-0.03 LU אחרי 10 דקות רינדור.',
+    'music',
+    [{'kind': 'code', 'file': 'tools/audio_mix.py', 'pattern': '_gap_nudge'},
+     {'kind': 'test', 'file': 'tests/test_music_gap_l135.py', 'pattern': 'test_closed_loop_retry_lands_above_floor'}]),
 }
 
 
