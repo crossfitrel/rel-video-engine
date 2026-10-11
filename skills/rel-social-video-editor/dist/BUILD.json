@@ -1,13 +1,13 @@
 {
  "version": "v10.0 — 2026-10-10",
- "built_at": "2026-10-10T23:29:42",
+ "built_at": "2026-10-11T21:39:20",
  "master_sha256": "a1ff1bdc8db1723b3171958a60166ef2325a98baf2ffc44a655e439297d7d2fa",
- "core_sha256": "b4d321bc820267616297f68c642ad339072b3e333b0381f06b4d1e5f409f6fa4",
+ "core_sha256": "f2d395334da845b7852c4dbc8884fd087761fcaed3823d0f0bdf636a9fabd171",
  "config_sha256": "6553eebf840e94be6b51976fb19b3c8bc4bd852aa4098396ed1d309fa1a5810c",
- "skill_md_sha256": "dd2b1735a368968fd3224c19093ea721932e8fba0b9359dff8120ff4d1fad8ec",
+ "skill_md_sha256": "b65a77d378b8220e1f00f6d2361d9104cc6b5622c351957a9ebda9b82d5e0f99",
  "master_chars": 123920,
  "master_lines": 1361,
- "core_chars": 14740,
+ "core_chars": 14838,
  "core_lines": 137,
  "description_chars": 422,
  "references": {

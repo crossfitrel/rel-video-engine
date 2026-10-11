@@ -1820,11 +1820,36 @@ def main():
             # קבוע ברמת-הדיבור (music_lufs-9), לא ברמת-הפתיח.
             mix_cmd[mix_cmd.index("--music-lufs") + 1] = str(speech_lufs)
             music_detail = f"{track.name} @ {speech_lufs} (אין פתיח — מפלס-דיבור קבוע לכל האורך)"
+    # L135 (11.10.26) — מפלס יחסי לדיבור + רצפה, בכל ריל עם דיבור. מפלס מוחלט (‎-46/-54)
+    # נתן gap של 17-28 LU בין ריליז כי הדיבור בקלט נע ב-26dB. בחירה ידנית באפליקציה
+    # (music_lufs) נשמרת אבל נחתכת ברצפה; gap_db במניפסט = בחירה ידנית יחסית.
+    _has_words = False
+    try:
+        _has_words = bool(json.loads(WORDS.read_text(encoding="utf-8")))
+    except Exception:
+        pass
+    if _has_words and not a.no_duck:
+        _pol = json.loads((HERE / "music-level-policy.json").read_text(encoding="utf-8"))
+        _gs = mus_pref.get("gap_db")
+        if _gs is None and mus_pref.get("music_lufs") is None:
+            _gs = _pol["speech_gap_lu"]
+        if _gs is not None:
+            mix_cmd += ["--gap-speech", str(float(_gs)), "--gap-intro", str(float(_gs) - (_pol["speech_gap_lu"] - _pol["intro_gap_lu"]))]
+        if not mus_pref.get("allow_louder"):
+            mix_cmd += ["--min-gap", str(_pol["min_speech_gap_lu"]), "--min-intro-gap", str(_pol["min_intro_gap_lu"]),
+                        "--gap-tolerance", str(_pol["gate_tolerance_lu"])]
+        music_detail += f" · L135 gap {'ידני ' + str(_gs) if mus_pref.get('gap_db') is not None else (_gs or 'ידני-LUFS')} / רצפה {_pol['min_speech_gap_lu']}"
     if hfx_mute:
         mix_cmd += ["--mute", ";".join(f"{x:.3f}-{y:.3f}" for x, y in hfx_mute)]
         music_detail += f" · דרופ הוק {hfx_mute}"
     r = sh(mix_cmd)
     if r.returncode != 0: fail(f"audio_mix נכשל: {r.stdout[-200:]}{r.stderr[-300:]}")
+    try:  # L135 — ה-gap הנמדד בפועל (לא המספר שביקשנו) נכנס לדוח
+        _mg = json.loads(Path(f"{MIXED}.musicgap.json").read_text(encoding="utf-8"))
+        if _mg.get("measured"):
+            music_detail += f" · נמדד: מוזיקה {_mg['measured']['gap_lu']} LU מתחת לדיבור"
+    except Exception:
+        pass
     st.done_step("music", music_detail)
     report.append(f"- מוזיקה: {music_detail} LUFS")
 

@@ -1584,6 +1584,17 @@ LESSONS: dict[str, dict] = {
     'ops',
     [{'kind': 'code', 'file': 'tools/project_hygiene.py', 'pattern': 'MEDIA_EXT'},
      {'kind': 'test', 'file': 'tests/test_project_hygiene.py', 'pattern': 'test_self_test_flags_media_and_junk'}]),
+ 'L135_music_level_relative_to_dialog': L(
+    'מפלס המוזיקה נקבע יחסית לדיבור הנמדד של הסרטון (dialog_I - gap), לא כ-LUFS מוחלט; רצפה 21 LU שאף ריל עם דיבור '
+    'לא עובר (גם בחירה ידנית נחתכת), ושער מדוד מרנדר את המצע לבד ומודד אותו בחלון הדיבור. ערכים: tools/music-level-policy.json.',
+    'הראל 11.10.26 "כל פעם אנחנו נופלים עם המוזיקה. הווליום חזק מידיי". ביקורת 60 ריליז: עם LUFS מוחלט ה-gap נע 1.7-27.7 LU '
+    'כי הדיבור בקלט נע ‎-10.8 עד ‎-37; כל ה"חזק מדי" ב-16.6-20.0; העוגן המאושר (E-Myth 24.9) 20.9.',
+    'music',
+    [{'kind': 'code', 'file': 'tools/audio_mix.py', 'pattern': r'def apply_dialog_relative_levels'},
+     {'kind': 'code', 'file': 'tools/audio_mix.py', 'pattern': r'def measure_bed_gap'},
+     {'kind': 'code', 'file': 'tools/local_finish_pipeline.py', 'pattern': r'music-level-policy.json'},
+     {'kind': 'test', 'file': 'tests/test_music_gap_l135.py', 'pattern': 'test_absolute_manual_pref_is_clamped_by_floor'},
+     {'kind': 'test', 'file': 'tests/test_music_gap_l135.py', 'pattern': 'test_gate_catches_loud_bed'}]),
 }
 
 

@@ -186,6 +186,69 @@ def parse_mute(spec, dur=None):
             out.append([a, b])
     return out
 
+POLICY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "music-level-policy.json")
+
+
+def load_level_policy(path=POLICY_PATH):
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def _has_intro(args, D=None):
+    ss = getattr(args, "speech_start", None)
+    return bool(ss and ss > 0.3 and (D is None or ss < D - 0.3))
+
+
+def apply_dialog_relative_levels(args, dialog_i, D=None):
+    """L135 — קובע את args.music_lufs/args.speech_lufs יחסית לדיבור הנמדד, ואוכף רצפה.
+    מחזיר None כשאין מצב יחסי (מונטאז' בלי דיבור / דיבור לא נמדד)."""
+    gs, gi, fl, fli = (getattr(args, k, None) for k in ("gap_speech", "gap_intro", "min_gap", "min_intro_gap"))
+    if dialog_i is None or dialog_i < -70 or (gs is None and fl is None):
+        return None
+    intro = _has_intro(args, D)
+    if gs is not None:
+        if intro:
+            args.speech_lufs = round(dialog_i - gs, 1)
+            args.music_lufs = round(dialog_i - (gi if gi is not None else gs - 8.0), 1)
+        else:
+            args.music_lufs = round(dialog_i - gs, 1)
+    speech = (args.speech_lufs if args.speech_lufs is not None else args.music_lufs - 9.0) if intro else args.music_lufs
+    clamped = False
+    if fl is not None and speech > dialog_i - fl:
+        speech, clamped = round(dialog_i - fl, 1), True
+    if intro:
+        args.speech_lufs = speech
+        if fli is not None and args.music_lufs > dialog_i - fli:
+            args.music_lufs, clamped = round(dialog_i - fli, 1), True
+        if args.music_lufs < speech:          # פתיח לעולם לא שקט מהמצע בדיבור
+            args.music_lufs = speech
+    else:
+        args.music_lufs = speech
+    return {"dialog_i": round(dialog_i, 2), "speech_lufs": speech, "intro_lufs": args.music_lufs if intro else None,
+            "speech_gap": round(dialog_i - speech, 2), "clamped": clamped}
+
+
+def measure_bed_gap(args, m, D, dialog_i):
+    """שער L135 — מרנדר את המצע לבד (אותה שרשרת גיין) ומודד אותו בחלון הדיבור.
+    לא סומך על המספר שביקשנו: loudnorm יכול לעבור לדינמי בשקט."""
+    intro = _has_intro(args, D)
+    ss = args.speech_start if intro else 0.0
+    chain = (f"[0:a]loudnorm=I={args.music_lufs}:TP=-3:LRA=11:linear=true:"
+             f"measured_I={m['I']:.2f}:measured_TP={m['TP']:.2f}:measured_LRA={m['LRA']:.2f}:"
+             f"measured_thresh={m['thresh']:.2f},aformat=sample_rates=48000:channel_layouts=stereo,"
+             f"atrim=0:{D:.3f},asetpts=N/SR/TB")
+    if intro:
+        chain += f",volume=enable='gte(t,{ss:.3f})':volume={args.speech_lufs - args.music_lufs:.2f}dB"
+    chain += f",atrim=start={ss:.3f}:end={D:.3f},asetpts=N/SR/TB,loudnorm=print_format=json"
+    r = run(["ffmpeg", "-hide_banner", "-nostats", "-stream_loop", "-1", "-i", args.music,
+             "-filter_complex", chain, "-t", f"{D + 1:.3f}", "-f", "null", "-"])
+    blocks = re.findall(r"\{[^{}]*\}", r.stderr, re.DOTALL)
+    if not blocks:
+        return None
+    bed = float(json.loads(blocks[-1])["input_i"])
+    return {"bed_speech_lufs": round(bed, 2), "dialog_i": round(dialog_i, 2), "gap_lu": round(dialog_i - bed, 2)}
+
+
 def cmd_mix(args):
     if not has_audio(args.video):
         print(f"⚠️  אין ערוץ אודיו ב-{args.video}", file=sys.stderr)
@@ -216,6 +279,14 @@ def cmd_mix(args):
     print("— לפני —")
     print(f"   דיבור (וידאו): {v['I']:.2f} LUFS  (אורך {D:.2f}s)")
     print(f"   מוזיקה        : {m['I']:.2f} LUFS")
+    # L135 (11.10.26) — מפלס יחסי לדיבור + רצפה. עם LUFS מוחלט ה-gap בין דיבור למוזיקה
+    # נע 1.7-27.7 LU בין ריליז (הדיבור בקלט נע ‎-10.8 עד ‎-37), ולכן "חזק מדי" חזר שוב
+    # ושוב גם כשהמספר במניפסט ירד. מכאן: אם יש דיבור — המוזיקה נקבעת כ-dialog_I - gap,
+    # ובכל מקרה לא קרובה לדיבור יותר מהרצפה (music-level-policy.json).
+    _gap = apply_dialog_relative_levels(args, v["I"], D)
+    if _gap:
+        print(f"   מפלס יחסי     : דיבור {v['I']:.1f} → מוזיקה בדיבור {_gap['speech_lufs']:.1f} "
+              f"(gap {_gap['speech_gap']:.1f} LU){' · ⛔ נחתך ברצפה' if _gap['clamped'] else ''}")
     _dip = music_intro_dip(args.music)
     if _dip and _dip.get("dip"):
         print(f"⚠️  music_intro_dip: הטראק צונח ב-{_dip['dip_at']}ש מתחת לקטע החזק "
@@ -343,6 +414,23 @@ def cmd_mix(args):
     if abs(ad - D) > 0.3:
         print(f"   ❌ אזהרה: אורך האודיו ({ad:.2f}) ≠ וידאו ({D:.2f}) — סאונד נחתך בזנב!", file=sys.stderr)
         return 1
+    # L135 — שער מדוד: המצע בחלון הדיבור מול הדיבור. גלאי שלא נמדד = לא PASS.
+    if _gap or getattr(args, "min_gap", None) is not None:
+        g = measure_bed_gap(args, m, D, v["I"])
+        rec = {"policy": _gap, "measured": g, "min_gap": getattr(args, "min_gap", None)}
+        try:
+            with open(f"{args.out}.musicgap.json", "w", encoding="utf-8") as f:
+                json.dump(rec, f, ensure_ascii=False, indent=1)
+        except OSError:
+            pass
+        if g is None:
+            print("   ❌ G_music_gap: מדידת המצע נכשלה — לא נמדד ≠ PASS", file=sys.stderr)
+            return 3
+        tol = float(getattr(args, "gap_tolerance", 0.6) or 0.6)
+        print(f"   G_music_gap   : מצע בדיבור {g['bed_speech_lufs']:.1f} · דיבור {g['dialog_i']:.1f} → gap {g['gap_lu']:.1f} LU")
+        if args.min_gap is not None and g["gap_lu"] < args.min_gap - tol:
+            print(f"   ❌ G_music_gap: המוזיקה {g['gap_lu']:.1f} LU מתחת לדיבור < רצפה {args.min_gap} — חזק מדי", file=sys.stderr)
+            return 3
     print(f"✅ נשמר: {args.out}  (מוזיקה קבועה, סאונד מלא לכל האורך)")
     if ".music_from_" in str(args.music):          # v9.47 — קובץ הביניים של ה-offset
         try:
@@ -374,6 +462,11 @@ def main():
                     help="v9.47 L128 — 'auto' (music_start_offset) או שניות: מאיפה מתחיל המצע בטראק")
     px.add_argument("--mute", default=None, help="v9.46 חלונות השתקת מצע 'a-b;c-d' (שניות) — music_drop של hook_fx")
     px.add_argument("--tp-limit", type=float, default=0.75, help="ceiling ל-alimiter true-peak (0-1). 0.75≈-2.5dB — מוריד מ-0.84 כי ה-AAC encode אחרי הלימיטר יוצר inter-sample peak שחומק ממנו (נצפה 20.7: 0.84 → TP+0.23dBTP בפועל, קליפינג). ראה local_finish_pipeline.py")
+    px.add_argument("--gap-speech", type=float, default=None, help="L135: מוזיקה בזמן דיבור = dialog_I - gap (LU)")
+    px.add_argument("--gap-intro", type=float, default=None, help="L135: פתיח בלי דיבור = dialog_I - gap (LU)")
+    px.add_argument("--min-gap", type=float, default=None, help="L135: רצפה — המוזיקה בדיבור לעולם לא קרובה יותר מזה (LU)")
+    px.add_argument("--min-intro-gap", type=float, default=None, help="L135: רצפה לפתיח (LU)")
+    px.add_argument("--gap-tolerance", type=float, default=0.6)
     px.set_defaults(func=cmd_mix)
 
     args = p.parse_args()

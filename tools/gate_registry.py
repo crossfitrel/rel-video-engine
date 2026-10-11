@@ -116,6 +116,13 @@ GATES: dict[str, dict] = {
     "מדווח; audio_mix מכייל מחדש ב---refinish בלי לבנות הכל",
     "-14±1.2 LUFS, TP≤-0.8", MEASURED),
 
+ "audio_mix:G_music_gap": G(
+    "audio_mix", BLOCKING,
+    "מוזיקה קרובה לדיבור מ-21 LU בולעת את הדיבור בטלפון — 'כל פעם אנחנו נופלים עם המוזיקה' (הראל 11.10.26)",
+    "כמעט אפס — המפלס כבר נחתך ברצפה לפני המיקס; השער נופל רק כשהגיין בפועל סטה (loudnorm דינמי) או שהמדידה נכשלה",
+    "allow_louder:true ב-finish_prefs.music לבחירה מפורשת של הראל; אחרת לתקן את השרשרת ולגמור שוב",
+    "gap ≥ 21-0.6 LU (מצע בחלון הדיבור מול dialog_I)", MEASURED),
+
  "qa_gates:G5_format": G(
     "qa_gates", BLOCKING,
     "רזולוציה/fps לא תקינים נדחים בהעלאה או נחתכים",
