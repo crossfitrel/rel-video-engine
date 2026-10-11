@@ -1594,7 +1594,14 @@ LESSONS: dict[str, dict] = {
      {'kind': 'code', 'file': 'tools/audio_mix.py', 'pattern': r'def measure_bed_gap'},
      {'kind': 'code', 'file': 'tools/local_finish_pipeline.py', 'pattern': r'music-level-policy.json'},
      {'kind': 'test', 'file': 'tests/test_music_gap_l135.py', 'pattern': 'test_absolute_manual_pref_is_clamped_by_floor'},
-     {'kind': 'test', 'file': 'tests/test_music_gap_l135.py', 'pattern': 'test_gate_catches_loud_bed'}]),
+     {'kind': 'test', 'file': 'tests/test_music_gap_l135.py', 'pattern': 'test_gate_catches_loud_bed'}]), 'L136_clip_cache_key_survives_copy': L(
+    'מטמון ראיות הבירול ממופתח file|mtime|size; העתקה (git/rclone/tar) משנה mtime בלי שהקליפ השתנה. '
+    'כשאין התאמה מדויקת — שם+גודל בלי mtime הם אותו קליפ.',
+    'v10 ענן 11.10.26: אחרי מעבר הספריות לענף libs, 64 קליפים בבריכה "איבדו" ראיה ויזואלית והשער נכשל-סגור על כולם.',
+    'broll',
+    [{'kind': 'code', 'file': 'tools/broll_vision_model.py', 'pattern': 'def resolve_key'},
+     {'kind': 'code', 'file': 'tools/broll_vision.py', 'pattern': 'L136'},
+     {'kind': 'test', 'file': 'tests/test_clip_key_copy_l136.py', 'pattern': 'test_lookup_survives_mtime_change'}]),
 }
 
 

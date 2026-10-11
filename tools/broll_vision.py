@@ -132,6 +132,9 @@ def vision_for(paths, cache=None, write=True, limit=None):
         if not p or not Path(p).exists():
             continue
         k = _key(p)
+        if k not in cache:   # mtime השתנה בהעתקה (git/rclone)? אותו שם+גודל = אותו קליפ (L136)
+            n, _, sz = k.rsplit("|", 2)
+            k = next((ck for ck in cache if ck.rsplit("|", 2)[0] == n and ck.rsplit("|", 2)[2] == sz), k)
         if k not in cache:
             if limit is not None and scanned >= limit:
                 continue

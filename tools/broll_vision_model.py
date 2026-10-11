@@ -73,8 +73,25 @@ def save_cache(c: dict) -> None:
     os.replace(tmp, p)
 
 
+def resolve_key(c: dict, p) -> str | None:
+    """המפתח במטמון לקליפ הזה. קודם התאמה מדויקת (file|mtime|size); אחרת
+    שם+גודל בלי mtime — העתקה (git/rclone/tar) משנה mtime בלי שהקליפ השתנה,
+    ובענן כל הקליפים מגיעים מ-git עם mtime של רגע ה-checkout (L136)."""
+    k = clip_key(p)
+    if k in c:
+        return k
+    name, _, size = k.split("|")
+    for ck in c:
+        cn, _, cs = ck.rsplit("|", 2)
+        if cn == name and cs == size:
+            return ck
+    return None
+
+
 def lookup(path) -> dict | None:
-    return load_cache().get(clip_key(path))
+    c = load_cache()
+    k = resolve_key(c, path)
+    return c.get(k) if k else None
 
 
 def missing(paths) -> list:
@@ -84,9 +101,10 @@ def missing(paths) -> list:
     for p in paths:
         try:
             k = clip_key(p)
+            hit = resolve_key(c, p)
         except OSError:
             continue
-        if k not in c and k not in seen:
+        if hit is None and k not in seen:
             seen.add(k)
             out.append(p)
     return out
