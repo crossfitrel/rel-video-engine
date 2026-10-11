@@ -6,6 +6,8 @@
 # כל העתקה נבדקת ב-rclone check (md5) — העתקה בלי אימות לא נחשבת.
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"; source "$HERE/env.sh"
+# בלי טוקן Drive (המצב הרגיל במשימות מתוזמנות) — ענף libs בריפו הפרטי. ראו cloud/libs_git.sh
+[[ -z "${RCLONE_CONFIG_HAYONHQ_TOKEN:-}" || "${REL_LIBS_BACKEND:-}" == git ]] && exec bash "$HERE/libs_git.sh" "$@"
 D="$REL_DRIVE_REMOTE:$REL_DRIVE_ROOT"
 RC=(rclone --drive-chunk-size 64M --transfers 8 --checkers 16 --exclude .DS_Store --exclude '__pycache__/**' --log-level ERROR)
 STATE_FILES=(tools/music-rotation.json tools/learn-state.json tools/illustration-ledger.json tools/hook_fx_verdicts.json

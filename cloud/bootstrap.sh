@@ -11,6 +11,7 @@ NO_DRIVE=0; [[ "${1:-}" == "--no-drive" ]] && NO_DRIVE=1
 need_apt=()
 command -v ffmpeg >/dev/null || need_apt+=(ffmpeg)
 command -v fc-cache >/dev/null || need_apt+=(fontconfig)
+command -v rsync >/dev/null || need_apt+=(rsync)       # libs_git (ענף הספריות)
 if ((${#need_apt[@]})); then log "apt: ${need_apt[*]}"; apt-get update -qq && apt-get install -y -qq "${need_apt[@]}" >/dev/null; fi
 FF="$(ffmpeg -hide_banner -filters 2>/dev/null || true)"; grep -qE ' (subtitles|ass) ' <<<"$FF" && log "ffmpeg: libass ✓" || log "ffmpeg: אין libass (הכתוביות ב-PIL — לא חוסם)"
 if ! command -v rclone >/dev/null; then
@@ -37,13 +38,11 @@ PY
 # 4. תאימות לנתיבי מק היסטוריים בקונפיגים (רשת ביטחון, לא מנגנון ראשי)
 bash "$HERE/mac_compat.sh"
 
-# 5. ספריות + מצב מ-Drive (ספריות/, מצב/) — רק עם טוקן בסביבה
+# 5. ספריות + מצב — ענף libs בריפו הפרטי (בלי טוקן); Drive רק אם יש RCLONE_CONFIG_HAYONHQ_TOKEN
 mkdir -p "$REL_WORK_ROOT"
 if (( NO_DRIVE )); then log "Drive: דילוג (--no-drive)";
-elif [[ -z "${RCLONE_CONFIG_HAYONHQ_TOKEN:-}" ]]; then
-  log "⚠️ אין RCLONE_CONFIG_HAYONHQ_TOKEN בסביבה — ספריות/מצב לא נמשכו. ראו CLOUD.md §טוקן."; exit 3
 else
-  bash "$HERE/state_sync.sh" pull
+  bash "$HERE/state_sync.sh" pull || { log "⚠️ משיכת ספריות/מצב נכשלה"; exit 3; }   # ענף libs (ברירת מחדל) או Drive כשיש טוקן
 fi
 
 # 6. פונטים למערכת (fontconfig) — מהספריות שנמשכו
