@@ -33,16 +33,14 @@
 | osxphotos (קציר גלריה) | לא עובר — כלי מק בלבד, לא בזרימת הריל |
 | נתיבי `/Users/hayon/...` בקונפיגים | `cloud/env.sh` (שורש אחד) + `cloud/mac_compat.sh` כרשת ביטחון לקונפיגים ישנים |
 
-## טוקן Drive (פעולה חד-פעמית של הראל)
-רכיב הענן ניגש ל-Drive של hayonhq דרך rclone. הטוקן **לא** בריפו ולא בקובץ: משתני סביבה של סביבת הענן.
-במק: `rclone config show hayonhq` → מעתיקים את שורת `token = {...}` ובהגדרות סביבת הענן (claude.ai/code → Environment → Environment variables) מוסיפים:
-```
-RCLONE_CONFIG_HAYONHQ_TYPE=drive
-RCLONE_CONFIG_HAYONHQ_SCOPE=drive
-RCLONE_CONFIG_HAYONHQ_TOKEN={"access_token":...,"refresh_token":...}
-```
-בלי זה `bootstrap.sh` עוצר בקוד 3 ומודיע — אין עריכה בלי ספריות.
-⚠️ rclone מזהיר שה-client_id המשותף שלו יוצא משימוש במהלך 2026 — כדאי ליצור client_id משלך ב-Google Cloud ולהוסיף `RCLONE_CONFIG_HAYONHQ_CLIENT_ID/SECRET`.
+## ספריות ומצב — ענף `libs` בריפו הפרטי (בלי טוקן, מ-11.10.26)
+משימות מתוזמנות של claude.ai רצות בסביבת `cloud_default`, שלא קוראת משתני סביבה של claude.ai/code — טוקן Drive לא יכול להגיע אליהן (נבדק 11.10.26 בריצת אימות: `token_present:false` אחרי שהראל הדביק). לכן:
+- הספריות (בירולים 3.2GB, מיכאל לוי, brand-assets כולל מוזיקה, tools-assets, פתיחים קבועים) והמצב (קבצי מצב + פרויקטים פעילים) יושבים בענף `libs` של `crossfitrel/rel-video-cloud`, נגישים דרך ה-git proxy של הסשן — אותו מסלול כמו הקוד.
+- `cloud/libs_git.sh` (pull · push · pull-project · push-project · archive-final). `state_sync.sh` מעביר אליו אוטומטית כשאין `RCLONE_CONFIG_HAYONHQ_TOKEN`.
+- קובץ מעל 90MB נשמר כחלקים `*.relsplit.000…` + `*.relsplit.sha256` ומורכב ומאומת בפריסה.
+- ארכיון ה-FINAL = עמודת "סרטון מוכן" במאנדיי; `archive-final` רושם sha256 ב-`state/מסירות/ledger.txt`.
+- Drive של hayonhq נשאר גיבוי ומקור הקציר (בירולים חדשים מהמק): אחרי קציר במק → `rclone copy` לתיקייה זמנית → דחיפה לענף `libs` (או דרך סשן שמחזיק את הספרייה).
+- rclone נשאר אופציונלי: אם קיים טוקן בסביבה, `state_sync.sh` עובד מול Drive כמו קודם.
 
 ## אימות (10.10.26)
 - **baseline בענן (ריצה אחרונה, 199ש):** 941 בדיקות · 935 עוברות · 6 נכשלות רק מחוסר ספריות שעוד לא נמשכו מ-Drive (מאגר הבירולים עם ראיות vision, נכס הפתיח הקבוע, ספריית המוזיקה המלאה) — נסגרות כשהטוקן מוגדר. doctor 0 FAIL · gates 216/0 · lessons 140/0 · skill pack תואם (v10.0).

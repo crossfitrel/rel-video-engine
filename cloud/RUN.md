@@ -10,11 +10,10 @@
 
 ## 0.5 הכנה (רק כשיש עבודה, ≈4 דק')
 ```
-add_repo crossfitrel/rel-video-cloud (push) → git clone --depth 1 … /home/claude/rel-video-cloud
-cd /home/claude/rel-video-cloud && bash cloud/bootstrap.sh        # venv, מודל, puppeteer, ספריות+מצב מ-Drive של hayonhq
+add_repo crossfitrel/rel-video-cloud (push) → git clone --depth 1 … /home/claude/rel-video-cloud   # הענף libs נמשך ע"י bootstrap
+cd /home/claude/rel-video-cloud && bash cloud/bootstrap.sh        # venv, מודל, puppeteer, ספריות+מצב מענף libs (בלי טוקן)
 ```
-`bootstrap` יוצא בקוד 3 כש-`RCLONE_CONFIG_HAYONHQ_TOKEN` חסר ⇒ לא עורכים (בלי ספריות אין בירול/מוזיקה/פונטים).
-במקרה כזה: `ArtifactData set system/health {"drive":"missing_token","at":<UTC>,"note":"צריך להגדיר טוקן Drive בסביבת הענן — CLOUD.md"}` — העמוד מציג באנר. **בלי מייל** (הריצה חוזרת כל שעה; מייל היה הופך לספאם).
+`bootstrap` יוצא בקוד 3 רק אם משיכת ענף `libs` נכשלה ⇒ לא עורכים. במקרה כזה: `ArtifactData set system/health {"libs":"pull_failed","at":<UTC>,"note":"..."}` — העמוד מציג באנר. **בלי מייל**.
 כל כשל אחר שדורש את הראל ⇒ אותו מסמך health + באנר; מייל רק אם זה חוסם פרסום מתוזמן בתוך 24 שעות.
 טוענים את הסקיל `rel-social-video-editor` ואת ה-reference של השלב בלבד.
 
