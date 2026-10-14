@@ -18,10 +18,13 @@ def ns(**kw):
 
 
 class TestLevels(unittest.TestCase):
-    def test_policy_floor_not_louder_than_approved_anchor(self):
-        # העוגן המאושר (E-Myth) 20.9 — הרצפה לא יכולה להיות קרובה לדיבור יותר ממנו
-        self.assertGreaterEqual(POL["min_speech_gap_lu"], POL["anchor"]["gap_lu"])
+    def test_policy_floor_well_below_rejected_anchor(self):
+        # L138 — E-Myth (20.9) נפסל אחרי פרסום 14.10.26: הרצפה לפחות 4 LU שקטה ממנו,
+        # ולא בתוך טווח התלונות. ברירת המחדל לא נמוכה מהרצפה.
+        self.assertGreaterEqual(POL["min_speech_gap_lu"], POL["anchor"]["gap_lu"] + 4.0)
+        self.assertGreater(POL["min_speech_gap_lu"], max(POL["complaints_measured_gap_lu"]))
         self.assertGreaterEqual(POL["speech_gap_lu"], POL["min_speech_gap_lu"])
+        self.assertIsNotNone(POL.get("min_local_gap_lu"))
 
     def test_relative_level_follows_dialog_not_absolute(self):
         for dialog in (-12.0, -23.0, -37.0):

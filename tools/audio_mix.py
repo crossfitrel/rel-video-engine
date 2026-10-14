@@ -236,17 +236,118 @@ def apply_dialog_relative_levels(args, dialog_i, D=None):
             "speech_gap": round(dialog_i - speech, 2), "clamped": clamped}
 
 
-def measure_bed_gap(args, m, D, dialog_i):
+def bed_filter(args, m, D, envelope=None):
+    """L138 — שרשרת המצע אחת לכל המקומות (מיקס, שער מדוד, מעטפת מקומית), כדי שמה שנמדד = מה שנשמע.
+    מחזיר את גוף השרשרת בלי תווית קלט/פלט."""
+    s = (f"loudnorm=I={args.music_lufs}:TP=-3:LRA=11:linear=true:"
+         f"measured_I={m['I']:.2f}:measured_TP={m['TP']:.2f}:measured_LRA={m['LRA']:.2f}:"
+         f"measured_thresh={m['thresh']:.2f},aformat=sample_rates=48000:channel_layouts=stereo,"
+         f"atrim=0:{D:.3f},afade=t=in:st=0:d=0.3,asetpts=N/SR/TB")
+    if _has_intro(args, D):
+        sl = args.speech_lufs if args.speech_lufs is not None else (args.music_lufs - 9.0)
+        s += f",volume=enable='gte(t,{args.speech_start:.3f})':volume={sl - args.music_lufs:.2f}dB"
+    mute_w = parse_mute(getattr(args, "mute", None), D)
+    if mute_w:
+        expr = "*".join(f"min(1,max(0,max(({a:.3f}-t)/0.04,(t-{b:.3f})/0.08)))" for a, b in mute_w)
+        s += f",volume='{expr}':eval=frame"
+    if envelope and envelope.get("cmdfile"):
+        s += f",asendcmd=f='{envelope['cmdfile']}',volume@relenv=volume=1.0"
+    return s
+
+
+def _short_term_series(inputs, chain, D):
+    """ebur128 short-term (חלון 3ש) כל 0.1ש → מערך numpy באורך ceil(D*10). None = לא נמדד."""
+    import tempfile
+    import numpy as np
+    fd, tmp = tempfile.mkstemp(suffix=".r128.txt")
+    os.close(fd)
+    try:
+        r = run(["ffmpeg", "-hide_banner", "-nostats", *inputs, "-filter_complex",
+                 f"{chain},ebur128=metadata=1,ametadata=mode=print:key=lavfi.r128.S:file='{tmp}'",
+                 "-t", f"{D:.3f}", "-f", "null", "-"])
+        with open(tmp, encoding="utf-8", errors="ignore") as fh:
+            txt = fh.read()
+    finally:
+        try:
+            os.remove(tmp)
+        except OSError:
+            pass
+    if r.returncode != 0:
+        return None
+    n = int(np.ceil(D * 10)) + 1
+    out = np.full(n, -120.0)
+    t = None
+    for line in txt.splitlines():
+        mt = re.search(r"pts_time:([\d.]+)", line)
+        if mt:
+            t = float(mt.group(1))
+            continue
+        if "lavfi.r128.S=" in line and t is not None:
+            i = int(round(t * 10))
+            if 0 <= i < n:
+                try:
+                    out[i] = max(-120.0, float(line.split("=", 1)[1]))
+                except ValueError:
+                    pass
+    for i in range(1, n):                      # חורים (פריים לא מדויק על 0.1) — ממשיכים את הקודם
+        if out[i] <= -120.0 and out[i - 1] > -120.0:
+            out[i] = out[i - 1]
+    return out
+
+
+def local_envelope(args, m, D, dialog_i, workdir=None):
+    """L138 (הראל 14.10.26, E-Myth: "שוב המוזיקה גבוהה מידיי") — ה-gap האינטגרלי לא מספיק.
+    ב-E-Myth הוא היה 20.3 LU, אבל ב-10 השניות האחרונות הקול ירד ל-‎-28 והמצע הקבוע נשאר ‎-37:
+    ‎~9 dB בלבד בין קול למוזיקה, בדיוק ב-CTA. כאן: בכל חלון 3ש שיש בו דיבור, המוזיקה לא
+    קרובה לקול של אותו חלון יותר מ-local_gap. רק מנמיך (אף פעם לא מגביר), slew ‎6dB/ש
+    כדי שלא יישמע כ"דאקינג שואב" (הראל 23.6). None = אין צורך/לא נמדד."""
+    lg = getattr(args, "local_gap", None)
+    if lg is None:
+        return None
+    import numpy as np
+    voice = _short_term_series(["-i", args.video], "[0:a]aformat=sample_rates=48000:channel_layouts=stereo", D)
+    bed = _short_term_series(["-stream_loop", "-1", "-i", args.music], f"[0:a]{bed_filter(args, m, D)}", D)
+    if voice is None or bed is None:
+        return {"error": "not_measured"}
+    n = min(len(voice), len(bed))
+    voice, bed = voice[:n], bed[:n]
+    speech = (voice >= dialog_i - 12.0) & (voice > -60.0)
+    need = np.where(speech, np.maximum(0.0, lg - (voice - bed)), 0.0)
+    if float(need.max(initial=0.0)) < 0.3:
+        return {"applied": False, "worst_local_gap": round(float((voice - bed)[speech].min()), 2) if speech.any() else None}
+    # הרחבה ±0.5ש + slew 0.6dB לצעד (6dB/ש) לשני הכיוונים — ירידה מתחילה לפני, חזרה אחרי
+    k = 5
+    wide = np.array([need[max(0, i - k):i + k + 1].max() for i in range(n)])
+    step = 0.6
+    for i in range(1, n):
+        wide[i] = max(wide[i], wide[i - 1] - step)
+    for i in range(n - 2, -1, -1):
+        wide[i] = max(wide[i], wide[i + 1] - step)
+    import tempfile
+    fd, cmdfile = tempfile.mkstemp(suffix=".relenv.cmd", dir=workdir)   # נתיב ASCII — בלי עברית/רווחים בתוך ה-filtergraph
+    os.close(fd)
+    lines, last = [], None
+    for i in range(n):
+        g = round(float(wide[i]), 2)
+        if last is None or abs(g - last) >= 0.05:
+            lines.append(f"{i / 10:.2f} volume@relenv volume {10 ** (-g / 20):.5f};")
+            last = g
+    with open(cmdfile, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+    after = voice - (bed - wide)
+    return {"applied": True, "cmdfile": cmdfile, "local_gap": lg,
+            "seconds_reduced": round(float((wide >= 0.3).sum()) / 10, 1),
+            "max_cut_db": round(float(wide.max()), 2),
+            "worst_local_gap_before": round(float((voice - bed)[speech].min()), 2),
+            "worst_local_gap_after": round(float(after[speech].min()), 2)}
+
+
+def measure_bed_gap(args, m, D, dialog_i, envelope=None):
     """שער L135 — מרנדר את המצע לבד (אותה שרשרת גיין) ומודד אותו בחלון הדיבור.
     לא סומך על המספר שביקשנו: loudnorm יכול לעבור לדינמי בשקט."""
     intro = _has_intro(args, D)
     ss = args.speech_start if intro else 0.0
-    chain = (f"[0:a]loudnorm=I={args.music_lufs}:TP=-3:LRA=11:linear=true:"
-             f"measured_I={m['I']:.2f}:measured_TP={m['TP']:.2f}:measured_LRA={m['LRA']:.2f}:"
-             f"measured_thresh={m['thresh']:.2f},aformat=sample_rates=48000:channel_layouts=stereo,"
-             f"atrim=0:{D:.3f},asetpts=N/SR/TB")
-    if intro:
-        chain += f",volume=enable='gte(t,{ss:.3f})':volume={args.speech_lufs - args.music_lufs:.2f}dB"
+    chain = f"[0:a]{bed_filter(args, m, D, envelope)}"
     chain += f",atrim=start={ss:.3f}:end={D:.3f},asetpts=N/SR/TB,loudnorm=print_format=json"
     r = run(["ffmpeg", "-hide_banner", "-nostats", "-stream_loop", "-1", "-i", args.music,
              "-filter_complex", chain, "-t", f"{D + 1:.3f}", "-f", "null", "-"])
@@ -325,40 +426,26 @@ def cmd_mix(args):
     #    תיקון: two-pass ליניארי (linear=true + measured_I/TP/LRA/thresh ממדידה קודמת) —
     #    גיין קבוע אחד לכל האורך, בלי ניפוח דינמי של קטעים שקטים. את מדידת המוזיקה (m)
     #    כבר יש לנו למעלה; את מדידת המיקס-לפני-loudnorm-סופי (premix) מודדים ב-pass נפרד.
-    if args.speech_start and args.speech_start > 0.3 and args.speech_start < D - 0.3:
-        # ברירת מחדל הועמקה 5→9 dB (23.7.26 r2, פידבק חוזר: "מוזיקה עדיין רועשת מדי
-        # בכל הסרטונים" — 13/15 מהסרטונים האחרונים לא השתמשו בדאקינג כלל; ‎-5dB התברר
-        # לא מספיק עמוק לטראקים אנרגטיים גם כשדאקינג כן הופעל). ראה local_finish_pipeline.py.
-        speech_lufs = args.speech_lufs if args.speech_lufs is not None else (args.music_lufs - 9.0)
-        ss = args.speech_start
-        fc_pre = (
-            f"[1:a]loudnorm=I={args.music_lufs}:TP=-3:LRA=11:linear=true:"
-            f"measured_I={m['I']:.2f}:measured_TP={m['TP']:.2f}:measured_LRA={m['LRA']:.2f}:"
-            f"measured_thresh={m['thresh']:.2f},"
-            f"aformat=sample_rates=48000:channel_layouts=stereo,"
-            f"atrim=0:{D:.3f},afade=t=in:st=0:d=0.3,asetpts=N/SR/TB[mbase];"
-            f"[mbase]volume=enable='gte(t,{ss:.3f})':volume={speech_lufs - args.music_lufs:.2f}dB[mbed];"
-            f"[0:a]aformat=sample_rates=48000:channel_layouts=stereo[v0];"
-            f"[v0][mbed]amix=inputs=2:duration=longest:dropout_transition=0:normalize=0[premix]"
-        )
-        print(f"   דאקינג        : פתיח {args.music_lufs:.1f} LUFS עד {ss:.2f}ש → דיבור {speech_lufs:.1f} LUFS (הראל 20.7 r4)")
-    else:
-        fc_pre = (
-            f"[1:a]loudnorm=I={args.music_lufs}:TP=-3:LRA=11:linear=true:"
-            f"measured_I={m['I']:.2f}:measured_TP={m['TP']:.2f}:measured_LRA={m['LRA']:.2f}:"
-            f"measured_thresh={m['thresh']:.2f},"
-            f"aformat=sample_rates=48000:channel_layouts=stereo,"
-            f"atrim=0:{D:.3f},afade=t=in:st=0:d=0.3,asetpts=N/SR/TB[mbed];"
-            f"[0:a]aformat=sample_rates=48000:channel_layouts=stereo[v0];"
-            f"[v0][mbed]amix=inputs=2:duration=longest:dropout_transition=0:normalize=0[premix]"
-        )
-
-    # v9.46 — חלונות השתקת מוזיקה מארגז העריכה של ההוק (hook_fx music_drop): המצע נעלם
-    # ברגע ה"דרופ" וחוזר אחריו (fade 40ms פנימה / 80ms החוצה) — הסאונד-עיצוב של ההוק.
+    # ברירת מחדל speech_lufs הועמקה 5→9 dB (23.7.26 r2). L138: שרשרת המצע נבנית פעם אחת
+    # (bed_filter) ומשמשת גם את השער המדוד וגם את המעטפת המקומית.
+    if _has_intro(args, D) and args.speech_lufs is None:
+        args.speech_lufs = args.music_lufs - 9.0
+    env = local_envelope(args, m, D, v["I"]) if v["I"] > -70 else None
+    if env and env.get("applied"):
+        print(f"   מעטפת מקומית  : {env['seconds_reduced']}ש הונמכו (עד ‎-{env['max_cut_db']}dB) — "
+              f"gap מקומי מינימלי {env['worst_local_gap_before']} → {env['worst_local_gap_after']} LU (L138)")
+    elif env and env.get("error"):
+        print("   ❌ G_music_local: מדידת חלונות לא הצליחה — לא נמדד ≠ PASS", file=sys.stderr)
+        return 3
+    fc_pre = (
+        f"[1:a]{bed_filter(args, m, D, env)}[mbed];"
+        f"[0:a]aformat=sample_rates=48000:channel_layouts=stereo[v0];"
+        f"[v0][mbed]amix=inputs=2:duration=longest:dropout_transition=0:normalize=0[premix]"
+    )
+    if _has_intro(args, D):
+        print(f"   דאקינג        : פתיח {args.music_lufs:.1f} LUFS עד {args.speech_start:.2f}ש → דיבור {args.speech_lufs:.1f} LUFS (הראל 20.7 r4)")
     mute_w = parse_mute(getattr(args, "mute", None), D)
     if mute_w:
-        expr = "*".join(f"min(1,max(0,max(({a:.3f}-t)/0.04,(t-{b:.3f})/0.08)))" for a, b in mute_w)
-        fc_pre = fc_pre.replace("[v0][mbed]amix", f"[mbed]volume='{expr}':eval=frame[mbedm];[v0][mbedm]amix")
         print(f"   השתקת מצע     : {', '.join(f'{a:.2f}-{b:.2f}' for a, b in mute_w)} (hook_fx)")
 
     # --- PASS 1: רינדור ה-premix (אודיו בלבד, בלי loudnorm סופי) כדי למדוד אותו ---
@@ -424,8 +511,9 @@ def cmd_mix(args):
         return 1
     # L135 — שער מדוד: המצע בחלון הדיבור מול הדיבור. גלאי שלא נמדד = לא PASS.
     if _gap or getattr(args, "min_gap", None) is not None:
-        g = measure_bed_gap(args, m, D, v["I"])
-        rec = {"policy": _gap, "measured": g, "min_gap": getattr(args, "min_gap", None)}
+        g = measure_bed_gap(args, m, D, v["I"], env)
+        rec = {"policy": _gap, "measured": g, "min_gap": getattr(args, "min_gap", None),
+               "local": {k: v_ for k, v_ in (env or {}).items() if k != "cmdfile"} or None}
         try:
             with open(f"{args.out}.musicgap.json", "w", encoding="utf-8") as f:
                 json.dump(rec, f, ensure_ascii=False, indent=1)
@@ -446,6 +534,14 @@ def cmd_mix(args):
                 return cmd_mix(args)
             print(f"   ❌ G_music_gap: המוזיקה {g['gap_lu']:.1f} LU מתחת לדיבור < רצפה {args.min_gap} — חזק מדי", file=sys.stderr)
             return 3
+    if env and env.get("applied") and env["worst_local_gap_after"] < env["local_gap"] - 1.5:
+        print(f"   ❌ G_music_local: חלון שבו המוזיקה {env['worst_local_gap_after']} LU מתחת לקול < {env['local_gap']}", file=sys.stderr)
+        return 3
+    if env and env.get("cmdfile"):
+        try:
+            os.remove(env["cmdfile"])
+        except OSError:
+            pass
     print(f"✅ נשמר: {args.out}  (מוזיקה קבועה, סאונד מלא לכל האורך)")
     if ".music_from_" in str(args.music):          # v9.47 — קובץ הביניים של ה-offset
         try:
@@ -482,6 +578,8 @@ def main():
     px.add_argument("--min-gap", type=float, default=None, help="L135: רצפה — המוזיקה בדיבור לעולם לא קרובה יותר מזה (LU)")
     px.add_argument("--min-intro-gap", type=float, default=None, help="L135: רצפה לפתיח (LU)")
     px.add_argument("--gap-tolerance", type=float, default=0.6)
+    px.add_argument("--local-gap", type=float, default=None,
+                    help="L138: בכל חלון 3ש עם דיבור — המוזיקה לפחות כך מתחת לקול של אותו חלון (LU). מנמיך בלבד")
     px.set_defaults(func=cmd_mix)
 
     args = p.parse_args()

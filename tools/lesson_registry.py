@@ -1608,6 +1608,18 @@ LESSONS: dict[str, dict] = {
     'music',
     [{'kind': 'code', 'file': 'tools/audio_mix.py', 'pattern': '_gap_nudge'},
      {'kind': 'test', 'file': 'tests/test_music_gap_l135.py', 'pattern': 'test_closed_loop_retry_lands_above_floor'}]),
+ 'L138_music_local_floor_and_recalibration': L(
+    'מוזיקה מתחת לדיבור נמדדת גם פר-חלון: בכל חלון 3ש עם דיבור המצע לפחות 20 LU מתחת לקול של אותו חלון '
+    '(מעטפת שמנמיכה בלבד, slew 6dB/ש). המפלס האינטגרלי: gap 26 / רצפה 25. עוגן "מאושר" שנשמע אחרי פרסום כחזק — נפסל, '
+    'ותיקון מפלס כולל סריקת התור ב-Metricool כי קובץ שגומר קודם לא מתעדכן לבד.',
+    'הראל 14.10.26 על E-Myth שעלה: "שוב המוזיקה גבוהה מידיי... למרות שאמרת שטיפלת". הקובץ גומר 25.9 (לפני L135) והיה העוגן של L135 '
+    '(gap 20.9); נמדד אחרי פרסום בהפרדת קול/מוזיקה: gap 20.3, ובחלון ה-CTA האחרון ~9.6 dB בלבד. ה"דאקינג" בקוד הוא מדרגה אחת בכניסת הדיבור.',
+    'music',
+    [{'kind': 'code', 'file': 'tools/audio_mix.py', 'pattern': r'def local_envelope'},
+     {'kind': 'code', 'file': 'tools/audio_mix.py', 'pattern': r'def bed_filter'},
+     {'kind': 'code', 'file': 'tools/local_finish_pipeline.py', 'pattern': r'--local-gap'},
+     {'kind': 'test', 'file': 'tests/test_music_local_l138.py', 'pattern': 'test_quiet_tail_is_caught_and_fixed'},
+     {'kind': 'test', 'file': 'tests/test_music_gap_l135.py', 'pattern': 'test_policy_floor_well_below_rejected_anchor'}]),
 }
 
 

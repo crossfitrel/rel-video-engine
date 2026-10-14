@@ -1838,7 +1838,11 @@ def main():
         if not mus_pref.get("allow_louder"):
             mix_cmd += ["--min-gap", str(_pol["min_speech_gap_lu"]), "--min-intro-gap", str(_pol["min_intro_gap_lu"]),
                         "--gap-tolerance", str(_pol["gate_tolerance_lu"])]
+            if _pol.get("min_local_gap_lu") is not None:      # L138 — רצפה פר-חלון (CTA/משפט שקט)
+                mix_cmd += ["--local-gap", str(_pol["min_local_gap_lu"])]
         music_detail += f" · L135 gap {'ידני ' + str(_gs) if mus_pref.get('gap_db') is not None else (_gs or 'ידני-LUFS')} / רצפה {_pol['min_speech_gap_lu']}"
+        if not mus_pref.get("allow_louder") and _pol.get("min_local_gap_lu") is not None:
+            music_detail += f" · רצפה מקומית {_pol['min_local_gap_lu']}"
     if hfx_mute:
         mix_cmd += ["--mute", ";".join(f"{x:.3f}-{y:.3f}" for x, y in hfx_mute)]
         music_detail += f" · דרופ הוק {hfx_mute}"
@@ -1848,6 +1852,9 @@ def main():
         _mg = json.loads(Path(f"{MIXED}.musicgap.json").read_text(encoding="utf-8"))
         if _mg.get("measured"):
             music_detail += f" · נמדד: מוזיקה {_mg['measured']['gap_lu']} LU מתחת לדיבור"
+        _lc = _mg.get("local") or {}
+        if _lc.get("applied"):
+            music_detail += f" · מעטפת מקומית: {_lc['seconds_reduced']}ש עד ‎-{_lc['max_cut_db']}dB (חלון גרוע {_lc['worst_local_gap_after']} LU)"
     except Exception:
         pass
     st.done_step("music", music_detail)
