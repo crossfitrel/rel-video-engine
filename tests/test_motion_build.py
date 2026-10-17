@@ -362,3 +362,50 @@ class NameSparkle(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class WordAnchorsV949(unittest.TestCase):
+    """v9.49 (17.10.26) — עוגני מילה: זמני MG נגזרים מ-words_final ולא מחושבים בראש.
+    הזרקת כשל: resolve_anchors שמתעלם מ-n / מקבל התאמת שורש לפני מדויקת / MG12 שלא חוסם ⇒ נכשל."""
+    W = words(("השאלה", 0.0), ("האלה", 1.0), ("לא", 2.0), ("רק", 2.4), ("לא", 3.0), ("וכושר,", 4.0), ("וכושר", 5.0))
+
+    def _p(self, ev, bw=None):
+        p = plan([ev]); p["base_windows"] = bw or []; mb.resolve_anchors(p, self.W); return p
+
+    def test_exact_before_stem(self):
+        # L140: "השאלה"→שורש "אלה" תפס את "האלה" כשהעוגן חיפש מילה מאוחרת יותר
+        p = self._p({"id": "a", "type": "stat", "start": {"w": "האלה"}, "end": 3, "value": 1})
+        self.assertEqual(p["events"][0]["start"], 1.0)
+
+    def test_occurrence_and_after(self):
+        p = self._p({"id": "a", "type": "stat", "start": {"w": "לא", "n": 2}, "end": {"w": "רק", "after": 2.1}, "value": 1})
+        self.assertEqual((p["events"][0]["start"], p["events"][0]["end"]), (3.0, 2.4))
+
+    def test_nested_lists_and_base_windows(self):
+        p = self._p({"id": "a", "type": "board_list", "start": 0, "end": 6,
+                     "items": [{"text": "x", "at": {"w": "וכושר", "n": 2}}]}, bw=[[0, {"w": "רק"}]])
+        self.assertEqual(p["events"][0]["items"][0]["at"], 5.0)
+        self.assertEqual(p["base_windows"][0][1], 2.4)
+
+    def test_missing_anchor_blocks(self):
+        p = self._p({"id": "a", "type": "stat", "start": {"w": "מומצא"}, "end": 3, "value": 1})
+        g = mb.gate_anchors(p)
+        self.assertFalse(g["ok"]); self.assertEqual(g["level"], "blocking")
+
+    def test_pipe_is_line_break_not_word(self):
+        p = plan([{"id": "a", "type": "board_title", "start": 0, "end": 3, "text": "לא רק | וכושר"}])
+        self.assertTrue(mb.gate_text_fidelity(p, self.W)["ok"])
+
+
+class NoNegativeTransitionL139(unittest.TestCase):
+    """L139: מעבר בזמן שלילי (חלון בסיס שמתחיל ב-0) הזיז את כל הטיימליין ב-1.27ש. אוכף בקוד הליבה."""
+    def test_core_guards(self):
+        js = (HERE.parent / "tools" / "motion" / "lib" / "rel-motion.js").read_text(encoding="utf-8")
+        self.assertIn("if (s0 > 0.3) evs.push", js)
+        self.assertIn("Math.max(0, t0 - 0.24)", js)
+
+    def test_board_templates_registered(self):
+        for t in ("board_title", "spectrum", "board_list", "board_strike", "board_steps", "board_years"):
+            self.assertIn(t, mb.FULL_TYPES)
+        for t in ("board_poll", "source_tag"):
+            self.assertIn(t, mb.OVERLAY_TYPES)

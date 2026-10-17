@@ -1620,6 +1620,30 @@ LESSONS: dict[str, dict] = {
      {'kind': 'code', 'file': 'tools/local_finish_pipeline.py', 'pattern': r'--local-gap'},
      {'kind': 'test', 'file': 'tests/test_music_local_l138.py', 'pattern': 'test_quiet_tail_is_caught_and_fixed'},
      {'kind': 'test', 'file': 'tests/test_music_gap_l135.py', 'pattern': 'test_policy_floor_well_below_rejected_anchor'}]),
+ 'L139_mg_no_negative_transition': L(
+    'שום אנימציה בטיימליין הראשי של ה-MG לא מתחילה בזמן שלילי: חלון בסיס שמתחיל ב-0 לא מקבל מעבר כניסה, '
+    'וזמן התחלה של שכבת מעבר נחתך ל-0. מעבר שלילי גורם ל-GSAP להזיז את כל הילדים קדימה — כל ה-MG מאחר אחרי הדיבור.',
+    'דמו "על הלוח" 17.10.26: base_windows [[0,1.85]] + backdrop ⇒ shutter ב-‎-0.24ש ⇒ כל 11 האירועים זזו +1.27ש '
+    '("בריאות" הופיעה 1.4ש אחרי שנאמרה). נמדד ב-getChildren().startTime מול ev.start. באג קיים מ-v9.39.',
+    'motion',
+    [{'kind': 'code', 'file': 'tools/motion/lib/rel-motion.js', 'pattern': r's0 > 0\.3\) evs\.push'},
+     {'kind': 'test', 'file': 'tests/test_motion_build.py', 'pattern': 'class NoNegativeTransitionL139'}]),
+ 'L140_word_anchor_exact_first': L(
+    'זמני MG הם עוגני מילה מהציר הסופי ולא מספרים שחושבו בראש (MG12 חוסם עוגן יתום); '
+    'התאמה מדויקת קודם, התאמת שורש רק אם אין אף מופע מדויק.',
+    'הראל 17.10.26: "ברמה גבוהה יותר בדיוק של התוכן". בדמו "השאלה" נקצץ לשורש "אלה" ונתפס על "האלה" 7.6ש מוקדם — '
+    'סצנת המדרגות נעלמה. תוקן לסריקה מדויקת-קודם.',
+    'motion',
+    [{'kind': 'code', 'file': 'tools/motion_build.py', 'pattern': 'def gate_anchors'},
+     {'kind': 'code', 'file': 'tools/motion_build.py', 'pattern': 'exact=True'},
+     {'kind': 'test', 'file': 'tests/test_motion_build.py', 'pattern': 'test_exact_before_stem'}]),
+ 'L141_board_caption_floor': L(
+    'סצנת MG מסך-מלא על משטח בהיר/אדום מחזיקה רצפה כהה ברצועת הכתוביות (מ-1262) — הכתובית הממותגת '
+    '(לבן + מתאר אדום) לא נקראת על נייר ונעלמת על אדום.',
+    'דמו "על הלוח" 17.10.26: V7 מדד garbled 27/90 cues על משטחי נייר/אדום; אחרי הרצפה — 0 ממצאים, f_ok 0.871.',
+    'motion',
+    [{'kind': 'code', 'file': 'tools/motion/templates/board.js', 'pattern': 'רצפת כתוביות'},
+     {'kind': 'doc', 'file': 'tools/motion/MOTION.md', 'pattern': 'רצפת כתוביות'}]),
 }
 
 

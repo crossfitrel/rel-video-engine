@@ -103,7 +103,7 @@ WORDS_MAP              = relvid.edl_utils.map_words_to_keeps (v7.9) · **לא מ
                          (speech_coverage_gate) מוודא שאין דיבור בלי כתוביות
 CAPTIONS_MAC           = captions-app/captions_overlay.py  # צריבה PIL על המק (בלי libass)
 CAPTIONS_SANDBOX       = tools/captions_build.py           # ASS+libass (בסנדבוקס בלבד)
-MUSIC_MIX              = tools/audio_mix.py mix — יחסי לדיבור: gap 26 / רצפה 25 / רצפה מקומית 20 לחלון 3ש (L138, 14.10.26; tools/music-level-policy.json) ·
+MUSIC_MIX              = tools/audio_mix.py mix --music-lufs -46 (v9.22; -38→-46→-44→-46) ·
                          דאקינג ברירת-מחדל בעומק 8 (דיבור ‎-54) · אורך מלא · --no-duck מבטל
 MUSIC_LIB              = brand-assets/music/  ("calm" בשם = רגוע; rotation אוטומטי;
                          חוק 90 יום: אותה מנגינה לא חוזרת בחלון 3 חודשים — music-rotation.json v2)

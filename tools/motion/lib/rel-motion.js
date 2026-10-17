@@ -109,7 +109,9 @@
     const evs = (plan.events||[]).slice();
     // גבולות חלונות הבסיס (מעבר אנימציה ⇄ הראל במצלמה) מקבלים מעבר משלהם
     if (plan.backdrop) (plan.base_windows||[]).forEach(([s0,e0],j) => {
-      evs.push({id:'_bwi'+j, start:s0, transition:'shutter', _virtual:true});
+      // v9.49 (L139): חלון שמתחיל ב-0 לא מקבל מעבר כניסה — מעבר בזמן שלילי (a=-0.24) גרם ל-GSAP להזיז את כל
+      // הטיימליין קדימה ב-~1.27ש (כל אנימציה איחרה אחרי הדיבור). נמדד בדמו "על הלוח" 17.10.26.
+      if (s0 > 0.3) evs.push({id:'_bwi'+j, start:s0, transition:'shutter', _virtual:true});
       if (e0 < plan.duration - 0.3) evs.push({id:'_bwo'+j, start:e0, transition:'panel', _virtual:true}); });
     evs.sort((a,b)=>a.start-b.start);
     let k = 0;
@@ -126,7 +128,7 @@
       if (kind === 'push' && root){ master.fromTo(root,{xPercent:-100},{xPercent:0,duration:.42,ease:'rel.inOut',immediateRender:false},t0); return; }
       if (kind === 'iris' && root){ master.fromTo(root,{clipPath:'circle(0% at 50% 45%)'},{clipPath:'circle(140% at 50% 45%)',duration:.5,ease:'rel.inOut',immediateRender:false},t0); return; }
       const lay = REL.el('div','mg-event',stage); lay.dataset.mgId = '_t_'+ev.id; lay.dataset.mgType = 'transition'; lay.style.zIndex = 50;
-      const a = t0 - 0.24, b = t0 + 0.34;
+      const a = Math.max(0, t0 - 0.24), b = t0 + 0.34;   // L139 — אף פעם לא זמן שלילי בטיימליין הראשי
       master.set(lay,{visibility:'visible'},a); master.set(lay,{visibility:'hidden'},b);
       if (kind === 'panel'){
         const p1 = REL.el('div','',lay), p2 = REL.el('div','',lay);
@@ -143,7 +145,7 @@
           master.to(bar,{scaleX:0,transformOrigin: j%2 ? '100% 50%' : '0% 50%',duration:.26,ease:'rel.out'},t0 + j*.012); }
       } else if (kind === 'flash'){
         const f = REL.el('div','',lay); Object.assign(f.style,{position:'absolute',inset:0,background:'#fff'});
-        master.fromTo(f,{opacity:0},{keyframes:[{opacity:.75,duration:.06},{opacity:0,duration:.24}]},t0-.06);   // פלאש קצר — לא מסך אפור
+        master.fromTo(f,{opacity:0},{keyframes:[{opacity:.75,duration:.06},{opacity:0,duration:.24}]},Math.max(0,t0-.06));   // פלאש קצר — לא מסך אפור
       }
       REL.events.push({id:'_t_'+ev.id, type:'transition', start:a, end:b, hero:t0, full:true});
     });

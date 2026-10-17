@@ -108,3 +108,12 @@ whoosh (כניסת מסך מלא / מעבר) · pop (כרטיס/אפשרות) ·
 - מתכונים שמשלבים MG (`hook_toolbox.json` edit_recipes): `object_spotlight` (spotlight + תריס) · `then_now_split` (then_now + הרצה אחורה) · `anatomy_freeze_draw` (impact_freeze עם punch=1 + telestrator על הפריים הקפוא) · `number_stat_hit` (stat + פגיעה ורעד קטן).
 - **HFX10:** תנועה גאומטרית לא חופפת MG מרחבי (spotlight/then_now/telestrator/callout/forearm/angle/tripod) — הנקודה שה-MG מצביע עליה הייתה זזה. פריז בלי פאנץ'/רעד מותר.
 - צלילי ה-MG (`plan_sfx`) וצלילי ההוק נספרים יחד בעין: לא יותר מ-3 צלילים ב-0-4ש. עדיף צליל אחד חזק על הרגע.
+
+## 13. סגנון "על הלוח מונפש" (v9.49, 17.10.26) — `templates/board.js` · `docs/על-הלוח-מונפש.md`
+הראל 17.10.26 על רילס ייחוס (הסבר שכולו גרפיקה על רצף מחלה-בריאות-כושר): "לעל הלוח ... במיתוג שלנו" · "ברמה גבוהה יותר בדיוק של התוכן" · "לתכנן מראש את התסריט לפי האנימציות" · "הרוב אנימציות, מידי פעם אני".
+- **משטחים:** `plate: ink | paper | red` — דיו/נייר/אדום מותג, מתחלפים לפי משמעות. האדום נוחת רק על "כושר"/המסקנה. במשטח נייר/אדום יש **רצפת כתוביות** (פס דיו מ-1262) — V7 מדד 27/90 garbled בלעדיה.
+- **קשת עוגן:** `spectrum` (צמתים · טבעת שגולשת · `flood` מהצומת) + `board_poll` ל-CTA. מודל אחד שחוזר.
+- **סצנות:** `board_title` (`|` = שבירה) · `board_list` (אייקונים breathe/strength/move/recover/check) · `board_strike` · `board_steps` (`plan_at` = מתאר מקווקו "מראש") · `board_years` (ציר RTL) · `source_tag`.
+- **דיוק:** כל זמן = **עוגן מילה** `{"w":..,"n":..,"after":..,"off":..,"edge":"end"}` שנפתר מ-words_final (MG12 חוסם; מדויק לפני שורש — L140). טענה חיצונית ⇒ `source_tag` + `facts.source`.
+- **~80/20:** `backdrop:true` + `base_windows` לפתיחה ליד הלוח (עם `spotlight` על הציור האמיתי), רגע אישי, CTA. חלון שמתחיל ב-0 לא מקבל מעבר כניסה (L139).
+- תוכנית ייחוס: `~/rel-video-work/_motion_demo/board_scale/motion_plan.json`.

@@ -134,9 +134,9 @@ EMAIL_TO  = harel@crossfitrel.com — רק כשנדרשת פעולה מהראל 
 | `references/failures.md` | משהו נכשל / בקשה ידנית חריגה | טיפול בכשלים · ערוץ ידני | 1K |
 | `references/fix-verify.md` | סבב תיקונים: changelog פר-גרסה, verify-fixes, fix-verdict | שלושת החוזים של v9.13 (16.8.26) — נגד עריכות-מחדש וטעויות חוזרות · "מה תוקן בגרסה הזו" — בדיקת תיקונים במקום צפייה מחדש  | 4K |
 | `references/hook-build.md` | שלב 2.5: ארגז כלי ההוק, HOOK_PLAN, P22, מגברי spotlight/then_now | בניית הוק — ארגז כלי ההוק (v9.44, 8.10.26) | 3K |
-| `references/motion-graphics.md` | שכבת MG: תבניות, motion_plan, שערי MG0-MG8, --motion בגימור, אזורים ומינון | שכבת Motion Graphics (v9.37, 4.10.26) | 3K |
-| `references/version-history.md` | היסטוריה בלבד — כמעט אף פעם | גרסה | 19K |
-| `references/video-canon.md` | מחלוקת על חוק עריכה — הקאנון גובר | VIDEO-CANON (עותק מ-00_META) | 20K |
+| `references/motion-graphics.md` | שכבת MG: תבניות, motion_plan, שערי MG0-MG8, --motion בגימור, אזורים ומינון | שכבת Motion Graphics (v9.37, 4.10.26) | 4K |
+| `references/version-history.md` | היסטוריה בלבד — כמעט אף פעם | גרסה | 20K |
+| `references/video-canon.md` | מחלוקת על חוק עריכה — הקאנון גובר | VIDEO-CANON (עותק מ-00_META) | 21K |
 
 ---
-*גרסת מערכת v10.0 — 2026-10-10 · נבנה 2026-10-11 21:39 · master sha a1ff1bdc8db1 · core sha f2d395334da8*
+*גרסת מערכת v10.0 — 2026-10-10 · נבנה 2026-10-17 11:00 · master sha b8877369d1f7 · core sha f2d395334da8*

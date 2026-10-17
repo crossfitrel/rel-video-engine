@@ -63,14 +63,18 @@ FW, FH = 1080, 1920
 # MG1 — אזור בטוח לטקסט. למעלה: UI של אינסטגרם/טיקטוק (Meta 14% = 269px) עם סובלנות.
 # למטה: רצועת הכתוביות של הקאנון (0.66H = 1267px, illustration_place.CAPTION_BAND).
 SAFE = {"x0": 56, "x1": 1024, "y0": 258, "y1": 1256}
-FULL_TYPES = {"forearm", "end_card", "tripod", "outro"}
+FULL_TYPES = {"forearm", "end_card", "tripod", "outro",
+              # v9.49 — סגנון "על הלוח מונפש" (templates/board.js): משטחי צבע + קשת עוגן
+              "board_title", "spectrum", "board_list", "board_strike", "board_steps", "board_years"}
 OVERLAY_TYPES = {"kinetic_title", "chips", "name_reveal", "name_sparkle", "compare", "list_stack", "quote",
                  "poll", "stat", "callout", "angle", "section",
                  # v9.38 — סיפור/תחרות · אימון/טכניקה · הסבר/וויס-אובר (templates/story|coach|explainer.js)
                  "letterbox", "punch", "athlete_card", "podium", "timeline", "quote_card",
                  "tag", "telestrator", "bubbles", "day_split", "alerts", "clock", "crowd",
                  # v9.44 — מגברי הוק (templates/hook.js, tools/hook_toolbox.json)
-                 "spotlight", "then_now"}
+                 "spotlight", "then_now",
+                 # v9.49 — על הלוח מונפש: סקר-קשת מעל הצילום · תגית מקור
+                 "board_poll", "source_tag"}
 # מיקום מפורש בתבנית (קואורדינטות/פינה/פסים) — 'auto' לא מוכרע לפי פנים; MG2 עדיין בודק טקסט מול פנים
 FIXED_POS_TYPES = {"letterbox", "tag", "telestrator", "spotlight", "then_now"}
 # then_now: שני פאנלים 1080×953 (עליון 0, תחתון 967) — כל פאנל מציג פריים קפוא אחר (L124)
@@ -79,8 +83,10 @@ THEN_NOW_H = 953.0
 TYPES = FULL_TYPES | OVERLAY_TYPES
 TEXT_KEYS = ("text", "name", "role", "title", "sub", "a", "b", "question", "label", "kicker",
              "promise", "state_a", "state_b", "label_radius", "label_ulna", "stat_unit", "unit",
-             "by", "word", "wrong_label", "tri_label", "label_a", "label_b", "value_a", "value_b")
-LIST_TEXT_KEYS = ("items", "options", "marks", "labels", "places")     # רשימות של {text} או מחרוזות
+             "by", "word", "wrong_label", "tri_label", "label_a", "label_b", "value_a", "value_b",
+             "result", "line2")
+LIST_TEXT_KEYS = ("items", "options", "marks", "labels", "places",     # רשימות של {text} או מחרוזות
+                  "nodes", "steps", "ticks", "strike", "lines")       # v9.49 board.js
 DICT_TEXT_KEYS = ("comment", "winner", "chip")                         # {text, at}
 NUM_KEYS = ("value", "stat_value", "to_deg")
 SFX_KINDS = ("whoosh", "pop", "tick", "hit", "sparkle")   # sparkle = חתימת שם מתאמן (name_sparkle, 8.10.26)
@@ -120,7 +126,7 @@ def sha(p: Path) -> str:
 
 
 NIQQUD = re.compile(r"[֑-ׇ]")
-PUNCT = re.compile(r"[\"'״׳?!.,:;()\[\]{}…–—\-־/\\]")
+PUNCT = re.compile(r"[\"'״׳?!.,:;()\[\]{}…–—\-־/\\|]")   # v9.49: "|" = שבירת שורה בתבניות board
 PREFIX = "והבכלמש"
 
 
@@ -185,7 +191,97 @@ def load_plan(W: Path, path: str | None = None) -> dict:
     plan.setdefault("facts", [])
     plan.setdefault("events", [])
     plan["_path"] = str(p)
+    resolve_anchors(plan, load_words(W))
     return plan
+
+
+# ─────────────────── עוגני מילה (v9.49, 17.10.26 — "דיוק בתוכן") ───────────────────
+# הראל 17.10.26: "אפילו ברמה גבוהה יותר בדיוק של התוכן" + "לתכנן מראש את התסריט לפי האנימציות".
+# כל זמן בתוכנית יכול להיות עוגן למילה במקום מספר שחושב בראש: {"w":"מחלה"} · {"w":"כושר","n":2} ·
+# {"w":"10","edge":"end","off":-0.05} · {"w":"השאלה","after":40}. העוגן נפתר מ-words_final (הציר הסופי) —
+# אם הציר משתנה בגימור חוזר, האנימציה זזה איתו. עוגן שלא נמצא ⇒ MG12 חוסם (לא ממציאים זמן).
+# זו המקבילה בתוכנית ל-`◆MG <תבנית> — [מה] @ [מילה]` שבתסריט (rel-script-writer).
+
+def _anchor_time(a: dict, words: list[dict]):
+    """קודם התאמה מדויקת; רק אם אין אף מופע מדויק — התאמת שורש. (L140: "השאלה"→"אלה" נתפס כ"האלה" — שורש
+    עם שתי תחיליות מוקדם מדי זז 7.6ש אחורה. עוגן הוא כתובת, לא חיפוש מילים דומות.)"""
+    t, err = _anchor_scan(a, words, exact=True)
+    if t is None:
+        t2, _ = _anchor_scan(a, words, exact=False)
+        if t2 is not None:
+            return t2, None
+    return t, err
+
+
+def _anchor_scan(a: dict, words: list[dict], exact: bool):
+    target = toks(a.get("w", ""))
+    if not target:
+        return None, "עוגן בלי w"
+    n, after = int(a.get("n", 1)), float(a.get("after", -1))
+    wt = [(toks(w.get("word") or w.get("text") or ""), w) for w in words]
+    same = (lambda t, s: t == s) if exact else (lambda t, s: tok_match(t, {s}))
+    k = 0
+    for i in range(len(wt)):
+        if float(wt[i][1].get("start", 0)) < after:
+            continue
+        seq = []
+        j = i
+        while j < len(wt) and len(seq) < len(target):
+            seq += wt[j][0]
+            j += 1
+        if len(seq) >= len(target) and all(same(t, s) for t, s in zip(target, seq[:len(target)])):
+            k += 1
+            if k == n:
+                w0, w1 = wt[i][1], wt[j - 1][1]
+                base = float(w1["end"]) if a.get("edge") == "end" else float(w0["start"])
+                return round(max(0.0, base + float(a.get("off", 0))), 3), None
+    return None, f"«{a.get('w')}» (מופע {n}) לא נמצא בציר"
+
+
+def resolve_anchors(plan: dict, words: list[dict]) -> None:
+    errs: list[str] = []
+
+    def walk(o, where):
+        if isinstance(o, dict):
+            for k, v in list(o.items()):
+                if isinstance(v, dict) and "w" in v and len(v) <= 5 and set(v) <= {"w", "n", "off", "edge", "after"}:
+                    if not words:
+                        errs.append(f"{where}.{k}: אין words_final לפתרון עוגן")
+                        continue
+                    t, err = _anchor_time(v, words)
+                    if err:
+                        errs.append(f"{where}.{k}: {err}")
+                    else:
+                        o[k] = t
+                        o.setdefault("_anchors", {})[k] = v
+                else:
+                    walk(v, f"{where}.{k}")
+        elif isinstance(o, list):
+            for i, v in enumerate(o):
+                if isinstance(v, dict) and "w" in v and set(v) <= {"w", "n", "off", "edge", "after"}:
+                    if not words:
+                        errs.append(f"{where}[{i}]: אין words_final"); continue
+                    t, err = _anchor_time(v, words)
+                    if err:
+                        errs.append(f"{where}[{i}]: {err}")
+                    else:
+                        o[i] = t
+                else:
+                    walk(v, f"{where}[{i}]")
+
+    for ev in plan.get("events", []):
+        walk(ev, ev.get("id", "?"))
+    bw = plan.get("base_windows") or []
+    walk({"base_windows": bw}, "plan")
+    plan["_anchor_errors"] = errs
+
+
+def gate_anchors(plan: dict) -> dict:
+    """MG12 — סנכרון: כל עוגן מילה נפתר מהציר הסופי. עוגן יתום = זמן שהומצא ⇒ חוסם."""
+    errs = plan.get("_anchor_errors") or []
+    n = sum(len(e.get("_anchors", {})) for e in plan.get("events", []))
+    return gate("MG12_word_anchors", not errs, "blocking",
+                "; ".join(errs) or f"{n} עוגני מילה נפתרו מ-words_final", missing=errs)
 
 
 def gate(name, ok, level, detail, **extra):
@@ -299,8 +395,8 @@ def gate_base_share(plan: dict) -> dict:
 
 
 def check(W: Path, plan: dict) -> list[dict]:
-    return [gate_schema(plan), gate_text_fidelity(plan, load_words(W)), gate_dosage(plan), gate_reading(plan),
-            gate_sfx(plan), gate_base_share(plan)]
+    return [gate_schema(plan), gate_anchors(plan), gate_text_fidelity(plan, load_words(W)), gate_dosage(plan),
+            gate_reading(plan), gate_sfx(plan), gate_base_share(plan)]
 
 # ─────────────────────────── פנים ───────────────────────────
 
