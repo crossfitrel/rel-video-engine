@@ -117,6 +117,18 @@
     "תוכן חינוכי ⇒ ~80% אנימציה / ~20% הראל (base_windows: פתיחה, רגע אישי, CTA)",
     "התסריט נכתב לפי הסצנות (◆MG STYLE board) — וויס-אובר אחד + 3 שוטים קצרים"
    ]
+  },
+  {
+   "date": "2026-10-17",
+   "demo": "board_scale",
+   "style": "board",
+   "plan": "_motion_demo/board_scale/motion_plan.json",
+   "verdict": "approved",
+   "quote": "מדהים! זה רמה גבוהה מאוד!",
+   "notes": [
+    "סגנון board מאושר כייחוס לתוכן חינוכי ול'על הלוח'",
+    "board_scale = תוכנית הייחוס המאושרת (11 רגעים, 24 עוגני מילה, 18% הראל במצלמה)"
+   ]
   }
  ],
  "measured_reference": {

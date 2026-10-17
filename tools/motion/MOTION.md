@@ -116,4 +116,4 @@ whoosh (כניסת מסך מלא / מעבר) · pop (כרטיס/אפשרות) ·
 - **סצנות:** `board_title` (`|` = שבירה) · `board_list` (אייקונים breathe/strength/move/recover/check) · `board_strike` · `board_steps` (`plan_at` = מתאר מקווקו "מראש") · `board_years` (ציר RTL) · `source_tag`.
 - **דיוק:** כל זמן = **עוגן מילה** `{"w":..,"n":..,"after":..,"off":..,"edge":"end"}` שנפתר מ-words_final (MG12 חוסם; מדויק לפני שורש — L140). טענה חיצונית ⇒ `source_tag` + `facts.source`.
 - **~80/20:** `backdrop:true` + `base_windows` לפתיחה ליד הלוח (עם `spotlight` על הציור האמיתי), רגע אישי, CTA. חלון שמתחיל ב-0 לא מקבל מעבר כניסה (L139).
-- תוכנית ייחוס: `~/rel-video-work/_motion_demo/board_scale/motion_plan.json`.
+- תוכנית ייחוס **מאושרת** (הראל 17.10.26: "מדהים! זה רמה גבוהה מאוד!"): `~/rel-video-work/_motion_demo/board_scale/motion_plan.json`.
