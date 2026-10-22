@@ -34,3 +34,4 @@ node_modules/
 !archive/**
 .upload/
 תוצרי-אנימציה/
+handoff/claims.lock

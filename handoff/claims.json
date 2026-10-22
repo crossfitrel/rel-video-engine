@@ -1,3 +1,18 @@
 {
- "claims": []
+ "claims": [
+  {
+   "file": "tools/motion/templates/purchase.js",
+   "by": "גיפט קארד ריל 2: תבנית app_purchase",
+   "note": "בונה מחדש את purchase.js (לא נשמר ב-10.10)",
+   "since": "2026-10-22 14:14",
+   "expires": 1792678443.4017553
+  },
+  {
+   "file": "tools/motion_build.py",
+   "by": "גיפט קארד ריל 2: תבנית app_purchase",
+   "note": "בונה מחדש את purchase.js (לא נשמר ב-10.10)",
+   "since": "2026-10-22 14:14",
+   "expires": 1792678443.4017553
+  }
+ ]
 }
