@@ -230,6 +230,27 @@ def scene_changes(video: Path, thresh=0.35):
     return [round(float(t), 3) for t in re.findall(r"pts_time:([\d.]+)", err)]
 
 
+
+def clip_boundaries(W: Path):
+    """גבולות הקליפים מ-concat.txt — חילוף שוט ודאי (גם כשאותה זווית ו-scene<0.35).
+
+    22.10.26: בגלם של ארבעה קליפים באותו מועדון ffmpeg scene לא מצא אף חילוף,
+    ושער קפיצת-התנוחה חסם חיתוך שנופל בדיוק על גבול קליפ (שתי תנוחות משני
+    שוטים שונים). הגבול ידוע מהבנייה של INPUT — אין צורך לנחש אותו."""
+    cc = W / "concat.txt"
+    if not cc.exists():
+        return []
+    out, t = [], 0.0
+    names = re.findall(r"file '([^']+)'", cc.read_text(encoding="utf-8"))
+    for n in names[:-1]:
+        d = probe_duration(W / n)
+        if not d:
+            return out
+        t += float(d)
+        out.append(round(t, 3))
+    return out
+
+
 # ═════════════════════════════════════════════════ מעבר 3: חזותי
 def visual_track(video: Path):
     """תנועה גלובלית, תנועת שליש-תחתון (ידיים), ונוכחות פנים — ברזולוציה נמוכה.
@@ -445,6 +466,10 @@ def build(workdir, *, hook_sec=6.0, cta_sec=8.0, min_gap=0.12):
         db, floor = f_env.result()
         scenes = f_sc.result()
         vis = f_vis.result()
+    for _b in clip_boundaries(W):
+        if not any(abs(_b - t) < 0.2 for t in scenes):
+            scenes.append(_b)
+    scenes = sorted(scenes)
     measure_secs = round(time.time() - t0, 1)
 
     # ── הצמדת גבולות מילה לאנרגיה שנמדדה בפועל ──
