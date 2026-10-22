@@ -312,6 +312,10 @@ def gate_schema(plan: dict) -> dict:
         for x in ev.get("sfx") or []:
             if x.get("kind") not in SFX_KINDS:
                 probs.append(f"{i}: sfx לא מוכר {x.get('kind')}")
+        # accent נקרא ב-REL.words כ-(opts.accent||[]).map — מחרוזת מפילה את הדף (MG6) רק בשלב הרינדור,
+        # אחרי שכל השערים שלפני הרינדור עברו. נתפס כאן, לפני הגימור (22.10.26).
+        if "accent" in ev and not isinstance(ev["accent"], list):
+            probs.append(f"{i}: accent חייב להיות רשימת מילים, לא {type(ev['accent']).__name__}")
     bw = plan.get("base_windows") or []
     if bw and plan.get("opaque"):
         probs.append("base_windows עם opaque:true — השכבה חייבת אלפא כדי שהצילום ייראה בחלונות")

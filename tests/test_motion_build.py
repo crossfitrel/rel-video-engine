@@ -65,6 +65,12 @@ class Schema(unittest.TestCase):
         self.assertFalse(mb.gate_schema(plan(ev))["ok"])
         self.assertTrue(mb.gate_schema(plan(ev, tail=3.0))["ok"])
 
+    def test_accent_must_be_list(self):
+        # 22.10.26: accent כמחרוזת עבר את כל השערים ונפל רק ברינדור (MG6 — map is not a function)
+        ev = {"id": "k", "type": "kinetic_title", "start": 0, "end": 2, "text": "3 שאלות"}
+        self.assertFalse(mb.gate_schema(plan([dict(ev, accent="3")]))["ok"])
+        self.assertTrue(mb.gate_schema(plan([dict(ev, accent=["3"])]))["ok"])
+
 
 class Dosage(unittest.TestCase):
     def test_dosage_is_reporting_until_calibrated(self):
