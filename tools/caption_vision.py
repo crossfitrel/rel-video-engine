@@ -319,6 +319,12 @@ def project_inputs(W_dir: Path, video=None, words=None, brand=None):
         # מודד מול זמנים מוזזים ומדווח "garbled" על כתוביות תקינות (נמדד: 41/54 מול 0/54).
         wf, wm = W_dir / "words_final.json", W_dir / "words_after_mg.json"
         words = wm if (wm.exists() and (not wf.exists() or wm.stat().st_mtime >= wf.stat().st_mtime)) else wf
+        # 22.10.26: מילים שמוצגות כ-MG (suppress_captions) לא נצרבו בכוונה — הצינור מודד מול
+        # words_captions_mg.json, אבל V7 העצמאי (vision_check) מדד מול הרשימה המלאה ודיווח אותן
+        # "missing" (נמדד: 36/130 על על-הלוח-כושר מול 0/94 בצינור) ⇒ P13/P20 high שקרי.
+        wc = W_dir / "words_captions_mg.json"
+        if wc.exists() and words.exists() and wc.stat().st_mtime >= words.stat().st_mtime:
+            words = wc
     man = {}
     try:
         man = json.loads((W_dir / "project_manifest.json").read_text(encoding="utf-8"))
