@@ -65,7 +65,9 @@ FW, FH = 1080, 1920
 SAFE = {"x0": 56, "x1": 1024, "y0": 258, "y1": 1256}
 FULL_TYPES = {"forearm", "end_card", "tripod", "outro",
               # v9.49 — סגנון "על הלוח מונפש" (templates/board.js): משטחי צבע + קשת עוגן
-              "board_title", "spectrum", "board_list", "board_strike", "board_steps", "board_years"}
+              "board_title", "spectrum", "board_list", "board_strike", "board_steps", "board_years",
+              # v9.48 — הדמיית רכישה באפליקציה (templates/purchase.js) — חובה ב-CTA של כל תוכן גיפט קארד
+              "app_purchase"}
 OVERLAY_TYPES = {"kinetic_title", "chips", "name_reveal", "name_sparkle", "compare", "list_stack", "quote",
                  "poll", "stat", "callout", "angle", "section",
                  # v9.38 — סיפור/תחרות · אימון/טכניקה · הסבר/וויס-אובר (templates/story|coach|explainer.js)
@@ -84,7 +86,10 @@ TYPES = FULL_TYPES | OVERLAY_TYPES
 TEXT_KEYS = ("text", "name", "role", "title", "sub", "a", "b", "question", "label", "kicker",
              "promise", "state_a", "state_b", "label_radius", "label_ulna", "stat_unit", "unit",
              "by", "word", "wrong_label", "tri_label", "label_a", "label_b", "value_a", "value_b",
-             "result", "line2")
+             "result", "line2",
+             # v9.48 app_purchase
+             "store_title", "product", "product_sub", "price", "cta", "done_label", "chat_name", "msg",
+             "card_title", "card_sub", "card_code", "sent_label")
 LIST_TEXT_KEYS = ("items", "options", "marks", "labels", "places",     # רשימות של {text} או מחרוזות
                   "nodes", "steps", "ticks", "strike", "lines")       # v9.49 board.js
 DICT_TEXT_KEYS = ("comment", "winner", "chip")                         # {text, at}
