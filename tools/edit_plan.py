@@ -363,8 +363,15 @@ def validate(workdir, verbose=True):
     # השורש של "יש רגע שאני מסתכל למטה". הפיצול כבר נבחר למזעור הקפיצה
     # (`best_split`); כאן מודדים מה נשאר ומדווחים. חוסם רק כשגם הפיצול
     # הטוב ביותר לא הצליח — כלומר הגוף זז לאורך **כל** הפער.
+    # חיתוך שחוצה שינוי סצנה (גבול בין קליפים) הוא מעבר שוט, לא קפיצת-חיתוך:
+    # "התנוחה" בשני צידיו שייכת לשני שוטים שונים, ולכן המדד לא חל עליו
+    # (נמדד 22.10.26: שני גבולות קליפ נחסמו ב-0.236/0.188 בלי שום ג'אמפ-קאט).
+    _scenes = [float(t) for t in (((cands.get("measurement") or {})
+                                   .get("scene_changes") or {}).get("times") or [])]
     jumps = []
     for (s, e, cid) in cuts:
+        if any(s - 0.05 <= t <= e + 0.05 for t in _scenes):
+            continue
         pj = pose_jump(by_id.get(cid), s, e)
         if pj is not None:
             jumps.append((pj, cid, s))
