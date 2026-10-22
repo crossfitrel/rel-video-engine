@@ -297,22 +297,26 @@ REL.define('board_poll', ctx => {
   draw(tl, path, .3, .55);
   (ev.nodes||[]).forEach((n,i) => {
     const [x,y] = geom.pt(n.pos);
+    // n.at (עוגן מילה, אופציונלי): התחנה נוחתת על המילה שלה — לא לפני שנאמרה (MG12). בלי at — מדורג כמו קודם.
+    const na = n.at != null ? Math.max(.45, ctx.at(n.at) - 2*F) : .45 + i*.08;
     const c = svgEl('circle',{cx:x,cy:y,r:14,fill:'#fff'},svg);
-    tl.fromTo(c,{scale:0,svgOrigin:`${x} ${y}`},{scale:1,duration:.3},.45 + i*.08);
+    tl.fromTo(c,{scale:0,svgOrigin:`${x} ${y}`},{scale:1,duration:.3},na);
     const lb = el('div','mg-title',s); Object.assign(lb.style,{position:'absolute',width:'240px',left:(x-120)+'px',textAlign:'center',fontSize:'46px',
       top: (n.pos > .2 && n.pos < .8) ? (y-84)+'px' : (y+34)+'px'});
     lb.textContent = n.text;
-    tl.fromTo(lb,{autoAlpha:0,y:16},{autoAlpha:1,y:0,duration:.32},.5 + i*.08);
+    tl.fromTo(lb,{autoAlpha:0,y:16},{autoAlpha:1,y:0,duration:.32},na + .05);
   });
   // סימן שאלה שקופץ בין התחנות — דטרמיניסטי (keyframes), בלי repeat:-1
   const qm = svgEl('g',{},svg);
   svgEl('circle',{r:30,fill:'#d42a30',stroke:'#fff','stroke-width':5},qm);
   const tq = svgEl('text',{'text-anchor':'middle','dominant-baseline':'central',fill:'#fff','font-family':'Ploni','font-weight':900,'font-size':40},qm); tq.textContent = '?';
   const o = {t:.5}; const upd = () => { const [x,y] = geom.pt(o.t); qm.setAttribute('transform',`translate(${x} ${y})`); }; upd();
-  tl.fromTo(qm,{autoAlpha:0},{autoAlpha:1,duration:.25},.8);
   const hops = ev.hops || [0,1,.5];
+  // hop_at (אופציונלי, עוגני מילה): כל קפיצה נוחתת על התחנה שנאמרת עכשיו — כמו שהתיעוד בראש התבנית מבטיח
+  const hopT = Array.isArray(ev.hop_at) && ev.hop_at.length === hops.length ? ev.hop_at.map(x => Math.max(.3, ctx.at(x) - .12)) : null;
+  tl.fromTo(qm,{autoAlpha:0},{autoAlpha:1,duration:.25}, hopT ? Math.max(.2, hopT[0] - .2) : .8);
   let t0 = .95;
-  hops.forEach(h => { tl.to(o,{t:h,duration:.5,ease:'rel.inOut',onUpdate:upd},t0); t0 += .9; });
+  hops.forEach((h,i) => { tl.to(o,{t:h,duration:.5,ease:'rel.inOut',onUpdate:upd}, hopT ? hopT[i] : t0); t0 += .9; });
   tl.to(card,{autoAlpha:0,y:-20,duration:T.exit,ease:'rel.in'}, outAt(ctx,.25));
 });
 
