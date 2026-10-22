@@ -8,7 +8,7 @@
  *   done_at  — "הרכישה הושלמה" (V) — ברירת מחדל tap_at+0.55
  *   chat_at  — מעבר לצ'אט והודעה עם הכרטיס ("ומקבלים"/"לווצאפ")
  *   card_at  — ברק על הכרטיס + הקוד קופץ ("קוד")
- *   send_at  — (אופציונלי) העברה הלאה: הכרטיס עף ו-sent_label נוחת ("ושולחים")
+ *   send_at  — (אופציונלי) העברה הלאה: כפתור העברה נלחץ, הכרטיס זז, גלולת sent_label נוחתת ("ושולחים"/"אל")
  * כל טקסט מ-facts עם source או מהתמליל (MG4). צבעים: טוקני המותג בלבד — הצ'אט כהה, בלי ירוק/כחול של אפליקציות
  * (MOTION.md §2). אין מלבן סביב משטחים (L117): המשטחים עצמם מעוגלים, החשיפה בתנועה/clip-path. */
 (function(){
@@ -103,27 +103,25 @@ REL.define('app_purchase', ctx => {
   tl.fromTo(shine, {left:'-160px'}, {left:'420px', duration:.7, ease:'rel.inOut'}, card);
   if (code) tl.fromTo(code, {scale:.4, autoAlpha:0, transformOrigin:'0% 100%'}, {scale:1, autoAlpha:1, duration:.36, ease:'rel.hero'}, card + .1);
 
-  // ── שלב 4 (אופציונלי): שליחה הלאה — send_at ("ושולחים"): כפתור העברה נלחץ, הכרטיס עף, סטטוס "נשלח"
+  // ── שלב 4 (אופציונלי): שליחה הלאה — send_at ("ושולחים"): כפתור העברה נלחץ, הכרטיס זז, גלולת "נשלח"
   if (ev.send_at != null) {
     const snd = ctx.at(ev.send_at);
     const fwd = el('div', '', ch);
     Object.assign(fwd.style, {position:'absolute', top:'650px', left:'244px', width:'84px', height:'84px', borderRadius:'50%', background:'#f3eeee',
       display:'grid', placeItems:'center', boxShadow:'0 8px 18px rgba(0,0,0,.4)'});
     fwd.innerHTML = '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#871d1f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 5l7 7-7 7"/><path d="M21 12H9a6 6 0 0 0-6 6v1"/></svg>';
-    const fly = bub.cloneNode(true); ch.appendChild(fly);
-    [...fly.querySelectorAll('.mg-box')].forEach(n => n.classList.remove('mg-box'));   // העתק דקורטיבי — לא נמדד פעמיים
-    const sent = txt(ch, ev.sent_label || '', {position:'absolute', top:'770px', left:'30px', right:'30px', textAlign:'center',
-      font:'800 44px/1.1 var(--f-title)', color:'#fff'});
+    const sent = txt(ch, ev.sent_label || '', {position:'absolute', top:'650px', textAlign:'center',
+      font:'800 46px/1.1 var(--f-title)', color:'#fff', background:'var(--rel-red)', borderRadius:'40px', padding:'14px 30px 18px', left:'auto', right:'auto', width:'max-content', marginInline:'auto', insetInline:0});
     const sring = el('div', '', phone);
     Object.assign(sring.style, {position:'absolute', left:(14 + 244 - 4) + 'px', top:(14 + 650 - 4) + 'px', width:'92px', height:'92px', borderRadius:'50%',
       border:'6px solid #fff', zIndex:6});
     tl.fromTo(fwd, {autoAlpha:0, scale:.5}, {autoAlpha:1, scale:1, duration:.3, ease:'rel.hero'}, Math.max(0, snd - .45));
     tl.fromTo(sring, {autoAlpha:0, scale:1.6}, {autoAlpha:1, scale:1, duration:.2, ease:'rel.out'}, Math.max(0, snd - .2));
     tl.to(sring, {scale:1.9, autoAlpha:0, duration:.32, ease:'rel.out'}, snd + .05);
-    tl.fromTo(fly, {autoAlpha:0}, {autoAlpha:1, duration:.01}, snd + .08);
-    tl.to(fly, {x:-520, y:-260, rotation:-14, scale:.55, autoAlpha:0, duration:.55, ease:'rel.in'}, snd + .1);
-    tl.to(bub, {autoAlpha:.35, duration:.3, ease:'rel.out'}, snd + .1);
-    tl.to(fwd, {autoAlpha:0, duration:.2}, snd + .4);
+    // הכרטיס "יוצא": דחיפה קטנה שמאלה-למעלה וחזרה (תחושת שליחה) — בלי שכפול ובלי עמעום (ביקורת MG_SNAPS 22.10.26)
+    tl.to(bub, {x:-18, y:-14, scale:.97, duration:.16, ease:'rel.out'}, snd + .08);
+    tl.to(bub, {x:0, y:0, scale:1, duration:.3, ease:'rel.hero'}, snd + .24);
+    tl.to(fwd, {autoAlpha:0, scale:.6, duration:.2, ease:'rel.in'}, snd + .38);
     if (ev.sent_label) tl.fromTo(sent, {autoAlpha:0, y:24}, {autoAlpha:1, y:0, duration:.4, ease:'rel.hero'}, snd + .55);
   }
 
