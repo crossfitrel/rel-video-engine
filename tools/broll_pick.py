@@ -496,6 +496,12 @@ def main():
     if not is_throwdown:
         items = [it for it in items
                  if "Throwdown" not in it["tags"] and "Throwdown" not in it["event"]]
+    # v10 (22.10.26, ממומן ילדים): הפרדת מחלקות קשיחה גם בקהל. עד היום מחלקת "ילדים"
+    # קיבלה את כל בריכת המועדון (54 קליפים — דדליפט, אמבט קרח, מיכאל לוי) ורק קליפ
+    # ילדים אחד. סרטון ילדים = בירול ילדים בלבד; לכן מסננים לפי audience/category.
+    if a.dept.strip() == "ילדים" or a.audience == "ילדים":
+        items = [it for it in items
+                 if "ילדים" in (it.get("audience") or []) or it.get("category") == "ילדים"]
     if a.audience in ("נשים", "גברים"):
         items = [it for it in items
                  if not it.get("audience") or a.audience in it["audience"] or
