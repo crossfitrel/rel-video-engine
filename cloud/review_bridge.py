@@ -105,6 +105,15 @@ def export(out: Path):
             src = p if p.exists() else None
         if not src and (W / "FINAL.mp4").exists():
             src = W / "FINAL.mp4"
+        # v10.1 (23.10.26): גרסה חדשה לפני אישור — כל השערים עברו חוץ מ-approve_publish_gate,
+        # ולכן היא נשארת FINAL_PENDING. מציגים אותה לרוויו (פרוקסי צפייה בלבד); אישור הראל
+        # בעמוד הוא שמקדם אותה ל-FINAL דרך הגימור הרגיל. ה-FINAL הישן לא נוגעים בו.
+        pending_view = False
+        pend, gb = W / "FINAL_PENDING.mp4", _j(W / "gate_blockers.json", {}) or {}
+        only_appr = bool(gb.get("blockers")) and all("approve_publish_gate" in b for b in gb["blockers"])
+        if pend.exists() and only_appr and (not src or pend.stat().st_mtime > src.stat().st_mtime) \
+                and (W / "PREFLIGHT_PENDING.json").exists():
+            src, pending_view = pend, True
         video_url = None
         if src:
             s = sha256(src)
@@ -122,7 +131,7 @@ def export(out: Path):
                 cover_url = (assets.get(cs) or {}).get("url")
                 if not cover_url:
                     uploads.append({"project": r["name"], "doc_id": doc_id(W), "kind": "cover", "src": str(cpp), "sha": cs})
-        pf = _j(W / "PREFLIGHT.json", {}) or {}
+        pf = _j(W / ("PREFLIGHT_PENDING.json" if pending_view else "PREFLIGHT.json"), {}) or {}
         vd = pf.get("verdict") if isinstance(pf.get("verdict"), dict) else {}
         ready = bool(vd.get("ready_for_harel", pf.get("ready_for_harel", False)))
         sev = {"high": 0, "medium": 1, "low": 2}
@@ -136,6 +145,8 @@ def export(out: Path):
         except Exception:
             pass
         state = STATE_MAP.get(r.get("state"), r.get("state") or "draft")
+        if pending_view:
+            state = "review" if ready else "fixing"
         if state == "review" and not ready:
             state = "fixing"   # אין תוצר להראל בלי מבקר-קדם תקין (חוזה 1)
         docs.append({"doc_id": doc_id(W), "data": {
@@ -145,7 +156,7 @@ def export(out: Path):
             "video_url": video_url,
             "preflight": {"ready": ready, "verdict": "מבקר-קדם: " + str(vd.get("summary") or ("מוכן לך" if ready else "לא רץ")),
                           "lines": lines},
-            "fixed": fixed, "cover_url": cover_url,
+            "fixed": fixed, "cover_url": cover_url, "pending_view": pending_view,
             "caption": sched.get("caption_text") or sched.get("caption_draft"), "test": bool(m.get("test")),
             "publish_date": r.get("planned_date"), "updated_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
         }})

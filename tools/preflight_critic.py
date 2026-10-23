@@ -91,7 +91,7 @@ def load_plan(W: Path):
     # v9.34 (23.9.26): התוכנית שבתיקייה ≠ מה שנצרב. גימור עם --no-broll משאיר
     # broll_plan.json על הדיסק, ו-P1 דיווח HIGH על "קפיצה כפולה" מבירול שלא קיים
     # ב-FINAL (ניפוץ-מיתוסים). מקור האמת = finish_prefs.broll.items_applied (v7.6).
-    if (W / "FINAL.mp4").exists():
+    if (W / TARGET).exists():
         man = jload(W / "project_manifest.json", {}) or {}
         br = ((man.get("finish_prefs") or {}).get("broll") or {})
         if "items_applied" in br and isinstance(br["items_applied"], list):
@@ -565,7 +565,7 @@ def check_caption_density(findings, W: Path):
 
 def check_orientation_output(findings, W: Path):
     """P19 (L69): הדמות על הצד בתוצר. אותו שופט של I1, על הקובץ שהראל יראה."""
-    vid = next((W / n for n in ("FINAL.mp4", "FINAL_PENDING.mp4", "EXPORT.mp4")
+    vid = next((W / n for n in (TARGET, "FINAL.mp4", "FINAL_PENDING.mp4", "EXPORT.mp4")
                 if (W / n).exists()), None)
     if vid is None:
         return
@@ -805,7 +805,7 @@ def run(workdir: str, out_dur: float | None = None) -> dict:
         # v9.22 (10.9.26): הרצה ידנית בלי --out-dur סכמה את ה-keeps בלי האצה —
         # "איך הכרנו" ב-speed 1.175 דווח 70.5ש (high) כשה-FINAL היה 60.0ש.
         # קודם מדידת הקובץ עצמו; אחרת חלוקה ב-speed מרשומת המקור.
-        _fin = W / "FINAL.mp4"
+        _fin = W / TARGET
         _measured = None
         if _fin.exists():
             try:
@@ -866,18 +866,28 @@ def run(workdir: str, out_dur: float | None = None) -> dict:
                                  if f["severity"] == HIGH)[:160]),
     }
     doc_out = {"verdict": verdict, "findings": findings}
-    (W / "PREFLIGHT.json").write_text(
+    (W / OUT_NAME).write_text(
         json.dumps(doc_out, ensure_ascii=False, indent=1), encoding="utf-8")
     return doc_out
 
 
+TARGET = "FINAL.mp4"
+OUT_NAME = "PREFLIGHT.json"
+
+
 def main() -> int:
+    global TARGET, OUT_NAME
     ap = argparse.ArgumentParser()
     ap.add_argument("--workdir", required=True)
     ap.add_argument("--out-dur", type=float, default=None)
     ap.add_argument("--json", action="store_true")
     ap.add_argument("--strict", action="store_true")
+    # v10.1 (23.10.26): גרסה לפני אישור נשארת FINAL_PENDING (שער approve_publish) — המבקר
+    # בודק אותה במקום ה-FINAL הישן וכותב PREFLIGHT_PENDING.json; ה-FINAL לא נוגעים בו.
+    ap.add_argument("--target", default="FINAL.mp4", choices=["FINAL.mp4", "FINAL_PENDING.mp4"])
     a = ap.parse_args()
+    TARGET = a.target
+    OUT_NAME = "PREFLIGHT.json" if TARGET == "FINAL.mp4" else "PREFLIGHT_PENDING.json"
     doc = run(a.workdir, a.out_dur)
     v = doc["verdict"]
     if a.json:
