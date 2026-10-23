@@ -124,6 +124,14 @@ def resume_flags(workdir):
 
 def build_command(workdir, body, pybin, extra_flags=None):
     w = Path(workdir)
+    # v10.1: אישור מעמוד הרוויו בענן משחזר בדיוק את הגימור שייצר את הגרסה שהראל ראה
+    if body.get("replay_last"):
+        last = read_json(w / "LAST_FINISH_ARGS.json", {}) or {}
+        if last.get("args"):
+            cmd = [str(pybin), str(TOOLS / "run_finish.py"), "--workdir", str(w)] + list(last["args"])
+            for f in (extra_flags or []):
+                cmd.append(f)
+            return cmd
     cmd = [str(pybin), str(TOOLS / "run_finish.py"), "--workdir", str(w),
            "--content-type", body.get("content_type", "value"),
            "--brand", body.get("brand", "rel")]

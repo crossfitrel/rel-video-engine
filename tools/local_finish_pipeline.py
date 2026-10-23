@@ -795,6 +795,21 @@ def main():
                          "speed-only: מחיל --speed בלי לחתוך אף שתיקה — לשימוש "
                          "כשתוכנית הפערים כבר נקבעה (במאי/הראל).")
     a = ap.parse_args()
+    # v10.1 (23.10.26): הארגומנטים המדויקים של הגימור שמייצר את FINAL_PENDING נשמרים, כדי
+    # שאישור הראל בעמוד ("אשר והתחל גימור") ישחזר את אותו סרטון שהוא ראה ולא גימור ברירת מחדל
+    # (מאסל מן 23.10: האישור בלי דגלים בנה בירול+פתיח שלא היו בגרסה שאושרה). L45-reproduce.
+    try:
+        _argv = sys.argv[1:]
+        _wi = _argv.index("--workdir") if "--workdir" in _argv else -1
+        _args = [x for i, x in enumerate(_argv) if i not in (_wi, _wi + 1)] if _wi >= 0 else list(_argv)
+        _ri = _args.index("--run-id") if "--run-id" in _args else -1
+        if _ri >= 0:
+            del _args[_ri:_ri + 2]
+        (Path(a.workdir).resolve() / "LAST_FINISH_ARGS.json").write_text(json.dumps(
+            {"args": _args, "ts": time.strftime("%Y-%m-%d %H:%M:%S")}, ensure_ascii=False, indent=1),
+            encoding="utf-8")
+    except Exception:
+        pass
 
     W = Path(a.workdir).resolve()
     st = Status(W)

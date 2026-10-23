@@ -217,7 +217,12 @@ def apply(inp: Path, out: Path):
         if W:
             t = a.get("type")
             if t == "approve_publish":
-                res = c.post(f"/api/approve/{W.name}", json={"actor": "harel", "source": "cloud-review"}).get_json() or {}
+                # v10.1: לשחזר את הגימור המדויק של הגרסה שנצפתה (LAST_FINISH_ARGS.json), לא ברירת מחדל
+                _la = (_j(W / "LAST_FINISH_ARGS.json", {}) or {}).get("args") or []
+                _ct = _la[_la.index("--content-type") + 1] if "--content-type" in _la[:-1] else "value"
+                _br = _la[_la.index("--brand") + 1] if "--brand" in _la[:-1] else "rel"
+                res = c.post(f"/api/approve/{W.name}", json={"actor": "harel", "source": "cloud-review",
+                             "replay_last": bool(_la), "content_type": _ct, "brand": _br}).get_json() or {}
             elif t == "approve_cover_caption":
                 res = c.post(f"/api/schedule-review/{W.name}", json={"action": "approve", "caption_text": a.get("caption")}).get_json() or {}
             elif t == "request_cover_change":
