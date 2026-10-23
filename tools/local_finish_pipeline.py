@@ -678,7 +678,7 @@ def main():
     ap.add_argument("--whisper-model", default="auto",
                     help="auto = ivrit-ai/whisper-large-v3-turbo-ct2 + VAD (v7.8, 25.7.26). "
                          "נמדד מול medium על 6 סרטונים עם תמליל מתוקן: פי ~2 מהר וכמחצית "
-                         "השגיאות (WER 7.5% מול 15.8% בסרטון הייחוס). small/medium/large-v3 "
+                         "השגיאות (WER 7.5%% מול 15.8%% בסרטון הייחוס). small/medium/large-v3 "
                          "עדיין נתמכים בשם מפורש. בנוסף asr-glossary.json לשיבושים חוזרים.")
     ap.add_argument("--no-map-words", action="store_true",
                     help="מבטל את מיפוי המילים מ-whisper_raw ומאלץ תמלול חוזר על הקאט "
