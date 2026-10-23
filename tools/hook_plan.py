@@ -317,7 +317,9 @@ def cmd_stamp(W: Path, video: str) -> dict:
     if not (W / "HOOK_SHEET.jpg").exists():
         raise SystemExit("אין HOOK_SHEET.jpg — sheet ואז Read קודם")
     hp["sheet"] = "HOOK_SHEET.jpg"
-    hp["media"] = media_stamp(W, video)
+    # 23.10.26: --video בנתיב מלא (כמו ב-sheet) נשמר כנתיב מלא, ו-evaluate משווה מול השם בלבד
+    # ⇒ P22 "ה-FINAL השתנה" לנצח גם אחרי stamp טרי. הקובץ תמיד בתוך W — נשמר בשם.
+    hp["media"] = media_stamp(W, Path(video).name)
     hp["stamped_at"] = time.strftime("%Y-%m-%dT%H:%M:%S")
     (W / "HOOK_PLAN.json").write_text(json.dumps(hp, ensure_ascii=False, indent=1), encoding="utf-8")
     return hp
