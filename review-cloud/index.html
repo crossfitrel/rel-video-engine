@@ -99,7 +99,7 @@ textarea{min-height:76px;resize:vertical}
   <section id="detail" hidden>
     <button class="back" id="back">→ כל הסרטונים</button>
     <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;margin-block:6px 10px">
-      <h2 id="d-title"></h2><span class="pill" id="d-state"></span>
+      <h2 id="d-title"></h2><span style="display:flex;gap:8px;align-items:center"><span class="pill" id="d-state"></span><button class="btn" id="hide" type="button" title="הסר מהרשימה" style="padding:6px 10px">🗑</button></span>
     </div>
     <div class="player"><video id="vid" playsinline controls preload="metadata"></video><div class="novideo" id="novideo" hidden>הגרסה הזו עוד לא עלתה. היא תופיע אחרי הריצה הבאה.</div></div>
     <div class="note" style="margin-top:6px">גרסה <span id="d-ver" class="tc"></span> · <span id="d-dur" class="tc"></span> · פרסום מתוכנן <span id="d-date"></span></div>
@@ -163,12 +163,17 @@ const STATE = {
 let db=null, me=null, projects=[], comments=[], actions=[], filter='need', open=null, unsub=[];
 const fmt = (s) => { s=Math.max(0,Math.round(s||0)); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); };
 function toast(t){ const el=$('toast'); el.textContent=t; el.hidden=false; clearTimeout(toast.h); toast.h=setTimeout(()=>el.hidden=true,2600); }
-function st(p){ return STATE[p.state] || {t:p.state||'—',c:'',g:'work'}; }
+const WAIT={send_notes:'הערות נשלחו · ממתין לקלאוד',approve_publish:'אושר · ממתין לגימור',approve_cover_caption:'אושר · ממתין לתזמון',request_cover_change:'בקשת שינוי · ממתין לקלאוד'};
+function st(p){
+  // בקשה של הראל שעוד לא טופלה גוברת על הסטטוס מהקלאוד, כדי שלא יעבור פעמיים על אותו תוכן
+  const pend=pendingFor(p.id).filter(a=>WAIT[a.type]);
+  if(pend.length){ const last=pend.sort((a,b)=>String(b.at||'').localeCompare(String(a.at||'')))[0]; return {t:'⏳ '+WAIT[last.type],c:'wait',g:'work'}; }
+  return STATE[p.state] || {t:p.state||'—',c:'',g:'work'}; }
 function pendingFor(pid){ return actions.filter(a=>a.project===pid && !a.consumed); }
 
 function renderList(){
   const groups={need:[],work:[],done:[]};
-  projects.forEach(p=>groups[st(p).g].push(p));
+  projects.filter(p=>!p.hidden).forEach(p=>groups[st(p).g].push(p));
   for(const k of Object.keys(groups)) $('n-'+k).textContent=groups[k].length?String(groups[k].length):'';
   const rows=groups[filter].sort((a,b)=>String(a.publish_date||'9').localeCompare(String(b.publish_date||'9')));
   const L=$('list'); L.textContent='';
@@ -256,6 +261,9 @@ $('send').onclick=async()=>{
 };
 $('approve').onclick=()=>{ $('approve-confirm').hidden=false; };
 $('approve-no').onclick=()=>{ $('approve-confirm').hidden=true; };
+$('hide').onclick=async()=>{ if(!db) return toast('אין חיבור לנתונים'); const b=$('hide');
+  if(!b.dataset.arm){ b.dataset.arm='1'; b.textContent='להסיר?'; setTimeout(()=>{ b.dataset.arm=''; b.textContent='🗑'; },3000); return; }
+  try{ await db.doc('projects/'+open).update({hidden:true}); await addAction('remove'); toast('הוסר מהרשימה'); $('back').click(); }catch(e){ toast('לא הוסר: '+(e.message||e.code)); } };
 $('approve-yes').onclick=async()=>{ $('approve-confirm').hidden=true; try{ await addAction('approve_publish'); toast('אושר לגימור'); }catch(e){ toast('האישור לא נשמר: '+(e.message||e.code)); } };
 $('cc-ok').onclick=async()=>{ try{ await addAction('approve_cover_caption',{caption:$('caption').value}); $('caption').dataset.dirty=''; toast('אושר — יתוזמן בריצה הבאה'); }catch(e){ toast('לא נשמר: '+(e.message||e.code)); } };
 $('cc-change').onclick=async()=>{ const n=$('cc-note'); if(n.hidden){ n.hidden=false; n.focus(); return; }
