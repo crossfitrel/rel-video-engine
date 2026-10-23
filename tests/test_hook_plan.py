@@ -41,6 +41,19 @@ def sev(fs, needle=None):
 
 
 class HookPlanFindings(unittest.TestCase):
+    def test_stamp_is_checked_against_target_file(self):
+        """v10.1: preflight --target FINAL_PENDING.mp4 בודק את ההצהרה מול ה-PENDING, לא מול FINAL הישן."""
+        W = mkw(SCENE, plan=dict(GOOD, sheet="HOOK_SHEET.jpg"))
+        (W / "HOOK_SHEET.jpg").write_bytes(b"x")
+        (W / "FINAL.mp4").write_bytes(b"old")
+        (W / "FINAL_PENDING.mp4").write_bytes(b"newer-version")
+        hp.cmd_stamp(W, "FINAL.mp4")          # נקשר לגרסה הישנה
+        stale = "השתנה אחרי שההוק נבדק"
+        self.assertEqual(sev(hp.evaluate(W, measure_video=False, target="FINAL_PENDING.mp4"), stale), ["medium"])
+        hp.cmd_stamp(W, "FINAL_PENDING.mp4")
+        self.assertEqual(sev(hp.evaluate(W, measure_video=False, target="FINAL_PENDING.mp4"), stale), [])
+        self.assertEqual(sev(hp.evaluate(W, measure_video=False), stale), ["medium"])
+
     def test_no_plan_is_high_for_new_project(self):
         fs = hp.evaluate(mkw(SCENE), measure_video=False)
         self.assertIn("high", sev(fs, "HOOK_PLAN"))

@@ -537,7 +537,7 @@ def check_hook_anchor(findings, W: Path):
         findings.append(F("P22_hook_anchor", MED, f"hook_plan לא נטען: {e}", "לבדוק tools/hook_plan.py"))
         return
     try:
-        for x in HP.evaluate(W):
+        for x in HP.evaluate(W, target=TARGET):
             findings.append(F("P22_hook_anchor", x["severity"], x["detail"], x["fix"]))
     except Exception as e:                                     # גלאי שנופל בשקט גרוע מגלאי שאין
         findings.append(F("P22_hook_anchor", MED, f"P22 לא נמדד: {e}", "להריץ hook_plan.py check ידנית"))

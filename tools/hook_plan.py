@@ -158,9 +158,14 @@ def suggest(W: Path) -> dict:
 
 # ─────────────────────────── הממצאים (P22) ───────────────────────────
 
-def evaluate(W: Path, measure_video: bool = True) -> list[dict]:
-    """ממצאי P22. כל ממצא: {check, severity, detail, fix}. לא חוסם בעצמו — preflight קובע ready_for_harel."""
+def evaluate(W: Path, measure_video: bool = True, target: str | None = None) -> list[dict]:
+    """ממצאי P22. כל ממצא: {check, severity, detail, fix}. לא חוסם בעצמו — preflight קובע ready_for_harel.
+
+    target (v10.1, 23.10.26): הקובץ שנבדק — FINAL.mp4 (ברירת מחדל) או FINAL_PENDING.mp4.
+    עד התיקון ההשוואה הייתה תמיד מול FINAL.mp4, ולכן preflight --target FINAL_PENDING.mp4
+    אישר הצהרת הוק שנקשרה ל-FINAL הישן (גרסה אחרת) — מעבר שקרי."""
     W = Path(W)
+    target = Path(target).name if target else "FINAL.mp4"
     tb = toolbox()
     f: list[dict] = []
     F = lambda sev, d, fix: f.append({"check": CHECK, "severity": sev, "detail": d, "fix": fix})
@@ -179,7 +184,7 @@ def evaluate(W: Path, measure_video: bool = True) -> list[dict]:
         if anc not in (tb.get("anchor_types") or {}) or not str(hp.get("t0") or "").strip():
             F(HIGH, f"אין עוגן מוחשי מוצהר בשנייה 0 (anchor_type={anc!r}, t0 ריק={not hp.get('t0')})",
               "לבחור פריים פתיחה שהוא סצנה/פעולה/חפץ/אדם/מספר — או לצלם (shot_debt)")
-        fin = "FINAL.mp4" if (W / "FINAL.mp4").exists() else None
+        fin = target if (W / target).exists() else None
         if not hp.get("sheet") or not (W / str(hp.get("sheet"))).exists():
             F(MED, "ההצהרה לא נבדקה על גיליון (HOOK_SHEET.jpg חסר)", "hook_plan.py sheet → Read → stamp")
         elif fin and hp.get("media") and media_stamp(W, fin) != hp.get("media"):
@@ -210,8 +215,8 @@ def evaluate(W: Path, measure_video: bool = True) -> list[dict]:
         if early:
             F(HIGH, f"מסך גרפי מלא לפני העוגן ({early[0].get('type')} @ {float(early[0]['start']):.1f}ש) — כרטיס כותרת",
               "להזיז אחרי 2ש או להחליף במגבר מעל העוגן (spotlight/kinetic_title)")
-    if measure_video and (W / "FINAL.mp4").exists():
-        y = first_frame_yavg(W / "FINAL.mp4")
+    if measure_video and (W / target).exists():
+        y = first_frame_yavg(W / target)
         if y is not None and y < BLACK_YAVG:
             F(HIGH, f"הפריים הראשון שחור (YAVG {y:.1f})", "הפריים הראשון = העוגן; לחתוך את השחור")
     return f
@@ -338,7 +343,7 @@ def main() -> int:
         hp = cmd_stamp(W, a.video or "FINAL.mp4")
         print(f"נקשר ל-{hp['media']}")
     else:
-        fs = evaluate(W)
+        fs = evaluate(W, target=a.video)
         if not fs:
             print("✅ P22 נקי — עוגן מוצהר, נבדק על הגיליון, אין פתיחה אסורה")
         for x in fs:
