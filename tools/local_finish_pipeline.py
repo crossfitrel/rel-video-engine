@@ -1854,6 +1854,10 @@ def main():
                         "--gap-tolerance", str(_pol["gate_tolerance_lu"])]
             if _pol.get("min_local_gap_lu") is not None:      # L138 — רצפה פר-חלון (CTA/משפט שקט)
                 mix_cmd += ["--local-gap", str(_pol["min_local_gap_lu"])]
+        _bl = _pol.get("bed_level") or {}
+        if _bl.get("enabled"):                                # L142 — טראק שנבנה מיושר לפני המדידה
+            mix_cmd += ["--bed-level", "--bed-level-max-cut", str(_bl.get("max_cut_db", 12.0)),
+                        "--bed-level-max-boost", str(_bl.get("max_boost_db", 3.0))]
         music_detail += f" · L135 gap {'ידני ' + str(_gs) if mus_pref.get('gap_db') is not None else (_gs or 'ידני-LUFS')} / רצפה {_pol['min_speech_gap_lu']}"
         if not mus_pref.get("allow_louder") and _pol.get("min_local_gap_lu") is not None:
             music_detail += f" · רצפה מקומית {_pol['min_local_gap_lu']}"
@@ -1869,6 +1873,10 @@ def main():
         _lc = _mg.get("local") or {}
         if _lc.get("applied"):
             music_detail += f" · מעטפת מקומית: {_lc['seconds_reduced']}ש עד ‎-{_lc['max_cut_db']}dB (חלון גרוע {_lc['worst_local_gap_after']} LU)"
+        _bl_r = _mg.get("bed_level") or {}
+        if _bl_r.get("status") == "applied":
+            music_detail += (f" · יישור מצע: S p10-p90 {_bl_r['S_p10_p90_before']}→{_bl_r['S_p10_p90_after']}"
+                             f" (‎-{_bl_r['max_cut_db']}/+{_bl_r['max_boost_db']}dB)")
     except Exception:
         pass
     st.done_step("music", music_detail)

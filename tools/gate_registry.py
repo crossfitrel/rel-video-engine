@@ -123,6 +123,13 @@ GATES: dict[str, dict] = {
     "allow_louder:true ב-finish_prefs.music לבחירה מפורשת של הראל; אחרת לתקן את השרשרת ולגמור שוב",
     "gap ≥ 21-0.6 LU (מצע בחלון הדיבור מול dialog_I)", MEASURED),
 
+ "audio_mix:G_music_local": G(
+    "audio_mix", BLOCKING,
+    "משפט שקט/CTA או טראק שנבנה חושפים את המוזיקה מעל הקול גם כשה-gap האינטגרלי עובר (E-Myth 14.10, פינה-אנטומית-פרק2 23.10.26)",
+    "נמוך — חוסם רק כשהמדידה/היישור לא רצו (לא נמדד ≠ PASS) או כשהחלון הגרוע אחרי המעטפת < local_gap-1.5",
+    "allow_louder:true ב-finish_prefs.music מוריד את הרצפה המקומית; יישור המצע (L142) רץ תמיד כשיש דיבור",
+    "חלון 3ש עם דיבור: קול-מצע ≥ min_local_gap_lu-1.5 (20) · יישור מצע הוחל", MEASURED),
+
  "qa_gates:G5_format": G(
     "qa_gates", BLOCKING,
     "רזולוציה/fps לא תקינים נדחים בהעלאה או נחתכים",

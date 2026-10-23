@@ -255,15 +255,17 @@ def bed_filter(args, m, D, envelope=None):
     return s
 
 
-def _short_term_series(inputs, chain, D):
-    """ebur128 short-term (חלון 3ש) כל 0.1ש → מערך numpy באורך ceil(D*10). None = לא נמדד."""
+def _short_term_series(inputs, chain, D, key="S"):
+    """ebur128 short-term (חלון 3ש, key=S) או momentary (400ms, key=M) כל 0.1ש → מערך numpy
+    באורך ceil(D*10)+1. הערך באינדקס i מתאר את החלון שמסתיים ב-i/10 (ebur128 = חלון נגרר).
+    None = לא נמדד."""
     import tempfile
     import numpy as np
     fd, tmp = tempfile.mkstemp(suffix=".r128.txt")
     os.close(fd)
     try:
         r = run(["ffmpeg", "-hide_banner", "-nostats", *inputs, "-filter_complex",
-                 f"{chain},ebur128=metadata=1,ametadata=mode=print:key=lavfi.r128.S:file='{tmp}'",
+                 f"{chain},ebur128=metadata=1,ametadata=mode=print:key=lavfi.r128.{key}:file='{tmp}'",
                  "-t", f"{D:.3f}", "-f", "null", "-"])
         with open(tmp, encoding="utf-8", errors="ignore") as fh:
             txt = fh.read()
@@ -282,7 +284,7 @@ def _short_term_series(inputs, chain, D):
         if mt:
             t = float(mt.group(1))
             continue
-        if "lavfi.r128.S=" in line and t is not None:
+        if f"lavfi.r128.{key}=" in line and t is not None:
             i = int(round(t * 10))
             if 0 <= i < n:
                 try:
@@ -293,6 +295,74 @@ def _short_term_series(inputs, chain, D):
         if out[i] <= -120.0 and out[i - 1] > -120.0:
             out[i] = out[i - 1]
     return out
+
+
+def macro_level_bed(args, D):
+    """L142 (הראל 23.10.26, פינה-אנטומית-פרק2 נק' 53.5ש: "המוזיקה רועשת מידיי. זה חוזר על עצמו
+    כל הזמן וחייב לטפל בזה מהשורש"). נמדד על המק: gap אינטגרלי 24.2 עבר, אבל הטראק **נבנה** —
+    המצע עלה ‎-60→‎-49 LUFS-M לאורך הסרטון, כלומר ה-CTA בסוף הוא הרגע הכי רועש. loudnorm ליניארי
+    שומר את הצורה הזאת, והרצפה המקומית (L138) רק מגיבה לחלונות שכבר נכשלו.
+    כאן — שלב שמייצר את המצע **לפני** המדידה והמיקס: הקטע שבאמת מתנגן (D שניות, כולל לולאה)
+    מרונדר ל-WAV, ה-short-term (3ש) שלו מיושר לחציון של עצמו (קטע "בנייה" יורד עד max_cut,
+    קטע שקט עולה עד max_boost בלבד), ומכאן הכל — loudnorm, השער האינטגרלי, המעטפת המקומית
+    וה-nudge — רץ על המצע המיושר, כך שמה שנמדד = מה שנשמע. החלקה: חלון ממורכז 3ש + slew
+    ‎2dB/ש (יישור מאקרו, לא דאקינג). מחזיר (נתיב, דוח) או (None, דוח-כשל)."""
+    try:
+        import numpy as np
+    except Exception:
+        return None, {"status": "not_measured", "why": "numpy חסר — לא נמדד ≠ PASS"}
+    max_cut = float(getattr(args, "bed_level_max_cut", None) or 12.0)
+    max_boost = float(getattr(args, "bed_level_max_boost", None) or 3.0)
+    raw = f"{args.out}.bed_raw.wav"
+    r = run(["ffmpeg", "-y", "-hide_banner", "-nostats", "-loglevel", "error", "-stream_loop", "-1",
+             "-i", args.music, "-t", f"{D:.3f}", "-vn", "-ar", "48000", "-ac", "2", "-c:a", "pcm_f32le", raw])
+    if r.returncode != 0 or not os.path.exists(raw):
+        return None, {"status": "failed", "why": (r.stderr or "")[-300:]}
+    try:
+        S = _short_term_series(["-i", raw], "[0:a]aformat=sample_rates=48000:channel_layouts=stereo", D, "S")
+        if S is None:
+            return None, {"status": "not_measured", "why": "ebur128 על המצע נכשל"}
+        n = len(S)
+        # ebur128 S בנקודה i = חלון [i-3ש, i]; ממרכזים (‎-1.5ש) כדי שהגיין יפגוש את הקטע שמדד
+        Sc = np.concatenate([S[15:], np.full(15, S[-1])])[:n]
+        act = Sc > -70.0
+        if act.sum() < 20:
+            return None, {"status": "not_measured", "why": "מצע כמעט שקט — אין מה ליישר"}
+        ref = float(np.median(Sc[act]))
+        g = np.where(act, np.clip(ref - Sc, -max_cut, max_boost), 0.0)
+        k = 15                                               # ממוצע ממורכז 3ש — מאקרו בלבד
+        gp = np.pad(g, k, mode="edge")
+        g = np.convolve(gp, np.ones(2 * k + 1) / (2 * k + 1), mode="same")[k:-k]
+        step = 0.2                                           # slew ‎2dB/ש לשני הכיוונים
+        for i in range(1, n):
+            g[i] = min(max(g[i], g[i - 1] - step), g[i - 1] + step)
+        pcm = subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", raw, "-f", "f32le", "-ac", "2", "-ar", "48000", "-"],
+                             capture_output=True, stdin=subprocess.DEVNULL).stdout
+        x = np.frombuffer(pcm, dtype=np.float32).reshape(-1, 2).copy()
+        ts = np.arange(len(x)) / 48000.0
+        x *= (10 ** (np.interp(ts, np.arange(n) / 10.0, g) / 20.0)).astype(np.float32)[:, None]
+        lev = f"{args.out}.bed_level.wav"
+        w = subprocess.run(["ffmpeg", "-y", "-nostdin", "-v", "error", "-f", "f32le", "-ac", "2", "-ar", "48000", "-i", "-",
+                            "-c:a", "pcm_f32le", lev], input=x.tobytes(), capture_output=True)
+        if w.returncode != 0:
+            return None, {"status": "failed", "why": w.stderr[-300:].decode("utf-8", "replace")}
+    finally:
+        try:
+            os.remove(raw)
+        except OSError:
+            pass
+    after = Sc + g
+    q = lambda a, p: round(float(np.percentile(a, p)), 1)
+    tail = act.copy()
+    tail[: max(0, n - 100)] = False
+    head = act.copy()
+    head[min(n, 100):] = False
+    return lev, {"status": "applied", "ref_S": round(ref, 1),
+                 "S_p10_p90_before": [q(Sc[act], 10), q(Sc[act], 90)],
+                 "S_p10_p90_after": [q(after[act], 10), q(after[act], 90)],
+                 "S_first10_last10_before": [q(Sc[head], 50) if head.any() else None, q(Sc[tail], 50) if tail.any() else None],
+                 "S_first10_last10_after": [q(after[head], 50) if head.any() else None, q(after[tail], 50) if tail.any() else None],
+                 "max_cut_db": round(float(-g.min()), 1), "max_boost_db": round(float(g.max()), 1)}
 
 
 def local_envelope(args, m, D, dialog_i, workdir=None):
@@ -339,7 +409,8 @@ def local_envelope(args, m, D, dialog_i, workdir=None):
             "seconds_reduced": round(float((wide >= 0.3).sum()) / 10, 1),
             "max_cut_db": round(float(wide.max()), 2),
             "worst_local_gap_before": round(float((voice - bed)[speech].min()), 2),
-            "worst_local_gap_after": round(float(after[speech].min()), 2)}
+            "worst_local_gap_after": round(float(after[speech].min()), 2),
+            "_voice": voice, "_speech": speech}
 
 
 def measure_bed_gap(args, m, D, dialog_i, envelope=None):
@@ -359,6 +430,38 @@ def measure_bed_gap(args, m, D, dialog_i, envelope=None):
 
 
 def cmd_mix(args):
+    """עוטף: קבצי ביניים (offset / מצע מיושר) נמחקים פעם אחת בסוף הריצה החיצונית — גם בכשל,
+    וגם כשה-nudge של L137 מריץ את _cmd_mix שוב על אותו מצע."""
+    depth = getattr(args, "_depth", 0)
+    args._depth = depth + 1
+    if depth == 0:
+        args._tmpfiles = []
+    try:
+        return _cmd_mix(args)
+    finally:
+        args._depth = depth
+        if depth == 0:
+            for _t in getattr(args, "_tmpfiles", []):
+                try:
+                    os.remove(_t)
+                except OSError:
+                    pass
+
+
+def _resolve_legacy_local_floor(args):
+    """המק (v9.50) מעביר --local-floor <local_floor_lu> בלי --local-gap. אחרי המיזוג (L142) המשמעות:
+    יישור מאקרו של המצע + הרצפה המקומית של L138 (3ש, min_local_gap_lu מהמדיניות) — מקור אמת אחד."""
+    if getattr(args, "local_floor", None) is None:
+        return
+    args.bed_level = True
+    if getattr(args, "local_gap", None) is None:
+        try:
+            args.local_gap = load_level_policy().get("min_local_gap_lu")
+        except Exception:
+            args.local_gap = 20.0
+
+
+def _cmd_mix(args):
     if not has_audio(args.video):
         print(f"⚠️  אין ערוץ אודיו ב-{args.video}", file=sys.stderr)
         return 2
@@ -381,8 +484,23 @@ def cmd_mix(args):
             if r_t.returncode == 0 and os.path.exists(_trim):
                 print(f"   offset מוזיקה : {_off:.2f}ש ({'auto' if str(_off_req) == 'auto' else 'ידני'}) — המצע נכנס בקצב מ-0")
                 args.music = _trim
+                getattr(args, "_tmpfiles", []).append(_trim)
         elif str(_off_req) == "auto":
             print("   offset מוזיקה : 0 (הטראק כבר בקצב מההתחלה)")
+    # L142 — יישור מאקרו של המצע לפני כל מדידה (ראה macro_level_bed). פעם אחת לריצה: ה-nudge
+    # של L137 מריץ שוב על המצע שכבר יושר.
+    _resolve_legacy_local_floor(args)
+    if getattr(args, "bed_level", False) and not getattr(args, "_bed_level_rep", None):
+        _lev, _rep = macro_level_bed(args, D)
+        if _lev is None:
+            print(f"   ❌ G_music_local: יישור המצע לא הוחל ({str(_rep.get('why', ''))[:160]}) — לא נמדד ≠ PASS", file=sys.stderr)
+            return 3
+        getattr(args, "_tmpfiles", []).append(_lev)
+        args.music = _lev
+        args._bed_level_rep = _rep
+        print(f"   יישור מצע     : S(3ש) p10-p90 {_rep['S_p10_p90_before']} → {_rep['S_p10_p90_after']} · "
+              f"תחילה/סוף {_rep['S_first10_last10_before']} → {_rep['S_first10_last10_after']} · "
+              f"‎-{_rep['max_cut_db']}/+{_rep['max_boost_db']}dB (L142)")
     v = measure_lufs(args.video)
     m = measure_lufs(args.music)
     print("— לפני —")
@@ -431,6 +549,8 @@ def cmd_mix(args):
     if _has_intro(args, D) and args.speech_lufs is None:
         args.speech_lufs = args.music_lufs - 9.0
     env = local_envelope(args, m, D, v["I"]) if v["I"] > -70 else None
+    if env and env.get("cmdfile"):
+        getattr(args, "_tmpfiles", []).append(env["cmdfile"])
     if env and env.get("applied"):
         print(f"   מעטפת מקומית  : {env['seconds_reduced']}ש הונמכו (עד ‎-{env['max_cut_db']}dB) — "
               f"gap מקומי מינימלי {env['worst_local_gap_before']} → {env['worst_local_gap_after']} LU (L138)")
@@ -510,10 +630,25 @@ def cmd_mix(args):
         print(f"   ❌ אזהרה: אורך האודיו ({ad:.2f}) ≠ וידאו ({D:.2f}) — סאונד נחתך בזנב!", file=sys.stderr)
         return 1
     # L135 — שער מדוד: המצע בחלון הדיבור מול הדיבור. גלאי שלא נמדד = לא PASS.
+    if env and env.get("applied"):
+        # L142 — מדידה חוזרת של המצע שבאמת מרונדר (שרשרת + מעטפת) מול הקול. worst_local_gap_after
+        # הוא מודל (מניח שהגיין חל על כל החלון); כאן המספר הנמדד. מדווח בלבד — סף לא כויל.
+        try:
+            import numpy as np
+            _bs = _short_term_series(["-stream_loop", "-1", "-i", args.music], f"[0:a]{bed_filter(args, m, D, env)}", D)
+            if _bs is not None:
+                _n = min(len(_bs), len(env["_voice"]))
+                _d = (env["_voice"][:_n] - _bs[:_n])[env["_speech"][:_n]]
+                if len(_d):
+                    env["worst_local_gap_measured"] = round(float(_d.min()), 2)
+                    env["local_gap_p5_measured"] = round(float(np.percentile(_d, 5)), 2)
+        except Exception:
+            pass
     if _gap or getattr(args, "min_gap", None) is not None:
         g = measure_bed_gap(args, m, D, v["I"], env)
         rec = {"policy": _gap, "measured": g, "min_gap": getattr(args, "min_gap", None),
-               "local": {k: v_ for k, v_ in (env or {}).items() if k != "cmdfile"} or None}
+               "local": {k: v_ for k, v_ in (env or {}).items() if k != "cmdfile" and not k.startswith("_")} or None,
+               "bed_level": getattr(args, "_bed_level_rep", None)}
         try:
             with open(f"{args.out}.musicgap.json", "w", encoding="utf-8") as f:
                 json.dump(rec, f, ensure_ascii=False, indent=1)
@@ -531,6 +666,11 @@ def cmd_mix(args):
                 args._gap_nudge = round(args.min_gap - g["gap_lu"] + 0.3, 2)
                 args.music_offset = None          # המוזיקה כבר גזורה מה-offset בסבב הראשון
                 print(f"   ↻ G_music_gap: נמדד {g['gap_lu']:.1f} < {args.min_gap} — מנמיך את המצע ב-{args._gap_nudge} LU ומרנדר שוב")
+                if env and env.get("cmdfile"):
+                    try:
+                        os.remove(env["cmdfile"])
+                    except OSError:
+                        pass
                 return cmd_mix(args)
             print(f"   ❌ G_music_gap: המוזיקה {g['gap_lu']:.1f} LU מתחת לדיבור < רצפה {args.min_gap} — חזק מדי", file=sys.stderr)
             return 3
@@ -543,12 +683,7 @@ def cmd_mix(args):
         except OSError:
             pass
     print(f"✅ נשמר: {args.out}  (מוזיקה קבועה, סאונד מלא לכל האורך)")
-    if ".music_from_" in str(args.music):          # v9.47 — קובץ הביניים של ה-offset
-        try:
-            os.remove(args.music)
-        except OSError:
-            pass
-    return 0
+    return 0                                        # קבצי ביניים (offset/מצע מיושר) — נמחקים ב-cmd_mix
 
 
 def main():
@@ -580,6 +715,12 @@ def main():
     px.add_argument("--gap-tolerance", type=float, default=0.6)
     px.add_argument("--local-gap", type=float, default=None,
                     help="L138: בכל חלון 3ש עם דיבור — המוזיקה לפחות כך מתחת לקול של אותו חלון (LU). מנמיך בלבד")
+    px.add_argument("--bed-level", action="store_true",
+                    help="L142: יישור מאקרו של המצע לפני המדידה — S(3ש) של הטראק מיושר לחציון שלו (טראק שנבנה לא מסיים חזק)")
+    px.add_argument("--bed-level-max-cut", type=float, default=None, help="L142: הנמכה מקס' ביישור (dB, ברירת מחדל 12)")
+    px.add_argument("--bed-level-max-boost", type=float, default=None, help="L142: הגבהה מקס' ביישור (dB, ברירת מחדל 3)")
+    px.add_argument("--local-floor", type=float, default=None,
+                    help="תאימות למק (v9.50): שקול ל---bed-level + --local-gap מהמדיניות (min_local_gap_lu). הערך עצמו לא בשימוש")
     px.set_defaults(func=cmd_mix)
 
     args = p.parse_args()

@@ -1637,6 +1637,18 @@ LESSONS: dict[str, dict] = {
     [{'kind': 'code', 'file': 'tools/motion_build.py', 'pattern': 'def gate_anchors'},
      {'kind': 'code', 'file': 'tools/motion_build.py', 'pattern': 'exact=True'},
      {'kind': 'test', 'file': 'tests/test_motion_build.py', 'pattern': 'test_exact_before_stem'}]),
+ 'L142_music_bed_macro_level': L(
+    'המצע מיושר לאורך הזמן לפני כל מדידה: S(3ש) של הקטע שמתנגן מיושר לחציון שלו (הנמכה עד 12dB, הגבהה עד 3dB), '
+    'ורק אז loudnorm, G_music_gap, המעטפת המקומית (L138) וה-nudge (L137) — כך טראק שנבנה לא מסיים ב-CTA הכי רועש. '
+    'הסף המקומי אחד: min_local_gap_lu בחלון 3ש. רצפת momentary נבדקה ונפסלה — היא תופסת הפסקות בין מילים ומייצרת שאיבה.',
+    'הראל 23.10.26 על פינה-אנטומית-פרק2 (53.5ש): "המוזיקה רועשת מידיי. זה חוזר על עצמו כל הזמן". נמדד על המק: gap אינטגרלי 24.2 עבר, '
+    'אבל המצע עלה ‎-60→‎-49 LUFS-M לאורך הסרטון. התיקון נכתב במק כ-L137 (level_bed) ומוזג לריפו כשלב לפני L138 (ה-L137 של הריפו = nudge).',
+    'music',
+    [{'kind': 'code', 'file': 'tools/audio_mix.py', 'pattern': r'def macro_level_bed'},
+     {'kind': 'code', 'file': 'tools/local_finish_pipeline.py', 'pattern': r'--bed-level'},
+     {'kind': 'test', 'file': 'tests/test_music_bed_level_l142.py', 'pattern': 'test_build_is_flattened_before_measurement'},
+     {'kind': 'test', 'file': 'tests/test_music_bed_level_l142.py', 'pattern': 'test_leveling_failure_is_not_silent'},
+     {'kind': 'doc', 'file': 'tools/AUDIO-MIX.md', 'pattern': 'L142'}]),
  'L141_board_caption_floor': L(
     'סצנת MG מסך-מלא על משטח בהיר/אדום מחזיקה רצפה כהה ברצועת הכתוביות (מ-1262) — הכתובית הממותגת '
     '(לבן + מתאר אדום) לא נקראת על נייר ונעלמת על אדום.',
