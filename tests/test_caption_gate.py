@@ -99,3 +99,14 @@ class TestRegistryHook(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestHeartColorSelector(unittest.TestCase):
+    """הראל 23.10.26: ❤ בלי FE0F נראה לבן בטלפון — חוסם."""
+    def test_bare_heart_blocks(self):
+        import caption_gate as g
+        self.assertTrue(any('בורר צבע' in i for i in g.lint('שלחו את זה ❤🖤', 'ערך')[0]))
+
+    def test_red_heart_passes(self):
+        import caption_gate as g
+        self.assertFalse(any('בורר צבע' in i for i in g.lint('שלחו את זה ❤️🖤', 'ערך')[0]))

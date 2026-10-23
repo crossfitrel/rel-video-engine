@@ -89,6 +89,10 @@ def lint(text, ctype, brand='club'):
     if brand == 'club' and re.search('[\U0001FA75\U0001F499]', t):
         issues.append('לב תכלת/כחול בתוכן מועדון — המועדון ❤️🖤 בלבד')
     if brand == 'harel' and SIG.search(t): issues.append('❤️🖤 בתוכן אישי של הראל — אצלו 🩵')
+    # הראל 23.10.26: "רק לב אדום ושחור, לא לב לבן". U+2764 בלי בורר הצבע FE0F מוצג בטלפון
+    # כלב לבן/מתאר במקום אדום. החתימה חייבת להיות ❤️ (2764+FE0F).
+    if re.search('\u2764(?!\ufe0f)', t):
+        issues.append('לב בלי בורר צבע (❤ בלי FE0F) נראה לבן בטלפון — להשתמש ב-❤️🖤')
     for line in t.split('\n'):   # "פרטים בביו" כמשפט עומד (rel-cta-psychology §8 כלל 1)
         core = EMO_ANY.sub('', line).strip(' .!')
         if core and re.fullmatch(r'(ה?פרטים|פרטים נוספים|הקישור|לינק)\s*(בביו|בלינק שבביו|בלינק)', core):
