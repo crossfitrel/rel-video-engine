@@ -692,6 +692,11 @@ def main():
                     help="v9.46 ארגז העריכה של ההוק (tools/hook_fx.py): תנועות מצלמה/מעברים/צלילים ב-0-4ש "
                          "מתוך HOOK_PLAN.json[edit]. auto = רץ כשיש בלוק edit ו-finish_prefs.hook_fx.enabled אינו "
                          "false (כשל = אזהרה, יוצא בלי) · on = חובה · off = מדלג")
+    ap.add_argument("--timeline-only", action="store_true",
+                    help="v10.1 (הראל 23.10.26: 'עוד לפני שלב הגימור אשמח שתכניס אנימציות וגרפיקות'): "
+                         "עצירה מכוונת אחרי recut/words/tighten/gate — EXPORT_TIGHT + words_final מוכנים "
+                         "לתכנון motion_plan.json, בלי בירול/מוזיקה/כתוביות/FINAL. אחריו גימור אחד "
+                         "(--refinish --motion auto) מוסר להראל גרסה ראשונה שכבר כוללת MG.")
     ap.add_argument("--motion", choices=("auto", "on", "off"), default="auto",
                     help="v9.37 שכבת Motion Graphics (tools/motion_build.py). auto = רץ כשיש W/motion_plan.json "
                          "ו-finish_prefs.motion.enabled אינו false (כשל = אזהרה, הסרטון יוצא בלי MG) · "
@@ -1259,6 +1264,15 @@ def main():
         st.done_step("gate", f"אזהרה: {n} פערים שיוריים (לא חוסם, אושר בסקירה)")
     else:
         st.done_step("gate", "אפס דד-אייר")
+
+    if getattr(a, "timeline_only", False):
+        # עצירה מכוונת (v10.1): הציר הסופי ומילותיו קיימים — מתכננים עליהם MG לפני הגימור
+        # הראשון, כך שהגרסה הראשונה שהראל רואה כבר כוללת את שכבת האנימציה. אין FINAL.
+        report.append(f"- ⏸ timeline-only: EXPORT_TIGHT {dur:.2f}ש + words_final מוכנים לתכנון MG (לא גימור)")
+        (W / "FINISH_REPORT.md").write_text("\n".join(report), encoding="utf-8")
+        st.finish(True, f"ציר מוכן לתכנון MG ({dur:.2f}ש) — לא גימור")
+        print("DONE-TIMELINE-ONLY")
+        sys.exit(0)
 
     # ═══════════ Visual Hook Engine (11.9.26) — החלטה אחת, שני מנועים ═══════════
     # רץ רק כש-mode≠off. הקשר = הגוף הנקי הסופי (אחרי recut/tighten/speed/reconcile)

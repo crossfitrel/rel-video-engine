@@ -36,6 +36,7 @@ get_board_items_page 18395578529  filter: color_mkrp4sgm any_of [11]  (מזהה 
 - הורדה: `get_assets` → `public_url` (תקף שעה) → `curl -L -o raw/NN.ext` מיד.
 - `$REL_PY cloud/prep.py --name "<שם-עברי-לפי-תוכן>" --item <id> --dept <מחלקה> --title "<כותרת>" raw/*` (שער HDR, INPUT, תמלול, EDL, ROUGH).
 - שלבים 1.5–2.5 של הסקיל כרגיל: ⟦SCRIPT⟧/⟦EDIT-LAYER⟧ מה-Updates, `video_eyes` + Read, `director_lessons` → `--director`, HOOK_PLAN, motion_plan אם יש רגע ברמה גבוהה.
+- **MG לפני הגרסה הראשונה (הראל 23.10.26):** תוכן שרלוונטי לו אנימציה/גרפיקה מגיע להראל כבר עם שכבת ה-MG. סדר: `run_finish.py … --timeline-only` (ציר מהודק + words_final, בלי FINAL) → `motion_build.py propose/check/snap` + ביקורת ≥8 על הציר הזה → גימור אחד `--refinish --motion auto`. לא מגמרים פעם בלי MG ואז שוב עם MG.
 - גימור (`local_finish_pipeline.py`) → `PREFLIGHT.json`. **רק `ready_for_harel` ⇒ {"label":"מוכן לבדיקה"}.** אחרת — מתקנים וחוזרים; לא מוסרים להראל.
 
 ## 3. פרסום לעמוד הרוויו

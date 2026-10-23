@@ -101,7 +101,7 @@ textarea{min-height:76px;resize:vertical}
     <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;margin-block:6px 10px">
       <h2 id="d-title"></h2><span style="display:flex;gap:8px;align-items:center"><span class="pill" id="d-state"></span><button class="btn" id="hide" type="button" title="הסר מהרשימה" style="padding:6px 10px">🗑</button></span>
     </div>
-    <div class="player"><video id="vid" playsinline controls preload="metadata"></video><div class="novideo" id="novideo" hidden>הגרסה הזו עוד לא עלתה. היא תופיע אחרי הריצה הבאה.</div></div>
+    <div class="player"><video id="vid" playsinline controls preload="metadata"></video><div class="novideo" id="novideo" hidden>הסרטון עוד לא עלה לכאן. הוא יופיע כשהעריכה תסתיים.</div></div>
     <div class="note" style="margin-top:6px">גרסה <span id="d-ver" class="tc"></span> · <span id="d-dur" class="tc"></span> · פרסום מתוכנן <span id="d-date"></span></div>
 
     <div class="box" id="pf" style="margin-top:12px"></div>
@@ -158,7 +158,7 @@ const STATE = {
   draft:{t:'בהכנה',c:'wait',g:'work'}, review:{t:'מחכה לך',c:'need',g:'need'}, fixing:{t:'בתיקון',c:'wait',g:'work'},
   approved:{t:'אושר — בגימור',c:'wait',g:'work'}, finishing:{t:'בגימור',c:'wait',g:'work'},
   cover_review:{t:'קאבר+קפשן לאישור',c:'need',g:'need'}, ready_to_schedule:{t:'מוכן לתזמון',c:'ok',g:'work'},
-  scheduled:{t:'📅 תוזמן',c:'ok',g:'done'}, published:{t:'🚀 פורסם',c:'ok',g:'done'}, blocked:{t:'נעצר — ראה הערה',c:'bad',g:'need'}
+  scheduled:{t:'📅 תוזמן',c:'ok',g:'done'}, published:{t:'🚀 פורסם',c:'ok',g:'done'}, blocked:{t:'תקוע אצל הקלאוד',c:'bad',g:'work'}
 };
 let db=null, me=null, projects=[], comments=[], actions=[], filter='need', open=null, unsub=[];
 const fmt = (s) => { s=Math.max(0,Math.round(s||0)); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); };
@@ -199,7 +199,7 @@ function renderDetail(){
   $('d-ver').textContent=p.version||'—'; $('ac-ver').textContent=p.version||''; $('d-dur').textContent=p.duration?fmt(p.duration):'—';
   $('d-date').textContent=p.publish_date||'לא נקבע';
   const v=$('vid'); const url=p.video_url||'';
-  if(url){ if(v.dataset.src!==url){ v.src=url; v.dataset.src=url; } $('novideo').hidden=true; } else { v.removeAttribute('src'); v.dataset.src=''; $('novideo').hidden=false; }
+  if(url){ if(v.dataset.src!==url){ v.src=url; v.dataset.src=url; } $('novideo').hidden=true; } else { v.removeAttribute('src'); v.load(); v.dataset.src=''; $('novideo').hidden=false; }
   // מבקר-קדם
   const pf=$('pf'); pf.textContent=''; const pre=p.preflight||{};
   const vd=document.createElement('div'); vd.className='verdict '+(pre.ready?'ok':(pre.ready===false?'bad':''));

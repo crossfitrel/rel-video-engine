@@ -92,7 +92,10 @@ def main():
         #     FINAL.mp4 נשאר רק לתאימות עם קוד ישן.
         rec["output_hash"] = None
         rec["artifact_id"] = None
-        if "--prepare-visual-hook-review" in passthrough:
+        if "--timeline-only" in passthrough:
+            # v10.1 — פאס ציר לתכנון MG אינו גימור: אין FINAL חדש, ולכן אין חתימה או artifact.
+            rec["job_kind"] = "timeline_only"
+        elif "--prepare-visual-hook-review" in passthrough:
             # v9.23 — הכנת תצוגת פתיחה אינה גימור: אסור לחתום output_hash או ליצור
             # artifact מ-FINAL ישן שנשאר בתיקייה (אותו באג של v9.4, מסלול חדש).
             rec["job_kind"] = "hook_preview"
