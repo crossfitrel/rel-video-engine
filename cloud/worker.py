@@ -44,11 +44,17 @@ def sh(cmd, stage, cwd=None, timeout=5400, env=None):
     p = subprocess.run([str(c) for c in cmd], cwd=cwd, stdin=subprocess.DEVNULL, capture_output=True, text=True,
                        timeout=timeout, env={**os.environ, **(env or {})})
     sec = round(time.time() - t, 1)
-    tail = ((p.stdout or "")[-2500:] + "\n" + (p.stderr or "")[-1500:]).strip()
+    tail = ((p.stdout or "")[-1500:] + "\n--- stderr ---\n" + (p.stderr or "")[-2500:]).strip()
+    try:  # לוג מלא לכל שלב, כדי שכשל לא יהיה עיוור (נשמר ב-workdir או ב-WORK)
+        ld = (Path(cwd) if cwd else WORK) / "_worker_logs"; ld.mkdir(parents=True, exist_ok=True)
+        base = re.sub(r"[^\w.-]+", "_", stage)
+        (ld / f"{base}.out").write_text(p.stdout or "", encoding="utf-8"); (ld / f"{base}.err").write_text(p.stderr or "", encoding="utf-8")
+    except Exception:
+        pass
     STAGES.append({"stage": stage, "sec": sec, "rc": p.returncode})
     print(f"[worker] {stage}: rc={p.returncode} {sec}s", flush=True)
     if p.returncode:
-        raise RuntimeError(f"{stage} rc={p.returncode}\n{tail[-1500:]}")
+        raise RuntimeError(f"{stage} rc={p.returncode}\n{tail[-3500:]}")
     return p.stdout, started, sec
 
 
@@ -99,8 +105,16 @@ def manifest(wd: Path) -> dict:
 
 
 def preflight(wd: Path) -> dict:
+    """PREFLIGHT.json מנורמל: ready_for_harel/out_dur/summary יושבים תחת verdict (preflight_critic), findings ברמה העליונה."""
     p = wd / "PREFLIGHT.json"
-    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+    if not p.exists():
+        return {}
+    raw = json.loads(p.read_text(encoding="utf-8"))
+    v = raw.get("verdict") if isinstance(raw.get("verdict"), dict) else {}
+    out = {**raw, **v}
+    out["ready_for_harel"] = bool(v.get("ready_for_harel", raw.get("ready_for_harel", False)))
+    out["findings"] = [{**f, "msg": f.get("detail") or f.get("msg") or f.get("check")} for f in raw.get("findings") or []]
+    return out
 
 
 def brand_for(dept: str) -> str:
@@ -124,7 +138,7 @@ def publish_review(pid: str, name: str, state: str, extra: dict | None = None):
     row = {"id": pid, "workdir": name, "state": state, "version": ver, "video_path": vpath,
            "duration": pf.get("out_dur") or pf.get("duration"), "title": m.get("title"), "dept": m.get("dept"),
            "monday_item_id": str(m.get("monday_item_id") or ""),
-           "preflight": {"ready": bool(pf.get("ready_for_harel")), "verdict": pf.get("verdict_he") or pf.get("summary") or "",
+           "preflight": {"ready": bool(pf.get("ready_for_harel")), "verdict": pf.get("summary") or "",
                          "lines": [f.get("msg") or f.get("title") or "" for f in (pf.get("findings") or [])[:6]]}}
     cover = next((wd / c for c in ("COVER.png", "cover.png", "thumbnail.png") if (wd / c).exists()), None)
     if cover:
@@ -314,7 +328,7 @@ def cmd_bench(a):
         sh([PY, SYS / "tools/preflight_critic.py", "--workdir", wd], "preflight")
         pf = preflight(wd)
         res["preflight_ready"] = bool(pf.get("ready_for_harel"))
-        res["preflight_high"] = sum(1 for f in pf.get("findings", []) if f.get("severity") == "high")
+        res["preflight_high"] = pf.get("n_high"); res["preflight_summary"] = pf.get("summary"); res["out_dur"] = pf.get("out_dur")
         q = subprocess.run([PY, SYS / "tools/qa_gates.py", "--video", wd / "FINAL.mp4", "--words", wd / "words_final.json"], capture_output=True, text=True)
         res["qa_gates_rc"] = q.returncode
         sh([PY, HERE / "review_bridge.py", "proxy", "--src", wd / "FINAL.mp4", "--out", wd / "REVIEW_PROXY.mp4"], "proxy")

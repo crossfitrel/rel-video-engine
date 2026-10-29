@@ -68,22 +68,15 @@ jobs:
         if: github.event_name == 'push'
         run: |
           W=$(cat bench/workdir.txt 2>/dev/null || echo "אביגיל-המקום-השני-מאסטרס")
-          ~/.rel-whisper/bin/python cloud/worker.py bench --workdir "$W" --out /tmp/bench.json 2>&1 | tail -200 > /tmp/bench.log || true
+          ~/.rel-whisper/bin/python cloud/worker.py bench --workdir "$W" --out /tmp/bench.json > /tmp/bench.log 2>&1 || true
+          cat "$REL_WORK_ROOT/$W"/_worker_logs/*.err 2>/dev/null | tail -150 >> /tmp/bench.log || true
           python3 - <<'PY'
           import json, os
           b = json.load(open('/tmp/bench.json')); b['bootstrap_sec'] = int(os.environ.get('BOOT_SEC', 0)); b['run_id'] = os.environ['GITHUB_RUN_ID']
           json.dump(b, open('/tmp/bench.json', 'w'), ensure_ascii=False, indent=1)
           PY
-          git fetch -q origin bench-results || true
-          git checkout -q -B bench-results origin/bench-results 2>/dev/null || git checkout -q --orphan bench-results
-          git rm -rq --cached . 2>/dev/null || true
-          mkdir -p results && cp /tmp/bench.json "results/${GITHUB_RUN_ID}.json" && cp /tmp/bench.log "results/${GITHUB_RUN_ID}.log" || true
-          git add results && git -c user.name=rel-bench -c user.email=noreply@anthropic.com commit -qm "bench ${GITHUB_RUN_ID}" && git push -q origin bench-results
+          bash .github/push_bench.sh /tmp/bench.json /tmp/bench.log
       - name: bench failure log
         if: failure() && github.event_name == 'push'
         run: |
-          git fetch -q origin bench-results || true
-          git checkout -q -B bench-results origin/bench-results 2>/dev/null || git checkout -q --orphan bench-results
-          git rm -rq --cached . 2>/dev/null || true
-          mkdir -p results && { df -h; tail -120 /tmp/bootstrap.log 2>/dev/null; } > "results/${GITHUB_RUN_ID}-failed.log"
-          git add results && git -c user.name=rel-bench -c user.email=noreply@anthropic.com commit -qm "bench failed ${GITHUB_RUN_ID}" && git push -q origin bench-results
+          { df -h; tail -120 /tmp/bootstrap.log 2>/dev/null; } > /tmp/failed.log; bash .github/push_bench.sh /tmp/failed.log

@@ -98,8 +98,8 @@ REL.define('app_purchase', ctx => {
   const code = ev.card_code ? txt(gc, ev.card_code, {position:'absolute', bottom:'18px', left:'22px', padding:'6px 16px 8px', borderRadius:'12px',
     background:'rgba(255,255,255,.95)', font:'800 34px/1 var(--f-title)', color:'var(--rel-red)'}) : null;
   if (ev.msg) txt(bub, ev.msg, {marginTop:'16px', font:'600 36px/1.3 var(--f-title)', color:'#f3eeee'});
-  // חשיפה ב-clip-path ולא בהזזה: קופסאות הטקסט נשארות במקומן ⇒ MG1 לא מודד אותן מחוץ למסך באמצע מעבר (22.10.26)
-  tl.fromTo(ch, {clipPath:'inset(0 100% 0 0)'}, {clipPath:'inset(0 0% 0 0)', duration:.42, ease:'rel.inOut'}, chat);
+  // חשיפה ב-clip-path ולא בהזזה: קופסאות הטקסט נשארות במקומן ⇒ MG1 לא מודד אותן מחוץ למסך באמצע מעבר (22.10.26)  ·  REL.CLIP: שוליים של 60px כדי שהצל לא ייחתך (V939)
+  tl.fromTo(ch, {clipPath:REL.CLIP.l}, {clipPath:REL.CLIP.on, duration:.42, ease:'rel.inOut'}, chat);
   tl.fromTo(bub, {autoAlpha:0, scale:.7, transformOrigin:'100% 0%'}, {autoAlpha:1, scale:1, duration:.4, ease:'rel.hero'}, chat + .32);
   tl.fromTo(shine, {left:'-160px'}, {left:'420px', duration:.7, ease:'rel.inOut'}, card);
   if (code) tl.fromTo(code, {scale:.4, autoAlpha:0, transformOrigin:'0% 100%'}, {scale:1, autoAlpha:1, duration:.36, ease:'rel.hero'}, card + .1);
