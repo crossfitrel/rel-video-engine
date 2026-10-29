@@ -5,6 +5,7 @@ relvid.provider — שכבת ספק AI מופשטת (V2).
 
 שלושה backends מאחורי אותו חוזה:
   api     — Anthropic API. דורש ANTHROPIC_API_KEY. מודל: REL_AI_MODEL.
+  proxy   — (v11) דרך tools/llm.py → פונקציית video ב-Supabase: Sonnet, לוג עלות ותקרה בצד השרת. ברירת המחדל ב-worker.
   chat    — כותב כרטיס בקשה לדיסק וקורא תשובה שהודבקה חזרה. עובד בלי מפתח,
             כלומר קלוד בצ'אט הוא ה-Director.
   replay  — קורא אך ורק מה-cache. דטרמיניסטי → בדיקות ו-CI.
@@ -193,6 +194,14 @@ class Provider:
         )
         return _extract_json("".join(b.text for b in msg.content if b.type == "text"))
 
+    def _ask_proxy(self, role, payload):
+        sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
+        import llm
+        r = llm.ask("director" if role.startswith("director") or role == "edit_director" else role, user=_canon(payload),
+                    system=prompt_text(role), project_id=os.environ.get("REL_PROJECT_ID"), max_tokens=DEFAULT_MAX_TOKENS)
+        self.last_usage = {"model": r.get("model"), "usd": r.get("usd"), "usage": r.get("usage")}
+        return _extract_json(r["text"])
+
     def _ask_chat(self, role, payload, dg):
         resp = self.resp_dir / f"{role}.{dg}.json"
         if resp.exists():
@@ -224,7 +233,9 @@ class Provider:
             raise ProviderError(
                 f"backend=replay ואין תשובה ב-cache עבור {role}.{dg}. "
                 f"הריצו קודם עם backend=api או chat.")
-        if self.backend == "api":
+        if self.backend == "proxy":
+            ans, src = self._ask_proxy(role, payload), "proxy"
+        elif self.backend == "api":
             ans, src = self._ask_api(role, payload), "api"
         elif self.backend == "chat":
             ans, src = self._ask_chat(role, payload, dg)

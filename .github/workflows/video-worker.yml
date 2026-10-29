@@ -1,0 +1,77 @@
+# video-worker — מחשוב בלי קרדיטים של Claude (v11, 29.10.26).
+# מופעל רק מאירוע: workflow_dispatch מפונקציית video ב-Supabase (עמוד הרוויו / webhook של Monday),
+# או push לענף bench/** למדידה. אין cron ואין polling.
+# אין כאן סודות: הג'וב מקבל טוקן חד-פעמי (job_token) שתקף רק לג'וב הזה, 14 שעות. המפתחות (Anthropic/Monday) נשארים ב-Supabase.
+name: video-worker
+on:
+  workflow_dispatch:
+    inputs:
+      job_id: { description: "video.jobs.id", required: true }
+      job_token: { description: "טוקן חד-פעמי לג'וב", required: true }
+  push:
+    branches: ["bench/**"]
+permissions:
+  contents: write
+concurrency:
+  group: video-worker-${{ github.event.inputs.job_id || github.ref }}
+  cancel-in-progress: false
+jobs:
+  work:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    env:
+      REL_WORK_ROOT: /home/runner/rel-video-work
+      REL_LIBS_CLONE: /home/runner/rel-libs
+      WORKER_RUNNER: actions
+      REL_DIRECTOR_BACKEND: proxy
+      PYTHONUNBUFFERED: "1"
+    steps:
+      - name: mask token
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "::add-mask::${{ github.event.inputs.job_token }}"
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 1 }
+      - name: git auth for libs branch
+        run: |
+          git config --global url."https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
+          git config --global core.quotepath false
+          echo "LIBS_SHA=$(git ls-remote origin refs/heads/libs | cut -c1-12)" >> $GITHUB_ENV
+      - name: system deps
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg rsync fonts-noto-core >/dev/null
+          echo "CHROME_PATH=$(command -v google-chrome || command -v chromium)" >> $GITHUB_ENV
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.rel-whisper
+            ~/.cache/huggingface
+            ~/.cache/pip
+          key: relenv-${{ runner.os }}-${{ hashFiles('cloud/requirements-cloud.txt') }}
+      - uses: actions/cache@v4
+        with:
+          path: /home/runner/rel-libs
+          key: rellibs-${{ env.LIBS_SHA }}
+          restore-keys: rellibs-
+      - name: bootstrap
+        run: |
+          T=$(date +%s); bash cloud/bootstrap.sh; echo "BOOT_SEC=$(( $(date +%s)-T ))" >> $GITHUB_ENV
+      - name: run job
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          VIDEO_WORKER_TOKEN: ${{ github.event.inputs.job_token }}
+        run: ~/.rel-whisper/bin/python cloud/worker.py run --job-id "${{ github.event.inputs.job_id }}"
+      - name: bench
+        if: github.event_name == 'push'
+        run: |
+          W=$(cat bench/workdir.txt 2>/dev/null || echo "אביגיל-המקום-השני-מאסטרס")
+          ~/.rel-whisper/bin/python cloud/worker.py bench --workdir "$W" --out /tmp/bench.json || true
+          python3 - <<'PY'
+          import json, os
+          b = json.load(open('/tmp/bench.json')); b['bootstrap_sec'] = int(os.environ.get('BOOT_SEC', 0)); b['run_id'] = os.environ['GITHUB_RUN_ID']
+          json.dump(b, open('/tmp/bench.json', 'w'), ensure_ascii=False, indent=1)
+          PY
+          git fetch -q origin bench-results || true
+          git checkout -q -B bench-results origin/bench-results 2>/dev/null || git checkout -q --orphan bench-results
+          git rm -rq --cached . 2>/dev/null || true
+          mkdir -p results && cp /tmp/bench.json "results/${GITHUB_RUN_ID}.json"
+          git add results && git -c user.name=rel-bench -c user.email=noreply@anthropic.com commit -qm "bench ${GITHUB_RUN_ID}" && git push -q origin bench-results

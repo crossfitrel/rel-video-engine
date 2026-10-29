@@ -671,7 +671,7 @@ def main():
     r = sub.add_parser("run"); s = sub.add_parser("status")
     for x in (r, s):
         x.add_argument("--workdir", required=True)
-    r.add_argument("--backend", default=None, choices=["api", "chat", "replay"])
+    r.add_argument("--backend", default=None, choices=["api", "chat", "replay", "proxy"])
     r.add_argument("--threshold", type=float, default=7.5)
     r.add_argument("--max-loops", type=int, default=2)
     r.add_argument("--force", action="store_true")

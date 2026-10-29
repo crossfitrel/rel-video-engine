@@ -756,7 +756,7 @@ def main():
     ap.add_argument("--director", action="store_true",
                     help="V2: להריץ את מנוע ההחלטה בחמישה פאסים לפני הגימור — מודד מרחב "
                          "מועמדים, מייצר תוכנית מנומקת עם ביטחון וסיכון, ומקמפל edl.json")
-    ap.add_argument("--director-backend", choices=("api", "chat", "replay"), default=None,
+    ap.add_argument("--director-backend", choices=("api", "chat", "replay", "proxy"), default=None,
                     help="api=מפתח · chat=כרטיסי בקשה לדיסק (בלי מפתח) · replay=מה-cache בלבד")
     ap.add_argument("--director-threshold", type=float, default=7.5,
                     help="סף ציון האיכות. מתחתיו — חזרה אוטומטית לפאס התכנון")
