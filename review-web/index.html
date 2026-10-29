@@ -193,7 +193,7 @@ function st(p){ const pend=pendingFor(p.id).filter(a=>WAIT[a.type]);
   if(pend.length){ const last=pend.sort((a,b)=>String(b.at).localeCompare(String(a.at)))[0]; return {t:'⏳ '+WAIT[last.type],c:'wait',g:'work'}; }
   return STATE[p.state]||{t:p.state||'—',c:'',g:'work'}; }
 
-const FRIENDLY={ 'dispatch:not_configured':'העריכה האוטומטית בענן עוד לא מחוברת (חסר טוקן GitHub). עד אז Claude מריץ אותה פעמיים ביום.',
+const FRIENDLY={ 'dispatch:not_configured':'העריכה האוטומטית בענן עוד לא מחוברת (חסר טוקן GitHub). עד אז העריכה רצה כשפותחים סשן עם Claude.',
   'llm:not_configured':'שלב השיפוט (במאי וקפשן) עוד לא מחובר: חסר מפתח Anthropic.', 'cost_cap:hit':'הגענו לתקרת העלות של היום. העבודה ממשיכה מחר.' };
 function renderHealth(h){ const el=$('health'); const bad=(h||[]).filter(x=>x.value && x.value!=='ok');
   const lines=[...new Set(bad.map(x=>FRIENDLY[x.key+':'+x.value]||x.note||x.key).filter(Boolean))];

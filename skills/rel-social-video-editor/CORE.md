@@ -23,7 +23,7 @@ REVIEW    = rel.fit/review (Netlify rel-video-review, מקור review-web/) · �
 WORKER    = .github/workflows/video-worker.yml → cloud/worker.py run (prep·notes·finish·cover) · טוקן חד-פעמי לג'וב · ספירת עלות: video.costs · תקרות video.config.caps
 LLM       = tools/llm.py: Haiku (classify·transcript_sanity·broll_label·quick_check) · Sonnet (director·hook·caption·vision·note_map·mg_critic) · Opus רק escalate (gate_failed_twice | note_unmapped)
 DRIVE     = Drive של hayonhq@gmail.com → "REL Video Cloud/" (ספריות · מצב · מסירות · ארכיון · מניפסט) דרך rclone remote hayonhq (טוקן רק מ-env). לעולם לא ה-Drive של crossfitrel
-TRIGGER   = webhook Monday 660374019 + כפתורי העמוד → video.jobs → workflow_dispatch (אין polling) · גיבוי/הסלמה: משימה מתוזמנת "עריכת סושיאל בענן" trig_018rae8HZ3XwT7tsdZEdAwSA (11:13, 19:13; שאילתה אחת ויציאה) · מנעול: "לאחר צילום, בעריכה" + [CLOUD-LOCK]
+TRIGGER   = webhook Monday 660374019 + כפתורי העמוד → video.jobs → workflow_dispatch (אין polling) · אין ריצות מתוזמנות (הראל 29.10.26; trig_018rae8HZ3XwT7tsdZEdAwSA כבוי). ג'ובים של Claude (judge, schedule) מטופלים כשפותחים סשן: שלב 0 = שאילתה אחת על video.jobs · מנעול: "לאחר צילום, בעריכה" + [CLOUD-LOCK]
 MAC       = לא בזרימת הריל (פודקאסט בלבד). עבודה כבדה במק רק דרך ~/.rel-heavy (אחת-בכל-פעם)
 MONDAY    = בורד סושיאל 18395578529 · סטטוס color_mkrp4sgm · "מוכן לעריכה"(11) → "לאחר צילום, בעריכה" → "מוכן לבדיקה"(12) → "מוכן לתזמון!"(8) → "תוזמן!"(6) · תאריך date_mkrpvw3n (UTC!) · קובץ file_mm402fp7
 METRICOOL = מועדון 6323702 (IG+FB+TikTok+YT) · Throwdown 6436350 (IG+FB) · "הראל חיון" 6519658 (SmartLink t.mtrbio.com/HarelHayon)
