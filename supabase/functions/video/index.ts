@@ -36,6 +36,31 @@ async function auth(req: Request): Promise<Who | null> {
   return null;
 }
 
+
+// ---------- סודות: כתיבה בלבד מהעמוד (הערך לא חוזר לעולם, גם לא ל-Claude) ----------
+const SETTABLE: Record<string, { re: RegExp; health: string; verify: (v: string) => Promise<string | null> }> = {
+  anthropic_api_key: { re: /^sk-ant-[A-Za-z0-9_\-]{20,}$/, health: "llm", verify: async (v) => {
+    // Anthropic לא תמיד עונה מה-edge בזמן: אחרי 15 שניות שומרים בכל זאת, וקריאת ה-llm הראשונה מאמתת (באנר אם נכשל).
+    try { const r = await fetch("https://api.anthropic.com/v1/models?limit=1", { headers: { "x-api-key": v, "anthropic-version": "2023-06-01" }, signal: AbortSignal.timeout(15000) });
+      return r.ok ? null : (r.status === 401 ? "המפתח לא תקף" : "Anthropic החזיר " + r.status); } catch { return "__timeout__"; } } },
+  github_dispatch_token: { re: /^(github_pat_|ghp_)[A-Za-z0-9_]{20,}$/, health: "dispatch", verify: async (v) => {
+    const h = { authorization: "Bearer " + v, accept: "application/vnd.github+json", "user-agent": "rel-video" };
+    const r = await fetch("https://api.github.com/repos/crossfitrel/rel-video-cloud", { headers: h, signal: AbortSignal.timeout(15000) });
+    if (!r.ok) return r.status === 401 ? "הטוקן לא תקף" : "אין לטוקן גישה לריפו rel-video-cloud";
+    const w = await fetch("https://api.github.com/repos/crossfitrel/rel-video-cloud/actions/workflows", { headers: h, signal: AbortSignal.timeout(15000) });
+    return w.ok ? null : "חסרה הרשאת Actions (קריאה וכתיבה)"; } },
+};
+async function secretSet(name: string, value: string) {
+  const d = SETTABLE[name]; value = String(value || "").trim();
+  if (!d) return { ok: false, error: "שם לא מוכר" };
+  if (!d.re.test(value)) return { ok: false, error: "הפורמט לא נראה נכון" };
+  const bad = await d.verify(value); const unverified = bad === "__timeout__"; if (bad && !unverified) return { ok: false, error: bad };
+  const ex = await sql`select id from vault.secrets where name=${name} limit 1`;
+  if (ex[0]) await sql`select vault.update_secret(${ex[0].id}::uuid, ${value})`; else await sql`select vault.create_secret(${value}, ${name})`;
+  delete secretCache[name];
+  await health(d.health, unverified ? "unverified" : "ok", unverified ? "המפתח נשמר. Anthropic לא ענה בבדיקה, הוא ייבדק בקריאה הראשונה" : "הוגדר מהעמוד " + new Date().toISOString().slice(0, 10));
+  return { ok: true, name, verified: !unverified };
+}
 // ---------- jobs ----------
 const KIND_BY_ACTION: Record<string, string> = { send_notes: "notes", approve_publish: "finish", approve_cover_caption: "schedule", request_cover_change: "cover" };
 // מה רץ איפה: חישוב דטרמיניסטי + Sonnet ⇒ GitHub Actions. תזמון Metricool ⇒ צעד Claude קצר (MCP) עד שיהיה טוקן Metricool בכספת.
@@ -53,7 +78,7 @@ async function dispatch(job_id: string) {
   const token = rnd();
   await sql`update video.jobs set token_hash=${await sha(token)} where id=${job_id}`;
   if (!gh) {
-    await health("dispatch", "not_configured", "חסר github_dispatch_token בכספת: הג'וב נשאר בתור ויורץ בריצת הגיבוי");
+    await health("dispatch", "not_configured", "חסר github_dispatch_token בכספת: הג'וב נשאר בתור ויורץ כשנפתח סשן עם Claude");
     await sql`update video.jobs set dispatch=${sql.json({ ok: false, reason: "no_token" })} where id=${job_id}`;
     return { ok: false, reason: "no_token" };
   }
@@ -99,7 +124,7 @@ async function llm(b: any, who: Who) {
   if (!key) { await health("llm", "not_configured", "חסר מפתח Anthropic (anthropic_api_key)"); return { ok: false, error: "no_key" }; }
   const body: any = { model, max_tokens: Math.min(b.max_tokens || 2000, 8000), messages: b.messages };
   if (b.system) body.system = b.system;
-  const r = await fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json" }, body: JSON.stringify(body) });
+  const r = await fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json" }, body: JSON.stringify(body), signal: AbortSignal.timeout(110000) });
   const j = await r.json();
   if (!r.ok) { await health("llm", "error", `Anthropic ${r.status}: ${(j?.error?.message || "").slice(0, 120)}`); return { ok: false, error: "api", status: r.status, detail: j?.error?.message }; }
   const u = j.usage || {}; const p = prices[tier] || { in: 3, out: 15, cache_read: 0.3 };
@@ -141,6 +166,8 @@ Deno.serve(async (req) => {
     switch (op) {
       // ----- הראל -----
       case "state": return J({ ok: true, ...(await state()) });
+      case "secret_set": { if (who.role === "worker") break; return J(await secretSet(b.name, b.value)); }
+      case "secrets_status": { if (who.role === "worker") break; const r = await sql`select name from vault.secrets where name = any(${Object.keys(SETTABLE)})`; return J({ ok: true, set: Object.fromEntries(Object.keys(SETTABLE).map(k => [k, r.some((x: any) => x.name === k)])) }); }
       case "comment_add": {
         const r = await sql`insert into video.comments(project_id, version, t, text, category, status, by_user) values (${b.project_id}, ${b.version ?? null}, ${b.t ?? 0}, ${String(b.text || "").slice(0, 2000)}, ${b.category || "other"}, 'open', ${who.role}) returning id`;
         return J({ ok: true, id: r[0].id });

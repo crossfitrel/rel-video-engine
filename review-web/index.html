@@ -78,6 +78,11 @@ textarea{min-height:76px;resize:vertical}
 .confirm{border:1px solid var(--brand);border-radius:12px;padding:12px;display:grid;gap:8px;background:var(--surface)}
 .health{background:var(--surface);border:1px solid var(--bad);border-radius:12px;padding:10px 14px;font-size:14px}
 .login{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:10px}
+.keys{background:var(--surface);border:1px solid var(--brand);border-radius:12px;padding:16px;display:grid;gap:12px}
+.keys ol{margin:0;padding-inline-start:20px;display:grid;gap:4px;font-size:14px}
+.keys a{color:var(--brand);font-weight:700}
+.keys .done{color:var(--ok);font-weight:700}
+input[type=password]{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px;width:100%;min-width:0;direction:ltr}
 .toast{position:fixed;inset-inline:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:12px 14px;border-radius:12px;font-weight:600;z-index:9}
 </style>
 </head>
@@ -89,6 +94,24 @@ textarea{min-height:76px;resize:vertical}
   </header>
 
   <div class="health" id="health" hidden></div>
+
+  <section class="keys" id="keys" hidden>
+    <h2>חיבור המפתחות</h2>
+    <div class="note">מה שמדביקים כאן נבדק מול השירות ונשמר ישר בכספת. הוא לא מוצג שוב ולא עובר דרך Claude.</div>
+    <div>
+      <b>1. מפתח Anthropic</b> <span class="done" id="k-a" hidden>✓ מחובר</span>
+      <ol><li>פותחים <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com ← API keys</a></li><li>Create Key, שם: rel-video. מעתיקים.</li></ol>
+      <div class="row"><input type="password" id="v-a" class="grow" placeholder="sk-ant-…" autocomplete="off"><button class="btn primary" data-k="anthropic_api_key" data-i="v-a">שמירה</button></div>
+    </div>
+    <div>
+      <b>2. טוקן GitHub</b> <span class="done" id="k-g" hidden>✓ מחובר</span>
+      <ol><li>פותחים <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub ← טוקן חדש</a></li>
+      <li>Resource owner: crossfitrel · Only select repositories: rel-video-cloud</li>
+      <li>Permissions ← Actions: Read and write · Generate token. מעתיקים.</li></ol>
+      <div class="row"><input type="password" id="v-g" class="grow" placeholder="github_pat_…" autocomplete="off"><button class="btn primary" data-k="github_dispatch_token" data-i="v-g">שמירה</button></div>
+    </div>
+    <button class="btn" id="keys-close" type="button">סגירה</button>
+  </section>
 
   <section class="login" id="login" hidden>
     <h2>כניסה לרוויו</h2>
@@ -197,7 +220,8 @@ const FRIENDLY={ 'dispatch:not_configured':'העריכה האוטומטית בע
   'llm:not_configured':'שלב השיפוט (במאי וקפשן) עוד לא מחובר: חסר מפתח Anthropic.', 'cost_cap:hit':'הגענו לתקרת העלות של היום. העבודה ממשיכה מחר.' };
 function renderHealth(h){ const el=$('health'); const bad=(h||[]).filter(x=>x.value && x.value!=='ok');
   const lines=[...new Set(bad.map(x=>FRIENDLY[x.key+':'+x.value]||x.note||x.key).filter(Boolean))];
-  el.hidden=!lines.length; el.textContent = lines.length ? ('⚠️ '+lines.slice(0,2).join(' · ')) : ''; }
+  el.hidden=!lines.length; el.textContent = lines.length ? ('⚠️ '+lines.slice(0,2).join(' · ')) : '';
+  if(bad.some(x=>x.value==='not_configured')){ const b=document.createElement('button'); b.className='btn primary'; b.style.marginTop='8px'; b.style.display='block'; b.textContent='לחיבור המפתחות'; b.onclick=openKeys; el.append(b); } }
 
 function renderList(){
   const groups={need:[],work:[],done:[]}; projects.forEach(p=>groups[st(p).g].push(p));
@@ -273,10 +297,19 @@ $('cc-ok').onclick=async()=>{ await act('approve_cover_caption',{caption:$('capt
 $('cc-change').onclick=async()=>{ const n=$('cc-note'); if(n.hidden){ n.hidden=false; n.focus(); return; } const note=n.value.trim(); if(!note) return toast('כתוב מה לשנות');
   await act('request_cover_change',{note,caption:$('caption').value},'הבקשה נשלחה'); n.value=''; n.hidden=true; };
 
+
+async function keysStatus(){ try{ const r=await api('secrets_status'); $('k-a').hidden=!r.set.anthropic_api_key; $('k-g').hidden=!r.set.github_dispatch_token; return r.set; }catch(e){ return null; } }
+function openKeys(){ $('keys').hidden=false; keysStatus(); $('keys').scrollIntoView({behavior:'smooth'}); }
+document.querySelectorAll('#keys [data-k]').forEach(b=>b.onclick=async()=>{ const inp=$(b.dataset.i); const v=inp.value.trim(); if(!v) return toast('מדביקים קודם');
+  b.disabled=true; b.textContent='בודק…';
+  try{ const r=await api('secret_set',{name:b.dataset.k,value:v}); inp.value=''; toast(r.verified===false?'נשמר ✓ (ייבדק בעריכה הראשונה)':'נשמר ונבדק ✓'); await keysStatus(); load(); }
+  catch(e){ toast(e.message); } finally{ b.disabled=false; b.textContent='שמירה'; } });
+$('keys-close').onclick=()=>{ $('keys').hidden=true; if(location.hash==='#setup') history.replaceState(null,'',location.pathname); };
 async function load(){
   if(!token){ showLogin(); return; }
   try{ const s=await api('state'); projects=s.projects||[]; comments=s.comments||[]; actions=s.actions||[]; renderHealth(s.health);
     $('login').hidden=true; if(!open) $('home').hidden=false;
+    if(location.hash==='#setup' && $('keys').hidden) openKeys();
     $('sync').textContent='עודכן '+new Date().toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'}); render();
   }catch(e){ if(!$('login').hidden) return; $('sync').textContent='שגיאת חיבור'; }
 }
