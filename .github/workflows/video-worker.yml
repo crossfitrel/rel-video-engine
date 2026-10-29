@@ -29,6 +29,10 @@ jobs:
       - name: mask token
         if: github.event_name == 'workflow_dispatch'
         run: echo "::add-mask::${{ github.event.inputs.job_token }}"
+      - name: free disk (ספריות 3.2GB + פריסה + מודל לא נכנסים ב-14GB של ברירת המחדל)
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL /usr/local/share/boost /usr/local/.ghcup /usr/share/swift &
+          wait; df -h / | tail -1
       - uses: actions/checkout@v4
         with: { fetch-depth: 1 }
       - name: git auth for libs branch
@@ -54,7 +58,7 @@ jobs:
           restore-keys: rellibs-
       - name: bootstrap
         run: |
-          T=$(date +%s); bash cloud/bootstrap.sh; echo "BOOT_SEC=$(( $(date +%s)-T ))" >> $GITHUB_ENV
+          T=$(date +%s); bash cloud/bootstrap.sh 2>&1 | tee /tmp/bootstrap.log; echo "BOOT_SEC=$(( $(date +%s)-T ))" >> $GITHUB_ENV; df -h / | tail -1
       - name: run job
         if: github.event_name == 'workflow_dispatch'
         env:
@@ -64,7 +68,7 @@ jobs:
         if: github.event_name == 'push'
         run: |
           W=$(cat bench/workdir.txt 2>/dev/null || echo "אביגיל-המקום-השני-מאסטרס")
-          ~/.rel-whisper/bin/python cloud/worker.py bench --workdir "$W" --out /tmp/bench.json || true
+          ~/.rel-whisper/bin/python cloud/worker.py bench --workdir "$W" --out /tmp/bench.json 2>&1 | tail -200 > /tmp/bench.log || true
           python3 - <<'PY'
           import json, os
           b = json.load(open('/tmp/bench.json')); b['bootstrap_sec'] = int(os.environ.get('BOOT_SEC', 0)); b['run_id'] = os.environ['GITHUB_RUN_ID']
@@ -73,5 +77,13 @@ jobs:
           git fetch -q origin bench-results || true
           git checkout -q -B bench-results origin/bench-results 2>/dev/null || git checkout -q --orphan bench-results
           git rm -rq --cached . 2>/dev/null || true
-          mkdir -p results && cp /tmp/bench.json "results/${GITHUB_RUN_ID}.json"
+          mkdir -p results && cp /tmp/bench.json "results/${GITHUB_RUN_ID}.json" && cp /tmp/bench.log "results/${GITHUB_RUN_ID}.log" || true
           git add results && git -c user.name=rel-bench -c user.email=noreply@anthropic.com commit -qm "bench ${GITHUB_RUN_ID}" && git push -q origin bench-results
+      - name: bench failure log
+        if: failure() && github.event_name == 'push'
+        run: |
+          git fetch -q origin bench-results || true
+          git checkout -q -B bench-results origin/bench-results 2>/dev/null || git checkout -q --orphan bench-results
+          git rm -rq --cached . 2>/dev/null || true
+          mkdir -p results && { df -h; tail -120 /tmp/bootstrap.log 2>/dev/null; } > "results/${GITHUB_RUN_ID}-failed.log"
+          git add results && git -c user.name=rel-bench -c user.email=noreply@anthropic.com commit -qm "bench failed ${GITHUB_RUN_ID}" && git push -q origin bench-results
