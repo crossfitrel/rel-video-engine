@@ -1,5 +1,5 @@
 # rel-social-video-editor · motion-graphics
-> נגזר מהמאסטר (v10.0 — 2026-10-10) ע"י tools/skill_pack.py — לא לערוך כאן.
+> נגזר מהמאסטר (v11.0 — 2026-10-29) ע"י tools/skill_pack.py — לא לערוך כאן.
 
 ## שכבת Motion Graphics (v9.37, 4.10.26)
 

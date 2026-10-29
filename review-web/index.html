@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#871d1f">
+<title>רוויו R.E.L</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;800&display=swap">
+<style>
+/* v11 (29.10.26): אותו עמוד רוויו כמו ה-Artifact, על Supabase (פונקציית video). טלפון קודם, RTL. */
+:root{
+  --bg:#f6f3f2; --surface:#ffffff; --fg:#1d1617; --muted:#6f6264; --line:#e6dcdb;
+  --brand:#871d1f; --brand-ink:#ffffff; --ok:#1f7a4d; --warn:#a86400; --bad:#b3261e; --info:#2a5d8f; --chip:#efe7e6;
+  --f:'Assistant','Ploni','Arial Hebrew',system-ui,sans-serif; --mono:ui-monospace,'SF Mono',Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141011; --surface:#1f1819; --fg:#f3ecec; --muted:#a8999b; --line:#352a2b;
+  --brand:#c2453f; --ok:#5cc28c; --warn:#e0a24a; --bad:#ef7a70; --info:#7fb0e0; --chip:#2b2223; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141011; --surface:#1f1819; --fg:#f3ecec; --muted:#a8999b; --line:#352a2b;
+  --brand:#c2453f; --ok:#5cc28c; --warn:#e0a24a; --bad:#ef7a70; --info:#7fb0e0; --chip:#2b2223; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--f);font-size:16px;line-height:1.45;padding-bottom:env(safe-area-inset-bottom,0px)}
+.wrap{max-width:640px;margin:0 auto;padding:12px 16px 40px;display:grid;gap:14px}
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);padding:calc(10px + env(safe-area-inset-top,0px)) 0 8px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line)}
+h1{font-weight:800;font-size:22px;margin:0} h1 b{color:var(--brand)}
+h2{font-weight:800;font-size:19px;margin:0;text-wrap:balance}
+h3{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--muted);margin:0}
+.sync{font-size:12px;color:var(--muted)}
+.hdr-end{display:flex;align-items:center;gap:10px}
+.icon{border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;width:38px;height:38px;font-size:18px;display:grid;place-items:center;cursor:pointer}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:6px 12px;font:600 14px var(--f);cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.tab .n{opacity:.7;margin-inline-start:4px;font-variant-numeric:tabular-nums}
+.list{display:grid;gap:8px}
+.item{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;text-align:start;color:var(--fg);font:inherit;width:100%}
+:focus-visible{outline:3px solid var(--info);outline-offset:2px}
+.item .t{font-weight:700;min-width:0}
+.item .meta{grid-column:1/-1;font-size:13px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap}
+.pill{font-size:12px;font-weight:700;border-radius:999px;padding:3px 9px;white-space:nowrap;background:var(--chip);color:var(--fg)}
+.pill.need{background:var(--brand);color:var(--brand-ink)} .pill.ok{color:var(--ok)} .pill.wait{color:var(--info)} .pill.bad{color:var(--bad)}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:18px;color:var(--muted);font-size:15px}
+.back{background:none;border:0;color:var(--info);font:600 15px var(--f);padding:4px 0;cursor:pointer}
+.player{position:relative;background:#000;border-radius:14px;overflow:hidden;aspect-ratio:9/16;max-height:70vh;margin-inline:auto;width:100%;max-width:min(100%,calc(70vh*9/16))}
+.player video{width:100%;height:100%;display:block;object-fit:contain;background:#000}
+.player .novideo{position:absolute;inset:0;display:grid;place-items:center;color:#d8cfcf;font-size:14px;padding:20px;text-align:center}
+.tc{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:8px}
+.verdict{display:flex;gap:8px;align-items:flex-start}
+.verdict .dot{width:10px;height:10px;border-radius:50%;margin-top:7px;flex:none;background:var(--muted)}
+.verdict.ok .dot{background:var(--ok)} .verdict.bad .dot{background:var(--bad)}
+.lines{margin:0;padding-inline-start:18px;font-size:14px;color:var(--muted)}
+.compose{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:center}
+.compose .at{font-size:14px;background:var(--chip);border-radius:8px;padding:8px 10px}
+textarea,select,input[type=text]{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px;width:100%;min-width:0}
+textarea{min-height:76px;resize:vertical}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font:700 15px var(--f);border-radius:10px;padding:11px 14px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.btn.go{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.grow{flex:1 1 140px}
+.comments{display:grid;gap:6px}
+.cm{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:start;padding:8px 0;border-top:1px solid var(--line)}
+.cm:first-child{border-top:0}
+.cm button.t{background:var(--chip);border:0;border-radius:6px;padding:2px 7px;color:var(--fg);cursor:pointer}
+.cm .txt{min-width:0;overflow-wrap:anywhere} .cm .reply{font-size:13px;color:var(--muted)}
+.note{font-size:13px;color:var(--muted)}
+.cover{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:start}
+.cover img{width:120px;aspect-ratio:9/16;object-fit:cover;border-radius:8px;background:var(--chip)}
+@media (max-width:420px){.cover{grid-template-columns:1fr}.cover img{width:100%;max-width:220px}}
+.confirm{border:1px solid var(--brand);border-radius:12px;padding:12px;display:grid;gap:8px;background:var(--surface)}
+.health{background:var(--surface);border:1px solid var(--bad);border-radius:12px;padding:10px 14px;font-size:14px}
+.login{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:10px}
+.toast{position:fixed;inset-inline:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:12px 14px;border-radius:12px;font-weight:600;z-index:9}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>רוויו <b>R.E.L</b></h1>
+    <div class="hdr-end"><div class="sync" id="sync">מתחבר…</div><button class="icon" id="theme" type="button" aria-label="מצב תצוגה"></button></div>
+  </header>
+
+  <div class="health" id="health" hidden></div>
+
+  <section class="login" id="login" hidden>
+    <h2>כניסה לרוויו</h2>
+    <div class="note">פותחים פעם אחת את קישור הכניסה האישי (נשלח בצ׳אט עם Claude). אחרי זה הטלפון זוכר.</div>
+    <input type="text" id="tok" placeholder="או מדביקים כאן את קוד הכניסה" autocomplete="off">
+    <button class="btn primary" id="tok-ok">כניסה</button>
+  </section>
+
+  <section id="home" hidden>
+    <div class="tabs" role="group" aria-label="סינון">
+      <button class="tab" data-f="need" aria-pressed="true">דורש אותך<span class="n" id="n-need"></span></button>
+      <button class="tab" data-f="work" aria-pressed="false">בעבודה<span class="n" id="n-work"></span></button>
+      <button class="tab" data-f="done" aria-pressed="false">תוזמן<span class="n" id="n-done"></span></button>
+    </div>
+    <div class="list" id="list" style="margin-top:12px"></div>
+  </section>
+
+  <section id="detail" hidden>
+    <button class="back" id="back">→ כל הסרטונים</button>
+    <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;margin-block:6px 10px">
+      <h2 id="d-title"></h2><span style="display:flex;gap:8px;align-items:center"><span class="pill" id="d-state"></span><button class="btn" id="hide" type="button" title="הסר מהרשימה" style="padding:6px 10px">🗑</button></span>
+    </div>
+    <div class="player"><video id="vid" playsinline controls preload="metadata"></video><div class="novideo" id="novideo" hidden>הסרטון עוד לא עלה לכאן. הוא יופיע כשהעריכה תסתיים.</div></div>
+    <div class="note" style="margin-top:6px">גרסה <span id="d-ver" class="tc"></span> · <span id="d-dur" class="tc"></span> · פרסום מתוכנן <span id="d-date"></span></div>
+
+    <div class="box" id="pf" style="margin-top:12px"></div>
+    <div class="box" id="fixed" hidden><h3>מה תוקן בגרסה הזו</h3><ul class="lines" id="fixed-l"></ul></div>
+
+    <div class="box" id="notes-box" style="margin-top:12px">
+      <h3>הערות</h3>
+      <div class="compose"><span class="at tc" id="at">0:00</span><input type="text" id="c-text" placeholder="מה לתקן ברגע הזה?" autocomplete="off"></div>
+      <div class="row">
+        <select id="c-cat" class="grow" aria-label="קטגוריה">
+          <option value="cut">חיתוך / קצב</option><option value="captions">כתוביות</option><option value="broll">בירול</option>
+          <option value="music">מוזיקה</option><option value="hook">הוק / פתיחה</option><option value="mg">גרפיקה</option><option value="other">אחר</option>
+        </select>
+        <button class="btn primary" id="c-add">הוסף הערה</button>
+      </div>
+      <div class="comments" id="c-list"></div>
+      <div class="row">
+        <button class="btn grow" id="send">📤 שלח הערות לקלאוד</button>
+        <button class="btn go grow" id="approve">✔ אשר והתחל גימור</button>
+      </div>
+      <div class="confirm" id="approve-confirm" hidden>
+        <div>לאשר את הגרסה <span class="tc" id="ac-ver"></span> לגימור? הגימור מתחיל מיד, ואחר כך יגיעו לכאן קאבר וקפשן לאישורך.</div>
+        <div class="row"><button class="btn go" id="approve-yes">כן, לגימור</button><button class="btn" id="approve-no">ביטול</button></div>
+      </div>
+      <div class="note" id="pending-note" hidden></div>
+    </div>
+
+    <div class="box" id="cc" hidden style="margin-top:12px">
+      <h3>קאבר, קפשן ותזמון</h3><div class="note" id="cc-date"></div>
+      <div class="cover"><img id="cover" alt="קאבר"><div style="display:grid;gap:8px;min-width:0">
+        <textarea id="caption" rows="8" aria-label="קפשן"></textarea>
+        <div class="row"><button class="btn go grow" id="cc-ok">✔ אשר קאבר, קפשן ותזמון</button><button class="btn grow" id="cc-change">✏️ בקש שינוי</button></div>
+        <input type="text" id="cc-note" placeholder="מה לשנות בקאבר או בקפשן?" hidden>
+      </div></div>
+    </div>
+  </section>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const API = "https://xfsvbpqbfmqlwgyusrww.supabase.co/functions/v1/video";
+const TK = "relReviewTokenV1";
+const $ = (id) => document.getElementById(id);
+const store = { get(k){ try{ return localStorage.getItem(k); }catch(_){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); }catch(_){} } };
+
+// קישור כניסה: #k=<token> → נשמר בטלפון ונמחק מהכתובת
+(function(){ const m=(location.hash||"").match(/[#&]k=([A-Za-z0-9]+)/); if(m){ store.set(TK,m[1]); history.replaceState(null,"",location.pathname); } })();
+let token = store.get(TK);
+
+const THEMES=[['auto','🌗','אוטומטי לפי הטלפון'],['dark','🌙','מצב לילה'],['light','☀️','מצב יום']];
+function applyTheme(m){ const r=document.documentElement; if(m==='auto') r.removeAttribute('data-theme'); else r.setAttribute('data-theme',m);
+  const t=THEMES.find(x=>x[0]===m)||THEMES[0]; $('theme').textContent=t[1]; $('theme').title=t[2]; }
+let themeMode=store.get('relTheme')||'auto'; applyTheme(themeMode);
+$('theme').onclick=()=>{ const i=THEMES.findIndex(x=>x[0]===themeMode); themeMode=THEMES[(i+1)%3][0]; applyTheme(themeMode); store.set('relTheme',themeMode); toast(THEMES.find(x=>x[0]===themeMode)[2]); };
+
+const STATE = {
+  draft:{t:'בהכנה',c:'wait',g:'work'}, review:{t:'מחכה לך',c:'need',g:'need'}, fixing:{t:'בתיקון',c:'wait',g:'work'},
+  approved:{t:'אושר, בגימור',c:'wait',g:'work'}, finishing:{t:'בגימור',c:'wait',g:'work'},
+  cover_review:{t:'קאבר+קפשן לאישור',c:'need',g:'need'}, ready_to_schedule:{t:'מוכן לתזמון',c:'ok',g:'work'},
+  scheduled:{t:'📅 תוזמן',c:'ok',g:'done'}, published:{t:'🚀 פורסם',c:'ok',g:'done'}, blocked:{t:'אצל הקלאוד',c:'bad',g:'work'}
+};
+const WAIT={send_notes:'הערות נשלחו, בטיפול',approve_publish:'אושר, בגימור',approve_cover_caption:'אושר, ממתין לתזמון',request_cover_change:'בקשת שינוי בטיפול'};
+let projects=[], comments=[], actions=[], filter='need', open=null, busy=false;
+const fmt=(s)=>{ s=Math.max(0,Math.round(+s||0)); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); };
+function toast(t){ const el=$('toast'); el.textContent=t; el.hidden=false; clearTimeout(toast.h); toast.h=setTimeout(()=>el.hidden=true,2600); }
+
+async function api(op, body={}){
+  const r = await fetch(API,{method:'POST',headers:{'content-type':'application/json','x-review-token':token||''},body:JSON.stringify({op,...body})});
+  const j = await r.json().catch(()=>({ok:false,error:'bad_json'}));
+  if(r.status===401){ showLogin(); throw new Error('נדרשת כניסה'); }
+  if(!j.ok) throw new Error(j.error||('HTTP '+r.status));
+  return j;
+}
+function showLogin(){ $('login').hidden=false; $('home').hidden=true; $('detail').hidden=true; $('sync').textContent='לא מחובר'; }
+$('tok-ok').onclick=()=>{ const v=$('tok').value.trim(); if(!v) return; token=v; store.set(TK,v); $('login').hidden=true; $('home').hidden=false; load(); };
+
+const pendingFor=(pid)=>actions.filter(a=>a.project_id===pid);
+function st(p){ const pend=pendingFor(p.id).filter(a=>WAIT[a.type]);
+  if(pend.length){ const last=pend.sort((a,b)=>String(b.at).localeCompare(String(a.at)))[0]; return {t:'⏳ '+WAIT[last.type],c:'wait',g:'work'}; }
+  return STATE[p.state]||{t:p.state||'—',c:'',g:'work'}; }
+
+const FRIENDLY={ 'dispatch:not_configured':'העריכה האוטומטית בענן עוד לא מחוברת (חסר טוקן GitHub). עד אז Claude מריץ אותה פעמיים ביום.',
+  'llm:not_configured':'שלב השיפוט (במאי וקפשן) עוד לא מחובר: חסר מפתח Anthropic.', 'cost_cap:hit':'הגענו לתקרת העלות של היום. העבודה ממשיכה מחר.' };
+function renderHealth(h){ const el=$('health'); const bad=(h||[]).filter(x=>x.value && x.value!=='ok');
+  const lines=[...new Set(bad.map(x=>FRIENDLY[x.key+':'+x.value]||x.note||x.key).filter(Boolean))];
+  el.hidden=!lines.length; el.textContent = lines.length ? ('⚠️ '+lines.slice(0,2).join(' · ')) : ''; }
+
+function renderList(){
+  const groups={need:[],work:[],done:[]}; projects.forEach(p=>groups[st(p).g].push(p));
+  for(const k in groups) $('n-'+k).textContent=groups[k].length?String(groups[k].length):'';
+  const rows=groups[filter].sort((a,b)=>String(a.publish_date||'9').localeCompare(String(b.publish_date||'9')));
+  const L=$('list'); L.textContent='';
+  if(!rows.length){ const e=document.createElement('div'); e.className='empty';
+    e.textContent = filter==='need' ? 'אין כרגע משהו שמחכה לך. סרטון מגיע לכאן רק אחרי מבקר-קדם תקין.' : 'אין סרטונים בקבוצה הזו.'; L.append(e); return; }
+  for(const p of rows){
+    const b=document.createElement('button'); b.className='item'; b.type='button';
+    const t=document.createElement('span'); t.className='t'; t.textContent=p.title||p.id;
+    const s=document.createElement('span'); s.className='pill '+st(p).c; s.textContent=st(p).t;
+    const m=document.createElement('span'); m.className='meta';
+    const oc=comments.filter(c=>c.project_id===p.id && c.status!=='verified').length;
+    m.textContent=[p.dept, p.publish_date?('פרסום '+String(p.publish_date).slice(0,10)):'', p.duration?fmt(p.duration):'', oc?(oc+' הערות פתוחות'):''].filter(Boolean).join(' · ');
+    b.append(t,s,m); b.onclick=()=>openProject(p.id); L.append(b);
+  }
+}
+
+function renderDetail(){
+  const p=projects.find(x=>x.id===open); if(!p) return;
+  $('d-title').textContent=p.title||p.id; const s=st(p); $('d-state').className='pill '+s.c; $('d-state').textContent=s.t;
+  $('d-ver').textContent=p.version||'—'; $('ac-ver').textContent=p.version||''; $('d-dur').textContent=p.duration?fmt(p.duration):'—';
+  $('d-date').textContent=p.publish_date?String(p.publish_date).slice(0,10):'לא נקבע';
+  const v=$('vid'); const url=p.video_url||'';
+  if(url){ if(v.dataset.path!==p.video_path){ v.src=url; v.dataset.path=p.video_path; } $('novideo').hidden=true; }
+  else { v.removeAttribute('src'); v.dataset.path=''; $('novideo').hidden=false; }
+  const pf=$('pf'); pf.textContent=''; const pre=p.preflight||{};
+  const vd=document.createElement('div'); vd.className='verdict '+(pre.ready?'ok':(pre.ready===false?'bad':''));
+  const dot=document.createElement('span'); dot.className='dot'; const tx=document.createElement('div');
+  tx.textContent=pre.verdict||(pre.ready?'מבקר-קדם: מוכן לך':'מבקר-קדם עוד לא רץ על הגרסה הזו'); vd.append(dot,tx); pf.append(vd);
+  if(Array.isArray(pre.lines)&&pre.lines.filter(Boolean).length){ const ul=document.createElement('ul'); ul.className='lines'; pre.lines.filter(Boolean).slice(0,6).forEach(l=>{const li=document.createElement('li'); li.textContent=l; ul.append(li);}); pf.append(ul); }
+  const fx=Array.isArray(p.fixed)?p.fixed:[]; $('fixed').hidden=!fx.length; const fl=$('fixed-l'); fl.textContent='';
+  fx.forEach(f=>{const li=document.createElement('li'); li.textContent=(f.verdict==='verified'||f.verdict==='fixed'?'✓ ':'• ')+(f.text||''); fl.append(li);});
+  const mine=comments.filter(c=>c.project_id===p.id).sort((a,b)=>(+a.t||0)-(+b.t||0)); const cl=$('c-list'); cl.textContent='';
+  if(!mine.length){ const e=document.createElement('div'); e.className='note'; e.textContent='עוצרים את הסרטון ברגע שצריך תיקון וכותבים מה לשנות. ההערה נצמדת לזמן ולגרסה.'; cl.append(e); }
+  const map={open:['פתוחה',''],sent:['נשלחה','wait'],fixed:['תוקן, לבדיקתך','need'],verified:['✓ אומת','ok'],not_fixed:['חוזר לתיקון','bad']};
+  mine.forEach(c=>{ const r=document.createElement('div'); r.className='cm';
+    const tb=document.createElement('button'); tb.className='t tc'; tb.textContent=fmt(c.t); tb.onclick=()=>{ v.currentTime=+c.t||0; v.play().catch(()=>{}); };
+    const body=document.createElement('div'); body.className='txt'; body.textContent=c.text||'';
+    if(c.reply){ const rp=document.createElement('div'); rp.className='reply'; rp.textContent='🤖 '+c.reply; body.append(rp); }
+    const sp=document.createElement('span'); const m=map[c.status]||[c.status||'','']; sp.className='pill '+m[1]; sp.textContent=m[0];
+    r.append(tb,body,sp); cl.append(r); });
+  const pend=pendingFor(p.id); const pn=$('pending-note'); pn.hidden=!pend.length;
+  pn.textContent=pend.length?('נשלח: '+pend.map(a=>({send_notes:'הערות',approve_publish:'אישור לגימור',approve_cover_caption:'אישור קאבר+קפשן',request_cover_change:'בקשת שינוי'})[a.type]||a.type).join(', ')+'. העבודה התחילה, הסטטוס יתעדכן כאן.'):'';
+  const reviewable=['review','fixing','blocked'].includes(p.state);
+  $('approve').disabled=!reviewable||!p.video_url||pend.some(a=>a.type==='approve_publish');
+  $('send').disabled=!mine.some(c=>c.status==='open');
+  const showCC=p.state==='cover_review'||(p.cover_url&&['ready_to_schedule','scheduled','published'].includes(p.state)); $('cc').hidden=!showCC;
+  if(showCC){ $('cc-date').textContent=p.publish_date?('יתוזמן ל-'+String(p.publish_date).slice(0,10)+' (מעמודת תאריך הפרסום בגאנט)'):'אין תאריך פרסום בגאנט, לא יתוזמן עד שייקבע';
+    $('cover').src=p.cover_url||''; const ta=$('caption'); if(document.activeElement!==ta&&!ta.dataset.dirty) ta.value=p.caption||'';
+    const locked=p.state!=='cover_review'; ta.readOnly=locked; $('cc-ok').disabled=locked||pend.some(a=>a.type==='approve_cover_caption'); $('cc-change').disabled=locked; }
+}
+function render(){ renderList(); if(open) renderDetail(); }
+function openProject(id){ open=id; $('home').hidden=true; $('detail').hidden=false; $('caption').dataset.dirty=''; renderDetail(); scrollTo(0,0); }
+$('back').onclick=()=>{ open=null; $('vid').pause(); $('detail').hidden=true; $('home').hidden=false; renderList(); };
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{ filter=b.dataset.f; document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); renderList(); });
+$('vid').addEventListener('timeupdate',()=>{ $('at').textContent=fmt($('vid').currentTime); });
+$('caption').addEventListener('input',e=>e.target.dataset.dirty='1');
+
+async function act(op, extra={}, okMsg='נשמר'){ if(busy) return; busy=true;
+  try{ await api(op,{project_id:open,...extra}); toast(okMsg); await load(); }catch(e){ toast('לא נשמר: '+e.message); } finally{ busy=false; } }
+$('c-add').onclick=async()=>{ const text=$('c-text').value.trim(); if(!text) return toast('כתוב מה לתקן'); const p=projects.find(x=>x.id===open);
+  await act('comment_add',{text,t:Math.round(($('vid').currentTime||0)*10)/10,category:$('c-cat').value,version:p?.version||null},'ההערה נשמרה'); $('c-text').value=''; };
+$('c-text').addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); $('c-add').click(); } });
+$('send').onclick=()=>act('send_notes',{},'נשלח לקלאוד');
+$('approve').onclick=()=>{ $('approve-confirm').hidden=false; };
+$('approve-no').onclick=()=>{ $('approve-confirm').hidden=true; };
+$('approve-yes').onclick=()=>{ $('approve-confirm').hidden=true; act('approve_publish',{},'אושר לגימור'); };
+$('hide').onclick=async()=>{ const b=$('hide'); if(!b.dataset.arm){ b.dataset.arm='1'; b.textContent='להסיר?'; setTimeout(()=>{ b.dataset.arm=''; b.textContent='🗑'; },3000); return; }
+  await act('hide',{},'הוסר מהרשימה'); $('back').click(); };
+$('cc-ok').onclick=async()=>{ await act('approve_cover_caption',{caption:$('caption').value},'אושר, יתוזמן לתאריך שבגאנט'); $('caption').dataset.dirty=''; };
+$('cc-change').onclick=async()=>{ const n=$('cc-note'); if(n.hidden){ n.hidden=false; n.focus(); return; } const note=n.value.trim(); if(!note) return toast('כתוב מה לשנות');
+  await act('request_cover_change',{note,caption:$('caption').value},'הבקשה נשלחה'); n.value=''; n.hidden=true; };
+
+async function load(){
+  if(!token){ showLogin(); return; }
+  try{ const s=await api('state'); projects=s.projects||[]; comments=s.comments||[]; actions=s.actions||[]; renderHealth(s.health);
+    $('login').hidden=true; if(!open) $('home').hidden=false;
+    $('sync').textContent='עודכן '+new Date().toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'}); render();
+  }catch(e){ if(!$('login').hidden) return; $('sync').textContent='שגיאת חיבור'; }
+}
+// רענון רק כשהעמוד גלוי: כל 30 שניות, ומיד כשחוזרים לטאב
+setInterval(()=>{ if(document.visibilityState==='visible' && !busy && document.activeElement?.tagName!=='TEXTAREA') load(); },30000);
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') load(); });
+load();
+</script>
+</body>
+</html>

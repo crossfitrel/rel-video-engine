@@ -1,6 +1,6 @@
 {
  "_doc": "תצורת tools/skill_pack.py — איזה סעיף H2 של המאסטר נכנס לאיזה reference. סעיף חדש שלא תואם אף match נכנס ל-misc.md (לא נאבד) ומדווח ב-build. description = התיאור המותקן (≤1024; יעד SKILL-STANDARD v2 ≤350).",
- "description": "מערכת עריכת סרטוני הסושיאל של קרוספיט אריאל, בענן (v10): גלם מהטלפון ל-Monday → ריצת ענן מתוזמנת (Whisper+EDL+במאי+גימור+PREFLIGHT) → עמוד הרוויו בטלפון → אישור קאבר+קפשן+תזמון → Metricool. TRIGGERS: ערוך סרטון, תרוץ על הסרטונים, הערות מעמוד הרוויו, גימור, מוכן לתזמון, תזמן ב-Metricool, EDITPLAN, סרטון אפליקציה. NEGATIVE: תסריט → rel-script-writer · קפשן → rel-cta-psychology · פודקאסט מלא → rel-podcast-descript-editor.",
+ "description": "מערכת עריכת סרטוני הסושיאל של קרוספיט אריאל, (v11): גלם מהטלפון ל-Monday → worker ב-GitHub Actions (Whisper+EDL+במאי Sonnet+גימור+PREFLIGHT) → עמוד הרוויו rel.fit/review → אישור קאבר+קפשן+תזמון → Metricool. TRIGGERS: ערוך סרטון, תרוץ על הסרטונים, הערות מעמוד הרוויו, גימור, מוכן לתזמון, תזמן ב-Metricool, EDITPLAN, סרטון אפליקציה. NEGATIVE: תסריט → rel-script-writer · קפשן → rel-cta-psychology · פודקאסט מלא → rel-podcast-descript-editor.",
  "routes": [
   {
    "file": "hook-edit.md",

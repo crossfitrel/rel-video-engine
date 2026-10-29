@@ -1,5 +1,5 @@
 # rel-social-video-editor · intake-guard
-> נגזר מהמאסטר (v10.0 — 2026-10-10) ע"י tools/skill_pack.py — לא לערוך כאן.
+> נגזר מהמאסטר (v11.0 — 2026-10-29) ע"י tools/skill_pack.py — לא לערוך כאן.
 
 ## שומרי הגלם — intake_guard (v9.26, 19.9.26)
 

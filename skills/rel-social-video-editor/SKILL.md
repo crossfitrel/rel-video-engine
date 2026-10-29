@@ -5,7 +5,7 @@ description: "**Social Video Editor — CrossFit R.E.L (v9.30)**: מערכת ע�
 
 # rel-social-video-editor v6 — מקומי מקצה-לקצה, אפס Descript
 
-**גרסה:** v10.0 — 2026-10-10 ("ענן") · **פרויקט:** Social Video Editing System
+**גרסה:** v11.0 — 2026-10-29 ("זול ועצמאי") · קודם: v10.0 — 2026-10-10 ("ענן") · **פרויקט:** Social Video Editing System
 **קאנון:** `00_META/VIDEO-CANON.md` (v2.2) גובר על הסקיל הזה. פורמט התסריט ו-`⟦EDIT-LAYER⟧` בבעלות `rel-script-writer`.
 
 ## תפיסת העל (מה השתנה ב-v6)

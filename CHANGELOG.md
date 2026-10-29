@@ -1,3 +1,15 @@
+## v11.0 — 29.10.2026 · זול ועצמאי ממכסת Claude
+
+**הראל:** להסב את המערכת לארכיטקטורה זולה ועצמאית: מחשוב בלי קרדיטים, מודלים זולים לשיפוט, מצב ורוויו מחוץ ל-Artifact, Codex/ChatGPT כגיבוי. הרקע: 23.10 workdirs אבדו (push-project לא רץ), 29.10 שישה סוכנים העמיסו את המק עד ניתוק, כל סוכן כ-500k טוקנים.
+- **Supabase סכמה `video`** (projects · comments · actions · jobs · runs · costs · system_health · config) + bucket `video-review`, סגורה ל-anon. פונקציות edge `video` (רוויו/worker/llm/dispatch/webhook) ו-`video-admin` (ביטול ג'וב, מאגר הפתוחים).
+- **עמוד הרוויו rel.fit/review** (Netlify `rel-video-review`, מקור `review-web/`): אותן יכולות כמו ה-Artifact. 11 הפרויקטים, 31 ההערות, 21 הפעולות ו-21 הנכסים הועברו (`cloud/migrate_artifact.py`, sha256 נבדק). ה-Artifact B799… לקריאה בלבד.
+- **worker** `cloud/worker.py` + `.github/workflows/video-worker.yml`: prep · notes · finish · cover. מופעל מאירוע (webhook Monday 660374019, כפתורי העמוד). אין polling, אין סודות ב-GitHub (טוקן חד-פעמי לג'וב).
+- **`tools/llm.py`**: ניתוב לפי משימה, תקרות עלות בשרת, לוג עלות לכל פרויקט. `provider.py` backend `proxy` לבמאי.
+- **AGENTS.md** חדש לגמרי ל-Codex/ChatGPT: אותם שערים, בלי תזמון ובלי הודעות.
+- **L143** (workdir נשמר ומאומת או שאין "בוצע") · **L144** (Opus רק בהסלמה). tests: `tests/test_v11_worker.py` (8, הזרקת כשל).
+- המשימה המתוזמנת "עריכת סושיאל בענן" הוחזרה לפעולה פעמיים ביום כערוץ הסלמה בלבד (שאילתה אחת ויציאה).
+- מדידה: `cloud/BENCH-v11.md`.
+
 ## v10.3 — 23.10.2026 · L142: המצע מיושר לאורך הזמן לפני המדידה (מיזוג L137 של המק)
 
 **הראל (פינה-אנטומית-פרק2, 53.5ש):** "המוזיקה רועשת מידיי. זה חוזר על עצמו כל הזמן וחייב לטפל בזה מהשורש".

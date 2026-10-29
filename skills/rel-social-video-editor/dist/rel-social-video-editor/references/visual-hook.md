@@ -1,5 +1,5 @@
 # rel-social-video-editor · visual-hook
-> נגזר מהמאסטר (v10.0 — 2026-10-10) ע"י tools/skill_pack.py — לא לערוך כאן.
+> נגזר מהמאסטר (v11.0 — 2026-10-29) ע"י tools/skill_pack.py — לא לערוך כאן.
 
 ## פתיחה חזותית — Visual Hook Engine (v9.22, 11.9.26)
 

@@ -1,3 +1,29 @@
+# מערכת עריכת הסושיאל — v11 "זול ועצמאי" (29.10.26)
+
+**המטרה:** מחשוב בלי קרדיטים של Claude, שיפוט במודלים זולים, מצב ורוויו מחוץ ל-Artifact, וגיבוי ל-Codex/ChatGPT. כל חוקי הברזל, שלושת החוזים ושערי האישור נשארו כמו שהם.
+
+| מה | איפה (v11) |
+|---|---|
+| מצב: projects · comments · actions · jobs · runs · costs · system_health · config | Supabase `xfsvbpqbfmqlwgyusrww`, סכמה `video` (סגורה ל-anon; הכל דרך פונקציית edge `video`) |
+| פרוקסי וקאברים | Supabase Storage, bucket פרטי `video-review` (sha256 נבדק בהורדה חוזרת) |
+| עמוד הרוויו | **rel.fit/review** → Netlify `rel-video-review` (מקור: `review-web/`). כניסה בקישור אישי `#k=` שנשמר בטלפון |
+| מחשוב | GitHub Actions `.github/workflows/video-worker.yml` → `cloud/worker.py run` (prep · notes · finish · cover) |
+| שיפוט | `tools/llm.py` → `op=llm` בפונקציה. Haiku: סיווג, הגיון לשוני, בירול-לתווית · Sonnet: במאי, הוק, קפשן, vision, מיפוי הערות · Opus: הסלמה בלבד |
+| טריגר | webhook של Monday (660374019, סטטוס בגאנט) + כפתורי העמוד → `video.jobs` → workflow_dispatch. אין polling |
+| workdirs | ענף `libs` (`push-project` אחרי כל שלב + משיכה חוזרת והשוואה, L143) |
+| Artifact הישן B799… | ארכיון לקריאה בלבד עם הפניה |
+| Codex/ChatGPT | `AGENTS.md` + `cloud/video_api.py` |
+
+**סודות (רק בכספת של Supabase, אף פעם לא בריפו):** `monday_token` (קיים) · `video_admin_key` · `video_review_token` · `anthropic_api_key` · `github_dispatch_token` (PAT עם Actions: write על הריפו בלבד). ה-runner מקבל רק טוקן חד-פעמי לג'וב (14 שעות).
+
+**מה רץ איפה:** חישוב דטרמיניסטי + Sonnet ⇒ Actions. תזמון Metricool ⇒ צעד Claude קצר (ג'וב `schedule`, runner=claude), כי אין טוקן Metricool בכספת. שיפוט שמעבר ל-Sonnet (שער שנכשל פעמיים, הערה לא ממופה, PREFLIGHT לא עבר) ⇒ ג'וב `judge` לסשן Claude אחד וממוקד.
+
+**תקרות עלות:** `video.config.caps` (‎$1.5 לריל · ‎$5 ליום · 2 קריאות Opus לריל), נאכפות בשרת. דוח: `python3 cloud/video_api.py costs '{}'` או `video.v_cost_per_day`.
+
+**מדידה:** ראו `cloud/BENCH-v11.md`.
+
+---
+
 # מערכת עריכת הסושיאל בענן — v10 (10.10.26)
 
 **המטרה:** אפס תלות במק בעריכת ריל. המק נשאר רק לפודקאסט "מדברים כושר".

@@ -1,9 +1,9 @@
 # rel-social-video-editor · hook-edit
-> נגזר מהמאסטר (v10.0 — 2026-10-10) ע"י tools/skill_pack.py — לא לערוך כאן.
+> נגזר מהמאסטר (v11.0 — 2026-10-29) ע"י tools/skill_pack.py — לא לערוך כאן.
 
 # rel-social-video-editor v6 — מקומי מקצה-לקצה, אפס Descript
 
-**גרסה:** v10.0 — 2026-10-10 ("ענן") · **פרויקט:** Social Video Editing System
+**גרסה:** v11.0 — 2026-10-29 ("זול ועצמאי") · קודם: v10.0 — 2026-10-10 ("ענן") · **פרויקט:** Social Video Editing System
 **קאנון:** `00_META/VIDEO-CANON.md` (v2.2) גובר על הסקיל הזה. פורמט התסריט ו-`⟦EDIT-LAYER⟧` בבעלות `rel-script-writer`.
 
 ## ארגז העריכה של ההוק (v9.46, 8.10.26)

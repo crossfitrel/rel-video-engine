@@ -1,5 +1,5 @@
 # rel-social-video-editor · version-history
-> נגזר מהמאסטר (v10.0 — 2026-10-10) ע"י tools/skill_pack.py — לא לערוך כאן.
+> נגזר מהמאסטר (v11.0 — 2026-10-29) ע"י tools/skill_pack.py — לא לערוך כאן.
 
 ## תוכן
 - v9.49 — 17.10.2026.

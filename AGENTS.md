@@ -1,75 +1,52 @@
-## Imported Claude Cowork project instructions
+# AGENTS.md — מערכת עריכת הסושיאל של קרוספיט אריאל (v11, 29.10.26)
 
-# הוראות פרויקט — Social Video Editing System (v9.0)
-> להדבקה ב-Project Instructions (מחליף את v8.0). עודכן 16.8.26.
+> לכל סוכן שאינו Claude (Codex, ChatGPT, כל מודל אחר) שעובד על הריפו הזה או מפעיל אותו.
+> אותם כללים ואותם שערים כמו ל-Claude. בסתירה: הסקיל `skills/rel-social-video-editor` (CORE.md + references) גובר על הקובץ הזה.
 
-## מטרת הפרויקט
-ניהול עריכת סרטוני הסושיאל של קרוספיט אריאל מקצה לקצה — **מקומי לחלוטין, אפס Descript, Editorial Operating System**: Monday (בריף/סטטוס) → הכנה דטרמיניסטית (Whisper+EDL+ffmpeg) → **שיפוט מודלי של הבמאי** → רוויו ותיקון של הראל ב-**review-app** (פורט 5112) → גימור אוטומטי תחת נעילה (`run_finish.py`) → Metricool. Claude הוא **העורך ומנהל ההחלטות**.
+## מה המערכת
+גלם מהטלפון ל-Monday (גאנט 18395578529, עמודה "קבצים" `file_mkrpfxkz`, סטטוס "מוכן לעריכה")
+→ worker דטרמיניסטי ב-GitHub Actions (`cloud/worker.py`, `.github/workflows/video-worker.yml`)
+→ שיפוט במודלים זולים דרך `tools/llm.py` (Haiku/Sonnet, Opus רק להסלמה)
+→ PREFLIGHT → עמוד הרוויו **rel.fit/review** (Netlify `rel-video-review`, מצב ב-Supabase סכמה `video`)
+→ הראל מאשר בטלפון → גימור → אישור קאבר+קפשן+תזמון → Metricool.
 
-## מקור אמת
-`skills/rel-social-video-editor/SKILL.md` (v9.13) הוא המקור התפעולי היחיד. `tools/PIPELINE.md` = runbook. `ARCHITECTURE.md` / `DATA-SCHEMA.md` / `TESTING.md` / `ASR-BENCH.md` / `V2-ARCHITECTURE.md` / `FFMPEG-STALL.md` = עומק. בסתירה — הסקיל גובר. *(`SKILL-rel-social-video-editor.md` בשורש הוא מצביע בלבד.)*
+## מה מותר לך לעשות מבחוץ
+כל הפעולות עוברות דרך פונקציית ה-edge `video` (Supabase `xfsvbpqbfmqlwgyusrww`), עם `cloud/video_api.py`:
+```
+export VIDEO_ADMIN_KEY=…        # מהכספת של Supabase (video_admin_key). לעולם לא בקוד, לא בקומיט, לא בלוג.
+python3 cloud/video_api.py jobs '{}'                                   # מה בתור
+python3 cloud/video_api.py costs '{}'                                  # עלות לריל וליום
+python3 cloud/video_api.py enqueue '{"kind":"prep","project_id":"p-<item>","payload":{"item_id":"<item>"}}'
+python3 cloud/video_api.py redispatch '{"job_id":"<uuid>"}'            # מפעיל שוב את ה-workflow לג'וב קיים
+python3 cloud/video_api.py health_set '{"key":"…","value":"ok"}'
+```
+- קריאת הערות של הראל: `state` (עם `VIDEO_REVIEW_TOKEN`) או `job_claim` של ג'וב `notes`.
+- הפעלת worker: רק `enqueue` / `redispatch` (הפונקציה עושה workflow_dispatch). לא מריצים workflow ידנית עם טוקן מומצא.
+- עדכון סטטוס: `project_upsert` (רק השדות שהשתנו), `comment_update`, `monday_status`.
 
-## עקרון העל
-**התמליל = מקור אמת. התסריט הרופף = מצפן. הקאנון = חוקי העריכה. הקבצים על הדיסק = מקור האמת של המערכת** (SQLite הוא אינדקס שנבנה-מחדש; `project_id` במניפסט הוא הזהות, לא שם התיקייה).
-**"התסריט הרופף" = ה-Update היחיד המסומן `⟦SCRIPT v{n}⟧` ונעוץ בראש הפריט.** בתוכו `⟦EDIT-LAYER⟧` (★HOOK-FRAME★, ⬛COVER⬛ לפי מותג, לוח חיתוך מתוזמן, קצב) — זה הקלט הרשמי לעריכה, ו-`⟦SHOOT⟧` הוא רשימת השוטים. תוכנית העריכה נשמרת כ-`⟦EDITPLAN v{n}⟧` — Update אחד, `edit_update` בעדכון, בלי `delete_update`.
+## מה אסור לך — לעולם
+1. **לא לעקוף שער.** `PREFLIGHT.json` עם `ready_for_harel=true` הוא התנאי היחיד ל"מוכן לבדיקה". אין "מוכן" בלי גימור מלא (כתוביות, מוזיקה, בירול, MG, hook_fx, קאבר) וכל הבדיקות: `qa_gates` · `vision_check` + גיליונות · תמלול חוזר של FINAL · `verify-fixes` על כל הערה מהסבב הקודם.
+2. **לא לתזמן בלי הראל.** תזמון ב-Metricool רק אחרי `approve_cover_caption` שהראל לחץ בעמוד, רק מ-`schedule_approval.artifact_path` עם sha256 תואם, ורק לתאריך מעמודת `date_mkrpvw3n` בגאנט (UTC). אחרי תזמון: אימות בקריאה חוזרת (`getScheduledPosts`) לפני "תוזמן!". ג'וב `schedule` רץ רק אצל Claude.
+3. **לא לשלוח הודעה או מייל לאף אדם.** תקלה שדורשת את הראל ⇒ `health_set` (באנר בעמוד), לא מייל.
+4. **לא לגעת בצבע, לא לדחוס FINAL, לא להאיץ סרטון כדי לעמוד באורך.** האורך נקבע ע"י התוכן.
+5. **לא לשנות סף בלי מדידה.** כל סף נגזר מסרטונים שהראל אישר (`tools/reference_profile.json`). אין שער חוסם עם סף לא-מדוד.
+6. **לא לבטל לקח.** כל לקח רשום ב-`tools/lesson_registry.py` עם אוכף; `--audit` חייב לעבור. לקח חדש = רשומה + אוכף (בדיקה/שער) באותו שינוי.
+7. **לא לעבוד על פריטי Monday/Metricool אמיתיים לבדיקות.** בדיקות רק על `p-e2etest` (`test: true`) או עותקים.
+8. **לא לשמור מפתחות בקוד.** Anthropic/Monday/GitHub יושבים בכספת של Supabase; ה-runner מקבל רק טוקן חד-פעמי לג'וב.
 
-## שלושת החוזים של v9.13 — נגד עריכות-מחדש וטעויות חוזרות (הראל 16.8.26)
-1. **אף תוצר לא מגיע להראל בלי מבקר-קדם.** `tools/preflight_critic.py` רץ בסוף כל גימור ועונה "אם הראל צופה עכשיו — מה הוא מתקן?" → `PREFLIGHT.json` עם `ready_for_harel`. כשמדווחים "מוכן לבדיקה" — **מצטטים את פסק-הדין**. ממצא high פתוח = החלטה מודעת שמדווחת, לא תקלה שמתגלה אצל הראל.
-2. **אין לקח בלי אוכף.** כל פידבק של הראל שמוטמע בקוד = רשומה ב-`tools/lesson_registry.py` (lesson/origin/layer) + אוכף (סימבול בקוד / בדיקה / שער). `--audit` = שער ב-doctor, נכשל כשאוכף נעלם. **זו חלק מהגדרת "בוצע" של כל תיקון.** (השורש: fade-בתפר ו-eof_action נסוגו בשקט בהחלפת מנוע וחזרו למסך — לקח = נוהל שנשכח; לקח עם אוכף = רגרסיה שנתפסת.)
-3. **הבמאי לומד מהראל (n=1).** `tools/director_lessons.py` רץ לפני כל `--director`: לקחים + דפוסי התיקון של הראל לפי cohort → payload הבמאי (`harel_lessons`, פרומפט v1.4). הקובץ קפוא בתוך פרויקט (יציבות digest); `--rebuild` דורס במודע.
+## שלושת החוזים
+1. אין תוצר להראל בלי מבקר-קדם (`tools/preflight_critic.py` → `PREFLIGHT.json`). כשמדווחים "מוכן לבדיקה" מצטטים את פסק-הדין.
+2. אין לקח בלי אוכף (`tools/lesson_registry.py --audit`).
+3. הבמאי לומד מהראל: `tools/director_lessons.py` רץ לפני כל `--director`.
 
-## שבעה עקרונות שנקנו בדם — לא מפרים אותם
-1. **כל סף נגזר ממדידה של סרטונים שהראל אישר, לא מניחוש.** המעטפת: `tools/reference_profile.json` (16 סרטונים), נבנית מחדש ב-`bench/output_profile.py --build-reference`.
-2. **יחידת ההתאמה של בירול היא המשפט, לא נושא-על.**
-3. **מי הקהל קובע את המבנה.** המרה = קהל קר = מצע רציף 70%. ערך/חיבור = עוגנים בלבד, ואפס בירולים היא תשובה טובה.
-4. **ערך שמשתנה בלי שהתוכנית השתנתה לא נכנס ל-payload של פאס.** נשבר ארבע פעמים — כל אחד שבר `--backend replay`.
-5. **התווית משקרת. הפריים לא.** `people` (מי בפריים) ≠ `audience` (למי הקליפ מיועד).
-6. **אין פנים בפריים ⇒ אין אימות זהות.** בגד ומבנה גוף אינם ראיה.
-7. **ספירה אינה מנבאת התנהגות.** כל כלל שנשען על "כמה" — לבדוק אם באמת נמדד.
-
-## v9.11-v9.13 — מה חדש
-- **v9.11 — קצה בירול מיושר לגבול החיתוך** (`snap_to_cuts`, חצייה 2 פריימים, `cut_slivers` = חוב), ותיקון שתי השכבות שנסוגו במנוע v2 (fade-בתפר · `eof_action=repeat`, `ENGINE_VERSION=v2.2`).
-- **v9.12 — הקאבר מהשורש:** בונה יחיד `thumbnail/cover_make.py` לשני המותגים, תמיד מ-EXPORT נקי, שערים חוסמים G-COVER1/2/3 עם סף נמדד.
-- **v9.13 — שלושת החוזים למעלה** + האפליקציה: `GET /api/next` (הצעד הבא ושל מי) · פאנל "🚦 מה עכשיו" · `GET /api/claude-brief` + כפתור "📋 העתק בריף לקלאוד" (כשהראל מדביק בריף כזה — לטפל בכל הפריטים ברצף) · `GET /api/preflight/{שם}` · תיקון ממשק render-v2 ↔ captions_overlay (`BRAND_PROFILES`, לקח L27).
-
-## איך שער נראה כאן
-לכל שער `protects` / `cost_of_blocking` / `fallback` ברשומה ובדוח (`gate_registry`). **בינארי מותר** כשהעלות אינה מתקזזת מול שום יתרון (הראל בתוכן מועדון · הבטחה שנסתרת · פרסום בלי אישור) — נכשל-סגור. **בינארי אסור** כשהשער מודד מציאות שאי אפשר לשנות או מעניש סרטון על חוב שאינו שלו — שם מדווח, ומייצר חוב. **אין שער חוסם עם סף לא-מדוד.** ה-preflight כולו מדווח בכוונה — הוא שיפוט צפייה, לא חוק פיזיקה.
-
-## Descript — מחוץ לזרימה
-אסור בזרימה הראשית. חריג יחיד `[DESCRIPT FALLBACK]` — אחרי שני כשלים מקומיים ובאישור הראל.
-
-## חוקי עריכה קשיחים
-יעד 55-60ש (קשיח 20-65; חריגה מ-50-65 = אזהרה) · תחת `--director` המדד הוא המעטפת הנמדדת (שקט 13-32% · פאוזה ≤0.65ש בתוצר · תקציב תפרים 0.16/ש) · כפילות = הטייק האחרון · Hook קדוש; פתיחה בלי דיבור >2.5ש = פתיח ויזואלי פוטנציאלי · CTA 8ש אחרונות מוגן (מצע המרה עם `bed_end` מוצהר — הדוקטרינה גוברת) · אין טקסטים גרפיים/לוגו/פתיחים (חריגי הקטלוג) · אסור צבע (חריג HDR/HLG → `tonemap.swift`) · 1080×1920@30fps · crf19/medium ב-v2 (דור אחד), crf23 להעלאות ב-v1.
-
-## כתוביות (צריבה מקומית בלבד)
-מילה אחת (2 רק ≤2 אותיות/<0.2ש), לבן Assistant ExtraBold, סטטיות, תחתון-מרכז, **בלי נקודות ופסיקים לעולם** (`?` `!` נשארים). forced alignment + `captions_qa` PASS ≥90% + **G6b מול ASR מהאודיו הסופי** + G9 לקסיקון עברי. פרופיל מותג אטומי (`BRAND_PROFILES`): מועדון ‎#871d1f+Assistant · הראל חיון ‎#0077B6.
-
-## B-roll
-רק מהקטלוג · תמיד mute · אחרי המשפט הראשון · לא על Hook/CTA · overlay על EXPORT נקי שנשמר תמיד. **דוקטרינה:** המרה = `continuous_bed` (יעד 70%, פעימת `trust` לגיטימית); ערך/חיבור = `anchors_only` (עוגן דורש **ציטוט** מהמשפט, ≥0.75; 0 בירולים = תשובה תקפה). **קצה בירול מיושר לגבול חיתוך** (v9.11). שערים: `broll_brief_gate` · `broll_seam_qa` · `broll_sequence_qa` · `broll_shot_debt` · preflight P1-P5.
-
-## מוזיקה
-מצע בכל סרטון: `audio_mix.py --music-lufs -44` עם דאקינג כברירת מחדל. אורך מלא. Pixabay בלבד, אסור AI-generated. חוק אי-חזרה 90 יום. **טון הבריף קובע ז'אנר** (`tone_class`). בחירת הראל ננעלת (`track_auto`) וגוברת על CLI.
-
-## שערי אישור (לא לעקוף)
-1. רוויו באפליקציה → "אשר והמשך לגימור" = `[APPROVE-PUBLISH]` → גימור תחת נעילה → `learn --propose`.
-2. אישור קאבר+קפשן באפליקציה → נועל `artifact_id`/`artifact_checksum` (v9.4) → `state=ready_to_schedule`.
-3. תזמון רק מ-`schedule_approval.artifact_path` עם אימות checksum; מייל אימות אחרי כל תזמון לפני "תוזמן!".
-שום פרסום/תזמון בלי כולם. אסור בדיקות על פריטי Monday/Metricool אמיתיים.
-
-## Metricool
-פוסט אחד לכל הרשתות (ריל → IG+FB+YT+TikTok; Throwdown → IG+FB). `titles` ×3 חובה. `firstComment` חובה. IG = "פרטים בביו 👆". אסור לתזמן בלי `state==ready_to_schedule` + `artifacts.verify().ok` (אחרת `[STALE-FINAL]`). API קודם, ידני אחרון. אופק ~חודש. אסור לגעת באיכות/מדיה של פוסט מתוזמן.
+## חוקי ברזל (נוסח מלא: `skills/rel-social-video-editor/references/iron-rules.md`)
+סף נגזר ממדידה · גלאי שמפסיק בשקט גרוע מגלאי שאין · קלט שהשתנה מבטל כל נגזרת · חוק הראייה: אין אמירה על סרטון בלי גיליון שנפתח · תיקנת פעמיים = השכבה הלא-נכונה · מדוד לפני ואחרי · workdir נשמר אחרי כל שלב (`libs_git.sh push-project` + אימות) — אין "בוצע" בלי שמירה מאומתת.
 
 ## קופי
-מבוסס תמלול בלבד, קול חם ואנרגטי, CTA רך אחד, עברית, "מועדון קרוספיט" לעולם.
+מבוסס תמלול בלבד · מנוע הקפשן v4 (`docs/CAPTION-ENGINE.md`) + `tools/caption_gate.py` · CTA אחד · אפס האשטגים · אין URL בקפשן · "מועדון קרוספיט", לעולם לא "חדר כושר" · בלי קו מפריד ארוך (—) · לבבות ❤️🖤 במועדון, 🩵 בתוכן האישי של הראל.
 
-## בדיקות ותקלות
-`python3 -m unittest discover -s tests` (**403**) · `tools/golden.py run` לפני כל שינוי policy · `tools/system_doctor.py` (**42 שערים, 0 FAIL**) · `tools/gate_registry.py --audit` (**118**) · `tools/lesson_registry.py --audit` (**27 לקחים**) · E2E רק על עותקים ב-`_work/.e2e/`. **כל שער חדש מקבל בדיקת הזרקת-כשל; כל לקח חדש מקבל אוכף.**
+## עלויות
+כל קריאת מודל עוברת ב-`tools/llm.py` → `op=llm`. התקרות ב-`video.config.caps` (ברירת מחדל ‎$1.5 לריל, ‎$5 ליום, 2 קריאות Opus לריל) נאכפות בצד השרת. אל תעקוף אותן במסלול ישיר.
 
-## משמעת עבודה
-**מדוד לפני שאתה מתקן, ומדוד שוב אחרי.** תיקנת אותו דבר פעמיים = השכבה הלא-נכונה. בידוד על הפקודה האמיתית. תיקון שנמדד ולא עבד לא נשאר בקוד. 0% CPU לאורך זמן = חסימה. פסק-דין של הראל נשמר כדאטה, לא בצ'אט. שרת רוויו אחרי עדכון קוד = הפעלה מחדש (`lsof -ti :5112`).
-
-## חיסכון
-לא מצטטים תמלול מלא; בתיקון חוזר מתייחסים רק לחדש; העבודה הכבדה בסקריפטים דטרמיניסטיים, לא בהסקה.
-
-## Visual Hook Engine (11.9.26)
-> The Social Video Editing System includes an optional Visual Hook Engine. Operational truth remains skills/rel-social-video-editor/SKILL.md and tools/PIPELINE.md. Read those before use. Missing hook preference means off; NO_OP is valid. Never change the spoken hook, add opening B-roll/graphic text outside explicit canon permission, or bypass review/artifact/checksum approval. Use the frozen visual_hook_plan and both renderer adapters; do not patch EXPORT and assume v2 will use it. The detailed implementation decision is documented in docs/decisions/visual-hook-engine.md.
+## בדיקות
+`$REL_PY tools/baseline.py` ירוק לפני commit. שער או worker חדש = בדיקת הזרקת-כשל ב-`tests/`.

@@ -5,13 +5,13 @@
 
 ## איך לעבוד עם הסקיל הזה (חיסכון טוקנים)
 1. **קוראים רק את ה-reference של השלב שבו עובדים** (מפה בסוף הקובץ). לא קוראים את כל המאסטר, לא את CHANGELOG ולא את כל ה-handoffs.
-2. **פתיחת סשן (v10 ענן)** = `add_repo crossfitrel/rel-video-cloud` → clone → `bash cloud/bootstrap.sh` (~3 דק'; venv, ivrit-ai ct2, ffmpeg, puppeteer, ספריות+מצב מ-Drive של hayonhq) → `source cloud/env.sh` → `$REL_PY tools/claude_start.py`. ארכיטקטורה: `CLOUD.md` · מה ריצה מתוזמנת עושה: `cloud/RUN.md`.
+2. **v11 (29.10.26): סשן Claude נכנס רק להסלמה.** החישוב רץ ב-GitHub Actions (`cloud/worker.py`) מאירוע; השיפוט דרך `tools/llm.py` (Haiku/Sonnet, Opus רק להסלמה); המצב ב-Supabase סכמה `video` (פונקציית edge `video`, לקוח `cloud/video_api.py`). סשן שנפתח בגלל ג'וב `judge`/`schedule` מטפל בפרויקט אחד וסוגר. **פתיחת סשן (v10 ענן)** = `add_repo crossfitrel/rel-video-cloud` → clone → `bash cloud/bootstrap.sh` (~3 דק'; venv, ivrit-ai ct2, ffmpeg, puppeteer, ספריות+מצב מ-Drive של hayonhq) → `source cloud/env.sh` → `$REL_PY tools/claude_start.py`. ארכיטקטורה: `CLOUD.md` · מה ריצה מתוזמנת עושה: `cloud/RUN.md`.
 3. **baseline/אימות = פקודה אחת:** `$REL_PY tools/baseline.py` (unittest + doctor + שני ה-audits, סיכום קצר ודיף מול הריצה הקודמת). לא מריצים את ארבעתם בנפרד ולא מדביקים פלט מלא.
 4. **צ'אט מקביל:** לפני עריכת קובץ משותף — `tools/work_claim.py claim <קבצים> --by "<נושא הצ'אט>"`; בסוף — `release`. תביעה פעילה של צ'אט אחר = לתאם, לא לדרוס.
 5. העבודה הכבדה בסקריפטים דטרמיניסטיים; לא מצטטים תמלול מלא; בתיקון חוזר מתייחסים רק לחדש.
 
 ## התפיסה בשורה אחת
-גלם מהטלפון ל-Monday ("קבצים" `file_mkrpfxkz`, סטטוס "מוכן לעריכה") → ריצת ענן מתוזמנת כל שעה (`cloud/prep.py`: שער HDR + Whisper + EDL + ffmpeg) → שיפוט הבמאי (`--director`) → גימור מלא + PREFLIGHT → **עמוד הרוויו** (Artifact עם db, בטלפון; `cloud/review_bridge.py` מחבר אותו למנוע ה-review-app) → גימור תחת נעילה (`local_finish_pipeline.py`) → אישור קאבר+קפשן+תזמון בעמוד → Metricool. **אפס תלות במק בריל** (המק נשאר לפודקאסט ולמסלול גיבוי עד סגירת האימותים). **Descript מחוץ לזרימה** (חריג יחיד `[DESCRIPT FALLBACK]` — אחרי שני כשלים מקומיים ובאישור הראל).
+גלם מהטלפון ל-Monday ("קבצים" `file_mkrpfxkz`, סטטוס "מוכן לעריכה") → webhook 660374019 → ג'וב ב-`video.jobs` → GitHub Actions `cloud/worker.py` (`cloud/prep.py`: שער HDR + Whisper + EDL + ffmpeg) → שיפוט הבמאי (`--director --director-backend proxy`, Sonnet) → גימור מלא + PREFLIGHT → **עמוד הרוויו rel.fit/review** (Netlify + Supabase; `cloud/review_bridge.py` מחבר אותו למנוע ה-review-app) → גימור תחת נעילה (`local_finish_pipeline.py`) → אישור קאבר+קפשן+תזמון בעמוד → Metricool. **אפס תלות במק בריל** (המק נשאר לפודקאסט ולמסלול גיבוי עד סגירת האימותים). **Descript מחוץ לזרימה** (חריג יחיד `[DESCRIPT FALLBACK]` — אחרי שני כשלים מקומיים ובאישור הראל).
 **עקרון העל:** תמליל = מקור אמת · תסריט רופף (`⟦SCRIPT v{n}⟧` הנעוץ) = מצפן · הקאנון = חוקי העריכה · הקבצים על הדיסק = מקור האמת (SQLite = אינדקס; `project_id` במניפסט = הזהות).
 
 ## קבועים שצריך כמעט בכל סשן
@@ -19,10 +19,12 @@
 REPO      = github.com/crossfitrel/rel-video-cloud (פרטי) · REL_HOME = שורש הריפו · נתיבים רק מ-cloud/env.sh (לא לקבע /Users/...)
 WORK_ROOT = $REL_WORK_ROOT = ~/rel-video-work   (לקרוא work_root() מ-tools/relvid/paths.py — לא לקבע נתיב)
 PYTHON    = $REL_PY = ~/.rel-whisper/bin/python (venv של bootstrap; ל-python3 המערכתי אין cv2/flask)
-REVIEW    = עמוד הרוויו https://claude.ai/artifact/B799jvngoLRUMYzoz1XqZn (db: projects · comments · actions · system/health; doc id = p-<monday_item_id>)
+REVIEW    = rel.fit/review (Netlify rel-video-review, מקור review-web/) · מצב: Supabase xfsvbpqbfmqlwgyusrww סכמה video דרך פונקציית edge video (cloud/video_api.py; id = p-<monday_item_id>) · Storage video-review · ה-Artifact B799… = ארכיון לקריאה בלבד
+WORKER    = .github/workflows/video-worker.yml → cloud/worker.py run (prep·notes·finish·cover) · טוקן חד-פעמי לג'וב · ספירת עלות: video.costs · תקרות video.config.caps
+LLM       = tools/llm.py: Haiku (classify·transcript_sanity·broll_label·quick_check) · Sonnet (director·hook·caption·vision·note_map·mg_critic) · Opus רק escalate (gate_failed_twice | note_unmapped)
 DRIVE     = Drive של hayonhq@gmail.com → "REL Video Cloud/" (ספריות · מצב · מסירות · ארכיון · מניפסט) דרך rclone remote hayonhq (טוקן רק מ-env). לעולם לא ה-Drive של crossfitrel
-TRIGGER   = משימה מתוזמנת "עריכת סושיאל בענן" trig_018rae8HZ3XwT7tsdZEdAwSA (כל שעה, ענן בלבד) · מנעול: "לאחר צילום, בעריכה" + [CLOUD-LOCK]
-MAC       = מסלול גיבוי בלבד עד שהאימותים בטלפון נסגרים: review-app 5112 (launchd com.rel.review-app) + Desktop Commander
+TRIGGER   = webhook Monday 660374019 + כפתורי העמוד → video.jobs → workflow_dispatch (אין polling) · גיבוי/הסלמה: משימה מתוזמנת "עריכת סושיאל בענן" trig_018rae8HZ3XwT7tsdZEdAwSA (11:13, 19:13; שאילתה אחת ויציאה) · מנעול: "לאחר צילום, בעריכה" + [CLOUD-LOCK]
+MAC       = לא בזרימת הריל (פודקאסט בלבד). עבודה כבדה במק רק דרך ~/.rel-heavy (אחת-בכל-פעם)
 MONDAY    = בורד סושיאל 18395578529 · סטטוס color_mkrp4sgm · "מוכן לעריכה"(11) → "לאחר צילום, בעריכה" → "מוכן לבדיקה"(12) → "מוכן לתזמון!"(8) → "תוזמן!"(6) · תאריך date_mkrpvw3n (UTC!) · קובץ file_mm402fp7
 METRICOOL = מועדון 6323702 (IG+FB+TikTok+YT) · Throwdown 6436350 (IG+FB) · "הראל חיון" 6519658 (SmartLink t.mtrbio.com/HarelHayon)
 ASR       = ivrit-ai turbo (ct2) + VAD + language=he · בענן REL_ASR_BACKEND=ct2 (MLX רק במק)
@@ -32,7 +34,7 @@ EMAIL_TO  = harel@crossfitrel.com — רק כשנדרשת פעולה מהראל 
 קבועים מלאים (עמודות, נתיבי כלים, API): `references/constants.md`.
 
 ## שערי אישור — לא עוקפים
-1. **רוויו בעמוד הרוויו** (במצב מעבר גם review-app) → "אשר והתחל גימור" = `[APPROVE-PUBLISH]` → גימור תחת נעילה → `learn_from_edits.py --propose`.
+1. **רוויו בעמוד rel.fit/review** → "אשר והתחל גימור" = `[APPROVE-PUBLISH]` → גימור תחת נעילה → `learn_from_edits.py --propose`.
 2. **אישור קאבר+קפשן+תזמון לתאריך שבבורד — כפתור אחד בעמוד** → נועל `artifact_id`/`artifact_checksum` → `state=ready_to_schedule`.
 3. **תזמון** רק מ-`schedule_approval.artifact_path` אחרי `artifacts.verify().ok` + sha256; **אימות אחרי כל תזמון = קריאה חוזרת ב-Metricool (`getScheduledPosts`), ורק אז "תוזמן!" במאנדיי + עדכון האפליקציה + דיווח בצ'אט; מייל רק בכשל שדורש את הראל.** חוסר התאמה = `[STALE-FINAL]`, לא מתזמנים.
    עדכון האפליקציה = `state_override:"scheduled"` ("📅 תוזמן — ממתין לפרסום"), **לא** `published` — published רק ידני / Metricool מראה `PUBLISHED` (v9.33, L97). שניהם מחוץ לתור התזמון.
@@ -100,8 +102,9 @@ EMAIL_TO  = harel@crossfitrel.com — רק כשנדרשת פעולה מהראל 
 
 ## כללי עבודה שנוטים להישכח
 - **פריים 0 = עוגן מוחשי** (סצנה/פעולה/חפץ/אדם/מספר) — לא כרטיס, לא פתיח, לא מדבר-למצלמה מופשט. `HOOK_PLAN.json` + Read על `HOOK_SHEET.jpg` לפני כל הצגה להראל (P22). מגבר אחד לכל היותר ב-0-2ש.
+- **הקפשן לא מסכם את הסרטון** — הצופה כבר ראה אותו. שורה 1 = הוק שני, מהלך הוספה אחד ממקור אמיתי (L132).
 - אחרי כל תזמון: Metricool **+** Monday **+** אפליקציה (גם קרוסלות). תאריך רק מעמודת הבורד. אופק ~חודש.
-- גימור רץ בסשן הענן (2 ליבות: ~13 דק' עם MG). בסוף כל ריצה: `cloud/state_sync.sh push` + `archive-final` ל-Drive של hayonhq.
+- **v11:** גימור רץ ב-worker של GitHub Actions, לא בסשן. סשן Claude (הסלמה) מטפל בפרויקט אחד: `push-project` אחרי כל שלב (L143), עלות מודל רק דרך `tools/llm.py` (L144), פרוקסי+קאבר דרך `cloud/video_api.py upload` + `project_upsert` — לא ArtifactData.
 - הגלם נכנס מהטלפון ל-Monday; התוצר הסופי עולה ל-`file_mm402fp7` ו-Metricool מושך מ-public_url.
 - **הפרויקט ב-claude.ai = ידע בלבד.** מדיה/תוצרים/לוגים/.bak — ל-Drive או לריפו, לעולם לא לתיקייה המסונכרנת (L134, `tools/project_hygiene.py scan`).
 - "לעולם לא 'חדר כושר'" — מועדון קרוספיט. לב: הראל 🩵 · מועדון 🖤❤️.
