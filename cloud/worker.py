@@ -336,6 +336,12 @@ def cmd_bench(a):
         res["ok"] = True
     except Exception as e:
         res["ok"] = False; res["error"] = str(e)[-1500:]
+        wd = WORK / a.workdir
+        for f in ("FINISH_REPORT.md", "finish_status.json"):   # fail() של הגימור כותב לכאן, לא ל-stdout
+            if (wd / f).exists():
+                res[f] = (wd / f).read_text(encoding="utf-8")[-2500:]
+        md = SYS / "brand-assets" / "music"
+        res["music_tracks"] = len(list(md.glob("*.mp3"))) if md.exists() else -1
     res["stages"] = STAGES; res["total_min"] = round((time.time() - T0) / 60, 2); res["ended"] = now()
     Path(a.out).write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps(res, ensure_ascii=False)[:3000])
