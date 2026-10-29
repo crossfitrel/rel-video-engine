@@ -63,12 +63,13 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         env:
           VIDEO_WORKER_TOKEN: ${{ github.event.inputs.job_token }}
-        run: ~/.rel-whisper/bin/python cloud/worker.py run --job-id "${{ github.event.inputs.job_id }}"
+        run: source cloud/env.sh && "$REL_PY" cloud/worker.py run --job-id "${{ github.event.inputs.job_id }}"
       - name: bench
         if: github.event_name == 'push'
         run: |
           W=$(cat bench/workdir.txt 2>/dev/null || echo "אביגיל-המקום-השני-מאסטרס")
-          ~/.rel-whisper/bin/python cloud/worker.py bench --workdir "$W" --out /tmp/bench.json > /tmp/bench.log 2>&1 || true
+          source cloud/env.sh
+          "$REL_PY" cloud/worker.py bench --workdir "$W" --out /tmp/bench.json > /tmp/bench.log 2>&1 || true
           cat "$REL_WORK_ROOT/$W"/_worker_logs/*.err 2>/dev/null | tail -150 >> /tmp/bench.log || true
           python3 - <<'PY'
           import json, os

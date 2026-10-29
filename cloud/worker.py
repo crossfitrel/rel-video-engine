@@ -25,6 +25,10 @@ sys.path.insert(0, str(HERE)); sys.path.insert(0, str(SYS / "tools"))
 import video_api as V  # noqa: E402
 
 PY = os.environ.get("REL_PY") or sys.executable
+# הצינור קורא ל-"python3" בשם (audio_mix, preflight, intake_guard): ה-venv חייב להיות ראשון ב-PATH,
+# אחרת python3 של המערכת רץ בלי numpy/cv2 ונכשל בשקט (נמדד ב-Actions 29.10.26: שלב music נפל בלי stderr).
+os.environ["PATH"] = str(Path(PY).parent) + os.pathsep + os.environ.get("PATH", "")
+os.environ.setdefault("REL_RUNTIME", "cloud")
 WORK = Path(os.environ.get("REL_WORK_ROOT", Path.home() / "rel-video-work"))
 RUNNER = os.environ.get("WORKER_RUNNER", "actions")
 T0 = time.time()
