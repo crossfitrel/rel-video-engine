@@ -1679,7 +1679,7 @@ LESSONS: dict[str, dict] = {
     'portability',
     [{'kind': 'code', 'file': 'tools/canon_lint.py', 'pattern': 'def _resolve'},
      {'kind': 'code', 'file': 'tools/canon_lint.py', 'pattern': 'track_auto'},
-     {'kind': 'code', 'file': 'cloud/worker.py', 'pattern': 'str(Path(PY).parent) + os.pathsep'}]),
+     {'kind': 'code', 'file': 'cloud/worker.py', 'pattern': 'ה-venv חייב להיות ראשון ב-PATH'}]),
 }
 
 
