@@ -200,7 +200,20 @@ def main():
          + ", ".join(x.get("file", "")[:40] for x in td_leak[:3])) if td_leak
         else f"broll={'כן' if broll_used else 'לא'} · {len(items)} קליפים · content_type={ct}")
 
-    missing = [it for it in items if it.get("path") and not Path(it["path"]).exists()]
+    # נתיב מוחלט שנכתב במכונה אחרת (מק / סשן ענן / runner של Actions) — ממפים לפי המקטע שאחרי שורש הריפו
+    # (v11, 29.10.26: canon הפיל ב-Actions ריל שעבר את כל השערים, כי broll_plan נכתב ב-/home/claude/...).
+    def _resolve(pth):
+        P = Path(pth)
+        if P.exists():
+            return P
+        parts = P.parts
+        for anchor in ("בירולים", "brand-assets", "מיכאל לוי", "תוצרי-אנימציה"):
+            if anchor in parts:
+                cand = HERE.parent.joinpath(*parts[parts.index(anchor):])
+                if cand.exists():
+                    return cand
+        return P
+    missing = [it for it in items if it.get("path") and not _resolve(it["path"]).exists()]
     add("broll_files_exist", "HARD_FAIL", not missing,
         f"{len(missing)} קבצי בירול חסרים" if missing else f"{len(items)} קליפים תקינים")
 
@@ -212,8 +225,12 @@ def main():
             f"{'קיים' if broll_used else 'חסר — לבדוק FINISH_REPORT.md'}")
 
     # --- מוזיקה: טראק מהספרייה (Pixabay בלבד, לא _disabled) ---
+    # הטראק של הפרויקט קודם (המניפסט), ורק אם אין — הרוטציה הגלובלית. הרוטציה משתנה בכל גימור של פרויקט אחר,
+    # ולכן לא מעידה על הטראק של הסרטון הזה (נמצא ב-E2E 10.10.26, תוקן ב-v11).
+    _mp = read_json(W / "project_manifest.json", {}) or {}
+    _mus = ((_mp.get("finish_prefs") or {}).get("music") or {})
     rot = read_json(HERE / "music-rotation.json", {}) or {}
-    last_track = rot.get("last", "")
+    last_track = Path(str(_mus.get("track") or _mus.get("track_auto") or rot.get("last", "") or "")).name
     if last_track:
         in_lib = (MUSIC_DIR / last_track).exists()
         add("music_from_library", "HARD_FAIL", in_lib,

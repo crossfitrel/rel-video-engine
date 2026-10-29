@@ -1656,6 +1656,30 @@ LESSONS: dict[str, dict] = {
     'motion',
     [{'kind': 'code', 'file': 'tools/motion/templates/board.js', 'pattern': 'רצפת כתוביות'},
      {'kind': 'doc', 'file': 'tools/motion/MOTION.md', 'pattern': 'רצפת כתוביות'}]),
+ 'L143_workdir_saved_or_not_done': L(
+    'אין "בוצע" בלי שמירת workdir מאומתת: worker.save_state דוחף לענף libs, מושך חזרה לתיקייה זמנית ומשווה טביעה; '
+    'טביעה שונה = RuntimeError והג\'וב נכשל. ג\'וב שנכשל לא צורך את הפעולה של הראל ומעלה באנר.',
+    'הראל 29.10.26: תיקיות עבודה של סשן ענן מ-23.10 אבדו כי push-project לא רץ, וכל סבב תיקונים ב-29.10 התחיל בשחזור.',
+    'state',
+    [{'kind': 'code', 'file': 'cloud/worker.py', 'pattern': 'def save_state'},
+     {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_save_state_mismatch_is_not_done'},
+     {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_failed_job_sets_health_and_does_not_consume_action'}]),
+ 'L144_opus_only_on_escalation': L(
+    'קריאת מודל עוברת רק ב-tools/llm.py: Haiku לסיווג ובדיקות מהירות, Sonnet לבמאי/הוק/קפשן/ראייה, Opus רק עם סיבת הסלמה '
+    '(שער שנכשל פעמיים או הערה שלא ממופה). תקרת עלות לריל וליום נאכפת בצד השרת (פונקציית video).',
+    'הראל 25.10 ו-29.10.26: המכסה השבועית נגמרה; כל סוכן עריכה צרך כ-500k טוקנים.',
+    'cost',
+    [{'kind': 'code', 'file': 'tools/llm.py', 'pattern': 'ESCALATION_REASONS'},
+     {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_opus_requires_escalation_reason'}]),
+ 'L145_paths_portable_between_runners': L(
+    'נתיב מוחלט שנכתב במכונה אחרת (מק, סשן ענן, runner של Actions) לא מפיל שער: canon_lint ממפה לפי המקטע שאחרי שורש הריפו '
+    '(בירולים/brand-assets/…), וטראק המוזיקה נבדק מהמניפסט של הפרויקט ולא מהרוטציה הגלובלית. ה-worker שם את ה-venv ראשון ב-PATH.',
+    'מדידה ב-GitHub Actions 29.10.26: ריל הבדיקה עבר את כל השערים ו-PREFLIGHT "מוכן להראל", ואז canon נפל על broll_plan עם נתיבי /Users/hayon; '
+    'לפני כן audio_mix נפל בשקט כי python3 של המערכת רץ בלי numpy.',
+    'portability',
+    [{'kind': 'code', 'file': 'tools/canon_lint.py', 'pattern': 'def _resolve'},
+     {'kind': 'code', 'file': 'tools/canon_lint.py', 'pattern': 'track_auto'},
+     {'kind': 'code', 'file': 'cloud/worker.py', 'pattern': 'os.environ["PATH"] = str(Path(PY).parent)'}]),
 }
 
 
