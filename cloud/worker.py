@@ -242,6 +242,16 @@ NOTE_MAP_SYS = ("אתה ממפה הערת עריכה של הראל (בעלים �
 
 def h_finish(job, project, comments):
     name = project["workdir"]; pull(name)
+    # 30.10.26: הג'וב הזה נוצר רק מלחיצת "אשר והתחל גימור" של הראל בעמוד (action approve_publish).
+    # במק review-app כתב APPROVAL.json; בענן אף אחד לא כתב אותו ⇒ canon_lint approve_publish_gate חסם כל גימור.
+    ap = WORK / name / "APPROVAL.json"
+    m = manifest(WORK / name)
+    if not ap.exists() or json.loads(ap.read_text(encoding="utf-8")).get("tag") != "[APPROVE-PUBLISH]":
+        ap.write_text(json.dumps({"tag": "[APPROVE-PUBLISH]", "approved_at": now(), "via": "rel.fit/review",
+                                  "action_id": (job.get("payload") or {}).get("action_id"), "job_id": job["id"],
+                                  "content_type": m.get("content_type") or "value", "length_reason": m.get("length_reason"),
+                                  "brand": brand_for(project.get("dept") or m.get("dept")), "speed": 1.0,
+                                  "version": project.get("version")}, ensure_ascii=False, indent=1), encoding="utf-8")
     out, st, sec = sh([PY, SYS / "tools/run_finish.py", "--workdir", WORK / name], "run_finish", timeout=7200)
     sh([PY, SYS / "tools/preflight_critic.py", "--workdir", WORK / name], "preflight")
     caption = make_caption(project, name)
