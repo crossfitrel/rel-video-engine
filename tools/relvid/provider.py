@@ -200,6 +200,8 @@ class Provider:
         r = llm.ask("director" if role.startswith("director") or role == "edit_director" else role, user=_canon(payload),
                     system=prompt_text(role), project_id=os.environ.get("REL_PROJECT_ID"), max_tokens=DEFAULT_MAX_TOKENS)
         self.last_usage = {"model": r.get("model"), "usd": r.get("usd"), "usage": r.get("usage")}
+        if r.get("stop_reason") == "max_tokens":
+            raise ProviderError(f"התשובה של {role} נקטעה בתקרת הטוקנים ({(r.get('usage') or {}).get('output_tokens')})")
         return _extract_json(r["text"])
 
     def _ask_chat(self, role, payload, dg):

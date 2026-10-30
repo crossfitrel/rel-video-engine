@@ -821,6 +821,7 @@ def main():
 
     def fail(msg, code=1):
         report.append(f"❌ {msg}")
+        print(f"❌ {msg}", file=sys.stderr, flush=True)  # 30.10.26: בלי זה הכשל היה עיוור בלוג ה-worker
         (W / "FINISH_REPORT.md").write_text("\n".join(report), encoding="utf-8")
         st.finish(False, msg)
         sys.exit(code)

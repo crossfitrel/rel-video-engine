@@ -122,16 +122,16 @@ async function llm(b: any, who: Who) {
   if (day[0].usd >= (caps.usd_per_day ?? 5)) { await health("cost_cap", "hit", "תקרת עלות יומית"); return { ok: false, error: "cap_day", spent: day[0].usd }; }
   const key = await secret("anthropic_api_key");
   if (!key) { await health("llm", "not_configured", "חסר מפתח Anthropic (anthropic_api_key)"); return { ok: false, error: "no_key" }; }
-  const body: any = { model, max_tokens: Math.min(b.max_tokens || 2000, 8000), messages: b.messages };
+  const body: any = { model, max_tokens: Math.min(b.max_tokens || 2000, 14000) /* 30.10.26: 8000 קטע את understand (8000/8000) ⇒ JSON שבור ⇒ finish rc=1 שקט. 8000 טוקנים ≈ 62ש, לכן 14000 + timeout 145ש */, messages: b.messages };
   if (b.system) body.system = b.system;
-  const r = await fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json" }, body: JSON.stringify(body), signal: AbortSignal.timeout(110000) });
+  const r = await fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json" }, body: JSON.stringify(body), signal: AbortSignal.timeout(145000) });
   const j = await r.json();
   if (!r.ok) { await health("llm", "error", `Anthropic ${r.status}: ${(j?.error?.message || "").slice(0, 120)}`); return { ok: false, error: "api", status: r.status, detail: j?.error?.message }; }
   const u = j.usage || {}; const p = prices[tier] || { in: 3, out: 15, cache_read: 0.3 };
   const usd = ((u.input_tokens || 0) * p.in + (u.output_tokens || 0) * p.out + (u.cache_read_input_tokens || 0) * (p.cache_read ?? p.in / 10) + (u.cache_creation_input_tokens || 0) * p.in * 1.25) / 1e6;
   await sql`insert into video.costs(project_id, job_id, task, model, input_tokens, output_tokens, cache_read_tokens, cache_write_tokens, usd) values (${project_id}, ${job_id}, ${b.task || "?"}, ${j.model || model}, ${u.input_tokens || 0}, ${u.output_tokens || 0}, ${u.cache_read_input_tokens || 0}, ${u.cache_creation_input_tokens || 0}, ${usd})`;
   await health("llm", "ok", "");
-  return { ok: true, model: j.model || model, tier, text: (j.content || []).filter((c: any) => c.type === "text").map((c: any) => c.text).join("\n"), usage: u, usd };
+  return { ok: true, model: j.model || model, tier, text: (j.content || []).filter((c: any) => c.type === "text").map((c: any) => c.text).join("\n"), usage: u, usd, stop_reason: j.stop_reason };
 }
 
 // ---------- review state ----------
