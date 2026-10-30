@@ -124,6 +124,8 @@ async function llm(b: any, who: Who) {
   if (!key) { await health("llm", "not_configured", "חסר מפתח Anthropic (anthropic_api_key)"); return { ok: false, error: "no_key" }; }
   const body: any = { model, max_tokens: Math.min(b.max_tokens || 2000, 14000) /* 30.10.26: 8000 קטע את understand (8000/8000) ⇒ JSON שבור ⇒ finish rc=1 שקט. 8000 טוקנים ≈ 62ש, לכן 14000 + timeout 145ש */, messages: b.messages };
   if (b.system) body.system = b.system;
+  // 30.10.26: ל-Sonnet 5.5 חשיבה פעילה כברירת מחדל, והיא אכלה את תקרת הטוקנים (understand: 14000 מתוכם ~7600 תווי תשובה). השיפוט כאן לא צריך חשיבה.
+  if (b.thinking) body.thinking = b.thinking; else if (tier === "sonnet") body.thinking = { type: "between_tools" };
   const r = await fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json" }, body: JSON.stringify(body), signal: AbortSignal.timeout(145000) });
   const j = await r.json();
   if (!r.ok) { await health("llm", "error", `Anthropic ${r.status}: ${(j?.error?.message || "").slice(0, 120)}`); return { ok: false, error: "api", status: r.status, detail: j?.error?.message }; }
