@@ -142,7 +142,14 @@ async function state() {
   const actions = ids.length ? await sql`select id, project_id, type, version, at from video.actions where not consumed and project_id = any(${ids})` : [];
   const hh = await sql`select key, value, note, at from video.system_health where value not in ('ok','') and key <> 'dispatch_info'`;
   for (const p of projects as any[]) { p.video_url = await signed(p.video_path); p.cover_url = await signed(p.cover_path); }
-  return { projects, comments, actions, health: hh, at: new Date().toISOString() };
+  // הג'וב האחרון לכל סרטון + משך חציוני לכל סוג ג'וב (מהריצות שהצליחו), כדי שהעמוד יראה שלב, צפי וסיבת תקיעה
+  const jobs = ids.length ? await sql`select distinct on (project_id) project_id, kind, status, runner, created_at, started_at, finished_at, left(coalesce(result->>'error',''),200) as error
+    from video.jobs where project_id = any(${ids}) order by project_id, created_at desc` : [];
+  const durations = await sql`select kind, count(*)::int as n,
+    round(percentile_cont(0.5) within group (order by extract(epoch from (started_at - created_at))))::int as queue_sec,
+    round(percentile_cont(0.5) within group (order by extract(epoch from (finished_at - started_at))))::int as run_sec
+    from video.jobs where status='done' and started_at is not null and finished_at is not null group by kind`;
+  return { projects, comments, actions, health: hh, jobs, durations, at: new Date().toISOString() };
 }
 const REVIEWABLE = ["review", "fixing", "blocked"];
 

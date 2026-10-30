@@ -44,6 +44,9 @@ h3{font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--muted);margin
 .item .t{font-weight:700;min-width:0}
 .item .meta{grid-column:1/-1;font-size:13px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap}
 .pill{font-size:12px;font-weight:700;border-radius:999px;padding:3px 9px;white-space:nowrap;background:var(--chip);color:var(--fg)}
+.steps{display:flex;flex-wrap:wrap;gap:4px} .step{font-size:11px;padding:3px 7px;border-radius:999px;background:var(--chip);opacity:.55}
+.step.done{opacity:.85} .step.now{opacity:1;font-weight:800;outline:2px solid currentColor} .step.now.bad{color:var(--bad)} .step.now.need{background:var(--brand);color:var(--brand-ink);outline:none}
+.legend summary{cursor:pointer;font-weight:700;font-size:13px} .legend dl{margin:8px 0 0;font-size:13px} .legend dt{font-weight:700;margin-top:8px} .legend dd{margin:2px 0 0;opacity:.85}
 .pill.need{background:var(--brand);color:var(--brand-ink)} .pill.ok{color:var(--ok)} .pill.wait{color:var(--info)} .pill.bad{color:var(--bad)}
 .empty{background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:18px;color:var(--muted);font-size:15px}
 .back{background:none;border:0;color:var(--info);font:600 15px var(--f);padding:4px 0;cursor:pointer}
@@ -127,6 +130,7 @@ input[type=password]{font:inherit;color:var(--fg);background:var(--bg);border:1p
       <button class="tab" data-f="done" aria-pressed="false">תוזמן<span class="n" id="n-done"></span></button>
     </div>
     <div class="list" id="list" style="margin-top:12px"></div>
+    <details class="box legend" id="legend" style="margin-top:16px"><summary>מה אומר כל סטטוס, ובאיזה סדר</summary><dl id="legend-l"></dl></details>
   </section>
 
   <section id="detail" hidden>
@@ -137,6 +141,7 @@ input[type=password]{font:inherit;color:var(--fg);background:var(--bg);border:1p
     <div class="player"><video id="vid" playsinline controls preload="metadata"></video><div class="novideo" id="novideo" hidden>הסרטון עוד לא עלה לכאן. הוא יופיע כשהעריכה תסתיים.</div></div>
     <div class="note" style="margin-top:6px">גרסה <span id="d-ver" class="tc"></span> · <span id="d-dur" class="tc"></span> · פרסום מתוכנן <span id="d-date"></span></div>
 
+    <div class="box" id="stage" style="margin-top:12px"></div>
     <div class="box" id="pf" style="margin-top:12px"></div>
     <div class="box" id="fixed" hidden><h3>מה תוקן בגרסה הזו</h3><ul class="lines" id="fixed-l"></ul></div>
 
@@ -190,14 +195,26 @@ function applyTheme(m){ const r=document.documentElement; if(m==='auto') r.remov
 let themeMode=store.get('relTheme')||'auto'; applyTheme(themeMode);
 $('theme').onclick=()=>{ const i=THEMES.findIndex(x=>x[0]===themeMode); themeMode=THEMES[(i+1)%3][0]; applyTheme(themeMode); store.set('relTheme',themeMode); toast(THEMES.find(x=>x[0]===themeMode)[2]); };
 
+// s = מספר השלב בסדר הפעולות (STEPS), d = מה זה אומר, who = אצל מי הכדור, next = מה קורה אחרי
 const STATE = {
-  draft:{t:'בהכנה',c:'wait',g:'work'}, review:{t:'מחכה לך',c:'need',g:'need'}, fixing:{t:'בתיקון',c:'wait',g:'work'},
-  approved:{t:'אושר, בגימור',c:'wait',g:'work'}, finishing:{t:'בגימור',c:'wait',g:'work'},
-  cover_review:{t:'קאבר+קפשן לאישור',c:'need',g:'need'}, ready_to_schedule:{t:'מוכן לתזמון',c:'ok',g:'work'},
-  scheduled:{t:'📅 תוזמן',c:'ok',g:'done'}, published:{t:'🚀 פורסם',c:'ok',g:'done'}, blocked:{t:'אצל הקלאוד',c:'bad',g:'work'}
+  draft:{t:'בהכנה',c:'wait',g:'work',s:0,who:'ענן',d:'עריכה ראשונה בענן: תמלול, חיתוך, במאי, בירול, כתוביות, מוזיקה ובדיקות. הסרטון מגיע אליך רק אם עבר את מבקר-הקדם.',next:'יגיע אליך לבדיקה'},
+  review:{t:'מחכה לך',c:'need',g:'need',s:1,who:'אתה',d:'גרסה מוכנה לבדיקה שלך. צפה, עצור ברגע שצריך תיקון וכתוב הערה. בסוף: "שלח לקלאוד" להערות, או "אשר והתחל גימור".',next:'תיקון הערות, או גימור אם אישרת'},
+  fixing:{t:'בתיקון',c:'wait',g:'work',s:1,who:'ענן',d:'ההערות ששלחת מתוקנות בענן: מיפוי כל הערה לרגע בסרטון, גימור מחדש ובדיקות. כשמסתיים תקבל גרסה חדשה עם רשימת מה תוקן.',next:'גרסה חדשה תחזור אליך'},
+  approved:{t:'אושר, בגימור',c:'wait',g:'work',s:2,who:'ענן',d:'אישרת את הגרסה. רץ גימור סופי באיכות מלאה.',next:'קאבר וקפשן לאישור שלך'},
+  finishing:{t:'בגימור',c:'wait',g:'work',s:2,who:'ענן',d:'גימור סופי באיכות מלאה ואחריו הכנת קאבר וקפשן.',next:'קאבר וקפשן לאישור שלך'},
+  cover_review:{t:'קאבר+קפשן לאישור',c:'need',g:'need',s:3,who:'אתה',d:'בדוק את הקאבר ואת הקפשן. אישור כאן הוא גם האישור לתזמן לתאריך שבגאנט.',next:'תזמון ב-Metricool'},
+  ready_to_schedule:{t:'מוכן לתזמון',c:'ok',g:'work',s:4,who:'Claude',d:'אישרת הכל. התזמון ל-Metricool נעשה בסשן Claude הבא (אין לענן גישה ל-Metricool).',next:'תוזמן'},
+  scheduled:{t:'📅 תוזמן',c:'ok',g:'done',s:5,who:'—',d:'מתוזמן ב-Metricool לתאריך שבגאנט. אין מה לעשות.',next:'יתפרסם אוטומטית'},
+  published:{t:'🚀 פורסם',c:'ok',g:'done',s:5,who:'—',d:'פורסם.',next:''},
+  blocked:{t:'אצל הקלאוד',c:'bad',g:'work',s:1,who:'Claude',d:'משהו לא עבר בדיקה אוטומטית (למשל הערה שלא הצליחו למפות, או מבקר-קדם שנכשל) ומחכה להכרעה של Claude. לא נדרש ממך כלום.',next:'יחזור אליך כשיתוקן'}
 };
-const WAIT={send_notes:'הערות נשלחו, בטיפול',approve_publish:'אושר, בגימור',approve_cover_caption:'אושר, ממתין לתזמון',request_cover_change:'בקשת שינוי בטיפול'};
-let projects=[], comments=[], actions=[], filter='need', open=null, busy=false;
+const STEPS=['הכנה','בדיקה שלך','גימור','קאבר+קפשן','תזמון','תוזמן'];
+const WAIT={send_notes:'הערות נשלחו',approve_publish:'אושר לגימור',approve_cover_caption:'אושר, ממתין לתזמון',request_cover_change:'בקשת שינוי נשלחה'};
+const WAIT_S={send_notes:1,approve_publish:2,approve_cover_caption:4,request_cover_change:3};
+const KIND={prep:'הכנה',notes:'תיקון הערות',finish:'גימור',cover:'קאבר וקפשן',schedule:'תזמון',judge:'הכרעה של Claude'};
+// משך ברירת מחדל בדקות (עד שיש 3 ריצות שהצליחו מכל סוג): המתנה למכונה + ריצה. נמדד 30.10: המתנה ~9 דק'
+const DEF={prep:[9,30],notes:[9,15],finish:[9,20],cover:[9,6]};
+let projects=[], comments=[], actions=[], jobs=[], durations=[], filter='need', open=null, busy=false;
 const fmt=(s)=>{ s=Math.max(0,Math.round(+s||0)); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); };
 function toast(t){ const el=$('toast'); el.textContent=t; el.hidden=false; clearTimeout(toast.h); toast.h=setTimeout(()=>el.hidden=true,2600); }
 
@@ -212,18 +229,47 @@ function showLogin(){ $('login').hidden=false; $('home').hidden=true; $('detail'
 $('tok-ok').onclick=()=>{ const v=$('tok').value.trim(); if(!v) return; token=v; store.set(TK,v); $('login').hidden=true; $('home').hidden=false; load(); };
 
 const pendingFor=(pid)=>actions.filter(a=>a.project_id===pid);
-function st(p){ const pend=pendingFor(p.id).filter(a=>WAIT[a.type]);
-  if(pend.length){ const last=pend.sort((a,b)=>String(b.at).localeCompare(String(a.at)))[0]; return {t:'⏳ '+WAIT[last.type],c:'wait',g:'work'}; }
-  return STATE[p.state]||{t:p.state||'—',c:'',g:'work'}; }
+const jobFor=(pid)=>jobs.find(j=>j.project_id===pid);
+const hm=(d)=>d.toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});
+function eta(j){ // מחזיר טקסט צפי לג'וב בתור/רץ, לפי חציון הריצות שהצליחו או ברירת מחדל
+  if(!j||!['queued','running'].includes(j.status)||j.runner!=='actions') return '';
+  const m=durations.find(x=>x.kind===j.kind); const real=m&&m.n>=3; const d=DEF[j.kind]||[9,15];
+  const q=real?m.queue_sec/60:d[0], r=real?m.run_sec/60:d[1];
+  const end=j.status==='running'&&j.started_at? new Date(new Date(j.started_at).getTime()+r*60000) : new Date(new Date(j.created_at).getTime()+(q+r)*60000);
+  const late=end<new Date(); return (late?'לוקח יותר מהרגיל, צפי היה ':'צפי לסיום ~')+hm(end)+(real?'':' (הערכה)'); }
+function st(p){ const base=STATE[p.state]||{t:p.state||'—',c:'',g:'work',s:0,d:'',who:'',next:''};
+  const j=jobFor(p.id); const pend=pendingFor(p.id).filter(a=>WAIT[a.type]);
+  if(j&&j.status==='failed'&&(!pend.length||String(j.created_at)>=String(pend[0].at)))
+    return {...base,t:'⚠️ נתקע: '+(KIND[j.kind]||j.kind),c:'bad',g:'work',who:'Claude',
+      d:'השלב "'+(KIND[j.kind]||j.kind)+'" נכשל בענן ב-'+hm(new Date(j.finished_at||j.created_at))+'. זה אצל Claude לתקן ולהריץ מחדש. לא נדרש ממך כלום.',next:'יורץ מחדש אחרי התיקון',err:j.error};
+  if(j&&['queued','running'].includes(j.status)){
+    const k=KIND[j.kind]||j.kind; const run=j.status==='running';
+    const d= j.runner==='claude' ? 'השלב "'+k+'" מחכה לסשן Claude (אין לו ריצה אוטומטית).' :
+      (run?'השלב "'+k+'" רץ עכשיו בענן, התחיל ב-'+hm(new Date(j.started_at))+'.':'השלב "'+k+'" נכנס לתור ב-'+hm(new Date(j.created_at))+' ומחכה למכונה פנויה ב-GitHub (בדרך כלל כמה דקות).');
+    return {...base,t:(run?'🔄 ':'⏳ ')+k+(run?' רץ':' בתור'),c:'wait',g:'work',who:j.runner==='claude'?'Claude':'ענן',d:d+' '+(base.d||''),eta:eta(j),s:WAIT_S[pend[0]?.type]??base.s}; }
+  if(pend.length){ const last=pend.sort((a,b)=>String(b.at).localeCompare(String(a.at)))[0];
+    return {...base,t:'⏳ '+WAIT[last.type],c:'wait',g:'work',who:'ענן',d:'הלחיצה שלך נקלטה ב-'+hm(new Date(last.at))+'. השלב הבא נפתח אוטומטית.',s:WAIT_S[last.type]??base.s}; }
+  return base; }
+const tip=(s)=>[s.d, s.who&&s.who!=='—'?('אצל: '+s.who):'', s.next?('הבא: '+s.next):'', s.eta||''].filter(Boolean).join('\n');
 
 const FRIENDLY={ 'dispatch:not_configured':'העריכה האוטומטית בענן עוד לא מחוברת (חסר טוקן GitHub). עד אז העריכה רצה כשפותחים סשן עם Claude.',
   'llm:not_configured':'שלב השיפוט (במאי וקפשן) עוד לא מחובר: חסר מפתח Anthropic.', 'cost_cap:hit':'הגענו לתקרת העלות של היום. העבודה ממשיכה מחר.' };
 function renderHealth(h){ const el=$('health'); const bad=(h||[]).filter(x=>x.value && x.value!=='ok');
-  const lines=[...new Set(bad.map(x=>FRIENDLY[x.key+':'+x.value]||x.note||x.key).filter(Boolean))];
+  const wk=(x)=>{ if(!String(x.key).startsWith('worker:')) return null; const pid=String(x.note||'').split(':')[0]; const p=projects.find(q=>q.id===pid);
+    // כשל ישן של סרטון שכבר רץ אחריו בהצלחה לא מוצג
+    const j=jobFor(pid); if(!p||(j&&j.status!=='failed')) return ''; return 'שלב "'+(KIND[x.key.slice(7)]||x.key.slice(7))+'" נתקע ב"'+(p.title||pid)+'". זה אצל Claude.'; };
+  const lines=[...new Set(bad.map(x=>{ const w=wk(x); return w!==null?w:(FRIENDLY[x.key+':'+x.value]||x.note||x.key); }).filter(Boolean))];
   el.hidden=!lines.length; el.textContent = lines.length ? ('⚠️ '+lines.slice(0,2).join(' · ')) : '';
   if(bad.some(x=>x.value==='not_configured')){ const b=document.createElement('button'); b.className='btn primary'; b.style.marginTop='8px'; b.style.display='block'; b.textContent='לחיבור המפתחות'; b.onclick=openKeys; el.append(b); } }
 
-function renderList(){
+function renderLegend(){ const l=$('legend-l'); if(l.childElementCount) return;
+  const add=(t,d)=>{ const a=document.createElement('dt'); a.textContent=t; const b=document.createElement('dd'); b.textContent=d; l.append(a,b); };
+  add('הסדר',STEPS.join(' ← ')+'. מ"בדיקה שלך" אפשר לחזור לתיקון כמה פעמים שצריך.');
+  ['draft','review','fixing','finishing','cover_review','ready_to_schedule','scheduled','blocked'].forEach(k=>{ const s=STATE[k]; add(s.t,s.d+(s.next?(' הבא: '+s.next+'.'):'')); });
+  add('⏳ ... בתור','לחצת, והשלב מחכה למכונה פנויה בענן. בדרך כלל כמה דקות.');
+  add('🔄 ... רץ','השלב רץ עכשיו. ליד הסטטוס מופיע צפי לסיום.');
+  add('⚠️ נתקע','השלב נכשל. זה אצל Claude לתקן ולהריץ מחדש, לא נדרש ממך כלום.'); }
+function renderList(){ renderLegend();
   const groups={need:[],work:[],done:[]}; projects.forEach(p=>groups[st(p).g].push(p));
   for(const k in groups) $('n-'+k).textContent=groups[k].length?String(groups[k].length):'';
   const rows=groups[filter].sort((a,b)=>String(a.publish_date||'9').localeCompare(String(b.publish_date||'9')));
@@ -233,17 +279,18 @@ function renderList(){
   for(const p of rows){
     const b=document.createElement('button'); b.className='item'; b.type='button';
     const t=document.createElement('span'); t.className='t'; t.textContent=p.title||p.id;
-    const s=document.createElement('span'); s.className='pill '+st(p).c; s.textContent=st(p).t;
+    const S=st(p); const s=document.createElement('span'); s.className='pill '+S.c; s.textContent=S.t; s.title=tip(S);
     const m=document.createElement('span'); m.className='meta';
     const oc=comments.filter(c=>c.project_id===p.id && c.status!=='verified').length;
-    m.textContent=[p.dept, p.publish_date?('פרסום '+String(p.publish_date).slice(0,10)):'', p.duration?fmt(p.duration):'', oc?(oc+' הערות פתוחות'):''].filter(Boolean).join(' · ');
+    m.textContent=[p.dept, p.publish_date?('פרסום '+String(p.publish_date).slice(0,10)):'', p.duration?fmt(p.duration):'', oc?(oc+' הערות פתוחות'):'', S.eta||''].filter(Boolean).join(' · ');
     b.append(t,s,m); b.onclick=()=>openProject(p.id); L.append(b);
   }
 }
 
 function renderDetail(){
   const p=projects.find(x=>x.id===open); if(!p) return;
-  $('d-title').textContent=p.title||p.id; const s=st(p); $('d-state').className='pill '+s.c; $('d-state').textContent=s.t;
+  $('d-title').textContent=p.title||p.id; const s=st(p); $('d-state').className='pill '+s.c; $('d-state').textContent=s.t; $('d-state').title=tip(s);
+  renderStage(s);
   $('d-ver').textContent=p.version||'—'; $('ac-ver').textContent=p.version||''; $('d-dur').textContent=p.duration?fmt(p.duration):'—';
   $('d-date').textContent=p.publish_date?String(p.publish_date).slice(0,10):'לא נקבע';
   const v=$('vid'); const url=p.video_url||'';
@@ -275,6 +322,12 @@ function renderDetail(){
     $('cover').src=p.cover_url||''; const ta=$('caption'); if(document.activeElement!==ta&&!ta.dataset.dirty) ta.value=p.caption||'';
     const locked=p.state!=='cover_review'; ta.readOnly=locked; $('cc-ok').disabled=locked||pend.some(a=>a.type==='approve_cover_caption'); $('cc-change').disabled=locked; }
 }
+function renderStage(s){ const el=$('stage'); el.textContent='';
+  const row=document.createElement('div'); row.className='steps';
+  STEPS.forEach((n,i)=>{ const c=document.createElement('span'); c.className='step'+(i<s.s?' done':'')+(i===s.s?(' now '+(s.c||'')):''); c.textContent=n; row.append(c); });
+  const d=document.createElement('div'); d.className='note'; d.style.marginTop='8px'; d.textContent=s.d||'';
+  const m=document.createElement('div'); m.className='note'; m.textContent=[s.who&&s.who!=='—'?('אצל: '+s.who):'', s.next?('הבא: '+s.next):'', s.eta||''].filter(Boolean).join(' · ');
+  el.append(row,d,m); }
 function render(){ renderList(); if(open) renderDetail(); }
 function openProject(id){ open=id; $('home').hidden=true; $('detail').hidden=false; $('caption').dataset.dirty=''; renderDetail(); scrollTo(0,0); }
 $('back').onclick=()=>{ open=null; $('vid').pause(); $('detail').hidden=true; $('home').hidden=false; renderList(); };
@@ -307,7 +360,7 @@ document.querySelectorAll('#keys [data-k]').forEach(b=>b.onclick=async()=>{ cons
 $('keys-close').onclick=()=>{ $('keys').hidden=true; if(location.hash==='#setup') history.replaceState(null,'',location.pathname); };
 async function load(){
   if(!token){ showLogin(); return; }
-  try{ const s=await api('state'); projects=s.projects||[]; comments=s.comments||[]; actions=s.actions||[]; renderHealth(s.health);
+  try{ const s=await api('state'); projects=s.projects||[]; comments=s.comments||[]; actions=s.actions||[]; jobs=s.jobs||[]; durations=s.durations||[]; renderHealth(s.health);
     $('login').hidden=true; if(!open) $('home').hidden=false;
     if(location.hash==='#setup' && $('keys').hidden) openKeys();
     $('sync').textContent='עודכן '+new Date().toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'}); render();
