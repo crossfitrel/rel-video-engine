@@ -1723,6 +1723,11 @@ LESSONS: dict[str, dict] = {
     'state',
     [{'kind': 'code', 'file': 'tools/relvid/provider.py', 'pattern': 'L152'},
      {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_extract_first_object_with_trailing_text'}]),
+ 'L153_refinish_retires_old_final': L(
+    'refinish אחרי אישור קודם מזיז את FINAL.mp4 ו-APPROVAL.json הישנים הצידה (‎_prev_<ts>) לפני הגימור; הגרסה החדשה חוזרת לרוויו.',
+    '1.11.26: refinish של גיפט קארד 3 נחסם ב-canon "FINAL קיים בלי APPROVAL".',
+    'state',
+    [{'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_refinish_moves_old_final_and_approval'}]),
 }
 
 

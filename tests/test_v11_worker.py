@@ -180,3 +180,11 @@ class TestJsonExtraData(__import__("unittest").TestCase):
         from relvid.provider import _extract_json
         self.assertEqual(_extract_json('{"a": 1}\n\nהערה: {"b": 2}'), {"a": 1})
         self.assertEqual(_extract_json('```json\n{"a": {"x": 1}}\n```\nעוד'), {"a": {"x": 1}})
+
+
+class TestRefinishMovesStaleFinal(__import__("unittest").TestCase):
+    def test_refinish_moves_old_final_and_approval(self):
+        from pathlib import Path
+        body = (Path(__file__).resolve().parents[1] / "cloud" / "worker.py").read_text(encoding="utf-8").split("def h_refinish", 1)[1].split("\nHANDLERS", 1)[0]
+        self.assertIn('"FINAL.mp4", "APPROVAL.json"', body)
+        self.assertLess(body.index("APPROVAL.json"), body.index("finish_full("))

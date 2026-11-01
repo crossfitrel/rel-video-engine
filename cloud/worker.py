@@ -327,6 +327,12 @@ def h_refinish(job, project, comments):
     name = project["workdir"]; pull(name)
     p = job.get("payload") or {}
     wd = WORK / name; m = manifest(wd)
+    # L153 (1.11.26): סבב הערות אחרי אישור קודם — FINAL הישן ו-APPROVAL הישן לא תקפים לגרסה החדשה.
+    # בלי זה canon (approve_publish_gate) חוסם: "FINAL קיים בלי APPROVAL". הגרסה החדשה חוזרת לרוויו, לא לפרסום.
+    ts = time.strftime("%Y%m%d-%H%M%S")
+    for f in ("FINAL.mp4", "APPROVAL.json"):
+        if (wd / f).exists():
+            (wd / f).rename(wd / f"{Path(f).stem}_prev_{ts}{Path(f).suffix}")
     if "full" in p and p["full"]:
         finish_full(project["id"], name, project.get("dept") or m.get("dept"), director=False, refinish=False)
     else:
