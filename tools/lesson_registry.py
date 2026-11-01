@@ -1680,6 +1680,14 @@ LESSONS: dict[str, dict] = {
     [{'kind': 'code', 'file': 'tools/canon_lint.py', 'pattern': 'def _resolve'},
      {'kind': 'code', 'file': 'tools/canon_lint.py', 'pattern': 'track_auto'},
      {'kind': 'code', 'file': 'cloud/worker.py', 'pattern': 'ה-venv חייב להיות ראשון ב-PATH'}]),
+ 'L146_verify_never_clones_full_libs': L(
+    'אימות שמירה (save_state) מושך מהשרת רק את קבצי ה-json של הפרויקט (libs_git.sh verify-project: partial + sparse clone), '
+    'לעולם לא שיבוט מלא שני של ענף libs. העבודה שהצליחה לא נכשלת בגלל המדידה שלה.',
+    'הראל 1.11.26 "המערכת תקועה": מ-30.10 כל ג\'וב prep/notes/finish נכשל ב-verify rc=128, No space left on device, '
+    'כי האימות שיבט שוב את כל הבירולים והפתיחים לתוך RUNNER_TEMP. הגימורים עצמם הצליחו.',
+    'state',
+    [{'kind': 'code', 'file': 'cloud/libs_git.sh', 'pattern': 'verify-project\\)'},
+     {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_verify_project_is_sparse_json_only'}]),
 }
 
 
