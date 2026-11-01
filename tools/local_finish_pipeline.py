@@ -2241,7 +2241,9 @@ def main():
     r = sh(qa_cmd, timeout=900)
     report.append("\n## QA\n```\n" + r.stdout.strip() + "\n```")
     if r.returncode != 0:
-        blockers.append("qa_gates: ראה qa_report.json")
+        # 1.11.26: ריצה שנכשלה לא שומרת את qa_report — שמות השערים שנפלו חייבים להופיע בשורת החסימה עצמה
+        _qf = [ln.strip()[:140] for ln in r.stdout.splitlines() if ln.strip().startswith("❌")]
+        blockers.append("qa_gates: " + (" | ".join(_qf[:4]) or "ראה qa_report.json"))
     st.done_step("qa", "PASS" if r.returncode == 0 else "FAIL")
 
     # 9f2. preflight_critic — "הצפייה של הראל, לפני הראל" (v9.13, הראל 16.8.26:
