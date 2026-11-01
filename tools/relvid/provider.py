@@ -112,13 +112,40 @@ def validate_answer(ans, allowed_ids=None, required_keys=()):
     if miss:
         raise ProviderError(f"חסרים מפתחות בתשובה: {miss}")
     if allowed_ids is not None:
+        allowed = set(map(str, allowed_ids))
         used = _collect_ids(ans, set())
-        bad = sorted(used - set(map(str, allowed_ids)))
+        bad = sorted(used - allowed)
         if bad:
-            raise ProviderError(
-                f"התשובה מפנה ל-{len(bad)} מזהי מועמד שאינם קיימים במרחב: {bad[:8]}"
-            )
+            # L154 (1.11.26): מזהה מומצא בודד הפיל ריל שלם (2 פעמים ביום אחד). העיקרון נשמר — המודל לא ממציא —
+            # אבל האכיפה היא גיזום: החלטה שמפנה למזהה לא-קיים נזרקת (= לא חותכים שם), השאר נשאר. רוב מומצא = כשל.
+            dropped = _prune_ids(ans, allowed)
+            ans.setdefault("_pruned", []).extend(bad)
+            if used and len(bad) > max(2, len(used) // 4):
+                raise ProviderError(
+                    f"התשובה מפנה ל-{len(bad)} מזהי מועמד שאינם קיימים במרחב: {bad[:8]}"
+                )
+            print(f"  [provider] נגזמו {dropped} החלטות עם מזהה לא-קיים: {bad[:8]}")
     return ans
+
+
+def _prune_ids(obj, allowed):
+    """מסיר החלטות (אובייקטים ברשימה) שמפנות למזהה לא-קיים, ומנקה מזהים לא-קיימים מרשימות candidate_ids."""
+    n = 0
+    if isinstance(obj, dict):
+        for k, v in list(obj.items()):
+            if k == "candidate_ids" and isinstance(v, list):
+                keep = [x for x in v if str(x) in allowed]
+                n += len(v) - len(keep); obj[k] = keep
+            elif isinstance(v, (dict, list)):
+                n += _prune_ids(v, allowed)
+    elif isinstance(obj, list):
+        i = 0
+        while i < len(obj):
+            x = obj[i]
+            if isinstance(x, dict) and x.get("candidate_id") is not None and str(x["candidate_id"]) not in allowed:
+                obj.pop(i); n += 1; continue
+            n += _prune_ids(x, allowed); i += 1
+    return n
 
 
 def _extract_json(text):

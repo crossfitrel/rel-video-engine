@@ -188,3 +188,18 @@ class TestRefinishMovesStaleFinal(__import__("unittest").TestCase):
         body = (Path(__file__).resolve().parents[1] / "cloud" / "worker.py").read_text(encoding="utf-8").split("def h_refinish", 1)[1].split("\nHANDLERS", 1)[0]
         self.assertIn('"FINAL.mp4", "APPROVAL.json"', body)
         self.assertLess(body.index("APPROVAL.json"), body.index("finish_full("))
+
+
+class TestPruneInventedIds(__import__("unittest").TestCase):
+    def test_single_invented_id_is_pruned_not_fatal(self):
+        import sys
+        from pathlib import Path
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+        from relvid.provider import validate_answer, ProviderError
+        ans = {"decisions": [{"candidate_id": "gap_1", "action": "cut"}, {"candidate_id": "gap_9999", "action": "cut"},
+                             {"candidate_id": "gap_2", "action": "keep"}, {"candidate_id": "gap_3"}, {"candidate_id": "gap_4"}]}
+        out = validate_answer(ans, allowed_ids=["gap_1", "gap_2", "gap_3", "gap_4"])
+        self.assertEqual([d["candidate_id"] for d in out["decisions"]], ["gap_1", "gap_2", "gap_3", "gap_4"])
+        self.assertIn("gap_9999", out["_pruned"])
+        with self.assertRaises(ProviderError):
+            validate_answer({"decisions": [{"candidate_id": f"x{i}"} for i in range(6)]}, allowed_ids=["a"])

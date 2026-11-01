@@ -1728,6 +1728,12 @@ LESSONS: dict[str, dict] = {
     '1.11.26: refinish של גיפט קארד 3 נחסם ב-canon "FINAL קיים בלי APPROVAL".',
     'state',
     [{'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_refinish_moves_old_final_and_approval'}]),
+ 'L154_prune_invented_candidate_ids': L(
+    'מזהה מועמד שהמודל המציא: ההחלטה שמפנה אליו נגזמת (לא חותכים שם) והשאר נשאר; רק כשרוב ההחלטות מומצאות זה כשל.',
+    '1.11.26: שני prep (הליכה יומית, גיפט קארד 1) נפלו כל אחד על מזהה מומצא יחיד.',
+    'state',
+    [{'kind': 'code', 'file': 'tools/relvid/provider.py', 'pattern': 'L154'},
+     {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_single_invented_id_is_pruned_not_fatal'}]),
 }
 
 
