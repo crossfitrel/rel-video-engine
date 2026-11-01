@@ -57,15 +57,28 @@ stage_tree(){ # src dst [rsync opts...]
   done < <(find "$dst" -type f -size +"$SPLIT_BYTES"c ! -name '*.relsplit.*' -print0)
 }
 
-commit_push(){ # msg
-  G add -A; if G diff --cached --quiet; then log "אין שינוי"; return 0; fi
-  G commit -qm "$1"
-  for i in 1 2 3; do
+commit_push(){ # msg stage_fn [args...]
+  # L151 (1.11.26): בשיבוט עומק 1 אין בסיס משותף, ו-rebase על push מקביל הופך כל קובץ ששונה ל-add/add conflict.
+  # ה-rebase נכשל בשקט, ה-push "הצליח" עם הקומיט של הכותב האחר, והשינויים שלנו נעלמו (verify תפס).
+  # במקום rebase: fetch → reset --hard ל-origin → בימוי מחדש מהדיסק → commit → push. עד 6 ניסיונות.
+  local msg="$1"; shift
+  for i in 1 2 3 4 5 6; do
+    "$@"
+    G add -A; if G diff --cached --quiet; then log "אין שינוי"; return 0; fi
+    G commit -qm "$msg"
     if G push -q origin "HEAD:$BR"; then log "push ✓ ($(G rev-parse --short HEAD))"; return 0; fi
-    G fetch -q --depth 1 origin "$BR" && G rebase -q "origin/$BR" || true; sleep $((i*5))
+    log "push נדחה (כותב מקביל) — מביים מחדש על הקצה של origin, ניסיון $i"
+    sleep $(( (RANDOM % 5) + i * 3 ))
+    G fetch -q --depth 1 origin "$BR" && G reset -q --hard "origin/$BR"
   done
   log "❌ push נכשל"; return 5
 }
+stage_state(){
+  for f in "${STATE_FILES[@]}"; do [[ -f "$REL_HOME/$f" ]] && { mkdir -p "$(dirname "$CL/state/$f")"; cp "$REL_HOME/$f" "$CL/state/$f"; }; done
+  [[ -d "$REL_WORK_ROOT/.index" ]] && stage_tree "$REL_WORK_ROOT/.index" "$CL/state/work-index" || true
+}
+stage_project(){ stage_tree "$REL_WORK_ROOT/$1" "$CL/state/פרויקטים/$1" "${PROJ_EXCL[@]}"; }
+stage_ledger(){ mkdir -p "$CL/state/מסירות"; grep -qF "$1" "$CL/state/מסירות/ledger.txt" 2>/dev/null || echo "$1" >> "$CL/state/מסירות/ledger.txt"; }
 
 case "${1:-}" in
   pull)
@@ -77,9 +90,7 @@ case "${1:-}" in
     log "pull ✓ ($(G rev-parse --short HEAD)) · בירולים $(find "$REL_HOME/בירולים" -type f -name '*.mp4' | wc -l) · מוזיקה $(find "$REL_HOME/brand-assets" -type f -name '*.mp3' | wc -l)" ;;
   push)
     clone
-    for f in "${STATE_FILES[@]}"; do [[ -f "$REL_HOME/$f" ]] && { mkdir -p "$(dirname "$CL/state/$f")"; cp "$REL_HOME/$f" "$CL/state/$f"; }; done
-    [[ -d "$REL_WORK_ROOT/.index" ]] && stage_tree "$REL_WORK_ROOT/.index" "$CL/state/work-index"
-    commit_push "state: push $(date -u +%FT%TZ)"; log "push ✓" ;;
+    commit_push "state: push $(date -u +%FT%TZ)" stage_state; log "push ✓" ;;
   verify-project)
     # אימות שמירה: משיכה טרייה מהשרת של תיקיית הפרויקט בלבד (sparse + partial clone).
     # שיבוט מלא של הענף (בירולים, פתיחים, ג'יגות) מילא את דיסק ה-runner ב-30.10.26 ⇒ rc=128 בכל ג'וב.
@@ -95,8 +106,8 @@ case "${1:-}" in
     n="$2"; clone; [[ -d "$CL/state/פרויקטים/$n" ]] || { log "אין פרויקט $n בענף"; exit 6; }
     deploy "$CL/state/פרויקטים/$n" "$REL_WORK_ROOT/$n"; log "pull-project $n ✓" ;;
   push-project)
-    n="$2"; clone; stage_tree "$REL_WORK_ROOT/$n" "$CL/state/פרויקטים/$n" "${PROJ_EXCL[@]}"
-    commit_push "project: $n $(date -u +%FT%TZ)"
+    n="$2"; clone
+    commit_push "project: $n $(date -u +%FT%TZ)" stage_project "$n"
     # אימות: מה שבענף (אחרי הרכבה) זהה בשמות וגדלים למה שהיה אמור להיכנס
     tmp="$(mktemp -d)"; ref="$(mktemp -d)"; deploy "$CL/state/פרויקטים/$n" "$tmp"
     rsync -a "${PROJ_EXCL[@]}" "$REL_WORK_ROOT/$n/" "$ref/"
@@ -106,8 +117,8 @@ case "${1:-}" in
     rm -rf "$tmp"; log "push-project $n ✓ (מאומת)" ;;
   archive-final)
     # ה-FINAL המתוזמן כבר יושב ב-Monday ("סרטון מוכן", file_mm402fp7) — זה הארכיון. כאן רק רישום.
-    n="$2"; src="$3"; clone; mkdir -p "$CL/state/מסירות"
-    echo "$(date -u +%FT%TZ) $n $(sha256sum "$src" | cut -d' ' -f1) $(stat -c%s "$src")" >> "$CL/state/מסירות/ledger.txt"
-    commit_push "archive-final: $n"; log "archive-final $n ✓ (רישום; הקובץ ב-Monday)" ;;
+    n="$2"; src="$3"; clone
+    line="$(date -u +%FT%TZ) $n $(sha256sum "$src" | cut -d' ' -f1) $(stat -c%s "$src")"
+    commit_push "archive-final: $n" stage_ledger "$line"; log "archive-final $n ✓ (רישום; הקובץ ב-Monday)" ;;
   *) echo "usage: $0 pull|push|pull-project N|push-project N|verify-project N OUTDIR|archive-final N PATH"; exit 2 ;;
 esac

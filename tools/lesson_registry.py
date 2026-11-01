@@ -1711,6 +1711,12 @@ LESSONS: dict[str, dict] = {
     [{'kind': 'code', 'file': 'cloud/worker.py', 'pattern': 'def h_refinish'},
      {'kind': 'doc', 'file': 'cloud/RUN.md', 'pattern': 'L150'},
      {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_refinish_handler_registered'}]),
+ 'L151_libs_push_restage_not_rebase': L(
+    'push לענף libs שנדחה בגלל כותב מקביל: fetch, reset --hard ל-origin ובימוי מחדש מהדיסק. לעולם לא rebase בשיבוט עומק 1.',
+    '1.11.26: גימור וול-בול נשמר "בהצלחה" עם הקומיט של כותב אחר (rebase נכשל בשקט על add/add), verify תפס rc=7. שוחזר בסימולציה ותוקן.',
+    'state',
+    [{'kind': 'code', 'file': 'cloud/libs_git.sh', 'pattern': 'L151'},
+     {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_no_shallow_rebase'}]),
 }
 
 

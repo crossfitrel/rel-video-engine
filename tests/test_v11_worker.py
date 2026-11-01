@@ -159,3 +159,14 @@ class TestRefinishKind(__import__("unittest").TestCase):
         body = src.split("def h_refinish", 1)[1].split("\nHANDLERS", 1)[0]
         self.assertIn("finish_full(", body)
         self.assertIn("comment_update", body)
+
+
+class TestLibsConcurrentPush(__import__("unittest").TestCase):
+    """L151: אין rebase בשיבוט רדוד; push שנדחה = reset ל-origin ובימוי מחדש מהדיסק."""
+    def test_no_shallow_rebase(self):
+        from pathlib import Path
+        sh = (Path(__file__).resolve().parents[1] / "cloud" / "libs_git.sh").read_text(encoding="utf-8")
+        body = sh.split("commit_push(){", 1)[1].split("\n}", 1)[0]
+        self.assertNotIn("G rebase", body)
+        self.assertIn('reset -q --hard "origin/$BR"', body)
+        self.assertIn('"$@"', body)
