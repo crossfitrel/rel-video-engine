@@ -170,3 +170,13 @@ class TestLibsConcurrentPush(__import__("unittest").TestCase):
         self.assertNotIn("G rebase", body)
         self.assertIn('reset -q --hard "origin/$BR"', body)
         self.assertIn('"$@"', body)
+
+
+class TestJsonExtraData(__import__("unittest").TestCase):
+    def test_extract_first_object_with_trailing_text(self):
+        import sys
+        from pathlib import Path
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
+        from relvid.provider import _extract_json
+        self.assertEqual(_extract_json('{"a": 1}\n\nהערה: {"b": 2}'), {"a": 1})
+        self.assertEqual(_extract_json('```json\n{"a": {"x": 1}}\n```\nעוד'), {"a": {"x": 1}})

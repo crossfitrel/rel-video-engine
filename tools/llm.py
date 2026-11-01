@@ -68,7 +68,10 @@ def ask_json(task: str, user, **kw) -> dict:
     i, j = t.find("{"), t.rfind("}")
     if i < 0 or j < i:
         raise LLMError(f"{task}: אין JSON בתשובה")
-    r["json"] = json.loads(t[i:j + 1])
+    try:
+        r["json"] = json.loads(t[i:j + 1])
+    except json.JSONDecodeError:  # L152: JSON ואחריו טקסט נוסף
+        r["json"] = json.JSONDecoder().raw_decode(t[i:])[0]
     return r
 
 

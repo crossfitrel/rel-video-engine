@@ -132,7 +132,11 @@ def _extract_json(text):
     i, j = t.find("{"), t.rfind("}")
     if i < 0 or j <= i:
         raise ProviderError("לא נמצא JSON בתשובה")
-    return json.loads(t[i:j + 1])
+    try:
+        return json.loads(t[i:j + 1])
+    except json.JSONDecodeError:
+        # L152 (1.11.26): אובייקט JSON תקין ואחריו טקסט/אובייקט נוסף ⇒ "Extra data". מפענחים את האובייקט השלם הראשון.
+        return json.JSONDecoder().raw_decode(t[i:])[0]
 
 
 class Provider:

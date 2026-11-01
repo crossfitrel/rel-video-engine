@@ -1717,6 +1717,12 @@ LESSONS: dict[str, dict] = {
     'state',
     [{'kind': 'code', 'file': 'cloud/libs_git.sh', 'pattern': 'L151'},
      {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_no_shallow_rebase'}]),
+ 'L152_json_extract_first_object': L(
+    'תשובת מודל = האובייקט השלם הראשון (raw_decode); טקסט או אובייקט נוסף אחריו לא מפילים את הריצה.',
+    '1.11.26: prep של גיפט קארד ריל 1 נפל על JSONDecodeError "Extra data" בתשובת הבמאי.',
+    'state',
+    [{'kind': 'code', 'file': 'tools/relvid/provider.py', 'pattern': 'L152'},
+     {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_extract_first_object_with_trailing_text'}]),
 }
 
 
