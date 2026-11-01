@@ -1746,6 +1746,13 @@ LESSONS: dict[str, dict] = {
     [{'kind': 'code', 'file': 'tools/animation_overlay.py', 'pattern': 'def resolve_media'},
      {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_mac_broll_path_resolves_on_runner'},
      {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_failed_broll_overlay_is_blocking'}]),
+ 'L157_mg_plan_is_a_decision': L(
+    'תוכנית MG קיימת שלא הורכבה = כשל גימור חוסם. טקסט על פנים ⇒ ניסיון אחד באזור השני (top↔body) לפני כשל. מפתח רשימה מספרי לא מפיל את ה-MG.',
+    '1.11.26: שישה ריל ענן יצאו בלי MG (Haar מודד ב-runner, במק "לא נמדד"; ticks=5 הפיל את 135 לידים) וסומנו מוכנים.',
+    'portability',
+    [{'kind': 'code', 'file': 'tools/motion_build.py', 'pattern': 'L157'},
+     {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_numeric_list_key_does_not_crash'},
+     {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_face_occlusion_retries_other_zone_and_plan_failure_blocks'}]),
 }
 
 

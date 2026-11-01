@@ -1756,7 +1756,8 @@ def main():
                                    f"ב-{_rd.get('secs', '?')}ש · MG_SHEET.jpg" + (f" · ⚠ {','.join(_warn)}" if _warn else ""))
             report.append(f"- 🎬 Motion Graphics: {len(mrep.get('events') or [])} רגעים · אזורים {mrep.get('zones')} · "
                           f"כתוביות יורדות ב-{mg_suppress} · גיליון MG_SHEET.jpg (חוק הראייה — לפתוח לפני הצגה)")
-        elif a.motion == "on":
+        elif a.motion == "on" or (W / "motion_plan.json").exists():
+            # L157 (1.11.26): תוכנית MG קיימת = החלטה מפורשת; ריל שיוצא בלי ה-MG שתוכנן לא נמסר כ"מוכן"
             fail("Motion Graphics נכשל: " + ("; ".join(_bad) or (r.stderr or r.stdout or "")[-300:]))
         else:
             st.done_step("motion", "נכשל (לא-חוסם) — הסרטון יוצא בלי MG")

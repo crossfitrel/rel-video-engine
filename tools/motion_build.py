@@ -169,7 +169,8 @@ def load_words(W: Path) -> list[dict]:
 def plan_texts(ev: dict) -> list[str]:
     out = [ev[k] for k in TEXT_KEYS if isinstance(ev.get(k), str) and ev[k].strip()]
     for lk in LIST_TEXT_KEYS:
-        for it in ev.get(lk) or []:
+        _lv = ev.get(lk)
+        for it in (_lv if isinstance(_lv, (list, tuple)) else []):   # 1.11.26: "ticks": 5 (מספר) הפיל את כל ה-MG
             if isinstance(it, dict) and it.get("text"):
                 out.append(it["text"])
             elif isinstance(it, str) and it.strip():
@@ -1349,7 +1350,23 @@ def run_all(W: Path, base: Path, out: Path, plan_path=None, workers=6, lossless=
     m, gs = measure(html, W / "motion_measure.json")
     rep["gates"] += gs
     if not blocking():
-        rep["gates"].append(gate_faces(base, plan, m, dur=D))
+        gf = gate_faces(base, plan, m, dur=D)
+        # L157 (1.11.26): טקסט על פנים ⇒ ניסיון אחד להעביר את האירועים הפוגעים לאזור השני (top↔body),
+        # ורק אם גם שם יש פנים — חוסם. ב-runner ה-Haar באמת מודד (במק החזיר "לא נמדד") ולכן MG נפל בשקט.
+        if not gf["ok"]:
+            bad_ids = {h.split("@")[0].split("/")[0].strip() for h in str(gf.get("detail", "")).split(";")}
+            flipped = []
+            for ev in plan["events"]:
+                if ev["id"] in bad_ids and ev["type"] not in FULL_TYPES and ev["type"] not in FIXED_POS_TYPES:
+                    ev["zone"] = "top" if ev.get("zone") in (None, "auto", "body") else "body"
+                    flipped.append(f"{ev['id']}→{ev['zone']}")
+            if flipped:
+                rep["zone_retry"] = flipped
+                html = compose(plan, W / "motion_comp.html")
+                m, gs2 = measure(html, W / "motion_measure.json")
+                rep["gates"] += [g for g in gs2 if not g["ok"]]
+                gf = gate_faces(base, plan, m, dur=D)
+        rep["gates"].append(gf)
     if blocking():
         return done(False)
     layer, info = render_layer(W, plan, workers, html=html)

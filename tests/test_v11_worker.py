@@ -225,3 +225,16 @@ class TestBrollPathsPortable(__import__("unittest").TestCase):
         from pathlib import Path
         src = (Path(__file__).resolve().parents[1] / "tools" / "local_finish_pipeline.py").read_text(encoding="utf-8")
         self.assertIn('fail(f"broll overlay נכשל על תוכנית קיימת', src)
+
+
+class TestMotionRobust(__import__("unittest").TestCase):
+    def test_numeric_list_key_does_not_crash(self):
+        import motion_build as MB
+        self.assertEqual(MB.plan_texts({"text": "שלום", "ticks": 5}), ["שלום"])
+
+    def test_face_occlusion_retries_other_zone_and_plan_failure_blocks(self):
+        from pathlib import Path
+        root = Path(__file__).resolve().parents[1] / "tools"
+        self.assertIn('rep["zone_retry"] = flipped', (root / "motion_build.py").read_text(encoding="utf-8"))
+        self.assertIn('a.motion == "on" or (W / "motion_plan.json").exists()',
+                      (root / "local_finish_pipeline.py").read_text(encoding="utf-8"))
