@@ -93,7 +93,7 @@ input[type=password]{font:inherit;color:var(--fg);background:var(--bg);border:1p
 <div class="wrap">
   <header class="top">
     <h1>רוויו <b>R.E.L</b></h1>
-    <div class="hdr-end"><div class="sync" id="sync">מתחבר…</div><button class="icon" id="theme" type="button" aria-label="מצב תצוגה"></button></div>
+    <div class="hdr-end"><div class="sync" id="sync">מתחבר…</div><button class="icon" id="keys-open" type="button" aria-label="מפתחות" title="מפתחות">🔑</button><button class="icon" id="theme" type="button" aria-label="מצב תצוגה"></button></div>
   </header>
 
   <div class="health" id="health" hidden></div>
@@ -362,6 +362,7 @@ document.querySelectorAll('#keys [data-k]').forEach(b=>b.onclick=async()=>{ cons
   b.disabled=true; b.textContent='בודק…';
   try{ const r=await api('secret_set',{name:b.dataset.k,value:v}); inp.value=''; toast(r.verified===false?'נשמר ✓ (ייבדק בעריכה הראשונה)':'נשמר ונבדק ✓'); await keysStatus(); load(); }
   catch(e){ toast(e.message); } finally{ b.disabled=false; b.textContent='שמירה'; } });
+$('keys-open').onclick=()=>{ if($('keys').hidden) openKeys(); else $('keys').hidden=true; };
 $('keys-close').onclick=()=>{ $('keys').hidden=true; if(location.hash==='#setup') history.replaceState(null,'',location.pathname); };
 async function load(){
   if(!token){ showLogin(); return; }
