@@ -203,3 +203,25 @@ class TestPruneInventedIds(__import__("unittest").TestCase):
         self.assertIn("gap_9999", out["_pruned"])
         with self.assertRaises(ProviderError):
             validate_answer({"decisions": [{"candidate_id": f"x{i}"} for i in range(6)]}, allowed_ids=["a"])
+
+
+class TestBrollPathsPortable(__import__("unittest").TestCase):
+    def test_mac_broll_path_resolves_on_runner(self):
+        import tempfile
+        from pathlib import Path
+        import animation_overlay as AO
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td) / "repo"; (root / "tools").mkdir(parents=True)
+            clip = root / "בירולים" / "קרוספיט אריאל" / "x.mp4"; clip.parent.mkdir(parents=True); clip.write_bytes(b"0")
+            old = AO.HERE
+            try:
+                AO.HERE = root / "tools"
+                mac = "/Users/hayon/Library/Mobile Documents/com~apple~CloudDocs/Social Video Editing System/בירולים/קרוספיט אריאל/x.mp4"
+                self.assertEqual(AO.resolve_media(mac), str(clip))
+            finally:
+                AO.HERE = old
+
+    def test_failed_broll_overlay_is_blocking(self):
+        from pathlib import Path
+        src = (Path(__file__).resolve().parents[1] / "tools" / "local_finish_pipeline.py").read_text(encoding="utf-8")
+        self.assertIn('fail(f"broll overlay נכשל על תוכנית קיימת', src)

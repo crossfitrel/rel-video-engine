@@ -22,6 +22,26 @@ CrossFit R.E.L — מסלול גימור ללא Descript credits (כש-prompt_pr
       --overlay "vox.mp4" 24 33.5  --src-offset 16
 """
 import argparse, subprocess, sys
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+_ANCHORS = ("בירולים", "brand-assets", "מיכאל לוי", "תוצרי-אנימציה")
+
+
+def resolve_media(pth: str) -> str:
+    """L156 (1.11.26): broll_plan שנבנה במק נושא נתיבי /Users/hayon/...; ב-runner של Actions הקובץ
+    יושב באותו נתיב יחסי מתחת לשורש הריפו. ממפים לפי המקטע שאחרי העוגן (כמו canon_lint._resolve, L145).
+    בלי זה הבירול נפל בשקט וכל ריל ענן יצא בלי בירול, וה-MG נפל על 'טקסט על פנים'."""
+    P = Path(pth)
+    if P.exists():
+        return str(P)
+    parts = P.parts
+    for anchor in _ANCHORS:
+        if anchor in parts:
+            cand = HERE.parent.joinpath(*parts[parts.index(anchor):])
+            if cand.exists():
+                return str(cand)
+    return str(P)
 
 def main():
     ap = argparse.ArgumentParser(description="שילוב אנימציות ממורכזות + רקע מטושטש (R.E.L)")
@@ -60,7 +80,7 @@ def main():
         # הפלט מעבר לווידאו. נמדד: EXPORT_TIGHT 35.58ש → EXPORT+BROLL 37.20ש,
         # ‏1.62ש של פריים קפוא בזנב. חותכים כל קלט לאורך החלון + מרווח
         # ביטחון של 0.10ש, כדי ש-repeat עדיין יהיה לו פריים להחזיק בתפר.
-        inputs += ["-t", f"{(float(e) - float(s)) / spd + 0.10:.3f}", "-i", f]
+        inputs += ["-t", f"{(float(e) - float(s)) / spd + 0.10:.3f}", "-i", resolve_media(f)]
 
     # --- filtergraph ---
     fc = []

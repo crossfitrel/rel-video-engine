@@ -1739,6 +1739,13 @@ LESSONS: dict[str, dict] = {
     '1.11.26: שלושה prep נחסמו ב-cap_reel אחרי ריצות שנפלו על באגים שתוקנו; enqueue נתקע עד 504 כש-workers קראו ל-llm במקביל (max 3).',
     'state',
     [{'kind': 'code', 'file': 'supabase/functions/video/index.ts', 'pattern': 'L155'}]),
+ 'L156_broll_paths_portable_and_blocking': L(
+    'animation_overlay ממפה נתיבי בירול של מכונה אחרת לפי העוגן (בירולים/…) מתחת לשורש הריפו; תוכנית בירולים קיימת שלא הוחלה = כשל גימור חוסם, לא אזהרה.',
+    '1.11.26: כל refinish בענן יצא בלי בירול (נתיבי /Users/hayon ב-broll_plan) וה-MG נפל על "טקסט על פנים"; זה עבר QA ו"מוכן" כי הכשל היה לא-חוסם.',
+    'portability',
+    [{'kind': 'code', 'file': 'tools/animation_overlay.py', 'pattern': 'def resolve_media'},
+     {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_mac_broll_path_resolves_on_runner'},
+     {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_failed_broll_overlay_is_blocking'}]),
 }
 
 

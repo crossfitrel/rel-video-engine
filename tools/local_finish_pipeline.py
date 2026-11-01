@@ -1595,8 +1595,11 @@ def main():
                 r = sh(["python3", HERE / "animation_overlay.py", "--base", VISUAL_BASE, "--out", BB]
                        + style + args)
                 if r.returncode != 0 or not BB.exists():
-                    report.append(f"- ⚠️ broll overlay נכשל — ממשיכים בלי בירול: {r.stderr[-300:]}")
-                    st.done_step("broll", "נכשל (לא-חוסם)")
+                    # L156 (1.11.26): תוכנית בירולים קיימת = החלטה מפורשת (v7.6). כשל בהחלה הוא חוסם —
+                    # "גלאי שמפסיק בשקט גרוע מגלאי שאין": כל ריל ענן יצא בלי בירול ונמסר כ"מוכן".
+                    report.append(f"- ❌ broll overlay נכשל — תוכנית קיימת לא הוחלה (חוסם): {r.stderr[-300:]}")
+                    st.done_step("broll", "נכשל (חוסם)")
+                    fail(f"broll overlay נכשל על תוכנית קיימת ({len(plan.get('plan', []))} קליפים): {r.stderr[-300:]}")
                 else:
                     base = BB
                     st.done_step("broll", f"{detail} · {len(plan.get('plan', []))} קליפים")
