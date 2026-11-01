@@ -24,6 +24,10 @@ $REL_PY cloud/worker.py run --job-id <id>
 טוענים את הסקיל `rel-social-video-editor` ואת ה-reference של השלב בלבד, מטפלים בפרויקט אחד, ובסוף:
 `push-project` (חובה) → `review_bridge.py proxy` → `video_api.upload` → `project_upsert` (state=review רק עם PREFLIGHT תקין) → `job_done`.
 
+**מ-1.11.26 (L150) — הסשן לא מרנדר.** עבור `notes_to_editor`/`note_unmapped`: עורכים רק את קבצי התוכנית של הפרויקט (`edl.json`, `project_manifest.json` finish_prefs, `HOOK_PLAN.json`, `motion_plan.json`) ב-sparse clone של ענף libs (json בלבד), push ל-libs, ואז
+`enqueue {"kind":"refinish","project_id":…,"payload":{"full":true|false,"fixed":{"<comment_id>":"מה תוקן"}}}` + `job_done` לג'וב ה-judge.
+ה-worker ב-Actions מרנדר, מריץ PREFLIGHT, מעלה פרוקסי, מחזיר ל"מוכן לבדיקה" ומסמן את ההערות כמתוקנות. `full:true` כשהשתנו חיתוכים/MG/מוזיקה; refinish מהיר רק לכתוביות/מפלס.
+
 ## 3. ג'וב `schedule` (הראל לחץ "אשר קאבר, קפשן ותזמון")
 - פרויקט `test: true` (`p-e2etest`) לעולם לא מתוזמן ולא נוגע במאנדיי.
 - הקובץ רק מ-`schedule_approval.artifact_path` + `artifacts.verify().ok` + sha256 מול `artifact_checksum`.

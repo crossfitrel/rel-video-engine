@@ -149,3 +149,13 @@ class TestVerifyParity(__import__("unittest").TestCase):
     def test_title_needs_subtitle_for_rel(self):
         body = (self.ROOT / "cloud" / "worker.py").read_text(encoding="utf-8").split("def finish_full", 1)[1].split("\ndef ", 1)[0]
         self.assertIn('m.get("subtitle")', body)
+
+
+class TestRefinishKind(__import__("unittest").TestCase):
+    def test_refinish_handler_registered(self):
+        from pathlib import Path
+        src = (Path(__file__).resolve().parents[1] / "cloud" / "worker.py").read_text(encoding="utf-8")
+        self.assertIn('"refinish": h_refinish', src)
+        body = src.split("def h_refinish", 1)[1].split("\nHANDLERS", 1)[0]
+        self.assertIn("finish_full(", body)
+        self.assertIn("comment_update", body)

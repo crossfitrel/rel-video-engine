@@ -320,7 +320,22 @@ def h_cover(job, project, comments):
     save_state(name, "cover")
 
 
-HANDLERS = {"prep": h_prep, "notes": h_notes, "finish": h_finish, "cover": h_cover}
+def h_refinish(job, project, comments):
+    """L150 (1.11.26): סבב הערות אחרי judge. Claude עורך רק את קבצי התוכנית (edl/manifest/HOOK_PLAN/motion_plan)
+    בענף libs ושולח refinish; הרינדור, PREFLIGHT, פרוקסי והחזרה ל"מוכן לבדיקה" רצים כאן ולא בסשן.
+    payload: {"full": bool (חיתוך מחדש; ברירת מחדל refinish מהיר), "fixed": {comment_id: "מה תוקן"}}"""
+    name = project["workdir"]; pull(name)
+    p = job.get("payload") or {}
+    wd = WORK / name; m = manifest(wd)
+    if "full" in p and p["full"]:
+        finish_full(project["id"], name, project.get("dept") or m.get("dept"), director=False, refinish=False)
+    else:
+        finish_full(project["id"], name, project.get("dept") or m.get("dept"), director=False, refinish=True)
+    for cid, reply in (p.get("fixed") or {}).items():
+        V.call("comment_update", id=cid, status="fixed", reply=str(reply)[:500])
+
+
+HANDLERS = {"prep": h_prep, "notes": h_notes, "finish": h_finish, "cover": h_cover, "refinish": h_refinish}
 
 
 def cmd_run(a):
