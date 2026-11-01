@@ -78,9 +78,9 @@ def save_state(name: str, stage: str) -> tuple[bool, str]:
     t = time.time(); started = now()
     sh(["bash", HERE / "libs_git.sh", "push-project", name], f"{stage}:save")
     chk = Path(os.environ.get("RUNNER_TEMP", "/tmp")) / f"verify-{int(time.time())}"
-    env = {"REL_WORK_ROOT": str(chk), "REL_LIBS_CLONE": str(chk / ".libs")}
     chk.mkdir(parents=True, exist_ok=True)
-    sh(["bash", HERE / "libs_git.sh", "pull-project", name], f"{stage}:verify", env=env)
+    # רק תיקיית הפרויקט (sparse) — שיבוט מלא של libs מילא את הדיסק (30.10.26, rc=128)
+    sh(["bash", HERE / "libs_git.sh", "verify-project", name, str(chk)], f"{stage}:verify")
     a = _sha_saved(wd, chk / name)
     ok = a[0] == a[1]
     log_run(f"{stage}:save", started, round(time.time() - t, 1), 0 if ok else 1, saved=ok, sha=a[0])

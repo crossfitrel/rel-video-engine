@@ -108,3 +108,21 @@ class WorkerContracts(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestVerifyIsSparse(__import__("unittest").TestCase):
+    """L146 (1.11.26): אימות שמירה לעולם לא משבט את כל ענף libs — מילא את דיסק ה-runner, rc=128 בכל ג'וב."""
+    def test_worker_uses_verify_project(self):
+        from pathlib import Path
+        src = (Path(__file__).resolve().parents[1] / "cloud" / "worker.py").read_text(encoding="utf-8")
+        body = src.split("def save_state", 1)[1].split("\ndef ", 1)[0]
+        self.assertIn('"verify-project"', body)
+        self.assertNotIn('"pull-project"', body)
+
+    def test_verify_project_is_sparse_json_only(self):
+        from pathlib import Path
+        sh = (Path(__file__).resolve().parents[1] / "cloud" / "libs_git.sh").read_text(encoding="utf-8")
+        block = sh.split("verify-project)", 1)[1].split(";;", 1)[0]
+        self.assertIn("--filter=blob:none", block)
+        self.assertIn("sparse-checkout set", block)
+        self.assertIn("*.json", block)

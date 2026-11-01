@@ -80,6 +80,17 @@ case "${1:-}" in
     for f in "${STATE_FILES[@]}"; do [[ -f "$REL_HOME/$f" ]] && { mkdir -p "$(dirname "$CL/state/$f")"; cp "$REL_HOME/$f" "$CL/state/$f"; }; done
     [[ -d "$REL_WORK_ROOT/.index" ]] && stage_tree "$REL_WORK_ROOT/.index" "$CL/state/work-index"
     commit_push "state: push $(date -u +%FT%TZ)"; log "push ✓" ;;
+  verify-project)
+    # אימות שמירה: משיכה טרייה מהשרת של תיקיית הפרויקט בלבד (sparse + partial clone).
+    # שיבוט מלא של הענף (בירולים, פתיחים, ג'יגות) מילא את דיסק ה-runner ב-30.10.26 ⇒ rc=128 בכל ג'וב.
+    n="$2"; out="$3"; vc="$(mktemp -d)/v"
+    git clone -q --depth 1 --filter=blob:none --no-checkout --single-branch --branch "$BR" "$REPO_URL" "$vc"
+    # worker._sha_saved משווה רק json — מושכים רק אותם (KB במקום GB)
+    git -C "$vc" sparse-checkout set --no-cone "/state/פרויקטים/$n/**/*.json"
+    git -C "$vc" checkout -q "$BR"
+    [[ -d "$vc/state/פרויקטים/$n" ]] || { log "אין פרויקט $n בענף"; rm -rf "$vc"; exit 6; }
+    deploy "$vc/state/פרויקטים/$n" "$out/$n"; rm -rf "$(dirname "$vc")"
+    log "verify-project $n ✓ ($(du -sh "$out/$n" | cut -f1))" ;;
   pull-project)
     n="$2"; clone; [[ -d "$CL/state/פרויקטים/$n" ]] || { log "אין פרויקט $n בענף"; exit 6; }
     deploy "$CL/state/פרויקטים/$n" "$REL_WORK_ROOT/$n"; log "pull-project $n ✓" ;;
@@ -98,5 +109,5 @@ case "${1:-}" in
     n="$2"; src="$3"; clone; mkdir -p "$CL/state/מסירות"
     echo "$(date -u +%FT%TZ) $n $(sha256sum "$src" | cut -d' ' -f1) $(stat -c%s "$src")" >> "$CL/state/מסירות/ledger.txt"
     commit_push "archive-final: $n"; log "archive-final $n ✓ (רישום; הקובץ ב-Monday)" ;;
-  *) echo "usage: $0 pull|push|pull-project N|push-project N|archive-final N PATH"; exit 2 ;;
+  *) echo "usage: $0 pull|push|pull-project N|push-project N|verify-project N OUTDIR|archive-final N PATH"; exit 2 ;;
 esac
