@@ -28,6 +28,9 @@ PROMPT_DIR = HERE / "prompts"
 
 DEFAULT_MODEL = os.environ.get("REL_AI_MODEL", "claude-opus-4-6")
 DEFAULT_MAX_TOKENS = int(os.environ.get("REL_AI_MAX_TOKENS", "16000"))
+COMPACT_SUFFIX = ("\n\n## פורמט דחוס (ניסיון חוזר אחרי קטיעה)\n"
+                  "התשובה הקודמת נקטעה באורך. החזר את אותו JSON בדיוק לפי הסכמה, בלי טקסט מחוצה לו, "
+                  "בלי שדות אופציונליים ריקים, וכל שדה נימוק/הסבר עד 8 מילים. אל תחשוב בקול.")
 
 # שם קובץ הפרומפט לכל תפקיד. הגרסה בתוך שם הקובץ — מחייב שינוי שם בכל שינוי חוזה.
 ROLE_PROMPTS = {
@@ -197,8 +200,14 @@ class Provider:
     def _ask_proxy(self, role, payload):
         sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
         import llm
-        r = llm.ask("director" if role.startswith("director") or role == "edit_director" else role, user=_canon(payload),
-                    system=prompt_text(role), project_id=os.environ.get("REL_PROJECT_ID"), max_tokens=DEFAULT_MAX_TOKENS)
+        task = "director" if role.startswith("director") or role == "edit_director" else role
+        r = llm.ask(task, user=_canon(payload), system=prompt_text(role),
+                    project_id=os.environ.get("REL_PROJECT_ID"), max_tokens=DEFAULT_MAX_TOKENS)
+        if r.get("stop_reason") == "max_tokens":
+            # L147 (1.11.26): בריל עם 40-60 מועמדים התשובה המלאה עוברת את תקרת השרת (14000) ⇒ prep נפל.
+            # ניסיון אחד נוסף בפורמט דחוס, ורק אז כשל.
+            r = llm.ask(task, user=_canon(payload), system=prompt_text(role) + COMPACT_SUFFIX,
+                        project_id=os.environ.get("REL_PROJECT_ID"), max_tokens=DEFAULT_MAX_TOKENS)
         self.last_usage = {"model": r.get("model"), "usd": r.get("usd"), "usage": r.get("usage")}
         if r.get("stop_reason") == "max_tokens":
             raise ProviderError(f"התשובה של {role} נקטעה בתקרת הטוקנים ({(r.get('usage') or {}).get('output_tokens')})")

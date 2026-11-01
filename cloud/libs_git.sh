@@ -86,7 +86,7 @@ case "${1:-}" in
     n="$2"; out="$3"; vc="$(mktemp -d)/v"
     git clone -q --depth 1 --filter=blob:none --no-checkout --single-branch --branch "$BR" "$REPO_URL" "$vc"
     # worker._sha_saved משווה רק json — מושכים רק אותם (KB במקום GB)
-    git -C "$vc" sparse-checkout set --no-cone "/state/פרויקטים/$n/**/*.json"
+    git -C "$vc" sparse-checkout set --no-cone "/state/פרויקטים/$n/**/*.json" "/state/פרויקטים/$n/**/*.json.relsplit.*"
     git -C "$vc" checkout -q "$BR"
     [[ -d "$vc/state/פרויקטים/$n" ]] || { log "אין פרויקט $n בענף"; rm -rf "$vc"; exit 6; }
     deploy "$vc/state/פרויקטים/$n" "$out/$n"; rm -rf "$(dirname "$vc")"

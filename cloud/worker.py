@@ -90,13 +90,31 @@ def save_state(name: str, stage: str) -> tuple[bool, str]:
     return ok, a[0]
 
 
+# L149 (1.11.26): חייב להיות זהה ל-PROJ_EXCL ב-libs_git.sh (נבדק ב-test). פער ביניהם = "שמירה לא אומתה" על פרויקט תקין.
+PUSH_EXCLUDES = ["cue_*.png", "FINAL_prev_*", "clip_*.mp4", "_mg_snaps/", "*.tmp", "EXPORT+*.mp4", "MIXED*.mp4", "MG_LAYER.mov",
+                 "_insert_base.mp4", "REVIEW_PROXY.mp4", "INPUT.hlg.mp4", "raw/", "*.wav", ".DS_Store", "__pycache__/"]
+
+
+def _push_excluded(rel: str) -> bool:
+    """אותה סמנטיקה כמו rsync --exclude: תבנית בלי / מתאימה לשם בכל עומק; תבנית עם / בסוף = תיקייה בכל עומק."""
+    import fnmatch
+    parts = rel.split("/")
+    for pat in PUSH_EXCLUDES:
+        if pat.endswith("/"):
+            if pat[:-1] in parts[:-1]:
+                return True
+        elif fnmatch.fnmatchcase(parts[-1], pat):
+            return True
+    return False
+
+
 def _sha_saved(src: Path, back: Path):
     """משווה רק את מה ש-push-project אמור לשמור: קבצי json/md/txt (בלי תוצרי ביניים שמוחרגים)."""
     def fp(root: Path):
         h = hashlib.sha256()
         for f in sorted(root.rglob("*.json")):
             rel = f.relative_to(root).as_posix()
-            if rel.startswith((".", "_mg_snaps/")):
+            if rel.startswith(".") or _push_excluded(rel):
                 continue
             h.update(rel.encode()); h.update(f.read_bytes())
         return h.hexdigest()
@@ -188,8 +206,9 @@ def finish_full(pid, name, dept, director=False, refinish=False):
         cmd += ["--director", "--director-backend", os.environ.get("REL_DIRECTOR_BACKEND", "proxy")]
     if refinish:
         cmd += ["--refinish"]
-    if m.get("title"):
-        cmd += ["--title", m["title"]]
+    # L148 (1.11.26): ל-brand=rel הקאבר דורש כותרת+תת-כותרת. בלי תת-כותרת לא מעבירים --title (הקאבר נבנה בשלב cover).
+    if m.get("title") and (m.get("subtitle") or brand_for(dept or m.get("dept")) != "rel"):
+        cmd += ["--title", m["title"]] + (["--subtitle", m["subtitle"]] if m.get("subtitle") else [])
     out, st, sec = sh(cmd, "finish", timeout=7200)
     sh([PY, SYS / "tools/preflight_critic.py", "--workdir", wd], "preflight")
     pf = preflight(wd)

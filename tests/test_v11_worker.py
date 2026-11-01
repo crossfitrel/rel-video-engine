@@ -126,3 +126,26 @@ class TestVerifyIsSparse(__import__("unittest").TestCase):
         self.assertIn("--filter=blob:none", block)
         self.assertIn("sparse-checkout set", block)
         self.assertIn("*.json", block)
+
+
+class TestVerifyParity(__import__("unittest").TestCase):
+    """L147-L149 (1.11.26)."""
+    ROOT = __import__("pathlib").Path(__file__).resolve().parents[1]
+
+    def test_fingerprint_excludes_match_push(self):
+        import re, sys
+        sh = (self.ROOT / "cloud" / "libs_git.sh").read_text(encoding="utf-8")
+        block = sh.split("PROJ_EXCL=(", 1)[1].split(")", 1)[0]
+        shell = re.findall(r"--exclude '([^']+)'", block)
+        sys.path.insert(0, str(self.ROOT / "cloud"))
+        src = (self.ROOT / "cloud" / "worker.py").read_text(encoding="utf-8")
+        py = re.findall(r'"([^"]+)"', src.split("PUSH_EXCLUDES = [", 1)[1].split("]", 1)[0])
+        self.assertEqual(sorted(shell), sorted(py))
+
+    def test_director_retries_compact_on_truncation(self):
+        src = (self.ROOT / "tools" / "relvid" / "provider.py").read_text(encoding="utf-8")
+        self.assertIn("COMPACT_SUFFIX", src.split("def _ask_proxy", 1)[1].split("def _ask_chat", 1)[0])
+
+    def test_title_needs_subtitle_for_rel(self):
+        body = (self.ROOT / "cloud" / "worker.py").read_text(encoding="utf-8").split("def finish_full", 1)[1].split("\ndef ", 1)[0]
+        self.assertIn('m.get("subtitle")', body)

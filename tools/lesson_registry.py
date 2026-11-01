@@ -1688,6 +1688,22 @@ LESSONS: dict[str, dict] = {
     'state',
     [{'kind': 'code', 'file': 'cloud/libs_git.sh', 'pattern': 'verify-project\\)'},
      {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_verify_project_is_sparse_json_only'}]),
+ 'L147_director_truncation_retries_compact': L(
+    'תשובת במאי שנקטעה בתקרת הטוקנים מקבלת ניסיון חוזר אחד בפורמט דחוס (COMPACT_SUFFIX) לפני כשל.',
+    '1.11.26: שני prep (40 ו-59 מועמדים) נפלו על "director נקטעה בתקרת הטוקנים (14000)".',
+    'cost',
+    [{'kind': 'code', 'file': 'tools/relvid/provider.py', 'pattern': 'COMPACT_SUFFIX'},
+     {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_director_retries_compact_on_truncation'}]),
+ 'L148_cover_title_requires_subtitle': L(
+    'ה-worker מעביר --title לגימור של brand=rel רק יחד עם --subtitle; בלי תת-כותרת הקאבר נבנה בשלב cover.',
+    '1.11.26: prep של "כלי אפיון עסק" נפל בסוף הגימור על "קאבר דורש גם --title וגם --subtitle".',
+    'state',
+    [{'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_title_needs_subtitle_for_rel'}]),
+ 'L149_verify_fingerprint_matches_push_excludes': L(
+    'טביעת האימות מחריגה בדיוק את מה ש-push-project מחריג (PUSH_EXCLUDES = PROJ_EXCL), וה-sparse מושך גם json מפוצל.',
+    '1.11.26: prep תקין נכשל ב"שמירה לא אומתה" כי הטביעה ספרה json בתיקייה שלא נדחפת.',
+    'state',
+    [{'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_fingerprint_excludes_match_push'}]),
 }
 
 
