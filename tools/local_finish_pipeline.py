@@ -2166,7 +2166,7 @@ def main():
             report.append(f"- 👁️ בירולים נמדדו על {Path(mg_pre_base).name} (לפני שכבת ה-MG)")
         r = sh([pil_py, HERE / "broll_vision_qa.py", "check", "--workdir", W,
                 "--video", _bv_video, "--intro-offset", f"{intro_sec:.3f}", "--strict"], timeout=600)
-        bv_line = (r.stdout.strip().splitlines() or ["ללא פלט"])[0][:170]
+        bv_line = (r.stdout.strip().splitlines() or ["ללא פלט · " + (r.stderr or "").strip()[-150:]])[0][:220]
         if r.returncode == 1:
             blockers.append(f"broll_vision: {bv_line}")
         st.done_step("broll_vision", bv_line if r.returncode in (0, 1)

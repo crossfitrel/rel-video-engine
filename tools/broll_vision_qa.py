@@ -175,7 +175,8 @@ def ncc(a, b):
 
 def _catalog():
     cfg = json.loads(CFG.read_text(encoding="utf-8"))
-    cat = json.loads(Path(cfg["catalog_path"]).read_text(encoding="utf-8"))["items"]
+    from animation_overlay import resolve_media   # L162: נתיבי מק → שורש הריפו ב-runner
+    cat = json.loads(Path(resolve_media(cfg["catalog_path"])).read_text(encoding="utf-8"))["items"]
     return cfg, {i["file"]: i for i in cat}
 
 
@@ -243,13 +244,17 @@ def _clip_path(W, it):
         p = Path(W) / p
     if p.exists():
         return p
+    from animation_overlay import resolve_media   # L159 (1.11.26): broll_plan מהמק ב-runner של Actions
+    rp = Path(resolve_media(str(p)))
+    if rp.exists():
+        return rp
     if _CAT_BY_NAME is None:
         try:
             _CAT_BY_NAME = {Path(i["path"]).name: i["path"] for i in _catalog()[1].values()}
         except Exception:
             _CAT_BY_NAME = {}
     alt = _CAT_BY_NAME.get(p.name)
-    return Path(alt) if alt else p
+    return Path(resolve_media(alt)) if alt else p
 
 
 def _intro(W):

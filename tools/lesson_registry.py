@@ -1778,6 +1778,11 @@ LESSONS: dict[str, dict] = {
     'ops',
     [{'kind': 'code', 'file': 'cloud/worker.py', 'pattern': 'def h_schedule'},
      {'kind': 'code', 'file': 'supabase/functions/video/index.ts', 'pattern': 'case "metricool"'}]),
+ 'L162_one_portable_resolver': L(
+    'כל כלי שפותח קליפ בירול או את קטלוג הבירולים (overlay, broll_vision_qa) עובר דרך animation_overlay.resolve_media; כשל של בודק מדווח עם stderr ולא "ללא פלט".',
+    '1.11.26: אחרי תיקון ה-overlay, broll_vision נפל ב"ללא פלט" על אותם נתיבי מק בחמישה ריל.',
+    'portability',
+    [{'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_broll_vision_uses_portable_resolver'}]),
 }
 
 

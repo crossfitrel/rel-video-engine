@@ -264,3 +264,10 @@ class TestMotionRobust(__import__("unittest").TestCase):
         self.assertIn('rep["zone_retry"] = flipped', (root / "motion_build.py").read_text(encoding="utf-8"))
         self.assertIn('a.motion == "on" or (W / "motion_plan.json").exists()',
                       (root / "local_finish_pipeline.py").read_text(encoding="utf-8"))
+
+
+class TestBrollVisionPortable(__import__("unittest").TestCase):
+    def test_broll_vision_uses_portable_resolver(self):
+        from pathlib import Path
+        src = (Path(__file__).resolve().parents[1] / "tools" / "broll_vision_qa.py").read_text(encoding="utf-8")
+        self.assertIn("from animation_overlay import resolve_media", src)

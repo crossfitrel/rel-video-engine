@@ -36,6 +36,11 @@ def resolve_media(pth: str) -> str:
     if P.exists():
         return str(P)
     parts = P.parts
+    for root_anchor in ("Social Video Editing System", "rel-video-cloud"):   # קבצי קונפיג/קטלוג בשורש
+        if root_anchor in parts and parts[-1] != root_anchor:
+            cand = HERE.parent.joinpath(*parts[parts.index(root_anchor) + 1:])
+            if cand.exists():
+                return str(cand)
     for anchor in _ANCHORS:
         if anchor in parts:
             cand = HERE.parent.joinpath(*parts[parts.index(anchor):])
