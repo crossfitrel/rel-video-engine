@@ -5,7 +5,8 @@
 import postgres from "npm:postgres@3.4.4";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
-const sql = postgres(Deno.env.get("SUPABASE_DB_URL")!, { max: 3, prepare: false });
+// 1.11.26: max 3 ⇒ enqueue נתקע עד 504 כשכמה workers קוראים ל-llm במקביל. 8 חיבורים + timeouts כדי שקריאה תיכשל מהר ולא תיתקע.
+const sql = postgres(Deno.env.get("SUPABASE_DB_URL")!, { max: 8, prepare: false, idle_timeout: 20, connect_timeout: 10 });
 const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, { auth: { persistSession: false } });
 const BUCKET = "video-review";
 const REPO = "crossfitrel/rel-video-cloud";
@@ -114,8 +115,13 @@ async function llm(b: any, who: Who) {
   const tier = b.tier || routes[b.task] || "sonnet"; const model = models[tier] || tier;
   const project_id = b.project_id || who.job?.project_id || null; const job_id = who.job?.id || null;
   if (project_id) {
-    const s = await sql`select coalesce(sum(usd),0)::float usd, count(*) filter (where model=${models.opus}) opus from video.costs where project_id=${project_id}`;
-    if (s[0].usd >= (caps.usd_per_reel ?? 1.5)) { await health("cost_cap", "hit", `תקרת עלות לריל ${project_id}`); return { ok: false, error: "cap_reel", spent: s[0].usd }; }
+    const s = await sql`select coalesce(sum(usd),0)::float usd, coalesce(sum(usd) filter (where job_id is not distinct from ${job_id}),0)::float job_usd,
+      count(*) filter (where model=${models.opus}) opus from video.costs where project_id=${project_id}`;
+    // L155 (1.11.26): התקרה לריל נספרת לכל ניסיון (ג'וב), לא לכל חיי הריל — ריצות שנפלו על באגים תשתית לא חונקות את הניסיון הבא.
+    // תקרת חיים = פי 3 (ברירת מחדל) כדי שריל לא יסתובב בלי סוף.
+    const perReel = caps.usd_per_reel ?? 1.5; const lifetime = caps.usd_per_reel_lifetime ?? perReel * 3;
+    const attempt = job_id ? s[0].job_usd : s[0].usd;
+    if (attempt >= perReel || s[0].usd >= lifetime) { await health("cost_cap", "hit", `תקרת עלות לריל ${project_id} (ניסיון $${attempt.toFixed(2)} · חיים $${s[0].usd.toFixed(2)})`); return { ok: false, error: "cap_reel", spent: s[0].usd, attempt }; }
     if (tier === "opus" && s[0].opus >= (caps.opus_calls_per_reel ?? 2)) return { ok: false, error: "cap_opus" };
   }
   const day = await sql`select coalesce(sum(usd),0)::float usd from video.costs where at > date_trunc('day', now() at time zone 'Asia/Jerusalem') at time zone 'Asia/Jerusalem'`;

@@ -1734,6 +1734,11 @@ LESSONS: dict[str, dict] = {
     'state',
     [{'kind': 'code', 'file': 'tools/relvid/provider.py', 'pattern': 'L154'},
      {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_single_invented_id_is_pruned_not_fatal'}]),
+ 'L155_cap_per_attempt': L(
+    'תקרת העלות לריל נספרת לכל ניסיון (job_id), ותקרת חיים לריל = פי 3; ריצות שנפלו על באגי תשתית לא חוסמות את הניסיון הבא. pool החיבורים של edge video = 8 עם timeouts.',
+    '1.11.26: שלושה prep נחסמו ב-cap_reel אחרי ריצות שנפלו על באגים שתוקנו; enqueue נתקע עד 504 כש-workers קראו ל-llm במקביל (max 3).',
+    'state',
+    [{'kind': 'code', 'file': 'supabase/functions/video/index.ts', 'pattern': 'L155'}]),
 }
 
 
