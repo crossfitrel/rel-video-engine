@@ -44,8 +44,26 @@ def _vision_of(item) -> dict:
             _VISION_CACHE[p] = {}
     return _VISION_CACHE[p]
 
+def _portable(p):
+    """L158 (1.11.26): catalog_path/usage_path בקונפיג הם נתיבי מק (/Users/hayon/...); ב-runner ממפים
+    לפי המקטע שאחרי 'Social Video Editing System' או העוגן 'בירולים' מתחת לשורש הריפו."""
+    P = Path(p)
+    if P.exists():
+        return P
+    parts = P.parts
+    for anchor in ("Social Video Editing System", "rel-video-cloud"):
+        if anchor in parts:
+            cand = HERE.parent.joinpath(*parts[parts.index(anchor) + 1:])
+            if cand.exists():
+                return cand
+    if "בירולים" in parts:
+        cand = HERE.parent.joinpath(*parts[parts.index("בירולים"):])
+        if cand.exists():
+            return cand
+    return P
+
 def load(p):
-    return json.loads(Path(p).read_text(encoding="utf-8"))
+    return json.loads(_portable(p).read_text(encoding="utf-8"))
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -373,7 +391,7 @@ def main():
         window = a.video_dur - a.cta_guard - 6.0
         a.n = max(1, min(14, int(window // (a.clip_len + a.gap))))
     catalog = load(a.catalog or cfg["catalog_path"])
-    usage_path = Path(cfg.get("usage_path", HERE / "broll-usage.json"))
+    usage_path = _portable(cfg.get("usage_path", HERE / "broll-usage.json"))
     usage = load(usage_path) if usage_path.exists() else {}
     now = int(time.time())
 

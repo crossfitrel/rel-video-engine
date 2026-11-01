@@ -1753,6 +1753,11 @@ LESSONS: dict[str, dict] = {
     [{'kind': 'code', 'file': 'tools/motion_build.py', 'pattern': 'L157'},
      {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_numeric_list_key_does_not_crash'},
      {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_face_occlusion_retries_other_zone_and_plan_failure_blocks'}]),
+ 'L158_broll_pick_portable_catalog': L(
+    'broll_pick ממפה catalog_path/usage_path של מק לשורש הריפו ב-runner, כדי שבחירת בירול אוטומטית תעבוד בענן.',
+    '1.11.26: 135 לידים יצא בלי בירול כי broll_pick נפל על FileNotFoundError של /Users/hayon/.../catalog.json.',
+    'portability',
+    [{'kind': 'code', 'file': 'tools/broll_pick.py', 'pattern': 'def _portable'}]),
 }
 
 
