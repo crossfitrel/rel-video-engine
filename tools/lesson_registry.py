@@ -1704,6 +1704,13 @@ LESSONS: dict[str, dict] = {
     '1.11.26: prep תקין נכשל ב"שמירה לא אומתה" כי הטביעה ספרה json בתיקייה שלא נדחפת.',
     'state',
     [{'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_fingerprint_excludes_match_push'}]),
+ 'L150_judge_edits_plans_actions_renders': L(
+    'סבב הערות שהוסלם: Claude עורך רק קבצי תוכנית (json) בענף libs ושולח ג\'וב refinish; הרינדור והחזרה לרוויו רצים ב-Actions.',
+    'הראל 1.11.26 "כל המערכת תקועה, אין מה לערוך ולתזמן": כל סבב הערות חיכה לסשן Claude מלא (bootstrap+רינדור), גם על "המוזיקה גבוהה".',
+    'cost',
+    [{'kind': 'code', 'file': 'cloud/worker.py', 'pattern': 'def h_refinish'},
+     {'kind': 'doc', 'file': 'cloud/RUN.md', 'pattern': 'L150'},
+     {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_refinish_handler_registered'}]),
 }
 
 
