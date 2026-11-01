@@ -1783,6 +1783,13 @@ LESSONS: dict[str, dict] = {
     '1.11.26: אחרי תיקון ה-overlay, broll_vision נפל ב"ללא פלט" על אותם נתיבי מק בחמישה ריל.',
     'portability',
     [{'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_broll_vision_uses_portable_resolver'}]),
+ 'L163_publish_date_planned_at_production': L(
+    'תאריך פרסום נקבע אוטומטית כבר בשלב ההפקה (מוכן לבדיקה / קאבר) לפי publish_planner: פינות בטווח הקבוע בחודש, 19:00, לא 7.10, לא היום/מחר, היום הרחוק ביותר מפרסומים בגאנט וב-Metricool. מחליף "לא בוחרים תאריך לבד".',
+    '1.11.26: "טיפ אחד" אושר ולא תוזמן כי בגאנט לא היה תאריך; הראל: "המטרה שאתה תסדר את התאריכי פרסום לבד, בסדר בריא והגיוני עם פריסה נכונה".',
+    'ops',
+    [{'kind': 'code', 'file': 'cloud/publish_planner.py', 'pattern': 'def plan'},
+     {'kind': 'code', 'file': 'cloud/worker.py', 'pattern': 'def ensure_publish_date'},
+     {'kind': 'test', 'file': 'tests/test_publish_planner.py', 'pattern': 'test_corner_range'}]),
 }
 
 

@@ -219,6 +219,11 @@ def finish_full(pid, name, dept, director=False, refinish=False):
     save_state(name, "finish")
     if pf.get("ready_for_harel"):
         publish_review(pid, name, "review")
+        try:   # L163: תאריך פרסום כבר בשלב ההפקה
+            if m.get("monday_item_id") and not m.get("test"):
+                ensure_publish_date({"id": pid, "monday_item_id": m["monday_item_id"], "title": m.get("title")})
+        except Exception as e:
+            V.call("health_set", key="auto_date", value="failed", note=f"{pid}: {str(e)[:150]}")
         if m.get("monday_item_id") and not m.get("test"):
             V.call("monday_status", item_id=str(m["monday_item_id"]), label="מוכן לבדיקה",
                    update=f"[AUTO-EDIT v11 DRAFT] מוכן לבדיקה בעמוד הרוויו · PREFLIGHT: מוכן להראל")
@@ -278,6 +283,11 @@ def h_finish(job, project, comments):
     sh([PY, SYS / "tools/preflight_critic.py", "--workdir", WORK / name], "preflight")
     caption = make_caption(project, name)
     publish_review(project["id"], name, "cover_review", {"caption": caption})
+    try:   # L163: התאריך נקבע כבר עכשיו, כדי שהאישור שלך יתזמן מיד
+        if project.get("monday_item_id") and not project.get("test"):
+            ensure_publish_date(project)
+    except Exception as e:
+        V.call("health_set", key="auto_date", value="failed", note=f"{project.get('title') or project['id']}: {str(e)[:150]}")
     log_run("finish", st, sec, ready=bool(preflight(WORK / name).get("ready_for_harel")))
     save_state(name, "finish")
 
@@ -471,11 +481,8 @@ def h_schedule(job, project, comments):
         V.call("project_upsert", project={"id": pid, "state": "ready_to_schedule"}); return
     md = V.call("monday_date", item_id=item)
     d = md.get("date") or {}
-    if not d.get("date"):
-        # לא בוחרים תאריך לבד (חוק של הראל). ממתינים: קביעת תאריך בגאנט מפעילה את הג'וב שוב (webhook date_mkrpvw3n).
-        V.call("project_upsert", project={"id": pid, "state": "ready_to_schedule", "extra": {**(project.get("extra") or {}), "waiting": "date"}})
-        V.call("health_set", key=f"wait_date:{pid}", value="waiting", note=f"{project.get('title') or md.get('name')}: אושר. ממתין לתאריך פרסום בגאנט, ואז מתוזמן לבד")
-        return
+    if not d.get("date"):   # L163: אין תאריך ⇒ קובעים לבד (לא ממתינים)
+        d = ensure_publish_date(project, md)
     blog = {"קרוספיט אריאל": "6323702", "ילדים": "6323702", "מועדון": "6323702"}.get((project.get("dept") or "").strip())
     if not blog:
         _to_claude(job, f"מחלקה {project.get('dept')!r}: מותג/רשתות לא מוגדרים לתזמון אוטומטי")
@@ -490,15 +497,16 @@ def h_schedule(job, project, comments):
     vpath = V.upload(str(final), f"{pid}/final-{sha[:10]}.mp4", "video/mp4")
     cover = next((wd / c for c in ("COVER.png", "cover.png", "thumbnail.png") if (wd / c).exists()), None)
     cpath = V.upload(str(cover), f"{pid}/cover-final-{V.sha256(str(cover))[:10]}.png", "image/png") if cover else None
-    vurl = V.call("signed_url", path=vpath, ttl=7 * 86400)["url"]; curl = V.call("signed_url", path=cpath, ttl=7 * 86400)["url"] if cpath else None
+    # L164: קישור Storage שפג לפני מועד הפרסום = פוסט שנכשל. TTL ארוך + saveExternalMediaFiles + אימות שהמדיה ב-static.metricool.com
+    vurl = V.call("signed_url", path=vpath, ttl=120 * 86400)["url"]; curl = V.call("signed_url", path=cpath, ttl=120 * 86400)["url"] if cpath else None
     V.call("monday_file", item_id=item, path=vpath, name=f"{md.get('name') or name} FINAL.mp4")   # best effort
     utc = dt.datetime.fromisoformat(f"{d['date']}T{d.get('time') or '17:00:00'}+00:00")
     from zoneinfo import ZoneInfo
     il = utc.astimezone(ZoneInfo("Asia/Jerusalem"))   # Monday שומר UTC; Metricool מקבל שעה מקומית
     when = il.strftime("%Y-%m-%dT%H:%M:%S")
     text = (job.get("payload") or {}).get("caption") or project.get("caption") or ""
-    title = re.sub(r"^[^:|]{1,25}[:|]\s*", "", md.get("name") or project.get("title") or "")[:90]
-    body = {"publicationDate": {"dateTime": when, "timezone": "Asia/Jerusalem"}, "text": text, "autoPublish": True, "draft": False,
+    title = re.sub(r"\s*[—–]\s*", ", ", re.sub(r"^[^:|]{1,25}[:|]\s*", "", md.get("name") or project.get("title") or ""))[:90]   # בלי קו מפריד ארוך
+    body = {"publicationDate": {"dateTime": when, "timezone": "Asia/Jerusalem"}, "text": text, "autoPublish": True, "draft": False, "saveExternalMediaFiles": True,
             "providers": [{"network": n} for n in ("instagram", "facebook", "tiktok", "youtube")], "media": [vurl],
             "instagramData": {"type": "REEL", "showReelOnFeed": True, "autoPublish": True},
             "facebookData": {"type": "REEL", "title": title}, "youtubeData": {"title": title, "type": "short", "privacy": "public", "madeForKids": False},
@@ -516,10 +524,46 @@ def h_schedule(job, project, comments):
     g = V.call("metricool", path="/api/v2/scheduler/posts", query={"blogId": blog, "start": day0, "end": day1, "timezone": "Asia/Jerusalem"})
     posts = (g.get("data") or {}).get("data") if isinstance(g.get("data"), dict) else g.get("data")
     hit = [x for x in (posts or []) if (x.get("text") or "").strip() == text.strip() and (x.get("publicationDate") or {}).get("dateTime", "")[:16] == when[:16]]
+    if hit and not str((hit[0].get("media") or [""])[0]).startswith("https://static.metricool.com"):
+        V.call("health_set", key="metricool_media", value="warn", note=f"{project.get('title')}: המדיה לא הועתקה ל-Metricool, קישור Storage תקף 120 יום")
     if not hit or len((hit[0].get("providers") or [])) < 4:
         _to_claude(job, "[SCHEDULE VERIFY FAILED] הפוסט לא נמצא/לא תואם בקריאה חוזרת")
     V.call("monday_status", item_id=item, label="תוזמן!", update=f"[SCHEDULED-METRICOOL] {when} · uuid {hit[0].get('uuid')} · אוטומטי (worker)")
     V.call("project_upsert", project={"id": pid, "state": "scheduled", "publish_date": d["date"], "extra": {**(project.get("extra") or {}), "metricool_uuid": hit[0].get("uuid"), "waiting": None}})
+
+
+def ensure_publish_date(project, md=None):
+    """L163: אין תאריך בגאנט ⇒ קובעים לבד לפי publish_planner (פינות בטווח הקבוע, פריסה מאוזנת מול הגאנט ו-Metricool)."""
+    import publish_planner as PP
+    item = str(project.get("monday_item_id") or "")
+    md = md or V.call("monday_date", item_id=item)
+    if (md.get("date") or {}).get("date"):
+        return md["date"]
+    from zoneinfo import ZoneInfo
+    today = dt.datetime.now(ZoneInfo("Asia/Jerusalem")).date()
+    taken = set()
+    for it in V.call("board_dates").get("items") or []:
+        try:
+            u = dt.datetime.fromisoformat(f"{it['date']}T{it.get('time') or '17:00:00'}+00:00").astimezone(ZoneInfo("Asia/Jerusalem"))
+            if u.hour >= 15 or not it.get("time"):   # רק פרסומי ערב חוסמים ערב
+                taken.add(u.date())
+        except Exception:
+            pass
+    g = V.call("metricool", path="/api/v2/scheduler/posts", query={"blogId": "6323702", "start": f"{today}T00:00:00",
+                                                                   "end": f"{today + dt.timedelta(days=40)}T23:59:59", "timezone": "Asia/Jerusalem"})
+    posts = (g.get("data") or {}).get("data") if isinstance(g.get("data"), dict) else g.get("data")
+    for x in posts or []:
+        if x.get("draft") or not (x.get("publicationDate") or {}).get("dateTime"):
+            continue
+        if any(p_.get("network") in ("instagram", "facebook", "tiktok") for p_ in x.get("providers") or []):
+            if int(x["publicationDate"]["dateTime"][11:13]) >= 15:
+                taken.add(dt.date.fromisoformat(x["publicationDate"]["dateTime"][:10]))
+    title = md.get("name") or project.get("title") or ""
+    d, hhmm, why = PP.plan(title, taken, today)
+    ud, ut = PP.to_monday_utc(d, hhmm)
+    V.call("monday_set_date", item_id=item, date=ud, time=ut, update=f"[AUTO-DATE] {d.strftime('%d.%m.%y')} {hhmm} · {why}")
+    V.call("project_upsert", project={"id": project["id"], "publish_date": str(d)})
+    return {"date": ud, "time": ut}
 
 
 def check_edge_version():

@@ -11,7 +11,7 @@ const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SE
 const BUCKET = "video-review";
 const REPO = "crossfitrel/rel-video-cloud";
 // L159 (1.11.26): קוד שנכתב לריפו ולא נפרס = התיקון לא קיים. ה-worker משווה את המספר הזה לקובץ בריפו ומדליק באנר אם הפונקציה הפרוסה ישנה.
-const FN_VERSION = "2026-11-01.1";
+const FN_VERSION = "2026-11-01.2";
 const METRICOOL_USER = "4873293";
 const WORKFLOW = "video-worker.yml";
 const CORS = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "content-type, x-review-token, x-video-admin, x-worker-token", "Access-Control-Allow-Methods": "POST, GET, OPTIONS" };
@@ -270,6 +270,20 @@ Deno.serve(async (req) => {
       case "monday_date": { if (!isW) break;
         const d = await monday(`query($id:[ID!]){items(ids:$id){name column_values(ids:["date_mkrpvw3n"]){value}}}`, { id: [String(b.item_id)] });
         const it = d.items?.[0]; return J({ ok: true, name: it?.name, date: it?.column_values?.[0]?.value ? JSON.parse(it.column_values[0].value) : null }); }
+      // L162: תאריכי פרסום נקבעים בשלב ההפקה. קריאת כל התאריכים בגאנט + כתיבת תאריך לפריט (UTC).
+      case "board_dates": { if (!isW) break;
+        const out: any[] = []; let cursor: string | null = null;
+        do {
+          const d: any = cursor ? await monday(`query($c:String!){next_items_page(cursor:$c,limit:500){cursor items{id name column_values(ids:["date_mkrpvw3n"]){value}}}}`, { c: cursor })
+            : await monday(`query{boards(ids:[18395578529]){items_page(limit:500){cursor items{id name column_values(ids:["date_mkrpvw3n"]){value}}}}}`);
+          const pg = cursor ? d.next_items_page : d.boards[0].items_page; cursor = pg.cursor;
+          for (const it of pg.items) { const v = it.column_values?.[0]?.value; if (v) { const j = JSON.parse(v); if (j?.date) out.push({ id: it.id, name: it.name, date: j.date, time: j.time || null }); } }
+        } while (cursor);
+        return J({ ok: true, items: out }); }
+      case "monday_set_date": { if (!isW) break;
+        await monday(`mutation($b:ID!,$i:ID!,$v:JSON!){change_column_value(board_id:$b,item_id:$i,column_id:"date_mkrpvw3n",value:$v){id}}`, { b: "18395578529", i: String(b.item_id), v: JSON.stringify({ date: b.date, time: b.time }) });
+        if (b.update) await monday(`mutation($i:ID!,$t:String!){create_update(item_id:$i,body:$t){id}}`, { i: String(b.item_id), t: b.update });
+        return J({ ok: true }); }
       case "monday_file": { if (!isW) break;
         // העלאת קובץ מה-Storage לעמודת קובץ במאנדיי (סרטון מוכן). הטוקן נשאר כאן.
         const t = await secret("monday_token"); const { data: blob, error } = await sb.storage.from(BUCKET).download(b.path); if (error || !blob) return J({ ok: false, error: error?.message || "download" });
