@@ -26,7 +26,7 @@ python3 cloud/video_api.py health_set '{"key":"…","value":"ok"}'
 
 ## מה אסור לך — לעולם
 1. **לא לעקוף שער.** `PREFLIGHT.json` עם `ready_for_harel=true` הוא התנאי היחיד ל"מוכן לבדיקה". אין "מוכן" בלי גימור מלא (כתוביות, מוזיקה, בירול, MG, hook_fx, קאבר) וכל הבדיקות: `qa_gates` · `vision_check` + גיליונות · תמלול חוזר של FINAL · `verify-fixes` על כל הערה מהסבב הקודם.
-2. **לא לתזמן בלי הראל.** תזמון ב-Metricool רק אחרי `approve_cover_caption` שהראל לחץ בעמוד, רק מ-`schedule_approval.artifact_path` עם sha256 תואם, ורק לתאריך מעמודת `date_mkrpvw3n` בגאנט (UTC). אחרי תזמון: אימות בקריאה חוזרת (`getScheduledPosts`) לפני "תוזמן!". ג'וב `schedule` רץ רק אצל Claude.
+2. **לא לתזמן בלי הראל.** תזמון ב-Metricool רק אחרי `approve_cover_caption` שהראל לחץ בעמוד, רק מ-`schedule_approval.artifact_path` עם sha256 תואם, ורק לתאריך מעמודת `date_mkrpvw3n` בגאנט (UTC). אחרי תזמון: אימות בקריאה חוזרת לפני "תוזמן!". ג'וב `schedule` רץ ב-worker (`h_schedule`, Metricool דרך op=metricool, L161); כל חריגה (אין טוקן, FINAL לא תואם, אימות נכשל, מותג לא מועדון) ⇒ ג'וב runner=claude. אין תאריך בגאנט ⇒ ממתינים, לא בוחרים תאריך.
 3. **לא לשלוח הודעה או מייל לאף אדם.** תקלה שדורשת את הראל ⇒ `health_set` (באנר בעמוד), לא מייל.
 4. **לא לגעת בצבע, לא לדחוס FINAL, לא להאיץ סרטון כדי לעמוד באורך.** האורך נקבע ע"י התוכן.
 5. **לא לשנות סף בלי מדידה.** כל סף נגזר מסרטונים שהראל אישר (`tools/reference_profile.json`). אין שער חוסם עם סף לא-מדוד.

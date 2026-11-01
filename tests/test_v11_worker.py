@@ -93,18 +93,44 @@ class WorkerContracts(unittest.TestCase):
         self.assertEqual(done["status"], "failed"); self.assertIsNone(done["consume_action"])
         self.assertTrue(any(op == "health_set" and k["value"] == "failed" for op, k in sent))
 
-    def test_escalation_creates_claude_judge_job(self):
+    def _run(self, job, exc, project=None):
         sent = []
         def fake(op, **k):
             sent.append((op, k))
             if op == "job_claim":
-                return {"ok": True, "job": {"id": "j2", "kind": "notes", "project_id": "p-1", "payload": {}}, "project": {"id": "p-1", "workdir": "proj"}, "comments": []}
+                return {"ok": True, "job": job, "project": project or {"id": "p-1", "workdir": "proj"}, "comments": []}
             return {"ok": True}
-        with mock.patch.object(V, "call", side_effect=fake), mock.patch.dict(W.HANDLERS, {"notes": mock.Mock(side_effect=W.Escalate("note_unmapped"))}):
-            W.cmd_run(type("A", (), {"job_id": "j2"})())
-        enq = [k for op, k in sent if op == "enqueue"]
-        self.assertEqual(enq[0]["kind"], "judge"); self.assertEqual(enq[0]["runner"], "claude")
+        with mock.patch.object(V, "call", side_effect=fake), mock.patch.dict(W.HANDLERS, {job["kind"]: mock.Mock(side_effect=exc)}):
+            W.cmd_run(type("A", (), {"job_id": job["id"]})())
+        return sent
 
+    def test_escalation_goes_to_autonomous_judge_first(self):
+        """L160: הסלמה ראשונה רצה ב-Actions (runner ברירת מחדל), לא בתור של Claude."""
+        sent = self._run({"id": "j2", "kind": "notes", "project_id": "p-1", "payload": {}}, W.Escalate("note_unmapped"))
+        enq = [k for op, k in sent if op == "enqueue"]
+        self.assertEqual(enq[0]["kind"], "judge"); self.assertNotIn("runner", enq[0]); self.assertEqual(enq[0]["payload"]["round"], 1)
+
+    def test_judge_after_two_rounds_goes_to_claude(self):
+        sent = self._run({"id": "j3", "kind": "judge", "project_id": "p-1", "payload": {"round": 2}}, W.Escalate("preflight_not_ready"))
+        enq = [k for op, k in sent if op == "enqueue"]
+        self.assertEqual(enq[0]["runner"], "claude")
+        self.assertTrue(any(op == "project_upsert" and k["project"]["state"] == "blocked" for op, k in sent))
+
+    def test_daily_cap_defers_not_fails(self):
+        """L160: תקרה יומית = deferred (op=resume מחזיר לתור), לא failed."""
+        sent = self._run({"id": "j4", "kind": "prep", "project_id": "p-1", "payload": {}}, RuntimeError("llm director: cap_day"))
+        done = [k for op, k in sent if op == "job_done"][0]
+        self.assertEqual(done["status"], "deferred")
+
+    def test_publish_review_never_nulls_title(self):
+        """L159: מניפסט בלי title לא דורס את הכותרת ב-null."""
+        src = (W.HERE / "worker.py").read_text(encoding="utf-8")
+        body = src.split("def publish_review", 1)[1].split("\ndef ", 1)[0]
+        self.assertNotIn('"title": m.get("title")', body)
+        self.assertIn('if m.get("title")', body)
+
+    def test_merge_patch(self):
+        self.assertEqual(W._merge({"a": 1, "b": {"c": 2, "d": 3}}, {"b": {"c": None, "e": [1]}, "f": 1}), {"a": 1, "b": {"d": 3, "e": [1]}, "f": 1})
 
 if __name__ == "__main__":
     unittest.main()

@@ -10,6 +10,9 @@ const sql = postgres(Deno.env.get("SUPABASE_DB_URL")!, { max: 8, prepare: false,
 const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, { auth: { persistSession: false } });
 const BUCKET = "video-review";
 const REPO = "crossfitrel/rel-video-cloud";
+// L159 (1.11.26): קוד שנכתב לריפו ולא נפרס = התיקון לא קיים. ה-worker משווה את המספר הזה לקובץ בריפו ומדליק באנר אם הפונקציה הפרוסה ישנה.
+const FN_VERSION = "2026-11-01.1";
+const METRICOOL_USER = "4873293";
 const WORKFLOW = "video-worker.yml";
 const CORS = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "content-type, x-review-token, x-video-admin, x-worker-token", "Access-Control-Allow-Methods": "POST, GET, OPTIONS" };
 const J = (b: unknown, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { ...CORS, "content-type": "application/json; charset=utf-8" } });
@@ -31,7 +34,7 @@ async function auth(req: Request): Promise<Who | null> {
   if (ak && eq(ak, (await secret("video_admin_key")) || "")) return { role: "admin" };
   if (wt) {
     const h = await sha(wt);
-    const r = await sql`select * from video.jobs where token_hash=${h} and status in ('queued','running') and created_at > now()-interval '14 hours' limit 1`;
+    const r = await sql`select * from video.jobs where token_hash=${h} and status in ('queued','running') and coalesce((dispatch->>'at')::timestamptz, created_at) > now()-interval '14 hours' limit 1`;
     if (r[0]) return { role: "worker", job: r[0] };
   }
   return null;
@@ -50,6 +53,10 @@ const SETTABLE: Record<string, { re: RegExp; health: string; verify: (v: string)
     if (!r.ok) return r.status === 401 ? "הטוקן לא תקף" : "אין לטוקן גישה לריפו rel-video-cloud";
     const w = await fetch("https://api.github.com/repos/crossfitrel/rel-video-cloud/actions/workflows", { headers: h, signal: AbortSignal.timeout(15000) });
     return w.ok ? null : "חסרה הרשאת Actions (קריאה וכתיבה)"; } },
+  // L161: תזמון אוטונומי. הטוקן של Metricool (X-Mc-Auth) נשמר רק כאן; ה-worker מדבר עם Metricool דרך op=metricool.
+  metricool_token: { re: /^[A-Za-z0-9_\-\.]{16,}$/, health: "metricool", verify: async (v) => {
+    try { const r = await fetch(`https://app.metricool.com/api/v2/scheduler/posts?blogId=6323702&userId=${METRICOOL_USER}&start=2026-01-01T00:00:00&end=2026-01-02T00:00:00&timezone=Asia/Jerusalem`, { headers: { "X-Mc-Auth": v }, signal: AbortSignal.timeout(15000) });
+      return r.ok ? null : (r.status === 401 || r.status === 403 ? "הטוקן לא תקף" : "Metricool החזיר " + r.status); } catch { return "__timeout__"; } } },
 };
 async function secretSet(name: string, value: string) {
   const d = SETTABLE[name]; value = String(value || "").trim();
@@ -65,7 +72,8 @@ async function secretSet(name: string, value: string) {
 // ---------- jobs ----------
 const KIND_BY_ACTION: Record<string, string> = { send_notes: "notes", approve_publish: "finish", approve_cover_caption: "schedule", request_cover_change: "cover" };
 // מה רץ איפה: חישוב דטרמיניסטי + Sonnet ⇒ GitHub Actions. תזמון Metricool ⇒ צעד Claude קצר (MCP) עד שיהיה טוקן Metricool בכספת.
-const RUNNER_BY_KIND: Record<string, string> = { prep: "actions", notes: "actions", finish: "actions", cover: "actions", schedule: "claude", judge: "claude" };
+// L160 (1.11.26): judge ו-schedule רצים ב-Actions. Claude נכנס רק כשה-worker עצמו מעביר (runner=claude) אחרי שני סבבים שנכשלו.
+const RUNNER_BY_KIND: Record<string, string> = { prep: "actions", notes: "actions", finish: "actions", cover: "actions", refinish: "actions", schedule: "actions", judge: "actions" };
 async function enqueue(kind: string, project_id: string | null, payload: any = {}, runner?: string) {
   const open = await sql`select id from video.jobs where kind=${kind} and coalesce(project_id,'')=${project_id || ""} and status in ('queued','running') limit 1`;
   if (open[0]) return { id: open[0].id, deduped: true };
@@ -119,7 +127,7 @@ async function llm(b: any, who: Who) {
       count(*) filter (where model=${models.opus}) opus from video.costs where project_id=${project_id}`;
     // L155 (1.11.26): התקרה לריל נספרת לכל ניסיון (ג'וב), לא לכל חיי הריל — ריצות שנפלו על באגים תשתית לא חונקות את הניסיון הבא.
     // תקרת חיים = פי 3 (ברירת מחדל) כדי שריל לא יסתובב בלי סוף.
-    const perReel = caps.usd_per_reel ?? 1.5; const lifetime = caps.usd_per_reel_lifetime ?? perReel * 3;
+    const perReel = caps.usd_per_reel ?? 1.5; const lifetime = caps.usd_per_reel_lifetime ?? perReel * 4;
     const attempt = job_id ? s[0].job_usd : s[0].usd;
     if (attempt >= perReel || s[0].usd >= lifetime) { await health("cost_cap", "hit", `תקרת עלות לריל ${project_id} (ניסיון $${attempt.toFixed(2)} · חיים $${s[0].usd.toFixed(2)})`); return { ok: false, error: "cap_reel", spent: s[0].usd, attempt }; }
     if (tier === "opus" && s[0].opus >= (caps.opus_calls_per_reel ?? 2)) return { ok: false, error: "cap_opus" };
@@ -172,6 +180,15 @@ Deno.serve(async (req) => {
     const e = b.event || {}; const label = e.value?.label?.text || "";
     if (String(e.boardId) === "18395578529" && e.columnId === "color_mkrp4sgm" && label === "מוכן לעריכה")
       return J({ ok: true, job: await enqueue("prep", `p-${e.pulseId}`, { item_id: String(e.pulseId) }) });
+    // L160: תאריך פרסום נקבע בגאנט ⇒ פרויקט שאושר ומחכה לתאריך מתוזמן לבד. שינוי שם ⇒ הכותרת בעמוד מתעדכנת.
+    if (String(e.boardId) === "18395578529" && e.columnId === "date_mkrpvw3n") {
+      const p = (await sql`select id, state from video.projects where id=${"p-" + e.pulseId}`)[0];
+      if (p?.state === "ready_to_schedule") return J({ ok: true, job: await enqueue("schedule", p.id, { trigger: "date_set" }) });
+      return J({ ok: true, ignored: "not_ready" });
+    }
+    if (String(e.boardId) === "18395578529" && e.type === "update_name" && e.value?.name) {
+      await sql`update video.projects set title=${e.value.name}, updated_at=now() where id=${"p-" + e.pulseId}`; return J({ ok: true });
+    }
     return J({ ok: true, ignored: true });
   }
   const who = await auth(req); if (!who) return J({ ok: false, error: "unauthorized" }, 401);
@@ -194,6 +211,8 @@ Deno.serve(async (req) => {
         let count = 0;
         if (op === "send_notes") { const r = await sql`update video.comments set status='sent', updated_at=now() where project_id=${p.id} and status='open' returning id`; count = r.length; if (!count) return J({ ok: false, error: "no_open_notes" }, 409); }
         if (op === "hide") await sql`update video.projects set hidden=true, updated_at=now() where id=${p.id}`;
+        // L160: אישור קאבר+קפשן מוציא מיד מ"דורש אותך" (קודם נשאר cover_review עד שסשן Claude תזמן ⇒ נראה כאילו האישור לא נקלט)
+        if (op === "approve_cover_caption") await sql`update video.projects set state='ready_to_schedule', caption=coalesce(${b.caption ?? null}, caption), updated_at=now() where id=${p.id}`;
         const payload = { caption: b.caption ?? null, note: b.note ?? null, count };
         const a = await sql`insert into video.actions(project_id, type, version, payload, by_user, consumed) values (${p.id}, ${op === "hide" ? "remove" : op}, ${p.version}, ${sql.json(payload)}, ${who.role}, ${op === "hide"}) returning id`;
         const job = KIND_BY_ACTION[op] ? await enqueue(KIND_BY_ACTION[op], p.id, { action_id: a[0].id, ...payload }) : null;
@@ -238,6 +257,39 @@ Deno.serve(async (req) => {
         return J({ ok: true }); }
       case "llm": { if (!isW) break; return J(await llm(b, who)); }
       case "enqueue": { if (!isW) break; return J({ ok: true, ...(await enqueue(b.kind, b.project_id || null, b.payload || {}, b.runner)) }); }
+      case "version": return J({ ok: true, version: FN_VERSION });
+      case "metricool": { if (!isW) break;
+        // רק ה-scheduler של Metricool, רק המותגים שלנו. הטוקן לא יוצא מכאן.
+        const tok = await secret("metricool_token"); if (!tok) return J({ ok: false, error: "not_configured" });
+        const path = String(b.path || ""); if (!/^\/api\/v2\/scheduler\/posts(\/[0-9]+)?$/.test(path)) return J({ ok: false, error: "path" }, 400);
+        const q = new URLSearchParams({ ...(b.query || {}), userId: METRICOOL_USER }); if (!["6323702", "6436350", "6519658"].includes(q.get("blogId") || "")) return J({ ok: false, error: "blog" }, 400);
+        const r = await fetch(`https://app.metricool.com${path}?${q}`, { method: b.method || "GET", headers: { "X-Mc-Auth": tok, "content-type": "application/json" }, body: b.body ? JSON.stringify(b.body) : undefined, signal: AbortSignal.timeout(120000) });
+        const txt = await r.text(); let data: any = null; try { data = JSON.parse(txt); } catch { data = txt.slice(0, 500); }
+        if (r.status === 401 || r.status === 403) await health("metricool", "failed", "טוקן Metricool לא תקף. להדביק מחדש בעמוד (מפתחות)");
+        return J({ ok: r.ok, status: r.status, data }); }
+      case "monday_date": { if (!isW) break;
+        const d = await monday(`query($id:[ID!]){items(ids:$id){name column_values(ids:["date_mkrpvw3n"]){value}}}`, { id: [String(b.item_id)] });
+        const it = d.items?.[0]; return J({ ok: true, name: it?.name, date: it?.column_values?.[0]?.value ? JSON.parse(it.column_values[0].value) : null }); }
+      case "monday_file": { if (!isW) break;
+        // העלאת קובץ מה-Storage לעמודת קובץ במאנדיי (סרטון מוכן). הטוקן נשאר כאן.
+        const t = await secret("monday_token"); const { data: blob, error } = await sb.storage.from(BUCKET).download(b.path); if (error || !blob) return J({ ok: false, error: error?.message || "download" });
+        const fd = new FormData(); fd.append("query", `mutation($f:File!){add_file_to_column(item_id:${Number(b.item_id)},column_id:"${b.column_id || "file_mm402fp7"}",file:$f){id}}`); fd.append("variables[file]", blob, b.name || "file");
+        const r = await fetch("https://api.monday.com/v2/file", { method: "POST", headers: { authorization: t! }, body: fd }); const j = await r.json().catch(() => ({}));
+        return J({ ok: !!j?.data?.add_file_to_column?.id, id: j?.data?.add_file_to_column?.id, error: j?.errors ? JSON.stringify(j.errors).slice(0, 200) : undefined }); }
+      case "resume": { if (who.role !== "admin") break;
+        // L160: מה שנדחה (תקרה יומית), נתקע (runner מת) או אושר ומחכה לתאריך — חוזר לתור לבד. בלי Claude ובלי מייל.
+        const out: any = { deferred: 0, stale: 0, retried: 0, schedule: 0 };
+        for (const j of await sql`update video.jobs set status='queued' where status='deferred' and created_at > now()-interval '10 days' returning id`) { await dispatch(j.id); out.deferred++; }
+        for (const j of await sql`update video.jobs set status='failed', finished_at=now(), result=coalesce(result,'{}'::jsonb)||'{"error":"stale: runner died"}'::jsonb where status='running' and runner='actions' and started_at < now()-interval '3 hours' returning kind, project_id, payload`) { await enqueue(j.kind, j.project_id, j.payload); out.stale++; }
+        // ג'וב שנכשל ואין אחריו ג'וב חדש לאותו פרויקט: ניסיון חוזר אחד ביום, עד 3 כשלים ב-72 שעות
+        for (const j of await sql`select distinct on (project_id) id, kind, project_id, payload, status from video.jobs where project_id is not null and kind in ('prep','notes','finish','refinish','cover','judge','schedule') order by project_id, created_at desc`) {
+          if (j.status !== "failed") continue;
+          const n = (await sql`select count(*)::int n from video.jobs where project_id=${j.project_id} and kind=${j.kind} and status='failed' and created_at > now()-interval '72 hours'`)[0].n;
+          const pr = (await sql`select hidden, state from video.projects where id=${j.project_id}`)[0];
+          if (n <= 3 && pr && !pr.hidden && !["scheduled", "published"].includes(pr.state)) { await enqueue(j.kind, j.project_id, j.payload); out.retried++; }
+        }
+        for (const p of await sql`select id from video.projects where state='ready_to_schedule' and not hidden and not exists (select 1 from video.jobs j where j.project_id=video.projects.id and j.kind='schedule' and j.status in ('queued','running'))`) { await enqueue("schedule", p.id, { trigger: "resume" }); out.schedule++; }
+        await health("resume", "ok", ""); return J({ ok: true, ...out }); }
       case "redispatch": { if (who.role !== "admin") break; return J({ ok: true, dispatch: await dispatch(b.job_id) }); }
       case "jobs": { if (!isW) break; return J({ ok: true, jobs: await sql`select id, project_id, kind, status, runner, attempts, dispatch, created_at, finished_at from video.jobs where status = any(${b.status || ["queued", "running"]}) order by created_at limit 50` }); }
       case "costs": { if (!isW) break; return J({ ok: true, per_project: await sql`select project_id, round(sum(usd),4)::float usd, count(*) calls, sum(input_tokens) tin, sum(output_tokens) tout from video.costs group by 1`, per_day: await sql`select * from video.v_cost_per_day order by d desc limit 30` }); }

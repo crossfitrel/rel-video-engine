@@ -24,7 +24,7 @@ from pathlib import Path
 
 ROUTES = {"classify": "haiku", "transcript_sanity": "haiku", "broll_label": "haiku", "quick_check": "haiku",
           "director": "sonnet", "hook": "sonnet", "caption": "sonnet", "vision": "sonnet", "note_map": "sonnet",
-          "mg_critic": "sonnet", "escalate": "opus"}
+          "mg_critic": "sonnet", "judge": "sonnet", "escalate": "opus"}
 MODELS = {"haiku": "claude-haiku-5-5", "sonnet": "claude-sonnet-5-5", "opus": "claude-opus-5-5"}
 ESCALATION_REASONS = {"gate_failed_twice", "note_unmapped"}
 

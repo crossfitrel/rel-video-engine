@@ -113,6 +113,11 @@ input[type=password]{font:inherit;color:var(--fg);background:var(--bg);border:1p
       <li>Permissions ← Actions: Read and write · Generate token. מעתיקים.</li></ol>
       <div class="row"><input type="password" id="v-g" class="grow" placeholder="github_pat_…" autocomplete="off"><button class="btn primary" data-k="github_dispatch_token" data-i="v-g">שמירה</button></div>
     </div>
+    <div>
+      <b>3. טוקן Metricool (תזמון אוטומטי)</b> <span class="done" id="k-m" hidden>✓ מחובר</span>
+      <ol><li>פותחים <a href="https://app.metricool.com/settings/api" target="_blank" rel="noopener">Metricool ← הגדרות ← API</a></li><li>מעתיקים את ה-Access token.</li></ol>
+      <div class="row"><input type="password" id="v-m" class="grow" placeholder="טוקן Metricool" autocomplete="off"><button class="btn primary" data-k="metricool_token" data-i="v-m">שמירה</button></div>
+    </div>
     <button class="btn" id="keys-close" type="button">סגירה</button>
   </section>
 
@@ -203,7 +208,7 @@ const STATE = {
   approved:{t:'אושר, בגימור',c:'wait',g:'work',s:2,who:'ענן',d:'אישרת את הגרסה. רץ גימור סופי באיכות מלאה.',next:'קאבר וקפשן לאישור שלך'},
   finishing:{t:'בגימור',c:'wait',g:'work',s:2,who:'ענן',d:'גימור סופי באיכות מלאה ואחריו הכנת קאבר וקפשן.',next:'קאבר וקפשן לאישור שלך'},
   cover_review:{t:'קאבר+קפשן לאישור',c:'need',g:'need',s:3,who:'אתה',d:'בדוק את הקאבר ואת הקפשן. אישור כאן הוא גם האישור לתזמן לתאריך שבגאנט.',next:'תזמון ב-Metricool'},
-  ready_to_schedule:{t:'מוכן לתזמון',c:'ok',g:'work',s:4,who:'Claude',d:'אישרת הכל. התזמון ל-Metricool נעשה בסשן Claude הבא (אין לענן גישה ל-Metricool).',next:'תוזמן'},
+  ready_to_schedule:{t:'מוכן לתזמון',c:'ok',g:'work',s:4,who:'Claude',d:'אישרת הכל. התזמון ל-Metricool רץ לבד לתאריך שבגאנט. אין תאריך בגאנט? ברגע שתקבע אותו, זה מתוזמן.',next:'תוזמן'},
   scheduled:{t:'📅 תוזמן',c:'ok',g:'done',s:5,who:'—',d:'מתוזמן ב-Metricool לתאריך שבגאנט. אין מה לעשות.',next:'יתפרסם אוטומטית'},
   published:{t:'🚀 פורסם',c:'ok',g:'done',s:5,who:'—',d:'פורסם.',next:''},
   blocked:{t:'אצל הקלאוד',c:'bad',g:'work',s:1,who:'Claude',d:'משהו לא עבר בדיקה אוטומטית (למשל הערה שלא הצליחו למפות, או מבקר-קדם שנכשל) ומחכה להכרעה של Claude. לא נדרש ממך כלום.',next:'יחזור אליך כשיתוקן'}
@@ -351,7 +356,7 @@ $('cc-change').onclick=async()=>{ const n=$('cc-note'); if(n.hidden){ n.hidden=f
   await act('request_cover_change',{note,caption:$('caption').value},'הבקשה נשלחה'); n.value=''; n.hidden=true; };
 
 
-async function keysStatus(){ try{ const r=await api('secrets_status'); $('k-a').hidden=!r.set.anthropic_api_key; $('k-g').hidden=!r.set.github_dispatch_token; return r.set; }catch(e){ return null; } }
+async function keysStatus(){ try{ const r=await api('secrets_status'); $('k-a').hidden=!r.set.anthropic_api_key; $('k-g').hidden=!r.set.github_dispatch_token; if($('k-m')) $('k-m').hidden=!r.set.metricool_token; return r.set; }catch(e){ return null; } }
 function openKeys(){ $('keys').hidden=false; keysStatus(); $('keys').scrollIntoView({behavior:'smooth'}); }
 document.querySelectorAll('#keys [data-k]').forEach(b=>b.onclick=async()=>{ const inp=$(b.dataset.i); const v=inp.value.trim(); if(!v) return toast('מדביקים קודם');
   b.disabled=true; b.textContent='בודק…';

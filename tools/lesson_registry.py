@@ -1758,6 +1758,26 @@ LESSONS: dict[str, dict] = {
     '1.11.26: 135 לידים יצא בלי בירול כי broll_pick נפל על FileNotFoundError של /Users/hayon/.../catalog.json.',
     'portability',
     [{'kind': 'code', 'file': 'tools/broll_pick.py', 'pattern': 'def _portable'}]),
+ 'L159_deployed_equals_repo_and_titles': L(
+    'תיקון בריפו שלא נפרס לפונקציית video לא קיים: ה-worker משווה FN_VERSION ומדליק באנר edge_stale. מניפסט בלי title לא דורס את הכותרת בעמוד.',
+    '1.11.26: L155 (תקרה לניסיון) נכתב לריפו ולא נפרס ⇒ ריל שעבר $1.5 בחייו נתקע לתמיד (cap_reel); 5 סרטונים הוצגו כ-p-<id> כי publish_review כתב title=null.',
+    'ops',
+    [{'kind': 'code', 'file': 'cloud/worker.py', 'pattern': 'def check_edge_version'},
+     {'kind': 'code', 'file': 'supabase/functions/video/index.ts', 'pattern': 'const FN_VERSION'},
+     {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_publish_review_never_nulls_title'}]),
+ 'L160_escalation_is_autonomous': L(
+    'הסלמה רצה ב-Actions (judge: Sonnet ואז Opus, merge-patch לקבצי התוכנית בלבד, רינדור ובדיקה באותו ג\'וב). Claude רק אחרי שני סבבים. תקרה יומית = deferred ו-op=resume מחזיר לתור; אישור קאבר מעביר מיד ל-ready_to_schedule.',
+    '1.11.26: כל הערה של הראל וכל מבקר-קדם שלא עבר נכנסו לתור runner=claude ⇒ 9 סרטונים "בעבודה" ימים, ואישור קאבר נראה כאילו לא נקלט.',
+    'ops',
+    [{'kind': 'code', 'file': 'cloud/worker.py', 'pattern': 'def h_judge'},
+     {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_escalation_goes_to_autonomous_judge_first'},
+     {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_daily_cap_defers_not_fails'}]),
+ 'L161_schedule_without_claude': L(
+    'תזמון אחרי אישור הראל רץ ב-worker דרך op=metricool (טוקן בכספת בלבד), עם כל השערים: תאריך רק מהגאנט (אין תאריך ⇒ ממתינים), sha מול artifact, אימות בקריאה חוזרת. כל חריגה ⇒ ג\'וב ל-Claude.',
+    '1.11.26: "טיפ אחד" אושר וחיכה לסשן Claude; בגאנט לא היה תאריך ולכן גם Claude לא יכול היה לתזמן.',
+    'ops',
+    [{'kind': 'code', 'file': 'cloud/worker.py', 'pattern': 'def h_schedule'},
+     {'kind': 'code', 'file': 'supabase/functions/video/index.ts', 'pattern': 'case "metricool"'}]),
 }
 
 
