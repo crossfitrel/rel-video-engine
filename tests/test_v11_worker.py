@@ -116,6 +116,18 @@ class WorkerContracts(unittest.TestCase):
         self.assertEqual(enq[0]["runner"], "claude")
         self.assertTrue(any(op == "project_upsert" and k["project"]["state"] == "blocked" for op, k in sent))
 
+    def test_judge_round2_routed_after_job_done(self):
+        """L165: הסלמה מתוך judge נשלחת אחרי job_done, אחרת dedupe בולע את סבב 2."""
+        sent = self._run({"id": "j5", "kind": "judge", "project_id": "p-1", "payload": {"round": 1}}, W.Escalate("preflight_not_ready"))
+        ops = [op for op, _ in sent]
+        self.assertLess(ops.index("job_done"), ops.index("enqueue"))
+        self.assertEqual([k for op, k in sent if op == "enqueue"][0]["payload"]["round"], 2)
+
+    def test_prep_gate_failure_goes_to_judge(self):
+        sent = self._run({"id": "j6", "kind": "prep", "project_id": "p-1", "payload": {}}, RuntimeError("finish rc=1 ❌ שערים חוסמים: canon_lint"))
+        self.assertEqual([k for op, k in sent if op == "job_done"][0]["status"], "escalated")
+        self.assertEqual([k for op, k in sent if op == "enqueue"][0]["kind"], "judge")
+
     def test_daily_cap_defers_not_fails(self):
         """L160: תקרה יומית = deferred (op=resume מחזיר לתור), לא failed."""
         sent = self._run({"id": "j4", "kind": "prep", "project_id": "p-1", "payload": {}}, RuntimeError("llm director: cap_day"))

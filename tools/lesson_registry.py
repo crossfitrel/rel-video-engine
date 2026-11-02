@@ -1790,6 +1790,13 @@ LESSONS: dict[str, dict] = {
     [{'kind': 'code', 'file': 'cloud/publish_planner.py', 'pattern': 'def plan'},
      {'kind': 'code', 'file': 'cloud/worker.py', 'pattern': 'def ensure_publish_date'},
      {'kind': 'test', 'file': 'tests/test_publish_planner.py', 'pattern': 'test_corner_range'}]),
+ 'L165_escalation_rounds_and_prep_gate': L(
+    'הסלמה נשלחת אחרי job_done (judge→judge סבב 2 נבלע ב-dedupe); prep שנופל על שער/במאי עובר ל-judge ולא נשאר failed שה-resume מריץ שוב ושורף את התקרה; judge עם 14000 טוקנים וניסיון חוזר כשאין JSON.',
+    '2.11.26: ה-resume הריץ שוב 4 prep שנכשלו על שערים, שרפו $4 עד 00:50 והתקרה היומית נחסמה לכל היום; שני judge נעצרו בסבב 1 ואחד נקטע ב-8000 טוקנים.',
+    'ops',
+    [{'kind': 'code', 'file': 'cloud/worker.py', 'pattern': 'def _gate_failure'},
+     {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_judge_round2_routed_after_job_done'},
+     {'kind': 'test', 'file': 'tests/test_v11_worker.py', 'pattern': 'test_prep_gate_failure_goes_to_judge'}]),
 }
 
 

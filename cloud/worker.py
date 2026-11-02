@@ -362,6 +362,13 @@ JUDGE_MAX_ROUNDS = 2
 PLAN_FILES = ("edl.json", "project_manifest.json", "HOOK_PLAN.json", "motion_plan.json", "broll_plan.json")
 
 
+def _gate_failure(job, msg: str) -> bool:
+    """כשל של שער/במאי (התוכנית לא עברה) ולא תשתית. רק ל-prep/refinish שיש להם workdir שמור."""
+    if job["kind"] not in ("prep", "refinish") or "cap_" in msg:
+        return False
+    return any(k in msg for k in ("שערים חוסמים", "הבמאי לא הפיק תוכנית", "מנוע ההחלטה נכשל"))
+
+
 def route_escalation(job, project, why: str):
     pid = job["project_id"]
     rnd = int((job.get("payload") or {}).get("round") or 0) if job["kind"] == "judge" else 0
@@ -409,7 +416,8 @@ def judge_context(wd: Path, project, comments, why):
     return ctx
 
 
-JUDGE_SYS = """אתה העורך הבכיר של מערכת עריכת הרילס של מועדון קרוספיט אריאל. ה-worker עצר כי משהו לא עבר (הערות של הראל, מבקר-קדם, או שער חוסם).
+JUDGE_SYS = """[content_type ב-project_manifest.json קובע את יעד האורך: conversion/המרה 20-45ש, value/ערך 45-90ש. סיווג שגוי = במאי שנכשל על אורך ומבקר-קדם שחוסם; תקן את content_type כשהתוכן ברור.]
+אתה העורך הבכיר של מערכת עריכת הרילס של מועדון קרוספיט אריאל. ה-worker עצר כי משהו לא עבר (הערות של הראל, מבקר-קדם, או שער חוסם).
 התפקיד שלך: לתקן את קבצי התוכנית בלבד, כדי שהרינדור הבא יעבור את כל השערים ויענה על ההערות. אתה לא מרנדר.
 קבצים שמותר לשנות: edl.json (keep_segments בציר המקור, בשניות), project_manifest.json (finish_prefs: מוזיקה/בירול/כתוביות), HOOK_PLAN.json, motion_plan.json, broll_plan.json.
 חוקי ברזל: ההוק (המשפט הראשון) לא נחתך · לא מאיצים ולא מקצרים בכוח, האורך נקבע ע"י התוכן · לא נוגעים בצבע · בירול לא על ההוק ולא על 8 השניות האחרונות (CTA) · אין שתיקות ארוכות (פאוזה ≤0.65ש) אבל לא חותכים באמצע מילה · חיתוך ב-keep_segments נופל בין מילים (לפי חותמות הזמן בתמלול) · הערה של הראל גוברת על כל העדפה אחרת חוץ מחוקי הברזל.
@@ -439,7 +447,13 @@ def h_judge(job, project, comments):
     p = job.get("payload") or {}; rnd = int(p.get("round") or 1)
     ctx = judge_context(wd, project, comments, p.get("why"))
     kw = {"task": "escalate", "escalate_reason": "gate_failed_twice"} if rnd >= 2 else {"task": "judge"}
-    r = llm.ask_json(kw.pop("task"), user=_compact(ctx, 60000), system=JUDGE_SYS, project_id=project["id"], max_tokens=8000, **kw)
+    task = kw.pop("task")
+    try:
+        r = llm.ask_json(task, user=_compact(ctx, 60000), system=JUDGE_SYS, project_id=project["id"], max_tokens=14000, **kw)
+    except llm.LLMError as e:   # L165: תשובה שנקטעה/בלי JSON ⇒ ניסיון אחד, קומפקטי
+        if "cap_" in str(e):
+            raise
+        r = llm.ask_json(task, user=_compact(ctx, 40000), system=JUDGE_SYS + "\nהחזר JSON קומפקטי בלבד, בלי הסברים, patches מינימליים.", project_id=project["id"], max_tokens=14000, **kw)
     ans = r["json"]; changed = []
     for f, patch in (ans.get("patches") or {}).items():
         if f not in PLAN_FILES or not isinstance(patch, dict) or not patch:
@@ -587,15 +601,18 @@ def cmd_run(a):
         print(f"[worker] לא נלקח: {r}"); return 0
     job, project, comments = r["job"], r.get("project"), r.get("comments") or []
     check_edge_version()
-    status, result = "done", {}
+    status, result, escalate_why = "done", {}, ""
     try:
         HANDLERS[job["kind"]](job, project, comments)
     except Escalate as e:
         status = "escalated"; result = {"escalate": str(e)}
-        route_escalation(job, project, str(e))
+        escalate_why = str(e)   # L165: מנותב אחרי job_done (אחרת enqueue של judge מתוך judge רץ עושה dedupe לג'וב הנוכחי ⇒ אין סבב 2)
     except Exception as e:
         msg = str(e)
-        if "cap_day" in msg:   # L160: תקרה יומית = דחייה למחר, לא כשל. op=resume מחזיר לתור.
+        if _gate_failure(job, msg):   # L165: prep שנפל על שער/במאי ⇒ judge (תוכנית), לא failed שחוזר שוב ושוב ושורף את התקרה היומית
+            status = "escalated"; result = {"escalate": "gate_failed", "error": msg[-1500:]}
+            escalate_why = json.dumps({"reason": "gate_failed", "error_tail": msg[-2500:]}, ensure_ascii=False)
+        elif "cap_day" in msg:   # L160: תקרה יומית = דחייה למחר, לא כשל. op=resume מחזיר לתור.
             status = "deferred"; result = {"deferred": "cap_day"}
             V.call("health_set", key="cost_cap", value="hit", note="הגענו לתקרת העלות של היום. העבודה ממשיכה מחר לבד.")
         else:
@@ -604,6 +621,8 @@ def cmd_run(a):
     result["stages"] = STAGES; result["minutes"] = round((time.time() - T0) / 60, 2)
     V.call("job_done", status=status, result=result, consume_action=(job.get("payload") or {}).get("action_id") if status != "failed" else None,
            handled_as=f"worker:{job['kind']}:{status}")
+    if status == "escalated":
+        route_escalation(job, project, escalate_why)
     if status == "done":
         V.call("health_set", key=f"worker:{job['kind']}", value="ok", note="")
     print(json.dumps({"status": status, "minutes": result["minutes"]}, ensure_ascii=False))
