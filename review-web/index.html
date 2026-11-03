@@ -258,7 +258,7 @@ function st(p){ const base=STATE[p.state]||{t:p.state||'—',c:'',g:'work',s:0,d
 const tip=(s)=>[s.d, s.who&&s.who!=='—'?('אצל: '+s.who):'', s.next?('הבא: '+s.next):'', s.eta||''].filter(Boolean).join('\n');
 
 const FRIENDLY={ 'dispatch:not_configured':'העריכה האוטומטית בענן עוד לא מחוברת (חסר טוקן GitHub). עד אז העריכה רצה כשפותחים סשן עם Claude.',
-  'llm:not_configured':'שלב השיפוט (במאי וקפשן) עוד לא מחובר: חסר מפתח Anthropic.', 'cost_cap:hit':'הגענו לתקרת העלות של היום. העבודה ממשיכה מחר.' };
+  'llm:not_configured':'שלב השיפוט (במאי וקפשן) עוד לא מחובר: חסר מפתח Anthropic.', 'cost_cap:hit':'הגענו לתקרת העלות של היום. העבודה ממשיכה מחר.', 'actions:blocked':'GitHub עצר את הרצת העריכה בענן (חיוב/מכסת דקות בחשבון crossfitrel). הסרטונים מחכים בתור ויתחילו לבד ברגע שזה משתחרר.' };
 function renderHealth(h){ const el=$('health'); const bad=(h||[]).filter(x=>x.value && x.value!=='ok');
   const wk=(x)=>{ if(!String(x.key).startsWith('worker:')) return null; const pid=String(x.note||'').split(':')[0]; const p=projects.find(q=>q.id===pid);
     // כשל ישן של סרטון שכבר רץ אחריו בהצלחה לא מוצג

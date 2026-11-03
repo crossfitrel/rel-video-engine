@@ -19,3 +19,8 @@
 
 ## ערוץ ידני
 "ערוך את הסרטון של X" → פריט בודד מלא · "תרוץ על מה שמוכן" → batch≤3 · "dry run על X" → שלבים 0-3 (edl+intent כ-Update) · "תזמן את X" → שלב 7 בלבד · "מה הראל תיקן" → learn_from_edits + דוח.
+
+## L166 (3.11.26) — ג'ובים "בתור" שלא זזים אף פעם
+- `dispatch.ok=true` (204) **לא** אומר שהריצה התחילה. GitHub מחזיר 204 גם כשהחשבון חסום, והריצה מתה ב-3-5 שניות בלי לוג ("recent account payments have failed or your spending limit needs to be increased").
+- בדיקה: `gh run list -R crossfitrel/rel-video-cloud -L 5` + `gh run view <id>` (ה-annotation). ב-1-2.11.26 נשרפו 1,984 דקות (מכסת 2,000 החינמית של החודש) ב-77 ריצות.
+- תיקון קבוע: אמצעי תשלום + budget ל-Actions בחשבון crossfitrel (github.com/settings/billing). בקוד: `selfHeal()` בפונקציית video (באנר `actions:blocked` + שליחה חוזרת אוטומטית בטעינת העמוד), ובאנר `cost_cap` שמתאפס ביום חדש.

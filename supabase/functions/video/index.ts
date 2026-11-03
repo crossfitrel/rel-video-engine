@@ -11,7 +11,7 @@ const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SE
 const BUCKET = "video-review";
 const REPO = "crossfitrel/rel-video-cloud";
 // L159 (1.11.26): קוד שנכתב לריפו ולא נפרס = התיקון לא קיים. ה-worker משווה את המספר הזה לקובץ בריפו ומדליק באנר אם הפונקציה הפרוסה ישנה.
-const FN_VERSION = "2026-11-01.2";
+const FN_VERSION = "2026-11-03.1";
 const METRICOOL_USER = "4873293";
 const WORKFLOW = "video-worker.yml";
 const CORS = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "content-type, x-review-token, x-video-admin, x-worker-token", "Access-Control-Allow-Methods": "POST, GET, OPTIONS" };
@@ -151,7 +151,21 @@ async function llm(b: any, who: Who) {
 }
 
 // ---------- review state ----------
+// L166 (3.11.26): הריפוי העצמי רץ בכל טעינת עמוד (אין cron ואין polling).
+// 1) באנר "תקרה יומית" מאתמול לא נשאר תקוע — מתאפס כשמתחיל יום חדש בישראל.
+// 2) dispatch שהחזיר 204 לא אומר שהריצה התחילה: GitHub מחזיר 204 גם כשהחשבון חסום (חיוב/מכסת דקות) והריצה מתה ב-3 שניות.
+//    ג'וב actions בתור שנשלח לפני 15+ דקות ולא התחיל ⇒ באנר actions:blocked + שליחה חוזרת (פעם ב-30 דקות לג'וב, עד 8 ג'ובים בטעינה).
+//    כשהחסימה משתחררת, טעינת העמוד הבאה מתניעה את כל התור לבד.
+async function selfHeal() {
+  await sql`update video.system_health set value='ok', note='' where key='cost_cap' and value='hit' and at < (date_trunc('day', now() at time zone 'Asia/Jerusalem') at time zone 'Asia/Jerusalem')`;
+  const stuck = await sql`select id from video.jobs where status='queued' and runner='actions' and (dispatch->>'ok')::boolean is true
+    and started_at is null and created_at < now()-interval '15 minutes' order by created_at limit 8`;
+  if (!stuck.length) { await sql`update video.system_health set value='ok', note='' where key='actions' and value='blocked'`; return; }
+  await health("actions", "blocked", `${stuck.length} ג'ובים בתור לא התחילו לרוץ ב-GitHub Actions`);
+  for (const j of await sql`select id from video.jobs where id = any(${stuck.map((x: any) => x.id)}) and (dispatch->>'at')::timestamptz < now()-interval '30 minutes'`) await dispatch(j.id);
+}
 async function state() {
+  try { await selfHeal(); } catch (_) { /* הריפוי לא מפיל את העמוד */ }
   const projects = await sql`select * from video.projects where not hidden order by publish_date nulls last, updated_at desc`;
   const ids = projects.map((p: any) => p.id);
   const comments = ids.length ? await sql`select * from video.comments where project_id = any(${ids}) order by t` : [];
