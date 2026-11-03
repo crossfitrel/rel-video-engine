@@ -109,8 +109,8 @@ input[type=password]{font:inherit;color:var(--fg);background:var(--bg);border:1p
     <div>
       <b>2. טוקן GitHub</b> <span class="done" id="k-g" hidden>✓ מחובר</span>
       <ol><li>פותחים <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub ← טוקן חדש</a></li>
-      <li>Resource owner: crossfitrel · Only select repositories: rel-video-cloud</li>
-      <li>Permissions ← Actions: Read and write · Generate token. מעתיקים.</li></ol>
+      <li>Resource owner: crossfitrel · Only select repositories: rel-video-cloud + rel-video-engine</li>
+      <li>Permissions ← Actions: Read and write · Contents: Read and write · Generate token. מעתיקים.</li><li>אותו טוקן גם ב-GitHub ← rel-video-engine ← Settings ← Secrets ← Actions בשם LIBS_TOKEN.</li></ol>
       <div class="row"><input type="password" id="v-g" class="grow" placeholder="github_pat_…" autocomplete="off"><button class="btn primary" data-k="github_dispatch_token" data-i="v-g">שמירה</button></div>
     </div>
     <div>

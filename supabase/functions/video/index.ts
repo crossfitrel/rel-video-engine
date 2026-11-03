@@ -9,9 +9,10 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 const sql = postgres(Deno.env.get("SUPABASE_DB_URL")!, { max: 8, prepare: false, idle_timeout: 20, connect_timeout: 10 });
 const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, { auth: { persistSession: false } });
 const BUCKET = "video-review";
-const REPO = "crossfitrel/rel-video-cloud";
+// L175 (3.11.26): הקוד והריצות עברו לריפו ציבורי (דקות Actions בחינם). הספריות והמצב נשארים בענף libs בריפו הפרטי rel-video-cloud.
+const REPO = "crossfitrel/rel-video-engine";
 // L159 (1.11.26): קוד שנכתב לריפו ולא נפרס = התיקון לא קיים. ה-worker משווה את המספר הזה לקובץ בריפו ומדליק באנר אם הפונקציה הפרוסה ישנה.
-const FN_VERSION = "2026-11-03.1";
+const FN_VERSION = "2026-11-03.3";
 const METRICOOL_USER = "4873293";
 const WORKFLOW = "video-worker.yml";
 const CORS = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "content-type, x-review-token, x-video-admin, x-worker-token", "Access-Control-Allow-Methods": "POST, GET, OPTIONS" };
@@ -49,9 +50,9 @@ const SETTABLE: Record<string, { re: RegExp; health: string; verify: (v: string)
       return r.ok ? null : (r.status === 401 ? "המפתח לא תקף" : "Anthropic החזיר " + r.status); } catch { return "__timeout__"; } } },
   github_dispatch_token: { re: /^(github_pat_|ghp_)[A-Za-z0-9_]{20,}$/, health: "dispatch", verify: async (v) => {
     const h = { authorization: "Bearer " + v, accept: "application/vnd.github+json", "user-agent": "rel-video" };
-    const r = await fetch("https://api.github.com/repos/crossfitrel/rel-video-cloud", { headers: h, signal: AbortSignal.timeout(15000) });
-    if (!r.ok) return r.status === 401 ? "הטוקן לא תקף" : "אין לטוקן גישה לריפו rel-video-cloud";
-    const w = await fetch("https://api.github.com/repos/crossfitrel/rel-video-cloud/actions/workflows", { headers: h, signal: AbortSignal.timeout(15000) });
+    const r = await fetch("https://api.github.com/repos/crossfitrel/rel-video-engine", { headers: h, signal: AbortSignal.timeout(15000) });
+    if (!r.ok) return r.status === 401 ? "הטוקן לא תקף" : "אין לטוקן גישה לריפו rel-video-engine";
+    const w = await fetch("https://api.github.com/repos/crossfitrel/rel-video-engine/actions/workflows", { headers: h, signal: AbortSignal.timeout(15000) });
     return w.ok ? null : "חסרה הרשאת Actions (קריאה וכתיבה)"; } },
   // L161: תזמון אוטונומי. הטוקן של Metricool (X-Mc-Auth) נשמר רק כאן; ה-worker מדבר עם Metricool דרך op=metricool.
   metricool_token: { re: /^[A-Za-z0-9_\-\.]{16,}$/, health: "metricool", verify: async (v) => {
@@ -82,6 +83,14 @@ async function enqueue(kind: string, project_id: string | null, payload: any = {
   const id = r[0].id; const d = run === "actions" ? await dispatch(id) : { ok: true, via: "claude-queue" };
   return { id, dispatch: d };
 }
+// L175: בריפו ציבורי ה-inputs של workflow_dispatch גלויים לכולם ⇒ טוקן הג'וב נשלח מוצפן (XOR עם HMAC-SHA256(PAT, job_id)).
+// ה-workflow מפענח עם secrets.LIBS_TOKEN, שהוא אותו PAT כמו github_dispatch_token בכספת.
+async function seal(token: string, job_id: string, key: string) {
+  const k = await crypto.subtle.importKey("raw", new TextEncoder().encode(key), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const pad = new Uint8Array(await crypto.subtle.sign("HMAC", k, new TextEncoder().encode(job_id)));
+  const t = token.match(/../g)!.map(h => parseInt(h, 16));
+  return "x1:" + t.map((b, i) => (b ^ pad[i]).toString(16).padStart(2, "0")).join("");
+}
 async function dispatch(job_id: string) {
   const gh = await secret("github_dispatch_token");
   const token = rnd();
@@ -93,7 +102,7 @@ async function dispatch(job_id: string) {
   }
   const res = await fetch(`https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW}/dispatches`, {
     method: "POST", headers: { authorization: `Bearer ${gh}`, accept: "application/vnd.github+json", "user-agent": "rel-video" },
-    body: JSON.stringify({ ref: "main", inputs: { job_id, job_token: token } }) });
+    body: JSON.stringify({ ref: "main", inputs: { job_id, job_token: await seal(token, job_id, gh) } }) });
   const ok = res.status === 204; const info = { ok, status: res.status, at: new Date().toISOString(), body: ok ? "" : (await res.text()).slice(0, 300) };
   await sql`update video.jobs set dispatch=${sql.json(info)} where id=${job_id}`;
   await health("dispatch", ok ? "ok" : "failed", ok ? "" : `GitHub החזיר ${res.status}`);
@@ -162,7 +171,8 @@ async function selfHeal() {
     and started_at is null and created_at < now()-interval '15 minutes' order by created_at limit 8`;
   if (!stuck.length) { await sql`update video.system_health set value='ok', note='' where key='actions' and value='blocked'`; return; }
   await health("actions", "blocked", `${stuck.length} ג'ובים בתור לא התחילו לרוץ ב-GitHub Actions`);
-  for (const j of await sql`select id from video.jobs where id = any(${stuck.map((x: any) => x.id)}) and (dispatch->>'at')::timestamptz < now()-interval '30 minutes'`) await dispatch(j.id);
+  // L169: נעילה אטומית — שתי טעינות עמוד במקביל לא שולחות את אותו ג'וב פעמיים
+  for (const j of await sql`update video.jobs set dispatch = dispatch || jsonb_build_object('at', now()) where id = any(${stuck.map((x: any) => x.id)}) and (dispatch->>'at')::timestamptz < now()-interval '30 minutes' returning id`) await dispatch(j.id);
 }
 async function state() {
   try { await selfHeal(); } catch (_) { /* הריפוי לא מפיל את העמוד */ }

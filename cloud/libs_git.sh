@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # libs_git — ספריות ומצב של מערכת העריכה דרך ענף `libs` בריפו הפרטי crossfitrel/rel-video-cloud.
+# L175: הקוד רץ מהריפו הציבורי rel-video-engine; הגישה לריפו הפרטי עם secrets.LIBS_TOKEN (ראו video-worker.yml).
 # בלי טוקן ובלי סודות: הגישה היא דרך ה-git proxy של סשן הענן (כמו הקוד עצמו).
 # נבחר ב-11.10.26 אחרי שהתברר שמשימות מתוזמנות של claude.ai רצות בסביבת cloud_default
 # שלא קוראת משתני סביבה של claude.ai/code — טוקן Drive לא יכול להגיע אליהן.

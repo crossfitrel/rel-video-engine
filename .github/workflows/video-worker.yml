@@ -22,24 +22,34 @@ jobs:
     env:
       REL_WORK_ROOT: /home/runner/rel-video-work
       REL_LIBS_CLONE: /home/runner/rel-libs
+      REL_LIBS_URL: https://github.com/crossfitrel/rel-video-cloud
       WORKER_RUNNER: actions
       REL_DIRECTOR_BACKEND: proxy
       PYTHONUNBUFFERED: "1"
     steps:
-      - name: mask token
-        if: github.event_name == 'workflow_dispatch'
-        run: echo "::add-mask::${{ github.event.inputs.job_token }}"
       - name: free disk (ספריות 3.2GB + פריסה + מודל לא נכנסים ב-14GB של ברירת המחדל)
         run: |
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL /usr/local/share/boost /usr/local/.ghcup /usr/share/swift &
           wait; df -h / | tail -1
       - uses: actions/checkout@v4
         with: { fetch-depth: 1 }
-      - name: git auth for libs branch
+      # L175 (3.11.26): ריפו ציבורי ⇒ inputs גלויים. הטוקן מגיע מוצפן (x1:) ומפוענח עם LIBS_TOKEN (אותו PAT שבכספת של Supabase).
+      - name: job token
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          T: ${{ github.event.inputs.job_token }}
+          K: ${{ secrets.LIBS_TOKEN }}
+          J: ${{ github.event.inputs.job_id }}
+        run: |
+          TOK=$(python3 .github/unseal.py)
+          echo "::add-mask::$TOK"
+          echo "VIDEO_WORKER_TOKEN=$TOK" >> "$GITHUB_ENV"
+      - name: git auth for libs branch (private repo rel-video-cloud)
         run: |
           git config --global url."https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
+          git config --global url."https://x-access-token:${{ secrets.LIBS_TOKEN }}@github.com/crossfitrel/rel-video-cloud".insteadOf "https://github.com/crossfitrel/rel-video-cloud"
           git config --global core.quotepath false
-          echo "LIBS_SHA=$(git ls-remote origin refs/heads/libs | cut -c1-12)" >> $GITHUB_ENV
+          echo "LIBS_SHA=$(git ls-remote "$REL_LIBS_URL" refs/heads/libs | cut -c1-12)" >> $GITHUB_ENV
       - name: system deps
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg rsync fonts-noto-core >/dev/null
@@ -61,8 +71,6 @@ jobs:
           T=$(date +%s); bash cloud/bootstrap.sh 2>&1 | tee /tmp/bootstrap.log; echo "BOOT_SEC=$(( $(date +%s)-T ))" >> $GITHUB_ENV; df -h / | tail -1
       - name: run job
         if: github.event_name == 'workflow_dispatch'
-        env:
-          VIDEO_WORKER_TOKEN: ${{ github.event.inputs.job_token }}
         run: source cloud/env.sh && "$REL_PY" cloud/worker.py run --job-id "${{ github.event.inputs.job_id }}"
       - name: bench
         if: github.event_name == 'push'
