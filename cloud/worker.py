@@ -371,6 +371,9 @@ def _gate_failure(job, msg: str) -> bool:
 
 
 def route_escalation(job, project, why: str):
+    # L170 (3.11.26): הניתוב עבר לטריגר video.route_escalation ב-DB (כאן הטוקן כבר פג אחרי job_done ⇒ ה-enqueue נכשל בשקט).
+    # L172: אחרי 3 סבבים שנפלו רק על מבקר-הקדם ⇒ הריל חוזר להראל עם הממצאים; כשל אמיתי ⇒ runner=claude.
+    return
     pid = job["project_id"]
     rnd = int((job.get("payload") or {}).get("round") or 0) if job["kind"] == "judge" else 0
     if job["kind"] == "judge" and rnd >= JUDGE_MAX_ROUNDS:

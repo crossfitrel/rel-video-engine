@@ -32,3 +32,4 @@
 - ג'וב שתקוע בתור בלי סשן: `update video.jobs set status='deferred' where id=…` ואז אותה קריאת `resume` שה-cron `video-resume` מריץ (net.http_post) ⇒ נשלח מחדש.
 - L170: הסלמות לא נותבו מאז L165 (טוקן ה-worker פג ב-job_done לפני ה-enqueue) ⇒ ריל "אצל הקלאוד" לנצח. הניתוב עבר לטריגר `trg_route_escalation` (redispatch דרך pg_net). 3 סבבים אוטומטיים, אחר כך runner=claude.
 - L171: 6 קליפים בקטלוג בלי קובץ בענף libs ⇒ canon `broll_files_exist` HARD_FAIL אחרי גימור מלא. `broll_pick` מסנן קליפים שאין להם קובץ.
+- L172: אחרי 3 סבבים שנפלו רק על preflight_not_ready ויש סרטון ⇒ חוזר להראל (state=review, extra.preflight_open_after_rounds). כשל אמיתי ⇒ runner=claude. הממצאים שחוזרים בלולאה (G1b אורך מחוץ ליעד, "FINAL השתנה אחרי שההוק נבדק", "עיגון בירול: אין פסיקה") הם ממצאי צנרת ולא איכות, ומועמדים להורדה ל-MED.
