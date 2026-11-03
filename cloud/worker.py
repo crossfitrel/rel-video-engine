@@ -229,9 +229,13 @@ def finish_full(pid, name, dept, director=False, refinish=False):
             V.call("monday_status", item_id=str(m["monday_item_id"]), label="מוכן לבדיקה",
                    update=f"[AUTO-EDIT v11 DRAFT] מוכן לבדיקה בעמוד הרוויו · PREFLIGHT: מוכן להראל")
     else:
-        V.call("project_upsert", project={"id": pid, "workdir": name, "state": "blocked",
-                                          "preflight": {"ready": False, "verdict": "מבקר-קדם לא עבר; הקלאוד מטפל",
-                                                        "lines": [f.get("msg") or "" for f in (pf.get("findings") or [])[:4]]}})
+        pfx = {"preflight": {"ready": False, "verdict": "מבקר-קדם לא עבר; הקלאוד מטפל",
+                             "lines": [f.get("msg") or "" for f in (pf.get("findings") or [])[:4]]}}
+        # L174 (3.11.26): גם כשמבקר-הקדם לא עבר מעלים פרוקסי (state=blocked), כדי שאחרי 3 סבבים (L172) יהיה סרטון להחזיר להראל.
+        try:
+            publish_review(pid, name, "blocked", extra=pfx)
+        except Exception:
+            V.call("project_upsert", project={"id": pid, "workdir": name, "state": "blocked", **pfx})
         raise Escalate("preflight_not_ready")
 
 
