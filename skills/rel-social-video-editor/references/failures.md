@@ -24,3 +24,9 @@
 - `dispatch.ok=true` (204) **לא** אומר שהריצה התחילה. GitHub מחזיר 204 גם כשהחשבון חסום, והריצה מתה ב-3-5 שניות בלי לוג ("recent account payments have failed or your spending limit needs to be increased").
 - בדיקה: `gh run list -R crossfitrel/rel-video-cloud -L 5` + `gh run view <id>` (ה-annotation). ב-1-2.11.26 נשרפו 1,984 דקות (מכסת 2,000 החינמית של החודש) ב-77 ריצות.
 - תיקון קבוע: אמצעי תשלום + budget ל-Actions בחשבון crossfitrel (github.com/settings/billing). בקוד: `selfHeal()` בפונקציית video (באנר `actions:blocked` + שליחה חוזרת אוטומטית בטעינת העמוד), ובאנר `cost_cap` שמתאפס ביום חדש.
+
+## L167-L169 (3.11.26) — נפילות בין הכיסאות
+- L167: ריל שסומן "מוכן לעריכה" לא הופיע בעמוד עד שה-prep רץ ⇒ טריגר `trg_prep_placeholder` יוצר שורת "בהכנה" עם יצירת הג'וב. גלם חסר = כשל גלוי (קודם skipped שנדרס ל-done בשקט).
+- L168: notes שהוסלם ⇒ ה-action לא נצרך ⇒ "הערות נשלחו" לנצח ⇒ טריגר `trg_consume_actions_on_review` סוגר לחיצות ישנות כשהפרויקט חוזר ל-review.
+- L169 (פתוח): שתי טעינות עמוד במקביל ⇒ dispatch כפול ⇒ הריצה הראשונה נופלת על unauthorized אחרי ~6 דק'. התיקון (UPDATE אטומי ב-selfHeal) מחכה לפריסת הפונקציה. נפתר לבד (הריצה השנייה לוקחת), רק מבזבז דקות.
+- ג'וב שתקוע בתור בלי סשן: `update video.jobs set status='deferred' where id=…` ואז אותה קריאת `resume` שה-cron `video-resume` מריץ (net.http_post) ⇒ נשלח מחדש.
