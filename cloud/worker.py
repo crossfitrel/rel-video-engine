@@ -184,7 +184,8 @@ def h_prep(job, project, comments):
     want = {str(f.get("assetId")) for f in fv.get("files", []) if f.get("assetId")}
     assets = [a for a in it.get("assets", []) if not want or str(a["id"]) in want]
     if not assets:
-        V.call("job_done", status="skipped", result={"reason": "no_raw_file"}); return
+        # L167: קודם job_done=skipped ואז cmd_run דרס ל-done ⇒ הריל נעלם בשקט. עכשיו כשל גלוי בעמוד ("נתקע: הכנה").
+        raise RuntimeError("אין קובץ גלם בעמודת 'קבצים' בפריט במאנדיי")
     V.call("monday_status", item_id=item_id, label="לאחר צילום, בעריכה", update=f"[CLOUD-LOCK worker {os.environ.get('GITHUB_RUN_ID', RUNNER)} {now()}]")
     title = it["name"]; name = slug(title); dept = (cols.get("dept") or cols.get("dropdown") or {}).get("text") or ""
     raw = WORK / "_raw" / name; raw.mkdir(parents=True, exist_ok=True)

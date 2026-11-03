@@ -216,7 +216,7 @@ const STATE = {
 const STEPS=['הכנה','בדיקה שלך','גימור','קאבר+קפשן','תזמון','תוזמן'];
 const WAIT={send_notes:'הערות נשלחו',approve_publish:'אושר לגימור',approve_cover_caption:'אושר, ממתין לתזמון',request_cover_change:'בקשת שינוי נשלחה'};
 const WAIT_S={send_notes:1,approve_publish:2,approve_cover_caption:4,request_cover_change:3};
-const KIND={prep:'הכנה',notes:'תיקון הערות',finish:'גימור',cover:'קאבר וקפשן',schedule:'תזמון',judge:'הכרעה של Claude'};
+const KIND={prep:'הכנה',notes:'תיקון הערות',finish:'גימור',cover:'קאבר וקפשן',schedule:'תזמון',judge:'בדיקה חוזרת אוטומטית'};
 // משך ברירת מחדל בדקות (עד שיש 3 ריצות שהצליחו מכל סוג): המתנה למכונה + ריצה. נמדד 30.10: המתנה ~9 דק'
 const DEF={prep:[9,30],notes:[9,15],finish:[9,20],cover:[9,6]};
 let projects=[], comments=[], actions=[], jobs=[], durations=[], filter='need', open=null, busy=false;
