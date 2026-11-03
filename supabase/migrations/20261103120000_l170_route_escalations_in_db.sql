@@ -1,0 +1,3 @@
+-- L170 (3.11.26): ה-worker מנתב הסלמה אחרי job_done, אבל הטוקן שלו כבר לא תקף ⇒ ה-enqueue נכשל בשקט. הניתוב עובר ל-DB.
+-- (נוסח מלא הוחל דרך apply_migration בשם l170_route_escalations_in_db; עד 3 סבבים ב-Actions, אחר כך runner=claude + באנר needs_claude)
+-- ראה video.route_escalation() / trg_route_escalation.

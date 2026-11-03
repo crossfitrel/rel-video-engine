@@ -30,3 +30,5 @@
 - L168: notes שהוסלם ⇒ ה-action לא נצרך ⇒ "הערות נשלחו" לנצח ⇒ טריגר `trg_consume_actions_on_review` סוגר לחיצות ישנות כשהפרויקט חוזר ל-review.
 - L169 (פתוח): שתי טעינות עמוד במקביל ⇒ dispatch כפול ⇒ הריצה הראשונה נופלת על unauthorized אחרי ~6 דק'. התיקון (UPDATE אטומי ב-selfHeal) מחכה לפריסת הפונקציה. נפתר לבד (הריצה השנייה לוקחת), רק מבזבז דקות.
 - ג'וב שתקוע בתור בלי סשן: `update video.jobs set status='deferred' where id=…` ואז אותה קריאת `resume` שה-cron `video-resume` מריץ (net.http_post) ⇒ נשלח מחדש.
+- L170: הסלמות לא נותבו מאז L165 (טוקן ה-worker פג ב-job_done לפני ה-enqueue) ⇒ ריל "אצל הקלאוד" לנצח. הניתוב עבר לטריגר `trg_route_escalation` (redispatch דרך pg_net). 3 סבבים אוטומטיים, אחר כך runner=claude.
+- L171: 6 קליפים בקטלוג בלי קובץ בענף libs ⇒ canon `broll_files_exist` HARD_FAIL אחרי גימור מלא. `broll_pick` מסנן קליפים שאין להם קובץ.

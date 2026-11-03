@@ -409,6 +409,24 @@ def main():
     items = [it for it in catalog["items"] if it.get("file") not in disabled]
     n_disabled = len(catalog["items"]) - len(items)
 
+    # ─── L171 (3.11.26): קליפ שבקטלוג אבל הקובץ שלו לא בענף libs ⇒ canon_lint:broll_files_exist נופל אחרי גימור מלא
+    # (6 קליפים כאלה; ריל 1 גיפט קארד נכשל על זה). בוחרים רק מה שקיים על הדיסק.
+    def _exists(it):
+        pth = it.get("path") or ""
+        if not pth:
+            return True
+        P = Path(pth)
+        if P.exists():
+            return True
+        root = Path(__file__).resolve().parent.parent
+        for anchor in ("בירולים", "brand-assets", "מיכאל לוי", "תוצרי-אנימציה"):
+            if anchor in P.parts and root.joinpath(*P.parts[P.parts.index(anchor):]).exists():
+                return True
+        return False
+    _before = len(items); items = [it for it in items if _exists(it)]
+    if len(items) < _before:
+        print(f"[broll_pick] {_before - len(items)} קליפים בקטלוג בלי קובץ על הדיסק — לא נבחרים", file=sys.stderr)
+
     # ─── v8.0: הפרדת מחלקות (חוק קשיח) ───
     dept_lib_map = {**DEPT_LIBRARIES, **(cfg.get("dept_libraries") or {})}
     if a.cross_library or a.library == "all":
