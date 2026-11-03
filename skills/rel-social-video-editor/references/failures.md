@@ -33,3 +33,4 @@
 - L170: הסלמות לא נותבו מאז L165 (טוקן ה-worker פג ב-job_done לפני ה-enqueue) ⇒ ריל "אצל הקלאוד" לנצח. הניתוב עבר לטריגר `trg_route_escalation` (redispatch דרך pg_net). 3 סבבים אוטומטיים, אחר כך runner=claude.
 - L171: 6 קליפים בקטלוג בלי קובץ בענף libs ⇒ canon `broll_files_exist` HARD_FAIL אחרי גימור מלא. `broll_pick` מסנן קליפים שאין להם קובץ.
 - L172: אחרי 3 סבבים שנפלו רק על preflight_not_ready ויש סרטון ⇒ חוזר להראל (state=review, extra.preflight_open_after_rounds). כשל אמיתי ⇒ runner=claude. הממצאים שחוזרים בלולאה (G1b אורך מחוץ ליעד, "FINAL השתנה אחרי שההוק נבדק", "עיגון בירול: אין פסיקה") הם ממצאי צנרת ולא איכות, ומועמדים להורדה ל-MED.
+- L173: redispatch מתוך טריגר נכשל לפעמים על timeout של pg_net ⇒ dispatch=null ⇒ אבוד. ג'וב שנוצר בטריגר מסומן מראש dispatch.ok/at-31דק', כך ש-selfHeal בטעינת עמוד תופס אותו. cron רשת-ביטחון (video-kick כל 10 דק') נחסם בשכבת ההרשאות ולא הוקם.
